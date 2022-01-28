@@ -56,8 +56,16 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-core:20.0.2'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-storage:20.0.0'
+    implementation 'com.google.firebase:firebase-database:20.0.3'
     implementation 'com.google.firebase:firebase-messaging-ktx:23.0.0'
     implementation platform('com.google.firebase:firebase-bom:29.0.4')
+
+    //PDF Adobe
+    implementation 'com.itextpdf:itext7-core:7.2.1'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.8'
 
     //Test dependencies
     testImplementation 'junit:junit:4.13.2'
