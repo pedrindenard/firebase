@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -14,29 +13,26 @@ import com.pdm.firebasestoragedatabase.R
 import com.pdm.firebasestoragedatabase.databinding.FragmentSignInBinding
 import com.pdm.firebasestoragedatabase.feature.presentation.activity.MainActivity
 import com.pdm.firebasestoragedatabase.feature.presentation.base.BaseFragment
-import com.pdm.firebasestoragedatabase.util.isValidEmail
-import com.pdm.firebasestoragedatabase.util.isValidPassword
-import com.pdm.firebasestoragedatabase.util.setOnSingleClickListener
+import com.pdm.firebasestoragedatabase.feature.presentation.fragment.auth.viewModel.AuthViewModel
+import com.pdm.firebasestoragedatabase.util.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignInFragment : BaseFragment() {
 
     private lateinit var firebaseAuth: FirebaseAuth
 
+    private val viewModel by viewModel<AuthViewModel>()
     private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
-
-    override fun onStart() {
-        super.onStart()
-        if (firebaseAuth.currentUser != null) {
-            val intent = Intent(context, MainActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         firebaseAuth = Firebase.auth
+    }
+
+    override fun onStart() {
+        super.onStart()
+        logIn()
     }
 
     override fun onCreateView(
@@ -50,8 +46,9 @@ class SignInFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.loginBtn.setOnSingleClickListener {
+            AUTHENTICATION = DEFAULT
+            showProgressDialog()
             onLoginFirebase()
             hideKeyboard()
         }
@@ -62,10 +59,17 @@ class SignInFragment : BaseFragment() {
         }
 
         binding.facebookLogin.setOnSingleClickListener {
+            AUTHENTICATION = FACEBOOK
             hideKeyboard()
         }
 
         binding.googleLogin.setOnSingleClickListener {
+            AUTHENTICATION = GOOGLE
+            hideKeyboard()
+        }
+
+        binding.githubLogin.setOnSingleClickListener {
+            AUTHENTICATION = GITHUB
             hideKeyboard()
         }
 
@@ -73,62 +77,61 @@ class SignInFragment : BaseFragment() {
             findNavController().navigate(R.id.signUpFragment)
             hideKeyboard()
         }
+
+        initObservers()
+    }
+
+    private fun initObservers() {
+        viewModel.emailError.observe(viewLifecycleOwner, {
+            binding.emailField.error = it
+            binding.emailField.requestFocus()
+        })
+
+        viewModel.passwordError.observe(viewLifecycleOwner, {
+            binding.passwordField.error = it
+            binding.passwordField.requestFocus()
+        })
+
+        viewModel.successLogin.observe(viewLifecycleOwner, {
+            hideProgressDialog()
+            logIn()
+        })
+
+        viewModel.errorResponse.observe(viewLifecycleOwner, {
+            activity?.makeToast(it)
+            hideProgressDialog()
+        })
     }
 
     private fun onLoginFirebase() {
         val email = binding.emailField.text.toString()
         val password = binding.passwordField.text.toString()
 
-        when {
-            email.isEmpty() -> {
-                binding.emailField.run {
-                    error = getString(R.string.error_empty_field)
-                    requestFocus()
-                    return
-                }
-            }
-            !isValidEmail(email) -> {
-                binding.emailField.run {
-                    error = getString(R.string.error_email)
-                    requestFocus()
-                    return
-                }
-            }
+        viewModel.run {
+            activity?.loginFirebase(
+                password = password,
+                email = email
+            )
         }
+    }
 
-        when {
-            password.isEmpty() -> {
-                binding.passwordField.run {
-                    error = getString(R.string.error_empty_field)
-                    requestFocus()
-                    return
-                }
-            }
-            !isValidPassword(password) -> {
-                binding.passwordField.run {
-                    error = getString(R.string.error_password)
-                    requestFocus()
-                    return
-                }
-            }
+    private fun logIn() {
+        if (
+            firebaseAuth.currentUser != null &&
+            firebaseAuth.currentUser!!.isEmailVerified
+        ) {
+            val intent = Intent(context, MainActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
+        } else {
+            activity?.makeToast(
+                getString(R.string.sign_in_email_verify)
+            )
         }
+    }
 
-        showProgressDialog()
-
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    val intent = Intent(context, MainActivity::class.java)
-                    startActivity(intent)
-                    activity?.finish()
-                } else {
-                    Toast.makeText(
-                        context, task.exception!!.message.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                hideProgressDialog()
-            }
+    companion object {
+        var AUTHENTICATION = ""
     }
 
     override fun onDestroyView() {

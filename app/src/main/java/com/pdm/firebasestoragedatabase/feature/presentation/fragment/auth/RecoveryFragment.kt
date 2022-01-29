@@ -12,13 +12,16 @@ import com.google.firebase.ktx.Firebase
 import com.pdm.firebasestoragedatabase.R
 import com.pdm.firebasestoragedatabase.databinding.FragmentRecoveryBinding
 import com.pdm.firebasestoragedatabase.feature.presentation.base.BaseFragment
-import com.pdm.firebasestoragedatabase.util.isValidEmail
+import com.pdm.firebasestoragedatabase.feature.presentation.fragment.auth.viewModel.AuthViewModel
+import com.pdm.firebasestoragedatabase.util.makeToast
 import com.pdm.firebasestoragedatabase.util.setOnSingleClickListener
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RecoveryFragment : BaseFragment() {
 
     private lateinit var firebaseAuth: FirebaseAuth
 
+    private val viewModel by viewModel<AuthViewModel>()
     private var _binding: FragmentRecoveryBinding? = null
     private val binding get() = _binding!!
 
@@ -40,47 +43,29 @@ class RecoveryFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.submitBtn.setOnSingleClickListener {
             val email = binding.emailField.text.toString()
-            submitAddress(email = email)
+            viewModel.run {
+                activity?.recoveryPassword(
+                    firebaseAuth = firebaseAuth,
+                    email = email
+                )
+            }
+            showProgressDialog()
             hideKeyboard()
         }
+
+        initObservers()
     }
+    private fun initObservers() {
+        viewModel.successRecoveryPassword.observe(viewLifecycleOwner, {
+            activity?.makeToast(getString(R.string.recovery_email_send))
+            findNavController().popBackStack()
+            hideProgressDialog()
+        })
 
-    private fun submitAddress(email: String) {
-        when {
-            email.isEmpty() -> {
-                binding.emailField.run {
-                    error = getString(R.string.error_empty_field)
-                    requestFocus()
-                    return
-                }
-            }
-            !isValidEmail(email) -> {
-                binding.emailField.run {
-                    error = getString(R.string.error_email)
-                    requestFocus()
-                    return
-                }
-            }
-        }
-
-        showProgressDialog()
-
-        FirebaseAuth.getInstance().sendPasswordResetEmail(email)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Toast.makeText(
-                        context, getString(R.string.recovery_email_send),
-                        Toast.LENGTH_LONG
-                    ).show()
-                    findNavController().popBackStack()
-                } else {
-                    Toast.makeText(
-                        context, it.exception!!.message.toString(),
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-                hideProgressDialog()
-            }
+        viewModel.errorResponse.observe(viewLifecycleOwner, {
+            activity?.makeToast(it)
+            hideProgressDialog()
+        })
     }
 
     override fun onDestroyView() {

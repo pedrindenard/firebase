@@ -1,28 +1,25 @@
 package com.pdm.firebasestoragedatabase.feature.presentation.fragment.auth
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.google.android.gms.tasks.Task
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.pdm.firebasestoragedatabase.R
 import com.pdm.firebasestoragedatabase.databinding.FragmentSignUpBinding
-import com.pdm.firebasestoragedatabase.feature.domain.model.User
-import com.pdm.firebasestoragedatabase.feature.presentation.activity.MainActivity
 import com.pdm.firebasestoragedatabase.feature.presentation.base.BaseFragment
+import com.pdm.firebasestoragedatabase.feature.presentation.fragment.auth.viewModel.AuthViewModel
 import com.pdm.firebasestoragedatabase.util.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignUpFragment : BaseFragment() {
 
     private lateinit var firebaseAuth: FirebaseAuth
 
+    private val viewModel by viewModel<AuthViewModel>()
     private var _binding: FragmentSignUpBinding? = null
     private val binding get() = _binding!!
 
@@ -43,11 +40,94 @@ class SignUpFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.registerBtn.setOnSingleClickListener {
+            AUTHENTICATION = DEFAULT
             onRegisterUserFirebase()
+            showProgressDialog()
+            hideKeyboard()
+        }
+
+        binding.googleRegister.setOnSingleClickListener {
+            AUTHENTICATION = GOOGLE
+            hideKeyboard()
+        }
+
+        binding.facebookRegister.setOnSingleClickListener {
+            AUTHENTICATION = FACEBOOK
+            hideKeyboard()
+        }
+
+        binding.githubRegister.setOnSingleClickListener {
+            AUTHENTICATION = GITHUB
             hideKeyboard()
         }
 
         binding.dateField.formatToDate()
+        initObservers()
+    }
+
+    private fun initObservers() {
+        viewModel.fullNameEmpty.observe(viewLifecycleOwner, {
+            binding.nameField.error = it
+            binding.nameField.requestFocus()
+        })
+
+        viewModel.birthDateError.observe(viewLifecycleOwner, {
+            binding.dateField.error = it
+            binding.dateField.requestFocus()
+        })
+
+        viewModel.emailError.observe(viewLifecycleOwner, {
+            binding.emailField.error = it
+            binding.emailField.requestFocus()
+        })
+
+        viewModel.passwordError.observe(viewLifecycleOwner, {
+            binding.passwordField.error = it
+            binding.passwordField.requestFocus()
+        })
+
+        viewModel.successCreateUser.observe(viewLifecycleOwner, {
+            if (it.second == true) {
+                viewModel.run {
+                    activity?.editAuthenticationFirebase(
+                        firebaseAuth = firebaseAuth,
+                        user = it.first
+                    )
+                }
+            }
+        })
+
+        viewModel.successEditUserInfo.observe(viewLifecycleOwner, {
+            viewModel.run {
+                activity?.submitEmailVerification(
+                    firebaseAuth = firebaseAuth
+                )
+            }
+        })
+
+        viewModel.successRecoveryPassword.observe(viewLifecycleOwner, {
+            activity?.makeToast(getString(R.string.recovery_email_send))
+            findNavController().popBackStack()
+        })
+
+        viewModel.successSubmitEmailVerification.observe(viewLifecycleOwner, {
+            activity?.makeToast(getString(R.string.sign_up_registered))
+            findNavController().popBackStack()
+        })
+
+        viewModel.invalidFields.observe(viewLifecycleOwner, {
+            hideProgressDialog()
+        })
+
+        viewModel.errorResponse.observe(viewLifecycleOwner, {
+            activity?.makeToast(it)
+            hideProgressDialog()
+        })
+
+        viewModel.failureResponse.observe(viewLifecycleOwner, {
+            activity?.makeToast(getString(R.string.failure))
+            hideProgressDialog()
+        })
     }
 
     private fun onRegisterUserFirebase() {
@@ -56,121 +136,18 @@ class SignUpFragment : BaseFragment() {
         val email = binding.emailField.text.toString()
         val password = binding.passwordField.text.toString()
 
-        if (name.isEmpty()) {
-            binding.nameField.run {
-                error = getString(R.string.error_empty_field)
-                requestFocus()
-                return
-            }
+        viewModel.run {
+            activity?.registerFirebase(
+                password = password,
+                email = email,
+                name = name,
+                date = date,
+            )
         }
-
-        when {
-            date.isEmpty() -> {
-                binding.dateField.run {
-                    error = getString(R.string.error_empty_field)
-                    requestFocus()
-                    return
-                }
-            }
-            !isValidBirthDate(date) -> {
-                binding.dateField.run {
-                    error = getString(R.string.error_date)
-                    requestFocus()
-                    return
-                }
-            }
-        }
-
-        when {
-            email.isEmpty() -> {
-                binding.emailField.run {
-                    error = getString(R.string.error_empty_field)
-                    requestFocus()
-                    return
-                }
-            }
-            !isValidEmail(email) -> {
-                binding.emailField.run {
-                    error = getString(R.string.error_email)
-                    requestFocus()
-                    return
-                }
-            }
-        }
-
-        when {
-            password.isEmpty() -> {
-                binding.passwordField.run {
-                    error = getString(R.string.error_empty_field)
-                    requestFocus()
-                    return
-                }
-            }
-            !isValidPassword(password) -> {
-                binding.passwordField.run {
-                    error = getString(R.string.error_password)
-                    requestFocus()
-                    return
-                }
-            }
-        }
-
-        showProgressDialog()
-
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    onSuccessCreateUser(
-                        currentUser = firebaseAuth.currentUser,
-                        email = email,
-                        name = name,
-                        age = date,
-                    )
-                } else {
-                    hideProgressDialog()
-                    onErrorRegister(task as Task<*>)
-                }
-            }
-    }
-    
-    private fun onSuccessCreateUser(
-        currentUser: FirebaseUser?, name: String, age: String, email: String
-    ) {
-        val user = User(
-            name = name,
-            email = email,
-            age = age
-        )
-        
-        FirebaseDatabase.getInstance().getReference(USERS_DATABASE)
-            .child(currentUser?.uid ?: "")
-            .setValue(user).addOnCompleteListener { 
-                if (it.isSuccessful) {
-                    Toast.makeText(
-                        context, getString(R.string.sign_up_registered),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    onSuccessRegister()
-                } else {
-                    onErrorRegister(it as Task<*>)
-                }
-                hideProgressDialog()
-            }
     }
 
-    private fun onErrorRegister(it: Task<*>) {
-        Toast.makeText(
-            context, it.exception!!.message.toString(),
-            Toast.LENGTH_SHORT
-        ).show()
-    }
-
-    private fun onSuccessRegister() {
-        if (firebaseAuth.currentUser != null) {
-            val intent = Intent(context, MainActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
-        }
+    companion object {
+        var AUTHENTICATION = ""
     }
 
     override fun onDestroyView() {
