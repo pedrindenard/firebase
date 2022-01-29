@@ -15,13 +15,14 @@ import com.pdm.firebasestoragedatabase.feature.domain.use_case.AuthUseCase
 import com.pdm.firebasestoragedatabase.feature.presentation.base.BaseViewModel
 import kotlinx.coroutines.launch
 
-class AuthViewModel(private val userCase: AuthUseCase) : BaseViewModel() {
+class AuthViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
 
     val fullNameEmpty = MutableLiveData<String>()
     val birthDateError = MutableLiveData<String>()
     val emailError = MutableLiveData<String>()
     val passwordError = MutableLiveData<String>()
     val invalidFields = MutableLiveData<Unit>()
+    val errorLogout = MutableLiveData<Unit>()
 
     private val _successCreateUser = MutableLiveData<Pair<User, Boolean?>>()
     val successCreateUser = _successCreateUser as LiveData<Pair<User, Boolean?>>
@@ -38,11 +39,14 @@ class AuthViewModel(private val userCase: AuthUseCase) : BaseViewModel() {
     private val _successSubmitEmailVerification = MutableLiveData<Task<Void>?>()
     val successSubmitEmailVerification = _successSubmitEmailVerification as LiveData<Task<Void>?>
 
+    private val _successLogOut = MutableLiveData<Unit?>()
+    val successLogOut = _successLogOut as LiveData<Unit?>
+
     fun Context.registerFirebase(name: String, date: String, email: String, password: String) {
         viewModelScope.launch {
             try {
                 val user = User(name = name, email = email, age = date)
-                userCase.registerUser(user, password)?.addOnCompleteListener {
+                useCase.registerUser(user, password)?.addOnCompleteListener {
                     when {
                         it.isSuccessful -> {
                             _successCreateUser.postValue(Pair(user, true))
@@ -101,7 +105,7 @@ class AuthViewModel(private val userCase: AuthUseCase) : BaseViewModel() {
     fun Context.loginFirebase(email: String, password: String) {
         viewModelScope.launch {
             try {
-                userCase.loginUser(password, email)?.addOnCompleteListener {
+                useCase.loginUser(email, password)?.addOnCompleteListener {
                     when {
                         it.isSuccessful -> {
                             _successLogin.postValue(it)
@@ -145,10 +149,10 @@ class AuthViewModel(private val userCase: AuthUseCase) : BaseViewModel() {
     fun Context.editAuthenticationFirebase(firebaseAuth: FirebaseAuth, user: User) {
         viewModelScope.launch {
             try {
-                userCase.editUser(firebaseAuth, user)?.addOnCompleteListener {
+                useCase.editUser(firebaseAuth, user)?.addOnCompleteListener {
                     when {
                         it.isSuccessful -> {
-                            _successSubmitEmailVerification.postValue(it)
+                            _successEditUserInfo.postValue(it)
                         }
                         it.isCanceled -> {
                             failureResponse.postValue(it.exception)
@@ -161,7 +165,9 @@ class AuthViewModel(private val userCase: AuthUseCase) : BaseViewModel() {
             } catch (e: InvalidAuthException) {
                 when (e.message) {
                     InvalidAuthFields.CURRENT_USER_IS_NULL.exception -> {
-                        errorResponse.postValue(getString(R.string.error_register_user))
+                        errorResponse.postValue(
+                            getString(R.string.error_register_user)
+                        )
                     }
                     InvalidAuthFields.EMPTY_NAME.exception -> {
                         fullNameEmpty.postValue(
@@ -194,10 +200,10 @@ class AuthViewModel(private val userCase: AuthUseCase) : BaseViewModel() {
         }
     }
 
-    fun Context.recoveryPassword(firebaseAuth: FirebaseAuth, email: String) {
+    fun Context.recoveryPassword(email: String) {
         viewModelScope.launch {
             try {
-                userCase.recoveryUser(firebaseAuth, email)?.addOnCompleteListener {
+                useCase.recoveryUser(email)?.addOnCompleteListener {
                     when {
                         it.isSuccessful -> {
                             _successRecoveryPassword.postValue(it)
@@ -212,9 +218,6 @@ class AuthViewModel(private val userCase: AuthUseCase) : BaseViewModel() {
                 }
             } catch (e: InvalidAuthException) {
                 when (e.message) {
-                    InvalidAuthFields.CURRENT_USER_IS_NULL.exception -> {
-                        errorResponse.postValue(getString(R.string.error_register_user))
-                    }
                     InvalidAuthFields.EMPTY_EMAIL.exception -> {
                         emailError.postValue(
                             getString(R.string.error_empty_field)
@@ -234,7 +237,7 @@ class AuthViewModel(private val userCase: AuthUseCase) : BaseViewModel() {
     fun Context.submitEmailVerification(firebaseAuth: FirebaseAuth) {
         viewModelScope.launch {
             try {
-                userCase.submitEmailUserAuth(firebaseAuth)?.addOnCompleteListener {
+                useCase.submitEmailUserAuth(firebaseAuth)?.addOnCompleteListener {
                     when {
                         it.isSuccessful -> {
                             _successSubmitEmailVerification.postValue(it)
@@ -250,7 +253,26 @@ class AuthViewModel(private val userCase: AuthUseCase) : BaseViewModel() {
             } catch (e: InvalidAuthException) {
                 when (e.message) {
                     InvalidAuthFields.CURRENT_USER_IS_NULL.exception -> {
-                        errorResponse.postValue(getString(R.string.error_register_user))
+                        errorResponse.postValue(
+                            getString(R.string.error_register_user)
+                        )
+                    }
+                }
+                invalidFields.postValue(Unit)
+            }
+        }
+    }
+
+    fun logOut(firebaseAuth: FirebaseAuth) {
+        viewModelScope.launch {
+            try {
+                useCase.logOut(firebaseAuth).let {
+                    _successLogOut.postValue(Unit)
+                }
+            } catch (e: InvalidAuthException) {
+                when (e.message) {
+                    InvalidAuthFields.CURRENT_USER_IS_NULL.exception -> {
+                        errorLogout.postValue(Unit)
                     }
                 }
                 invalidFields.postValue(Unit)

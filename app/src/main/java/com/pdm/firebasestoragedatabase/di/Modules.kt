@@ -11,7 +11,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module(override = true) {
-    viewModel { AuthViewModel(userCase = get()) }
+    viewModel { AuthViewModel(useCase = get()) }
 }
 
 val userCasesModule = module(override = true) {
@@ -22,7 +22,8 @@ val userCasesModule = module(override = true) {
             editUser = get(),
             deleteUser = get(),
             recoveryUser = get(),
-            submitEmailUserAuth = get()
+            submitEmailUserAuth = get(),
+            logOut = get()
         )
     }
     single { LoginUserAuth(repository = get()) }
@@ -30,6 +31,8 @@ val userCasesModule = module(override = true) {
     single { EditUserAuth(repository = get()) }
     single { DeleteUserAuth(repository = get()) }
     single { RecoveryUserAuth(repository = get()) }
+    single { SubmitEmailUserAuth(repository = get()) }
+    single { LogOutUserAuth(repository = get()) }
 }
 
 val repositoryModule = module(override = true) {

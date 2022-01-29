@@ -100,4 +100,13 @@ class AuthDataSourceImpl : AuthDataSource {
             null
         }
     }
+
+    override suspend fun logOut(): Unit? {
+        return try {
+            firebaseAuth.signOut()
+        } catch (e: Throwable) {
+            Log.e(ERROR_SERVICE, e.toString())
+            null
+        }
+    }
 }

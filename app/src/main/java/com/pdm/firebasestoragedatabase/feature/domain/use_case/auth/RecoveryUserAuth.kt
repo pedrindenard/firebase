@@ -10,11 +10,8 @@ import com.pdm.firebasestoragedatabase.util.isValidEmail
 class RecoveryUserAuth(private val repository: AuthRepository) {
 
     @Throws(InvalidAuthException::class)
-    suspend operator fun invoke(firebaseAuth: FirebaseAuth, email: String) : Task<Void>? {
+    suspend operator fun invoke(email: String) : Task<Void>? {
         when {
-            firebaseAuth.currentUser == null -> {
-                throw InvalidAuthException(InvalidAuthFields.CURRENT_USER_IS_NULL.exception)
-            }
             email.isBlank() -> {
                 throw InvalidAuthException(InvalidAuthFields.EMPTY_EMAIL.exception)
             }

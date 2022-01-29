@@ -18,4 +18,6 @@ interface AuthDataSource {
     suspend fun deleteUserAuth(currentUser: FirebaseUser): Task<Void>?
 
     suspend fun submitEmailVerification(): Task<Void>?
+
+    suspend fun logOut() : Unit?
 }

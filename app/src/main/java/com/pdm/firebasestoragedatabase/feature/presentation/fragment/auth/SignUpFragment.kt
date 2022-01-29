@@ -105,14 +105,10 @@ class SignUpFragment : BaseFragment() {
             }
         })
 
-        viewModel.successRecoveryPassword.observe(viewLifecycleOwner, {
-            activity?.makeToast(getString(R.string.recovery_email_send))
-            findNavController().popBackStack()
-        })
-
         viewModel.successSubmitEmailVerification.observe(viewLifecycleOwner, {
             activity?.makeToast(getString(R.string.sign_up_registered))
             findNavController().popBackStack()
+            hideProgressDialog()
         })
 
         viewModel.invalidFields.observe(viewLifecycleOwner, {

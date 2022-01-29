@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -45,7 +44,6 @@ class RecoveryFragment : BaseFragment() {
             val email = binding.emailField.text.toString()
             viewModel.run {
                 activity?.recoveryPassword(
-                    firebaseAuth = firebaseAuth,
                     email = email
                 )
             }
@@ -64,6 +62,10 @@ class RecoveryFragment : BaseFragment() {
 
         viewModel.errorResponse.observe(viewLifecycleOwner, {
             activity?.makeToast(it)
+            hideProgressDialog()
+        })
+
+        viewModel.invalidFields.observe(viewLifecycleOwner, {
             hideProgressDialog()
         })
     }

@@ -8,5 +8,6 @@ data class AuthUseCase (
     val registerUser: RegisterUserAuth,
     val deleteUser: DeleteUserAuth,
     val recoveryUser: RecoveryUserAuth,
-    val submitEmailUserAuth: SubmitEmailUserAuth
+    val submitEmailUserAuth: SubmitEmailUserAuth,
+    val logOut: LogOutUserAuth
 )

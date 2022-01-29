@@ -13,6 +13,7 @@
 
     <string name="sign_in_email">EMAIL</string>
     <string name="sign_in_password">SENHA</string>
+    <string name="sign_in_title">Bem vindo!</string>
     <string name="sign_in_login">Login</string>
     <string name="sign_in_recovery_password">Esqueceu sua senha?</string>
     <string name="sign_in_email_verify">Verifique seu endereço de email para ativar a conta</string>

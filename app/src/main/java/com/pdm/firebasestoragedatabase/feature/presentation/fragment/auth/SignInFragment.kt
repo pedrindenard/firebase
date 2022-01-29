@@ -93,12 +93,24 @@ class SignInFragment : BaseFragment() {
         })
 
         viewModel.successLogin.observe(viewLifecycleOwner, {
+            if (it != null && firebaseAuth.currentUser!!.isEmailVerified) {
+                val intent = Intent(context, MainActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            } else {
+                activity?.makeToast(
+                    getString(R.string.sign_in_email_verify)
+                )
+            }
             hideProgressDialog()
-            logIn()
         })
 
         viewModel.errorResponse.observe(viewLifecycleOwner, {
             activity?.makeToast(it)
+            hideProgressDialog()
+        })
+
+        viewModel.invalidFields.observe(viewLifecycleOwner, {
             hideProgressDialog()
         })
     }
@@ -123,10 +135,6 @@ class SignInFragment : BaseFragment() {
             val intent = Intent(context, MainActivity::class.java)
             startActivity(intent)
             activity?.finish()
-        } else {
-            activity?.makeToast(
-                getString(R.string.sign_in_email_verify)
-            )
         }
     }
 

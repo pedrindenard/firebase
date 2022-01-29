@@ -32,4 +32,8 @@ class AuthRepositoryImpl(private val dataSource: AuthDataSource) : AuthRepositor
     override suspend fun submitEmailVerification(): Task<Void>? {
         return dataSource.submitEmailVerification()
     }
+
+    override suspend fun logOut(): Unit? {
+        return dataSource.logOut()
+    }
 }
