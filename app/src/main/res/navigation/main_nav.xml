@@ -9,6 +9,6 @@
         android:id="@+id/firstFragment"
         android:name="com.pdm.firebasestoragedatabase.ui.fragment.FirstFragment"
         android:label="InitFragment"
-        tools:layout="@layout/fragment_first" />
+        tools:layout="@layout/fragment_home" />
 
 </navigation>

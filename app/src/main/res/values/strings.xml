@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Firebase Storage Database</string>
+
+    <string name="home_message">Sem as permissões não é possivel executar o aplicativo corretamente.</string>
+    <string name="home_download">Baixar</string>
+    <string name="home_crud">CRUD</string>
+    <string name="home_list">Listagem</string>
+    <string name="home_read">Informações</string>
+    <string name="home_upload">Postar</string>
+
+    <string name="dialog_alert">Confirmar</string>
+    <string name="dialog_progress">Aguarde…</string>
 </resources>
