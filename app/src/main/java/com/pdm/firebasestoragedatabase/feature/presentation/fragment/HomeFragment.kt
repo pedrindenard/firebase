@@ -1,4 +1,4 @@
-package com.pdm.firebasestoragedatabase.ui.fragment
+package com.pdm.firebasestoragedatabase.feature.presentation.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -14,7 +14,7 @@ import com.pdm.firebasestoragedatabase.util.hasPermissions
 import com.pdm.firebasestoragedatabase.util.setOnSingleClickListener
 import com.pdm.firebasestoragedatabase.util.storagePermissions
 
-class FirstFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -65,8 +65,7 @@ class FirstFragment : Fragment() {
                     }.run {
                         if (!this) {
                             Toast.makeText(
-                                context,
-                                getString(R.string.home_message),
+                                context, getString(R.string.home_message),
                                 Toast.LENGTH_LONG
                             ).show()
                             activity?.finish()

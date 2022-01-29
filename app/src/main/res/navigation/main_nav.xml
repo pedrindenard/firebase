@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@+id/firstFragment">
+    app:startDestination="@+id/homeFragment">
 
     <fragment
-        android:id="@+id/firstFragment"
-        android:name="com.pdm.firebasestoragedatabase.ui.fragment.FirstFragment"
-        android:label="InitFragment"
+        android:id="@+id/homeFragment"
+        android:name="com.pdm.firebasestoragedatabase.feature.presentation.fragment.HomeFragment"
+        android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
 
 </navigation>

@@ -1,4 +1,4 @@
-package com.pdm.firebasestoragedatabase.ui.dialogs
+package com.pdm.firebasestoragedatabase.feature.presentation.dialogs
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -27,7 +27,7 @@ class DialogAlert(private val title: String, private val description: String) : 
         binding.title.text = this.title
         binding.description.text = this.description
         binding.button.setOnSingleClickListener {
-
+            dialog?.dismiss()
         }
     }
 }

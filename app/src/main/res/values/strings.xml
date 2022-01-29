@@ -10,4 +10,30 @@
 
     <string name="dialog_alert">Confirmar</string>
     <string name="dialog_progress">Aguarde…</string>
+
+    <string name="sign_in_email">EMAIL</string>
+    <string name="sign_in_password">SENHA</string>
+    <string name="sign_in_login">Login</string>
+    <string name="sign_in_recovery_password">Esqueceu sua senha?</string>
+    <string name="sign_in_new_acc">Não tem uma conta?</string>
+    <string name="sign_in_register">Cadastrar-se</string>
+
+    <string name="sign_up_email">EMAIL</string>
+    <string name="sign_up_password">SENHA</string>
+    <string name="sign_up_name">NOME COMPLETO</string>
+    <string name="sign_up_date">DATA DE NASCIMENTO</string>
+    <string name="sign_up_register">Cadastrar-se</string>
+    <string name="sign_up_confirm">Confirmar</string>
+    <string name="sign_up_registered">Usuário registrado com sucesso!</string>
+
+    <string name="recovery_submit">Enviar</string>
+    <string name="recovery_title">Esqueceu sua senha?\n Não se preocupe!</string>
+    <string name="recovery_message">Digite seu endereço de e-mail para redefenir sua senha.</string>
+
+    <string name="todo">todo</string>
+    <string name="error_password">Mínimo de caracteres 6 e caracteres diferentes 3. Ex: Test123</string>
+    <string name="error_empty_field">Campo obrigatório</string>
+    <string name="error_date">Data de nascimento inválida</string>
+    <string name="error_email">Email inválido</string>
+    <string name="recovery_email_send">Email enviado com sucesso!</string>
 </resources>
