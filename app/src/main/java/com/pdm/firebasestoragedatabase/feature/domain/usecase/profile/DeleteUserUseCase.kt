@@ -2,8 +2,8 @@ package com.pdm.firebasestoragedatabase.feature.domain.usecase.profile
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.pdm.firebasestoragedatabase.feature.domain.exceptions.InvalidUser
-import com.pdm.firebasestoragedatabase.feature.domain.exceptions.ProfileException
+import com.pdm.firebasestoragedatabase.feature.domain.enums.InvalidUser
+import com.pdm.firebasestoragedatabase.feature.domain.enums.ProfileException
 import com.pdm.firebasestoragedatabase.feature.domain.repository.ProfileRepository
 
 class DeleteUserUseCase(private val repository: ProfileRepository) {

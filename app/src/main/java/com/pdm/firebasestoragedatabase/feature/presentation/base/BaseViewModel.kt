@@ -7,8 +7,8 @@ open class BaseViewModel : ViewModel() {
 
     val loading = MutableLiveData<Boolean>()
 
-    val failureResponse: MutableLiveData<Throwable> = MutableLiveData()
-
     val errorResponse: MutableLiveData<String> = MutableLiveData()
+
+    val failureResponse: MutableLiveData<Throwable> = MutableLiveData()
 
 }

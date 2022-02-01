@@ -3,8 +3,6 @@ package com.pdm.firebasestoragedatabase.feature.domain.datasource
 import android.content.Intent
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseUser
-import com.pdm.firebasestoragedatabase.feature.domain.model.User
 
 interface LoginDataSource {
 

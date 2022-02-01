@@ -27,7 +27,8 @@
     <string name="sign_up_last_name">SOBRENOME*</string>
     <string name="sign_up_date">DATA DE NASCIMENTO*</string>
     <string name="sign_up_confirm">Confirmar</string>
-    <string name="sign_up_registered">Verifique seu endereço de email</string>
+    <string name="sign_up_registered">Usuário cadastrado com sucesso. Verifique seu endereço de email</string>
+    <string name="sign_up_social">Usuário cadastrado com sucesso.</string>
 
     <string name="recovery_submit">Enviar</string>
     <string name="recovery_message">Digite seu endereço de e-mail\n para recuperar sua senha.</string>
@@ -44,4 +45,19 @@
 
     <string name="todo">todo</string>
     <string name="failure">Erro de conexão com o serviço, tente novamente mais tarde</string>
+
+    <string name="profile_email">Email</string>
+    <string name="profile_password">Senha</string>
+    <string name="profile_name">Nome completo</string>
+    <string name="profile_cpf">CPF</string>
+    <string name="profile_date">Data de nascimento</string>
+    <string name="profile_save">Salvar alterações</string>
+    <string name="profile_phone">Telefone</string>
+    <string name="profile_notification">Notificações</string>
+    <string name="profile_address">Endereços</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_search">Pesquisar</string>
+    <string name="menu_wishlist">Favoritos</string>
+    <string name="menu_profile">Minha conta</string>
+    <string name="menu_settings">Configurações</string>
 </resources>

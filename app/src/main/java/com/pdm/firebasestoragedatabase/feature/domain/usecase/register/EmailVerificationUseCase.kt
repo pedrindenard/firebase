@@ -2,8 +2,8 @@ package com.pdm.firebasestoragedatabase.feature.domain.usecase.register
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.pdm.firebasestoragedatabase.feature.domain.exceptions.InvalidAuth
-import com.pdm.firebasestoragedatabase.feature.domain.exceptions.AuthException
+import com.pdm.firebasestoragedatabase.feature.domain.enums.InvalidAuth
+import com.pdm.firebasestoragedatabase.feature.domain.enums.AuthException
 import com.pdm.firebasestoragedatabase.feature.domain.repository.RegisterRepository
 
 class EmailVerificationUseCase(private val repository: RegisterRepository) {

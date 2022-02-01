@@ -151,9 +151,10 @@ fun handlerDelay(delayMillis: Long = 1000, action: () -> Unit) {
     }, delayMillis)
 }
 
-fun Activity?.makeToast(description: String) {
+fun Activity.makeToast(description: String) {
     Toast.makeText(
-        this, description,
-        Toast.LENGTH_SHORT
+    this,
+        "",
+        Toast.LENGTH_LONG
     ).show()
 }

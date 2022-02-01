@@ -21,10 +21,10 @@ import com.pdm.firebasestoragedatabase.feature.domain.usecase.profile.LogOutUseC
 import com.pdm.firebasestoragedatabase.feature.domain.usecase.register.AddInfoUserUseCase
 import com.pdm.firebasestoragedatabase.feature.domain.usecase.register.EmailVerificationUseCase
 import com.pdm.firebasestoragedatabase.feature.domain.usecase.register.RegisterUserUseCase
-import com.pdm.firebasestoragedatabase.feature.presentation.fragments.login.viewmodel.SignInViewModel
-import com.pdm.firebasestoragedatabase.feature.presentation.fragments.profile.viewmodel.ProfileViewModel
-import com.pdm.firebasestoragedatabase.feature.presentation.fragments.recovery.viewmodel.RecoveryViewModel
-import com.pdm.firebasestoragedatabase.feature.presentation.fragments.register.viewmodel.SignUpViewModel
+import com.pdm.firebasestoragedatabase.feature.presentation.fragment.login.viewmodel.SignInViewModel
+import com.pdm.firebasestoragedatabase.feature.presentation.fragment.profile.viewmodel.ProfileViewModel
+import com.pdm.firebasestoragedatabase.feature.presentation.fragment.recovery.viewmodel.RecoveryViewModel
+import com.pdm.firebasestoragedatabase.feature.presentation.fragment.register.viewmodel.SignUpViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

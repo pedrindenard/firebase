@@ -2,6 +2,7 @@ package com.pdm.firebasestoragedatabase.util
 
 import android.util.Log
 import android.util.Patterns
+import java.security.MessageDigest
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -81,4 +82,20 @@ fun isValidLegalDocument(cpf: String): Boolean {
     }
 
     return numbers[9] == dv1 && numbers[10] == dv2
+}
+
+fun String.hashConfig() : String? {
+    return try {
+        val digest = MessageDigest.getInstance("SHA-256")
+        val hash = digest.digest(this.toByteArray(charset("UTF-8")))
+        val hexString = StringBuffer()
+        for (i in hash.indices) {
+            val hex = Integer.toHexString(0xff and hash[i].toInt())
+            if (hex.length == 1) hexString.append('0')
+            hexString.append(hex)
+        }
+        hexString.toString()
+    } catch (ex: Exception) {
+        throw RuntimeException(ex)
+    }
 }

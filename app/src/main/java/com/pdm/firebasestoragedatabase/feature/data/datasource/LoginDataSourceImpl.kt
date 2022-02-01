@@ -12,6 +12,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.pdm.firebasestoragedatabase.feature.domain.datasource.LoginDataSource
 import com.pdm.firebasestoragedatabase.util.ERROR_SERVICE
+import com.pdm.firebasestoragedatabase.util.hashConfig
 
 class LoginDataSourceImpl : LoginDataSource {
 
@@ -19,8 +20,8 @@ class LoginDataSourceImpl : LoginDataSource {
 
     override suspend fun loginWithUser(email: String, password: String): Task<AuthResult>? {
         return try {
-            firebaseAuth.signInWithEmailAndPassword(email, password)
-        } catch (e: Throwable) {
+            firebaseAuth.signInWithEmailAndPassword(email, password.hashConfig()!!)
+        } catch (e: Exception) {
             Log.e(ERROR_SERVICE, e.toString())
             null
         }

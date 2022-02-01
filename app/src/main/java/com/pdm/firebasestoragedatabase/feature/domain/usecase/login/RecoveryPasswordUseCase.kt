@@ -1,8 +1,8 @@
 package com.pdm.firebasestoragedatabase.feature.domain.usecase.login
 
 import com.google.android.gms.tasks.Task
-import com.pdm.firebasestoragedatabase.feature.domain.exceptions.InvalidAuth
-import com.pdm.firebasestoragedatabase.feature.domain.exceptions.AuthException
+import com.pdm.firebasestoragedatabase.feature.domain.enums.InvalidAuth
+import com.pdm.firebasestoragedatabase.feature.domain.enums.AuthException
 import com.pdm.firebasestoragedatabase.feature.domain.repository.LoginRepository
 import com.pdm.firebasestoragedatabase.util.isValidEmail
 
