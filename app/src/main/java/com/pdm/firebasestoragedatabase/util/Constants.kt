@@ -2,11 +2,8 @@ package com.pdm.firebasestoragedatabase.util
 
 const val USERS_DATABASE = "Users"
 
-const val DEFAULT = "Default"
-const val GOOGLE = "Google"
-const val FACEBOOK = "Facebook"
-const val GITHUB = "Github"
-
-const val GITHUB_TOKEN = "<GITHUB-ACCESS-TOKEN>"
+const val SERVER_TOKEN_ID = "927311579804-6mlnf5vlmdceq2ul2l4br80p81fhbivg.apps.googleusercontent.com"
 
 const val ERROR_SERVICE = "Error service"
+
+const val SAFE_ARGS = "SAFE_ARGS"

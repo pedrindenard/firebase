@@ -13,33 +13,35 @@
 
     <string name="sign_in_email">EMAIL</string>
     <string name="sign_in_password">SENHA</string>
-    <string name="sign_in_title">Bem vindo!</string>
     <string name="sign_in_login">Login</string>
     <string name="sign_in_recovery_password">Esqueceu sua senha?</string>
-    <string name="sign_in_email_verify">Verifique seu endereço de email para ativar a conta</string>
+    <string name="sign_in_email_verify">Verifique seu endereço de email</string>
     <string name="sign_in_new_acc">Não tem uma conta?</string>
     <string name="sign_in_register">Cadastrar-se</string>
 
-    <string name="sign_up_email">EMAIL</string>
-    <string name="sign_up_password">SENHA</string>
-    <string name="sign_up_name">NOME COMPLETO</string>
-    <string name="sign_up_date">DATA DE NASCIMENTO</string>
-    <string name="sign_up_register">Cadastrar-se</string>
+    <string name="sign_up_email">EMAIL*</string>
+    <string name="sign_up_password">SENHA*</string>
+    <string name="sign_up_confirm_password">CONFIRMAR SENHA*</string>
+    <string name="sign_up_name">NOME*</string>
+    <string name="sign_up_cpf">CPF*</string>
+    <string name="sign_up_last_name">SOBRENOME*</string>
+    <string name="sign_up_date">DATA DE NASCIMENTO*</string>
     <string name="sign_up_confirm">Confirmar</string>
-    <string name="sign_up_registered">Mensagem de email foi enviada para verificar sua conta</string>
+    <string name="sign_up_registered">Verifique seu endereço de email</string>
 
     <string name="recovery_submit">Enviar</string>
-    <string name="recovery_title">Esqueceu sua senha?\n Não se preocupe!</string>
-    <string name="recovery_message">Digite seu endereço de e-mail para redefenir sua senha.</string>
+    <string name="recovery_message">Digite seu endereço de e-mail\n para recuperar sua senha.</string>
     <string name="recovery_email_send">Email enviado com sucesso!</string>
 
-    <string name="todo">todo</string>
-
     <string name="error_register_user">Erro ao cadastrar usuário, tente novamente mais tarde</string>
-    <string name="error_password">Mínimo de caracteres 6 e caracteres diferentes 3. Ex: Test123</string>
+    <string name="error_password">Senha inválida</string>
     <string name="error_empty_field">Campo obrigatório</string>
+    <string name="error_confirm_password_field">Senhas diferentes</string>
     <string name="error_date">Data de nascimento inválida</string>
+    <string name="error_legal_document">CPF inválido</string>
     <string name="error_email">Email inválido</string>
+    <string name="error_fields">Campos inválidos</string>
 
+    <string name="todo">todo</string>
     <string name="failure">Erro de conexão com o serviço, tente novamente mais tarde</string>
 </resources>

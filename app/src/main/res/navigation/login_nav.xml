@@ -7,19 +7,39 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.pdm.firebasestoragedatabase.feature.presentation.fragment.auth.SignInFragment"
+        android:name="com.pdm.firebasestoragedatabase.feature.presentation.fragments.login.SignInFragment"
         android:label="SignInFragment"
-        tools:layout="@layout/fragment_sign_in" />
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_signInFragment_to_recoveryFragment"
+            app:destination="@id/recoveryFragment"
+            app:enterAnim="@anim/anim_fade_in"
+            app:exitAnim="@anim/anim_fade_out"
+            app:popEnterAnim="@anim/anim_fade_in"
+            app:popExitAnim="@anim/anim_fade_out" />
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/anim_fade_in"
+            app:exitAnim="@anim/anim_fade_out"
+            app:popEnterAnim="@anim/anim_fade_in"
+            app:popExitAnim="@anim/anim_fade_out" />
+    </fragment>
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.pdm.firebasestoragedatabase.feature.presentation.fragment.auth.SignUpFragment"
+        android:name="com.pdm.firebasestoragedatabase.feature.presentation.fragments.register.SignUpFragment"
         android:label="SignUpFragment"
-        tools:layout="@layout/fragment_sign_up" />
+        tools:layout="@layout/fragment_sign_up">
+        <argument
+            android:name="value"
+            android:defaultValue="true"
+            app:argType="boolean" />
+    </fragment>
 
     <fragment
         android:id="@+id/recoveryFragment"
-        android:name="com.pdm.firebasestoragedatabase.feature.presentation.fragment.auth.RecoveryFragment"
+        android:name="com.pdm.firebasestoragedatabase.feature.presentation.fragments.recovery.RecoveryFragment"
         android:label="RecoveryFragment"
         tools:layout="@layout/fragment_recovery" />
 

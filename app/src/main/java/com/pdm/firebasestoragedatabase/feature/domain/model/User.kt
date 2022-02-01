@@ -3,7 +3,12 @@ package com.pdm.firebasestoragedatabase.feature.domain.model
 import java.io.Serializable
 
 data class User (
-    val name: String,
-    val email: String,
-    val age: String
-) : Serializable
+    val name: String? = "",
+    val lastName: String? = "",
+    val email: String? = "",
+    val legalDocument: String? = "",
+    val birthdate: String? = "",
+    val gender: Int? = 0
+) : Serializable {
+
+}
