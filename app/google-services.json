@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "927311579804",
-    "project_id": "fir-storage-database",
-    "storage_bucket": "fir-storage-database.appspot.com"
+    "project_number": "69746215362",
+    "project_id": "fir-40cee",
+    "storage_bucket": "fir-40cee.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:927311579804:android:1a0242f88a0d0df0f57b59",
+        "mobilesdk_app_id": "1:69746215362:android:ee76e897cde6768b542e5b",
         "android_client_info": {
-          "package_name": "com.pdm.firebasestoragedatabase"
+          "package_name": "com.pdm.firebase"
         }
       },
       "oauth_client": [
         {
-          "client_id": "927311579804-m0kq01pmhuhsricutkic519l55h2i4e2.apps.googleusercontent.com",
+          "client_id": "69746215362-6lgcupmb5blsce607ee2o47skghbh9r8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.pdm.firebasestoragedatabase",
+            "package_name": "com.pdm.firebase",
             "certificate_hash": "c8e66db549a0d13553eab27242ba1a81cfea0ff2"
           }
         },
         {
-          "client_id": "927311579804-6mlnf5vlmdceq2ul2l4br80p81fhbivg.apps.googleusercontent.com",
+          "client_id": "69746215362-uqmcndm854knipthbhs1rokssb21c5r6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDtmCKVrVkGiAR9RRnq6tIJjc5EByPaIlI"
+          "current_key": "AIzaSyBAQ89EpPJ6jP7Pp0h187-Pm0Glsq2X3bg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "927311579804-6mlnf5vlmdceq2ul2l4br80p81fhbivg.apps.googleusercontent.com",
+              "client_id": "69746215362-uqmcndm854knipthbhs1rokssb21c5r6.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

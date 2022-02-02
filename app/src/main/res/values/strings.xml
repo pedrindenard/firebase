@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Firebase Storage Database</string>
+    <string name="app_name">Firebase</string>
 
     <string name="home_message">Sem as permissões não é possivel executar o aplicativo corretamente.</string>
     <string name="home_download">Baixar</string>
@@ -16,6 +16,7 @@
     <string name="sign_in_login">Login</string>
     <string name="sign_in_recovery_password">Esqueceu sua senha?</string>
     <string name="sign_in_email_verify">Verifique seu endereço de email</string>
+    <string name="sign_in_google">Tente novamente mais tarde</string>
     <string name="sign_in_new_acc">Não tem uma conta?</string>
     <string name="sign_in_register">Cadastrar-se</string>
 
