@@ -7,6 +7,7 @@ import com.pdm.firebase.feature.domain.model.auth.User
 import com.pdm.firebase.feature.domain.model.auth.UserFacebook
 import com.pdm.firebase.feature.domain.model.auth.UserGitHub
 import com.pdm.firebase.feature.domain.model.auth.UserGoogle
+import com.pdm.firebase.feature.domain.model.privacy.Privacy
 import com.pdm.firebase.util.mapTo
 
 fun Task<DataSnapshot>.fromDataToUser(): User {
@@ -44,7 +45,7 @@ fun Task<AuthResult>.fromDataToUserFacebook(): User? {
     val result = this.result.additionalUserInfo?.profile?.mapTo<UserFacebook>()
 
     return if (result != null) {
-        return User(
+        User(
             name = result.name,
             fullName = result.lastName,
             email = result.email,
@@ -61,7 +62,7 @@ fun Task<AuthResult>.fromDataToUserGitHub(email: String): User? {
     val result = this.result.additionalUserInfo?.profile?.mapTo<UserGitHub>()
 
     return if (result != null) {
-        return User(
+        User(
             name = "",
             fullName = result.name,
             email = result.email ?: email,
@@ -70,6 +71,19 @@ fun Task<AuthResult>.fromDataToUserGitHub(email: String): User? {
             picture = "",
             numberPhone = "",
             gender = 1
+        )
+    } else null
+}
+
+fun Task<DataSnapshot?>?.fromDataToPrivacy() : Privacy? {
+    val result = this?.result?.value?.mapTo<Privacy>()
+
+    return if (result != null) {
+        Privacy(
+            title = result.title,
+            description = result.description,
+            paragraph = result.paragraph,
+            lastUpdate = result.lastUpdate
         )
     } else null
 }

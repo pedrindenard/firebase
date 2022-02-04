@@ -3,7 +3,6 @@ package com.pdm.firebase.feature.domain.usecase.register
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.pdm.firebase.feature.domain.enums.InvalidAuth
-import com.pdm.firebase.feature.domain.enums.AuthException
 import com.pdm.firebase.feature.domain.model.auth.User
 import com.pdm.firebase.feature.domain.repository.ProfileRepository
 import com.pdm.firebase.util.isValidBirthDate
@@ -12,12 +11,12 @@ import com.pdm.firebase.util.isValidLegalDocument
 
 class AddInfoUserUseCase(private val repository: ProfileRepository) {
 
-    @Throws(AuthException::class)
+    @Throws(Exception::class)
     suspend operator fun invoke(firebaseAuth: FirebaseAuth, user: User) : Task<Void>? {
         var throws = String()
 
         if (firebaseAuth.currentUser == null) {
-            throw AuthException(InvalidAuth.CURRENT_USER_IS_NULL.value)
+            throw Exception(InvalidAuth.CURRENT_USER_IS_NULL.value)
         }
         if (user.name.isBlank()) {
             throws += InvalidAuth.EMPTY_NAME.value
@@ -35,7 +34,7 @@ class AddInfoUserUseCase(private val repository: ProfileRepository) {
             throws += InvalidAuth.INVALID_BIRTHDATE.value
         }
         if (throws.isNotEmpty()) {
-            throw AuthException(throws)
+            throw Exception(throws)
         }
 
         return repository.editProfile(

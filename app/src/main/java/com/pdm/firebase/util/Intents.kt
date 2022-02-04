@@ -8,6 +8,7 @@ import android.net.Uri
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
+import com.pdm.firebase.feature.presentation.activity.ErrorActivity
 
 fun Activity.startPhone(url: String) {
     val i = Intent(Intent.ACTION_DIAL, Uri.parse(url))
@@ -63,4 +64,9 @@ fun FragmentActivity.onBackPressedListener(
             }
         }
     )
+}
+
+fun Activity.startErrorActivity() {
+    val intent = Intent(this, ErrorActivity::class.java)
+    startActivity(intent)
 }

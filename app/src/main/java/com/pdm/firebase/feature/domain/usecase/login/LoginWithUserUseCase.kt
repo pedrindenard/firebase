@@ -3,14 +3,13 @@ package com.pdm.firebase.feature.domain.usecase.login
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.pdm.firebase.feature.domain.enums.InvalidAuth
-import com.pdm.firebase.feature.domain.enums.AuthException
 import com.pdm.firebase.feature.domain.repository.LoginRepository
 import com.pdm.firebase.util.isValidEmail
 import com.pdm.firebase.util.isValidPassword
 
 class LoginWithUserUseCase(private val repository: LoginRepository) {
 
-    @Throws(AuthException::class)
+    @Throws(Exception::class)
     suspend operator fun invoke(email: String, password: String): Task<AuthResult>? {
         var throws = String()
 
@@ -21,7 +20,7 @@ class LoginWithUserUseCase(private val repository: LoginRepository) {
             throws += InvalidAuth.INVALID_PASSWORD.value
         }
         if (throws.isNotEmpty()) {
-            throw AuthException(throws)
+            throw Exception(throws)
         }
 
         return repository.loginWithUser(

@@ -11,4 +11,5 @@
     <color name="red">#CE0000</color>
     <color name="gray">#F2F0F0</color>
     <color name="gray_night">#2F4F4F</color>
+    <color name="white_light">#f7f7f7</color>
 </resources>

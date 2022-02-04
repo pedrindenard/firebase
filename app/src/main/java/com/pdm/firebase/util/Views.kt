@@ -1,5 +1,6 @@
 package com.pdm.firebase.util
 
+import android.animation.AnimatorListenerAdapter
 import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
@@ -12,11 +13,15 @@ import android.text.TextWatcher
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.view.animation.Animation
+import android.view.animation.Transformation
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.AppCompatToggleButton
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -151,8 +156,84 @@ fun handlerDelay(delayMillis: Long = 1000, action: () -> Unit) {
     }, delayMillis)
 }
 
+fun ViewGroup?.addViews(requireContext: Context, description: List<String>?) {
+    description?.forEach {
+        this?.addView(
+            TextView(requireContext).apply {
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    setMargins(
+                        requireContext.dpToPx(dp = 0F),
+                        requireContext.dpToPx(dp = 0F),
+                        requireContext.dpToPx(dp = 0F),
+                        requireContext.dpToPx(dp = 0F)
+                    )
+                    setPadding(
+                        requireContext.dpToPx(dp = 0F),
+                        requireContext.dpToPx(dp = 0F),
+                        requireContext.dpToPx(dp = 0F),
+                        requireContext.dpToPx(dp = 16F)
+                    )
+                }
+                text = it
+                textAlignment = left
+                typeface = ResourcesCompat.getFont(requireContext, R.font.stellar_regular)
+            }
+        )
+    }
+}
+
 fun View?.disableIt() {
     this?.isEnabled = false
     this?.isClickable = false
     this?.isActivated = false
+}
+
+fun View.rotateView(rotate: Boolean, speed: Long, angleN: Float, angleP: Float): Boolean {
+    this.animate().setDuration(speed)
+        .setListener(object : AnimatorListenerAdapter() {})
+        .rotation(if (rotate) angleN else angleP)
+    return rotate
+}
+
+fun View.expand(speed: Int) {
+    this.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+    val targetHeight: Int = this.measuredHeight
+    this.layoutParams.height = 1
+    this.visibility = View.VISIBLE
+    val a: Animation = object : Animation() {
+        override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
+            this@expand.layoutParams.height = if (interpolatedTime == 1f) LinearLayout.LayoutParams.WRAP_CONTENT
+            else (targetHeight * interpolatedTime).toInt()
+            this@expand.requestLayout()
+        }
+
+        override fun willChangeBounds(): Boolean {
+            return true
+        }
+    }
+    a.duration = ((targetHeight / this.context.resources.displayMetrics.density).toInt().toLong() * speed)
+    this.startAnimation(a)
+}
+
+fun View.collapse(speed: Int) {
+    val initialHeight: Int = this.measuredHeight
+    val a: Animation = object : Animation() {
+        override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
+            if (interpolatedTime == 1f) {
+                this@collapse.visibility = View.GONE
+            } else {
+                this@collapse.layoutParams.height = initialHeight - (initialHeight * interpolatedTime).toInt()
+                this@collapse.requestLayout()
+            }
+        }
+
+        override fun willChangeBounds(): Boolean {
+            return true
+        }
+    }
+    a.duration = ((initialHeight / this.context.resources.displayMetrics.density).toInt().toLong() * speed)
+    this.startAnimation(a)
 }

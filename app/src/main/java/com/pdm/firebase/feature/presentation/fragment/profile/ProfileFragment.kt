@@ -29,6 +29,9 @@ class ProfileFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         firebaseAuth = Firebase.auth
+        viewModel.getUserInfo(
+            uid = firebaseAuth.uid
+        )
     }
 
     override fun onCreateView(
@@ -42,7 +45,6 @@ class ProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getUserInfo(firebaseAuth.uid)
         iniOnClickListeners()
         showProgressDialog()
         initObservers()

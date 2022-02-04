@@ -9,7 +9,6 @@ import com.google.firebase.auth.AuthResult
 import com.pdm.firebase.feature.data.fromto.fromDataToUserFacebook
 import com.pdm.firebase.feature.data.fromto.fromDataToUserGitHub
 import com.pdm.firebase.feature.data.fromto.fromDataToUserGoogle
-import com.pdm.firebase.feature.domain.enums.AuthException
 import com.pdm.firebase.feature.domain.enums.InvalidAuth
 import com.pdm.firebase.feature.domain.model.auth.User
 import com.pdm.firebase.feature.domain.usecase.AuthUseCase
@@ -42,7 +41,7 @@ class SignInViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                         }
                     }
                 }
-            } catch (e: AuthException) {
+            } catch (e: Exception) {
                 e.message?.let {
                     if (it.contains(InvalidAuth.INVALID_EMAIL.value)) {
                         emailError.postValue(Unit)
@@ -76,7 +75,7 @@ class SignInViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                         }
                     }
                 }
-            } catch (e: AuthException) {
+            } catch (e: java.lang.Exception) {
                 when (e.message) {
                     InvalidAuth.SIGN_IN_FAILED.value -> {
                         errorResponse.postValue(e.message)
@@ -107,7 +106,7 @@ class SignInViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                         }
                     }
                 }
-            } catch (e: AuthException) {
+            } catch (e: java.lang.Exception) {
                 when (e.message) {
                     InvalidAuth.SIGN_IN_FAILED.value -> {
                         errorResponse.postValue(e.message)
@@ -161,7 +160,7 @@ class SignInViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                         }
                     }
                 }
-            } catch (e: AuthException) {
+            } catch (e: Exception) {
                 when (e.message) {
                     InvalidAuth.INVALID_NUMBER_PHONE.value -> {
                         invalidNumberError.postValue(Unit)

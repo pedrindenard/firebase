@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.pdm.firebase.R
 import com.pdm.firebase.databinding.FragmentLoginBinding
 import com.pdm.firebase.feature.presentation.base.BaseFragment
+import com.pdm.firebase.feature.presentation.fragment.login.adapter.LoginViewPage
 import com.pdm.firebase.util.setOnSingleClickListener
 
 class LoginFragment : BaseFragment() {

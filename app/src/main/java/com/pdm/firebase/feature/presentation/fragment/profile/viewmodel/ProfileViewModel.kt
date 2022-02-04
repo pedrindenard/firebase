@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.pdm.firebase.feature.data.fromto.fromDataToUser
-import com.pdm.firebase.feature.domain.enums.AuthException
 import com.pdm.firebase.feature.domain.enums.InvalidAuth
 import com.pdm.firebase.feature.domain.enums.InvalidUser
 import com.pdm.firebase.feature.domain.model.auth.User
@@ -47,7 +46,7 @@ class ProfileViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                         }
                     }
                 }
-            } catch (e: AuthException) {
+            } catch (e: Exception) {
                 e.message?.let {
                     if (it.contains(InvalidAuth.CURRENT_USER_IS_NULL.value)) {
                         errorResponse.postValue(e.message)
@@ -92,7 +91,7 @@ class ProfileViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                         }
                     }
                 }
-            } catch (e: AuthException) {
+            } catch (e: Exception) {
                 when (e.message) {
                     InvalidUser.INVALID_UID.value -> {
                         errorResponse.postValue(e.message)
@@ -116,7 +115,7 @@ class ProfileViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                         }
                     }
                 }
-            } catch (e: AuthException) {
+            } catch (e: Exception) {
                 when (e.message) {
                     InvalidUser.INVALID_UID.value -> {
                         errorResponse.postValue(e.message)

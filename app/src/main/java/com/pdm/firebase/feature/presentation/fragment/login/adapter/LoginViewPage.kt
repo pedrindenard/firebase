@@ -1,4 +1,4 @@
-package com.pdm.firebase.feature.presentation.fragment.login
+package com.pdm.firebase.feature.presentation.fragment.login.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -6,7 +6,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.pdm.firebase.feature.presentation.fragment.login.tabs.SignInFragment
 import com.pdm.firebase.feature.presentation.fragment.login.tabs.SignUpFragment
-import com.pdm.firebase.feature.presentation.fragment.recovery.RecoveryFragment
 
 class LoginViewPage(
     fragmentManager: FragmentManager,

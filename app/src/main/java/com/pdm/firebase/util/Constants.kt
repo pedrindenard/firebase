@@ -2,6 +2,8 @@ package com.pdm.firebase.util
 
 const val USERS_DATABASE = "Users"
 
+const val PRIVACY_DATABASE = "Privacy"
+
 const val SERVER_TOKEN_ID = "69746215362-uqmcndm854knipthbhs1rokssb21c5r6.apps.googleusercontent.com"
 
 const val ERROR_SERVICE = "Error service"
@@ -31,6 +33,10 @@ const val GITHUB_PROVIDER = "github.com"
 const val GITHUB_PARAM_KEY = "login"
 
 const val DATABASE_APP = "firebase-database.db"
+
+const val BAD_REQUEST = "Bad request"
+
+const val ARGS = "ARGS"
 
 val FACEBOOK_PERMISSIONS = arrayListOf("email", "public_profile")
 

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.tasks.Task
-import com.pdm.firebase.feature.domain.enums.AuthException
 import com.pdm.firebase.feature.domain.enums.InvalidAuth
 import com.pdm.firebase.feature.domain.usecase.AuthUseCase
 import com.pdm.firebase.feature.presentation.base.BaseViewModel
@@ -30,7 +29,7 @@ class RecoveryViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                         }
                     }
                 }
-            } catch (e: AuthException) {
+            } catch (e: Exception) {
                 when (e.message) {
                     InvalidAuth.INVALID_EMAIL.value -> {
                         emailError.postValue(Unit)

@@ -51,8 +51,10 @@
     <string name="error_email">Email inválido</string>
     <string name="error_fields">Campos inválidos</string>
 
+    <string name="or">ou</string>
     <string name="todo">todo</string>
-    <string name="failure">Erro de conexão com o serviço, tente novamente mais tarde</string>
+    <string name="failure">Erro de conexão com o serviço,\ntente novamente mais tarde</string>
+    <string name="last_update">Última atualização %s</string>
 
     <string name="profile_email">Email</string>
     <string name="profile_password">Senha</string>
@@ -63,13 +65,16 @@
     <string name="profile_phone">Telefone</string>
     <string name="profile_notification">Notificações</string>
     <string name="profile_address">Endereços</string>
+    <string name="profile_sign_out">Sair</string>
+
     <string name="menu_home">Home</string>
     <string name="menu_search">Pesquisar</string>
     <string name="menu_wishlist">Favoritos</string>
     <string name="menu_profile">Minha conta</string>
     <string name="menu_settings">Configurações</string>
+
     <string name="login_git_hub">Entrar com Github</string>
-    <string name="or">ou</string>
     <string name="login_title">Firebase App</string>
-    <string name="profile_sign_out">Sair</string>
+    <string name="back">Voltar</string>
+
 </resources>

@@ -23,17 +23,10 @@
                 android:id="@+id/appCompatImageView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@color/blue"
+                android:background="@drawable/background_gradient"
                 android:src="@drawable/ic_launcher"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/gradientView"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:background="@drawable/background_gradient"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

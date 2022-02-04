@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
-import com.pdm.firebase.feature.domain.enums.AuthException
 import com.pdm.firebase.feature.domain.enums.InvalidAuth
 import com.pdm.firebase.feature.domain.model.auth.User
 import com.pdm.firebase.feature.domain.usecase.AuthUseCase
@@ -40,7 +39,7 @@ class SignUpViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                         }
                     }
                 }
-            } catch (e: AuthException) {
+            } catch (e: Exception) {
                 e.message?.let {
                     if (it.contains(InvalidAuth.EMPTY_NAME.value)) {
                         nameEmpty.postValue(Unit)
@@ -91,7 +90,7 @@ class SignUpViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                         }
                     }
                 }
-            } catch (e: AuthException) {
+            } catch (e: Exception) {
                 e.message?.let {
                     if (it.contains(InvalidAuth.CURRENT_USER_IS_NULL.value)) {
                         errorResponse.postValue("")
@@ -130,7 +129,7 @@ class SignUpViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                         }
                     }
                 }
-            } catch (e: AuthException) {
+            } catch (e: Exception) {
                 when (e.message) {
                     InvalidAuth.CURRENT_USER_IS_NULL.value -> {
                         errorResponse.postValue("")

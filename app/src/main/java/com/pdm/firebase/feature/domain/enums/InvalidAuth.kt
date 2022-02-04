@@ -1,7 +1,5 @@
 package com.pdm.firebase.feature.domain.enums
 
-class AuthException(message: String) : Exception(message)
-
 enum class InvalidAuth(val value: String) {
     EMPTY_NAME("empty.name "),
     EMPTY_LAST_NAME("empty.last.name "),
