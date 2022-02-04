@@ -9,7 +9,7 @@ import com.pdm.firebase.feature.data.fromto.fromDataToUser
 import com.pdm.firebase.feature.domain.enums.AuthException
 import com.pdm.firebase.feature.domain.enums.InvalidAuth
 import com.pdm.firebase.feature.domain.enums.InvalidUser
-import com.pdm.firebase.feature.domain.model.User
+import com.pdm.firebase.feature.domain.model.auth.User
 import com.pdm.firebase.feature.domain.usecase.AuthUseCase
 import com.pdm.firebase.feature.presentation.base.BaseViewModel
 import kotlinx.coroutines.launch
@@ -31,8 +31,8 @@ class ProfileViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
     private val _successEditUserInfo = MutableLiveData<Task<Void>?>()
     val successEditUserInfo = _successEditUserInfo as LiveData<Task<Void>?>
 
-    private val _successLogOut = MutableLiveData<Unit?>()
-    val successLogOut = _successLogOut as LiveData<Unit?>
+    private val _successLogOut = MutableLiveData<Unit>()
+    val successLogOut = _successLogOut as LiveData<Unit>
 
     fun editProfile(firebaseAuth: FirebaseAuth, user: User) {
         viewModelScope.launch {
@@ -79,7 +79,7 @@ class ProfileViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
         }
     }
 
-    private fun getUserInfo(uid: String?) {
+    fun getUserInfo(uid: String?) {
         viewModelScope.launch {
             try {
                 useCase.getUserInfoUseCase(uid)?.addOnCompleteListener {
@@ -89,6 +89,30 @@ class ProfileViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                         }
                         else -> {
                             errorResponse.postValue(it.exception?.message)
+                        }
+                    }
+                }
+            } catch (e: AuthException) {
+                when (e.message) {
+                    InvalidUser.INVALID_UID.value -> {
+                        errorResponse.postValue(e.message)
+                    }
+                }
+                failureResponse.postValue(e)
+            }
+        }
+    }
+
+    fun signOut(firebaseAuth: FirebaseAuth) {
+        viewModelScope.launch {
+            try {
+                useCase.logOutUseCase(firebaseAuth).let {
+                    when {
+                        it != null -> {
+                            _successLogOut.postValue(Unit)
+                        }
+                        else -> {
+                            errorResponse.postValue("")
                         }
                     }
                 }

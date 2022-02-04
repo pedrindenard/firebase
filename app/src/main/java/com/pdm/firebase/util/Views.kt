@@ -72,7 +72,7 @@ fun Activity.setErrorInput(
     textInputEditText: TextInputEditText,
     textInputLayout: TextInputLayout,
     appCompatTextView: AppCompatTextView? = null,
-    message: String?
+    message: String? = ""
 ) {
     val errorColor = ContextCompat.getColor(this, R.color.red)
     val grayColor = ColorStateList.valueOf(

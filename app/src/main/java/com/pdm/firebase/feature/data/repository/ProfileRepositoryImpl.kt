@@ -4,7 +4,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.pdm.firebase.feature.domain.datasource.ProfileDataSource
-import com.pdm.firebase.feature.domain.model.User
+import com.pdm.firebase.feature.domain.model.auth.User
 import com.pdm.firebase.feature.domain.repository.ProfileRepository
 
 class ProfileRepositoryImpl(private val dataSource: ProfileDataSource) : ProfileRepository {

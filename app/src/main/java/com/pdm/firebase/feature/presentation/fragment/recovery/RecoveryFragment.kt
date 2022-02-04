@@ -41,6 +41,11 @@ class RecoveryFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initClickListener()
+        initObservers()
+    }
+
+    private fun initClickListener() {
         binding.submitBtn.setOnSingleClickListener {
             val email = binding.emailField.text.toString()
             viewModel.recoveryPassword(email)
@@ -48,12 +53,16 @@ class RecoveryFragment : BaseFragment() {
             hideKeyboard()
         }
 
-        initObservers()
+        binding.popBackStack.setOnSingleClickListener {
+            findNavController().popBackStack()
+        }
+
+        binding.emailField.showKeyBoard()
     }
 
     private fun initObservers() {
         viewModel.successRecoveryPassword.observe(viewLifecycleOwner, {
-            snackBar(description = getString(R.string.recovery_email_send), RED)
+            showSnackBar(description = getString(R.string.recovery_email_send), RED)
             findNavController().popBackStack()
             hideProgressDialog()
         })
@@ -67,12 +76,12 @@ class RecoveryFragment : BaseFragment() {
         })
 
         viewModel.errorResponse.observe(viewLifecycleOwner, {
-            snackBar(description = it, RED)
+            showSnackBar(description = it, RED)
             hideProgressDialog()
         })
 
         viewModel.failureResponse.observe(viewLifecycleOwner, {
-            snackBar(description = getString(R.string.error_fields), RED)
+            showSnackBar(description = getString(R.string.error_fields), RED)
             hideProgressDialog()
         })
     }

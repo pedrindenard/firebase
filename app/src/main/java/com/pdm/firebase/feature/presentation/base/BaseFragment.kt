@@ -1,8 +1,10 @@
 package com.pdm.firebase.feature.presentation.base
 
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -11,21 +13,22 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.pdm.firebase.R
-import com.pdm.firebase.feature.presentation.dialog.DialogProgress
+import com.pdm.firebase.feature.presentation.dialog.ProgressDialog
 import com.pdm.firebase.util.BLACK
 import com.pdm.firebase.util.RED
-import com.pdm.firebase.util.dpToPx
-import java.lang.Exception
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat.getSystemService
+import com.google.android.material.textfield.TextInputEditText
 
 
 abstract class BaseFragment : Fragment() {
 
-    private var progressDialog: DialogProgress? = null
+    private var progressDialog: ProgressDialog? = null
 
     fun showProgressDialog() {
         activity?.let {
             if (progressDialog == null) {
-                progressDialog = DialogProgress()
+                progressDialog = ProgressDialog()
                 progressDialog?.show(it.supportFragmentManager, "ProgressDialog")
             }
         }
@@ -38,13 +41,21 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
+    fun TextInputEditText.showKeyBoard() {
+        activity?.window?.setSoftInputMode(
+            WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
+        )
+
+        val keyboard = activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
+        keyboard!!.showSoftInput(this, 0)
+    }
+
     fun hideKeyboard() {
-        val keyBoarding =
-            activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val keyBoarding = activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         keyBoarding.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
-    fun snackBar(description: String, color: String) {
+    fun showSnackBar(description: String, color: String) {
         Snackbar.make(requireView(), description, Snackbar.LENGTH_LONG).apply {
             setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             setBackgroundTint(
@@ -69,11 +80,9 @@ abstract class BaseFragment : Fragment() {
 
             try {
                 params as FrameLayout.LayoutParams
-                params.topMargin = context.dpToPx(32F)
                 params.gravity = Gravity.TOP
             } catch (e: Exception) {
                 params as CoordinatorLayout.LayoutParams
-                params.topMargin = context.dpToPx(32F)
                 params.gravity = Gravity.TOP
             }
 

@@ -1,372 +1,295 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <include
-        android:id="@+id/collapsingContainer"
-        layout="@layout/include_app_bar" />
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:overScrollMode="never"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginVertical="32dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/linearLayoutCompat"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="32dp"
-            android:layout_marginBottom="32dp"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:hint="@string/sign_up_name"
+            app:boxCollapsedPaddingTop="0dp"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidth="0.5dp"
+            app:boxStrokeWidthFocused="0.5dp"
+            app:hintTextColor="@color/black">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nameInput"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:hint="@string/sign_up_name"
-                app:boxCollapsedPaddingTop="0dp"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidth="0.5dp"
-                app:boxStrokeWidthFocused="0.5dp"
-                app:hintTextColor="@color/black">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nameField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:imeOptions="actionNext"
-                    android:importantForAutofill="no"
-                    android:inputType="textPersonName"
-                    android:maxLength="42"
-                    android:paddingStart="1dp"
-                    android:paddingTop="16dp"
-                    android:paddingEnd="0dp"
-                    android:paddingBottom="4dp"
-                    tools:text="Pedro" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/nameFieldError"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:textColor="@color/red"
-                android:textStyle="normal"
-                tools:text="Empty name" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/lastNameInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:hint="@string/sign_up_last_name"
-                app:boxCollapsedPaddingTop="0dp"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidth="0.5dp"
-                app:boxStrokeWidthFocused="0.5dp"
-                app:hintTextColor="@color/black">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/lastNameField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:imeOptions="actionNext"
-                    android:importantForAutofill="no"
-                    android:inputType="textPersonName"
-                    android:maxLength="42"
-                    android:paddingStart="1dp"
-                    android:paddingTop="16dp"
-                    android:paddingEnd="0dp"
-                    android:paddingBottom="4dp"
-                    tools:text="Dennard" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/lastNameFieldError"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:textColor="@color/red"
-                android:textStyle="normal"
-                tools:text="Empty last name" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/emailInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:hint="@string/sign_up_email"
-                app:boxCollapsedPaddingTop="0dp"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidth="0.5dp"
-                app:boxStrokeWidthFocused="0.5dp"
-                app:hintTextColor="@color/black">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/emailField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:imeOptions="actionNext"
-                    android:importantForAutofill="no"
-                    android:inputType="textEmailAddress"
-                    android:maxLength="42"
-                    android:paddingStart="1dp"
-                    android:paddingTop="16dp"
-                    android:paddingEnd="0dp"
-                    android:paddingBottom="4dp"
-                    tools:text="pedrominuzzi21@gmail.com" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/emailFieldError"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:textColor="@color/red"
-                android:textStyle="normal"
-                tools:text="Invalid email" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/legalDocumentInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:hint="@string/sign_up_cpf"
-                app:boxCollapsedPaddingTop="0dp"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidth="0.5dp"
-                app:boxStrokeWidthFocused="0.5dp"
-                app:hintTextColor="@color/black">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/legalDocumentField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:imeOptions="actionNext"
-                    android:importantForAutofill="no"
-                    android:inputType="number"
-                    android:maxLength="14"
-                    android:paddingStart="1dp"
-                    android:paddingTop="16dp"
-                    android:paddingEnd="0dp"
-                    android:paddingBottom="4dp"
-                    tools:text="098.765.543-41" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/legalDocumentFieldError"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:textColor="@color/red"
-                android:textStyle="normal"
-                tools:text="Invalid legal document" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/birth_date_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:hint="@string/sign_up_date"
-                app:boxCollapsedPaddingTop="0dp"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidth="0.5dp"
-                app:boxStrokeWidthFocused="0.5dp"
-                app:hintTextColor="@color/black">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/birth_date_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:imeOptions="actionNext"
-                    android:importantForAutofill="no"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:paddingStart="1dp"
-                    android:paddingTop="16dp"
-                    android:paddingEnd="0dp"
-                    android:paddingBottom="4dp"
-                    tools:text="21/06/2001" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/birthDateFieldError"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:textColor="@color/red"
-                android:textStyle="normal"
-                tools:text="Invalid birthdate" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/passwordLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/passwordInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/sign_up_password"
-                    app:boxCollapsedPaddingTop="0dp"
-                    app:boxStrokeColor="@color/black"
-                    app:boxStrokeWidth="0.5dp"
-                    app:boxStrokeWidthFocused="0.5dp"
-                    app:hintTextColor="@color/black">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/passwordField"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/white"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:imeOptions="actionNext"
-                        android:importantForAutofill="no"
-                        android:inputType="textPassword"
-                        android:maxLength="32"
-                        android:paddingStart="1dp"
-                        android:paddingTop="16dp"
-                        android:paddingEnd="0dp"
-                        android:paddingBottom="4dp"
-                        tools:text="12345678" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <androidx.appcompat.widget.AppCompatToggleButton
-                    android:id="@+id/togglePassword"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/ic_toggle"
-                    android:checked="false"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:text=""
-                    android:textOff=""
-                    android:textOn=""
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/passwordInput"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/passwordFieldError"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:textColor="@color/red"
-                android:textStyle="normal"
-                tools:text="Invalid password" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/confirmPasswordLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/confirmPasswordInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/sign_up_confirm_password"
-                    app:boxCollapsedPaddingTop="0dp"
-                    app:boxStrokeColor="@color/black"
-                    app:boxStrokeWidth="0.5dp"
-                    app:boxStrokeWidthFocused="0.5dp"
-                    app:hintTextColor="@color/black">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/confirmPasswordField"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/white"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:imeOptions="actionDone"
-                        android:importantForAutofill="no"
-                        android:inputType="textPassword"
-                        android:maxLength="32"
-                        android:paddingStart="1dp"
-                        android:paddingTop="16dp"
-                        android:paddingEnd="0dp"
-                        android:paddingBottom="4dp"
-                        tools:text="12345678" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <androidx.appcompat.widget.AppCompatToggleButton
-                    android:id="@+id/toggleConfirmPassword"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/ic_toggle"
-                    android:checked="false"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:text=""
-                    android:textOff=""
-                    android:textOn=""
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/confirmPasswordFieldError"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:textColor="@color/red"
-                android:textStyle="normal"
-                android:visibility="gone"
-                tools:text="Invalid password"
-                tools:visibility="visible" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/registerBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="42dp"
-                android:background="@color/blue"
+                android:backgroundTint="@color/white"
                 android:clickable="true"
                 android:focusable="true"
-                android:fontFamily="@font/stellar_bold"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:maxLength="42"
+                android:paddingStart="1dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="4dp"
+                tools:text="Pedro" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lastNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:hint="@string/sign_up_last_name"
+            app:boxCollapsedPaddingTop="0dp"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidth="0.5dp"
+            app:boxStrokeWidthFocused="0.5dp"
+            app:hintTextColor="@color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lastNameField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:maxLength="42"
+                android:paddingStart="1dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="4dp"
+                tools:text="Dennard" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:hint="@string/sign_up_email"
+            app:boxCollapsedPaddingTop="0dp"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidth="0.5dp"
+            app:boxStrokeWidthFocused="0.5dp"
+            app:hintTextColor="@color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:maxLength="42"
+                android:paddingStart="1dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="4dp"
+                tools:text="pedrominuzzi21@gmail.com" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/legalDocumentInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:hint="@string/sign_up_cpf"
+            app:boxCollapsedPaddingTop="0dp"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidth="0.5dp"
+            app:boxStrokeWidthFocused="0.5dp"
+            app:hintTextColor="@color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/legalDocumentField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="14"
+                android:paddingStart="1dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="4dp"
+                tools:text="098.765.543-41" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/birth_date_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:hint="@string/sign_up_date"
+            app:boxCollapsedPaddingTop="0dp"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidth="0.5dp"
+            app:boxStrokeWidthFocused="0.5dp"
+            app:hintTextColor="@color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/birth_date_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="10"
+                android:paddingStart="1dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="4dp"
+                tools:text="21/06/2001" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/passwordLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/sign_up_password"
+                app:boxCollapsedPaddingTop="0dp"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidth="0.5dp"
+                app:boxStrokeWidthFocused="0.5dp"
+                app:hintTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:imeOptions="actionNext"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:maxLength="32"
+                    android:paddingStart="1dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="0dp"
+                    android:paddingBottom="4dp"
+                    tools:text="12345678" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatToggleButton
+                android:id="@+id/togglePassword"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_toggle"
+                android:checked="false"
+                android:clickable="true"
+                android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:text="@string/sign_up_confirm" />
+                android:text=""
+                android:textOff=""
+                android:textOn=""
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/passwordInput"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.core.widget.NestedScrollView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/confirmPasswordLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/confirmPasswordInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/sign_up_confirm_password"
+                app:boxCollapsedPaddingTop="0dp"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidth="0.5dp"
+                app:boxStrokeWidthFocused="0.5dp"
+                app:hintTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/confirmPasswordField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:maxLength="32"
+                    android:paddingStart="1dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="0dp"
+                    android:paddingBottom="4dp"
+                    tools:text="12345678" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatToggleButton
+                android:id="@+id/toggleConfirmPassword"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_toggle"
+                android:checked="false"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text=""
+                android:textOff=""
+                android:textOn=""
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/registerBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
+            android:background="@color/blue"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/stellar_bold"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="@string/sign_up_confirm" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.core.widget.NestedScrollView>

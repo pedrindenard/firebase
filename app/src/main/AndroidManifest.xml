@@ -20,24 +20,32 @@
         android:theme="@style/Theme.FirebaseStorageDatabase">
 
         <activity
-            android:name="com.pdm.firebase.feature.presentation.activity.LoginActivity"
-            android:exported="true"
-            android:fitsSystemWindows="true">
+            android:name=".feature.presentation.activity.LoginActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
 
         <activity
-            android:name="com.pdm.firebase.feature.presentation.activity.MainActivity"
-            android:exported="true"
-            android:fitsSystemWindows="true">
+            android:name=".feature.presentation.activity.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:exported="true">
             <intent-filter>
+
                 <category android:name="android.intent.category.DEFAULT" />
+
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
     </application>
 

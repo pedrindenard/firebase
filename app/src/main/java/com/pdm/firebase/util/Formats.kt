@@ -18,7 +18,16 @@ fun TextInputEditText?.formatToLegalDocument() {
     this?.addTextChangedListener(mtw)
 }
 
-fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
+fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
+
+fun handlerJustNumber(s: String): String {
+    return try {
+        val re = Regex(pattern = "[^0-9]")
+        return re.replace(s, replacement = "")
+    } catch (e: Exception) {
+        s
+    }
+}
 
 inline fun <reified T : Any> Any.mapTo(): T =
     GsonBuilder().create().run {

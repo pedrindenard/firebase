@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@color/blue"
-                android:src="@drawable/ic_launcher_background"
+                android:src="@drawable/ic_launcher"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,7 +32,7 @@
                 android:id="@+id/gradientView"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                android:background="@drawable/gradient_style_in"
+                android:background="@drawable/background_gradient"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

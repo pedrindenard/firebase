@@ -8,7 +8,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.pdm.firebase.feature.domain.datasource.ProfileDataSource
-import com.pdm.firebase.feature.domain.model.User
+import com.pdm.firebase.feature.domain.model.auth.User
 import com.pdm.firebase.util.ERROR_SERVICE
 import com.pdm.firebase.util.USERS_DATABASE
 

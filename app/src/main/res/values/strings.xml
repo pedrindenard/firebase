@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Firebase</string>
 
+    <string name="facebook_app_id">3066054920284139</string>
+    <string name="fb_login_protocol_scheme">fb3066054920284139</string>
+
     <string name="home_message">Sem as permissões não é possivel executar o aplicativo corretamente.</string>
     <string name="home_download">Baixar</string>
     <string name="home_crud">CRUD</string>
@@ -11,6 +14,7 @@
     <string name="dialog_alert">Confirmar</string>
     <string name="dialog_progress">Aguarde…</string>
 
+    <string name="sign_in_title">Login</string>
     <string name="sign_in_email">EMAIL</string>
     <string name="sign_in_password">SENHA</string>
     <string name="sign_in_login">Login</string>
@@ -20,6 +24,7 @@
     <string name="sign_in_new_acc">Não tem uma conta?</string>
     <string name="sign_in_register">Cadastrar-se</string>
 
+    <string name="sign_up_title">Registrar</string>
     <string name="sign_up_email">EMAIL*</string>
     <string name="sign_up_password">SENHA*</string>
     <string name="sign_up_confirm_password">CONFIRMAR SENHA*</string>
@@ -31,11 +36,13 @@
     <string name="sign_up_registered">Usuário cadastrado com sucesso. Verifique seu endereço de email</string>
     <string name="sign_up_social">Usuário cadastrado com sucesso.</string>
 
+    <string name="recovery_password_title">Recuperar senha</string>
     <string name="recovery_submit">Enviar</string>
     <string name="recovery_message">Digite seu endereço de e-mail\n para recuperar sua senha.</string>
     <string name="recovery_email_send">Email enviado com sucesso!</string>
 
     <string name="error_register_user">Erro ao cadastrar usuário, tente novamente mais tarde</string>
+    <string name="error_number_phone">Número de telefone inválido</string>
     <string name="error_password">Senha inválida</string>
     <string name="error_empty_field">Campo obrigatório</string>
     <string name="error_confirm_password_field">Senhas diferentes</string>
@@ -61,4 +68,8 @@
     <string name="menu_wishlist">Favoritos</string>
     <string name="menu_profile">Minha conta</string>
     <string name="menu_settings">Configurações</string>
+    <string name="login_git_hub">Entrar com Github</string>
+    <string name="or">ou</string>
+    <string name="login_title">Firebase App</string>
+    <string name="profile_sign_out">Sair</string>
 </resources>

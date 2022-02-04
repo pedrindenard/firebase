@@ -1,4 +1,4 @@
-package com.pdm.firebase.feature.presentation.fragment.register.viewmodel
+package com.pdm.firebase.feature.presentation.fragment.login.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.pdm.firebase.feature.domain.enums.AuthException
 import com.pdm.firebase.feature.domain.enums.InvalidAuth
-import com.pdm.firebase.feature.domain.model.User
+import com.pdm.firebase.feature.domain.model.auth.User
 import com.pdm.firebase.feature.domain.usecase.AuthUseCase
 import com.pdm.firebase.feature.presentation.base.BaseViewModel
 import kotlinx.coroutines.launch
@@ -69,7 +69,7 @@ class SignUpViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
         }
     }
 
-    fun addInfoToUser(user: User, firebaseAuth: FirebaseAuth) {
+    private fun addInfoToUser(user: User, firebaseAuth: FirebaseAuth) {
         viewModelScope.launch {
             try {
                 useCase.addInfoUserUseCase(firebaseAuth, user)?.addOnCompleteListener {

@@ -84,7 +84,7 @@ fun isValidLegalDocument(cpf: String): Boolean {
     return numbers[9] == dv1 && numbers[10] == dv2
 }
 
-fun String.hashConfig() : String? {
+fun String.hashConfig(): String? {
     return try {
         val digest = MessageDigest.getInstance("SHA-256")
         val hash = digest.digest(this.toByteArray(charset("UTF-8")))
@@ -98,4 +98,15 @@ fun String.hashConfig() : String? {
     } catch (ex: Exception) {
         throw RuntimeException(ex)
     }
+}
+
+fun isValidPhone(phone: String): Boolean {
+    if (handlerJustNumber(phone).length == 10) {
+        if (handlerJustNumber(phone) != "0000000000") return true
+    } else if (handlerJustNumber(phone).length == 11) {
+        if (handlerJustNumber(phone) != "00000000000" &&
+            handlerJustNumber(phone).startsWith(prefix = "9", startIndex = 2)
+        ) return true
+    }
+    return false
 }

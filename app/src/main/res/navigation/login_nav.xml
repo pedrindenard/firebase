@@ -3,20 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_nav"
-    app:startDestination="@+id/signInFragment">
+    app:startDestination="@+id/loginFragment">
 
     <fragment
-        android:id="@+id/signInFragment"
-        android:name="com.pdm.firebase.feature.presentation.fragment.login.SignInFragment"
-        android:label="SignInFragment"
-        tools:layout="@layout/fragment_sign_in">
-        <action
-            android:id="@+id/action_signInFragment_to_recoveryFragment"
-            app:destination="@id/recoveryFragment"
-            app:enterAnim="@anim/anim_fade_in"
-            app:exitAnim="@anim/anim_fade_out"
-            app:popEnterAnim="@anim/anim_fade_in"
-            app:popExitAnim="@anim/anim_fade_out" />
+        android:id="@+id/loginFragment"
+        android:name="com.pdm.firebase.feature.presentation.fragment.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
@@ -24,19 +17,26 @@
             app:exitAnim="@anim/anim_fade_out"
             app:popEnterAnim="@anim/anim_fade_in"
             app:popExitAnim="@anim/anim_fade_out" />
+        <action
+            android:id="@+id/action_signInFragment_to_recoveryPasswordFragment"
+            app:destination="@id/recoveryFragment"
+            app:enterAnim="@anim/anim_fade_in"
+            app:exitAnim="@anim/anim_fade_out"
+            app:popEnterAnim="@anim/anim_fade_in"
+            app:popExitAnim="@anim/anim_fade_out" />
     </fragment>
 
     <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.pdm.firebase.feature.presentation.fragment.login.tabs.SignInFragment"
+        android:label="SignInFragment"
+        tools:layout="@layout/fragment_sign_in" />
+
+    <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.pdm.firebase.feature.presentation.fragment.register.SignUpFragment"
+        android:name="com.pdm.firebase.feature.presentation.fragment.login.tabs.SignUpFragment"
         android:label="SignUpFragment"
-        tools:layout="@layout/fragment_sign_up">
-        <argument
-            android:name="value"
-            android:defaultValue="@null"
-            app:argType="com.pdm.firebase.feature.domain.model.UserGoogle"
-            app:nullable="true" />
-    </fragment>
+        tools:layout="@layout/fragment_sign_up" />
 
     <fragment
         android:id="@+id/recoveryFragment"

@@ -11,4 +11,10 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
 
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.pdm.firebase.feature.presentation.fragment.profile.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
+
 </navigation>

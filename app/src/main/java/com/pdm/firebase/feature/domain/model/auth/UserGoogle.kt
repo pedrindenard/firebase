@@ -1,4 +1,4 @@
-package com.pdm.firebase.feature.domain.model
+package com.pdm.firebase.feature.domain.model.auth
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

@@ -8,7 +8,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.pdm.firebase.feature.domain.datasource.RegisterDataSource
-import com.pdm.firebase.feature.domain.model.User
+import com.pdm.firebase.feature.domain.model.auth.User
 import com.pdm.firebase.util.ERROR_SERVICE
 import com.pdm.firebase.util.USERS_DATABASE
 import com.pdm.firebase.util.hashConfig

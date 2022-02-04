@@ -35,25 +35,6 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun initClickListeners() {
-        binding.downloadBtn.setOnSingleClickListener {
-
-        }
-
-        binding.uploadBtn.setOnSingleClickListener {
-
-        }
-
-        binding.readBtn.setOnSingleClickListener {
-
-        }
-
-        binding.crudBtn.setOnSingleClickListener {
-
-        }
-
-        binding.listBtn.setOnSingleClickListener {
-
-        }
     }
 
     private fun onRequestPermission() {
@@ -64,7 +45,7 @@ class HomeFragment : BaseFragment() {
                         map.value
                     }.run {
                         if (!this) {
-                            snackBar(
+                            showSnackBar(
                                 description = getString(R.string.home_message),
                                 color = BLACK
                             )

@@ -12,6 +12,7 @@ data class AuthUseCase (
     val loginWithGoogleUseCase: LoginWithGoogleUseCase,
     val loginWithFacebookUseCase: LoginWithFacebookUseCase,
     val loginWithGitHubUseCase: LoginWithGitHubUseCase,
+    val loginWithNumberProneUseCase: LoginWithNumberProneUseCase,
     val recoveryUserUseCase: RecoveryPasswordUseCase,
 
     val registerUserUseCase: RegisterUserUseCase,

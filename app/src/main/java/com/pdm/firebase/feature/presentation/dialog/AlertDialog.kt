@@ -8,7 +8,7 @@ import androidx.fragment.app.DialogFragment
 import com.pdm.firebase.databinding.DialogAlertBinding
 import com.pdm.firebase.util.setOnSingleClickListener
 
-class DialogAlert(private val title: String, private val description: String) : DialogFragment() {
+class AlertDialog(private val title: String, private val description: String) : DialogFragment() {
 
     private var _binding: DialogAlertBinding? = null
     private val binding get() = _binding!!

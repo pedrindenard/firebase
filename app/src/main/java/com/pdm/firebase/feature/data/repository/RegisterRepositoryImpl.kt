@@ -4,7 +4,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
 import com.pdm.firebase.feature.domain.datasource.RegisterDataSource
-import com.pdm.firebase.feature.domain.model.User
+import com.pdm.firebase.feature.domain.model.auth.User
 import com.pdm.firebase.feature.domain.repository.RegisterRepository
 
 class RegisterRepositoryImpl(private val dataSource: RegisterDataSource) : RegisterRepository {

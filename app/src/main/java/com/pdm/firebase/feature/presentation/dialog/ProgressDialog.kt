@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.pdm.firebase.databinding.DialogProgressBinding
 
-class DialogProgress : DialogFragment() {
+class ProgressDialog : DialogFragment() {
 
     private var _binding: DialogProgressBinding? = null
     private val binding get() = _binding!!

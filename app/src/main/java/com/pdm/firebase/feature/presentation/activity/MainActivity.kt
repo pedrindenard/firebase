@@ -35,13 +35,16 @@ class MainActivity : BaseActivity() {
                     navController.startFragment(R.id.homeFragment)
                 }
                 R.id.searchFragment -> {
-                    navController.startFragment(R.id.searchFragment)
+                    navController.startFragment(R.id.homeFragment)
                 }
                 R.id.wishlistFragment -> {
-                    navController.startFragment(R.id.wishlistFragment)
+                    navController.startFragment(R.id.homeFragment)
                 }
                 R.id.profileFragment -> {
                     navController.startFragment(R.id.profileFragment)
+                }
+                R.id.settingsFragment -> {
+                    navController.startFragment(R.id.homeFragment)
                 }
                 else -> {
                     binding.bottomNavigation.visibility = View.GONE
@@ -53,7 +56,7 @@ class MainActivity : BaseActivity() {
 
     private fun NavController.startFragment(currentFragment: Int) {
         if (this.currentDestination?.id != currentFragment) {
-            this.navigate(R.id.homeFragment, null,
+            this.navigate(currentFragment, null,
                 NavOptions.Builder().apply {
                     setEnterAnim(R.anim.anim_fade_in)
                     setExitAnim(R.anim.anim_fade_out)

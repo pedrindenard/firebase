@@ -12,16 +12,34 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="200dp"
             android:background="@color/blue"
             android:padding="20dp">
+
+            <TextView
+                android:id="@+id/profileSigOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/stellar_bold"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text="@string/profile_sign_out"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:ignore="RelativeOverlap" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/profilePicture"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_launcher_background" />
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_launcher" />
 
             <TextView
                 android:id="@+id/profileName"
@@ -53,7 +71,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-100dp"
+            android:layout_marginTop="-50dp"
             android:padding="20dp">
 
             <com.google.android.material.card.MaterialCardView
@@ -61,6 +79,9 @@
                 android:layout_height="125dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardBackgroundColor="@color/blue"
                 app:cardElevation="10dp">
 
@@ -96,6 +117,9 @@
                 android:layout_height="125dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardBackgroundColor="@color/blue"
                 app:cardElevation="10dp">
 
@@ -135,16 +159,18 @@
             android:padding="20dp">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:hint="@string/profile_email"
+                android:hint="@string/profile_name"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidth="0.5dp"
                 app:boxStrokeWidthFocused="0.5dp"
                 app:hintTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
@@ -157,11 +183,41 @@
                     android:importantForAutofill="no"
                     android:inputType="textPersonName"
                     android:maxLength="42"
+                    tools:text="Pedro Denardi Minuzzi" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/profile_email"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidth="0.5dp"
+                app:boxStrokeWidthFocused="0.5dp"
+                app:hintTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_email"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/black"
+                    android:focusable="true"
+                    android:imeOptions="actionNext"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:maxLength="42"
                     tools:text="pedrominuzzi21@gmail.com" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/birthDateInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -172,6 +228,7 @@
                 app:hintTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/birthDateField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
@@ -189,6 +246,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/legalDocumentInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -199,6 +257,7 @@
                 app:hintTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/legalDocumentField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
@@ -216,6 +275,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/numberPhoneInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -226,6 +286,7 @@
                 app:hintTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/numberPhoneField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
@@ -246,6 +307,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="42dp"
                 android:background="@color/blue"
                 android:clickable="true"
                 android:focusable="true"

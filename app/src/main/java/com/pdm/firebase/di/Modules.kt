@@ -3,6 +3,8 @@ package com.pdm.firebase.di
 import com.pdm.firebase.feature.data.datasource.LoginDataSourceImpl
 import com.pdm.firebase.feature.data.datasource.ProfileDataSourceImpl
 import com.pdm.firebase.feature.data.datasource.RegisterDataSourceImpl
+import com.pdm.firebase.feature.data.local.CacheImpl
+import com.pdm.firebase.feature.data.local.database.ConnectDb
 import com.pdm.firebase.feature.data.repository.LoginRepositoryImpl
 import com.pdm.firebase.feature.data.repository.ProfileRepositoryImpl
 import com.pdm.firebase.feature.data.repository.RegisterRepositoryImpl
@@ -24,7 +26,8 @@ import com.pdm.firebase.feature.domain.usecase.register.RegisterUserUseCase
 import com.pdm.firebase.feature.presentation.fragment.login.viewmodel.SignInViewModel
 import com.pdm.firebase.feature.presentation.fragment.profile.viewmodel.ProfileViewModel
 import com.pdm.firebase.feature.presentation.fragment.recovery.viewmodel.RecoveryViewModel
-import com.pdm.firebase.feature.presentation.fragment.register.viewmodel.SignUpViewModel
+import com.pdm.firebase.feature.presentation.fragment.login.viewmodel.SignUpViewModel
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -42,6 +45,7 @@ val userCasesModule = module(override = true) {
             loginWithGoogleUseCase = get(),
             loginWithFacebookUseCase = get(),
             loginWithGitHubUseCase = get(),
+            loginWithNumberProneUseCase = get(),
             registerUserUseCase = get(),
             addInfoUserUseCase = get(),
             getUserInfoUseCase = get(),
@@ -56,6 +60,7 @@ val userCasesModule = module(override = true) {
     single { LoginWithGoogleUseCase(repository = get()) }
     single { LoginWithFacebookUseCase(repository = get()) }
     single { LoginWithGitHubUseCase(repository = get()) }
+    single { LoginWithNumberProneUseCase(repository = get()) }
     single { RegisterUserUseCase(repository = get()) }
     single { AddInfoUserUseCase(repository = get()) }
     single { GetUserInfoUseCase(repository = get()) }
@@ -76,4 +81,9 @@ val dataSourceModule = module(override = true) {
     single<LoginDataSource> { LoginDataSourceImpl() }
     single<RegisterDataSource> { RegisterDataSourceImpl() }
     single<ProfileDataSource> { ProfileDataSourceImpl() }
+}
+
+val dataModule = module {
+    single { CacheImpl(context = androidContext()) }
+    single { ConnectDb.getInstance(context = androidContext()) }
 }

@@ -63,6 +63,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-ktx:23.0.0'
     implementation platform('com.google.firebase:firebase-bom:29.0.4')
 
+    //Facebook Social
+    implementation 'com.facebook.android:facebook-login:12.0.0'
+
     //PDF Adobe
     implementation 'com.itextpdf:itext7-core:7.2.1'
 
@@ -71,6 +74,16 @@ dependencies {
 
     //EditTexts Masks
     implementation 'com.github.rtoshiro.mflibrary:mflibrary:1.0.0'
+
+    //DataStore Preferences
+    implementation 'androidx.datastore:datastore-preferences:1.0.0'
+
+    //DataBase Room
+    def roomVersion = "2.4.1"
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
 
     //Test dependencies
     testImplementation 'junit:junit:4.13.2'
@@ -107,6 +120,7 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
     //ViewModel
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.4.0"
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'

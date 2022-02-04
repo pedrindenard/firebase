@@ -9,6 +9,7 @@ import com.pdm.firebase.di.dataSourceModule
 import com.pdm.firebase.di.repositoryModule
 import com.pdm.firebase.di.userCasesModule
 import com.pdm.firebase.di.viewModelModule
+import com.pdm.firebase.di.dataModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -31,6 +32,7 @@ class App : Application() {
                     repositoryModule,
                     userCasesModule,
                     viewModelModule,
+                    dataModule
                 )
             )
         }

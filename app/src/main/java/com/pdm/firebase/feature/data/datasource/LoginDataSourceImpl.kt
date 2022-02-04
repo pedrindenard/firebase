@@ -1,11 +1,10 @@
 package com.pdm.firebase.feature.data.datasource
 
-import android.content.Intent
 import android.util.Log
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.common.api.ApiException
+import com.facebook.AccessToken
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
@@ -27,14 +26,11 @@ class LoginDataSourceImpl : LoginDataSource {
         }
     }
 
-    override suspend fun loginWithGoogle(data: Intent): Task<AuthResult>? {
+    override suspend fun loginWithGoogle(accessToken: String): Task<AuthResult>? {
         return try {
             firebaseAuth.signInWithCredential(
                 GoogleAuthProvider.getCredential(
-                    GoogleSignIn.getSignedInAccountFromIntent(data)
-                        .getResult(ApiException::class.java)
-                        .idToken,
-                    null
+                    accessToken, null
                 )
             )
         } catch (e: Throwable) {
@@ -43,12 +39,37 @@ class LoginDataSourceImpl : LoginDataSource {
         }
     }
 
-    override suspend fun loginWithFacebook(data: Intent): Task<AuthResult>? {
-        TODO("Not yet implemented")
+    override suspend fun loginWithFacebook(accessToken: AccessToken): Task<AuthResult>? {
+        return try {
+            firebaseAuth.signInWithCredential(
+                FacebookAuthProvider.getCredential(
+                    accessToken.token
+                )
+            )
+        } catch (e: Throwable) {
+            Log.e(ERROR_SERVICE, e.toString())
+            null
+        }
     }
 
-    override suspend fun loginWithGitBub(data: Intent): Task<AuthResult>? {
-        TODO("Not yet implemented")
+    override suspend fun loginWithGitHub(task: Task<AuthResult>): Task<AuthResult>? {
+        return try { task } catch (e: Throwable) {
+            Log.e(ERROR_SERVICE, e.toString())
+            null
+        }
+    }
+
+    override suspend fun loginWithNumberPhone(): Task<AuthResult>? {
+        return try {
+            firebaseAuth.signInWithCredential(
+                FacebookAuthProvider.getCredential(
+                    ""
+                )
+            )
+        } catch (e: Throwable) {
+            Log.e(ERROR_SERVICE, e.toString())
+            null
+        }
     }
 
     override suspend fun recoveryPassword(email: String): Task<Void>? {
