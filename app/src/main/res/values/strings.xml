@@ -2,7 +2,6 @@
     <string name="app_name">Firebase</string>
 
     <string name="facebook_app_id">3066054920284139</string>
-    <string name="fb_login_protocol_scheme">fb3066054920284139</string>
 
     <string name="home_message">Sem as permissões não é possivel executar o aplicativo corretamente.</string>
     <string name="home_download">Baixar</string>

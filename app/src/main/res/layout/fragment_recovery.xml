@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@drawable/background_gradient"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/ic_firebase"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView

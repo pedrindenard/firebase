@@ -69,8 +69,8 @@ class ProfileFragment : BaseFragment() {
 
                 Glide.with(requireContext())
                     .load(it.picture)
-                    .error(R.drawable.ic_launcher)
-                    .placeholder(R.drawable.ic_launcher)
+                    .error(R.drawable.ic_firebase)
+                    .placeholder(R.drawable.ic_firebase)
                     .into(binding.profilePicture)
             }
             hideProgressDialog()
