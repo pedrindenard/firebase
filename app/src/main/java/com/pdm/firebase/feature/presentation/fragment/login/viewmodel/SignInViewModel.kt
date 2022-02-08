@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.facebook.AccessToken
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.PhoneAuthCredential
 import com.pdm.firebase.feature.data.fromto.fromDataToUserFacebook
 import com.pdm.firebase.feature.data.fromto.fromDataToUserGitHub
 import com.pdm.firebase.feature.data.fromto.fromDataToUserGoogle
@@ -20,13 +21,9 @@ class SignInViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
     val emailError = MutableLiveData<Unit?>()
     val passwordError = MutableLiveData<Unit?>()
     val invalidNumberError = MutableLiveData<Unit?>()
-    val dismissDialogFragment = MutableLiveData<Unit?>()
 
-    private val _successLogin = MutableLiveData<Task<AuthResult?>>()
-    val successLoginWithUser = _successLogin as LiveData<Task<AuthResult?>>
-
-    private val _successCreatedUserWithSocial = MutableLiveData<User>()
-    val successCreatedUserWithSocialLogin = _successCreatedUserWithSocial as LiveData<User>
+    private val _successLogin = MutableLiveData<Task<AuthResult?>?>()
+    val successLoginWithUser = _successLogin as LiveData<Task<AuthResult?>?>
 
     fun loginWithUser(email: String, password: String) {
         viewModelScope.launch {
@@ -63,7 +60,10 @@ class SignInViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                         it.isSuccessful -> {
                             when (it.result.additionalUserInfo!!.isNewUser) {
                                 true -> {
-                                    _successCreatedUserWithSocial.postValue(it.fromDataToUserGoogle())
+                                    addInfoToSocialUser(
+                                        user = it.fromDataToUserGoogle()!!,
+                                        uid = it.result.user?.uid
+                                    )
                                 }
                                 false -> {
                                     _successLogin.postValue(it)
@@ -94,7 +94,10 @@ class SignInViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                         it.isSuccessful -> {
                             when (it.result.additionalUserInfo!!.isNewUser) {
                                 true -> {
-                                    _successCreatedUserWithSocial.postValue(it.fromDataToUserFacebook())
+                                    addInfoToSocialUser(
+                                        user = it.fromDataToUserFacebook()!!,
+                                        uid = it.result.user?.uid
+                                    )
                                 }
                                 false -> {
                                     _successLogin.postValue(it)
@@ -124,7 +127,10 @@ class SignInViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                     it.isSuccessful -> {
                         when (it.result.additionalUserInfo!!.isNewUser) {
                             true -> {
-                                _successCreatedUserWithSocial.postValue(it.fromDataToUserGitHub(email))
+                                addInfoToSocialUser(
+                                    user = it.fromDataToUserGitHub(email)!!,
+                                    uid = it.result.user?.uid
+                                )
                             }
                             false -> {
                                 _successLogin.postValue(it)
@@ -135,20 +141,22 @@ class SignInViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                         errorResponse.postValue(it.exception?.message)
                     }
                 }
-                dismissDialogFragment.postValue(Unit)
             }
         }
     }
 
-    fun loginWithNumberPhone(numberPhone: String) {
+    fun loginWithNumberPhone(credential: PhoneAuthCredential) {
         viewModelScope.launch {
             try {
-                useCase.loginWithNumberProneUseCase(numberPhone)?.addOnCompleteListener {
+                useCase.loginWithNumberProneUseCase(credential)?.addOnCompleteListener {
                     when {
                         it.isSuccessful -> {
                             when (it.result.additionalUserInfo!!.isNewUser) {
                                 true -> {
-
+                                    addInfoToSocialUser(
+                                        uid = it.result.user?.uid,
+                                        user = User()
+                                    )
                                 }
                                 false -> {
                                     _successLogin.postValue(it)
@@ -171,10 +179,27 @@ class SignInViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
         }
     }
 
-    fun invalidateErrors() {
-        dismissDialogFragment.value = null
-        invalidNumberError.value = null
-        passwordError.value = null
-        emailError.value = null
+    private fun addInfoToSocialUser(user: User, uid: String?) {
+        viewModelScope.launch {
+            try {
+                useCase.addInfoSocialUserUseCase(uid, user)?.addOnCompleteListener {
+                    when {
+                        it.isSuccessful -> {
+                            _successLogin.postValue(null)
+                        }
+                        else -> {
+                            errorResponse.postValue(it.exception?.message)
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                when (e.message) {
+                    InvalidAuth.CURRENT_USER_IS_NULL.value -> {
+                        errorResponse.postValue("")
+                    }
+                }
+                failureResponse.postValue(e)
+            }
+        }
     }
 }

@@ -15,9 +15,8 @@ fun Task<DataSnapshot>.fromDataToUser(): User {
 
     return User(
         name = user?.name ?: "",
-        fullName = user?.fullName ?: "",
+        lastName = user?.lastName ?: "",
         email = user?.email ?: "",
-        legalDocument = user?.legalDocument ?: "",
         birthdate = user?.birthdate ?: "",
         picture = user?.picture ?: "",
         gender = user?.gender ?: 0
@@ -30,9 +29,8 @@ fun Task<AuthResult>.fromDataToUserGoogle(): User? {
     return if (result != null) {
         User(
             name = result.firstName,
-            fullName = result.familyName,
+            lastName = result.familyName,
             email = result.email,
-            legalDocument = "",
             birthdate = "",
             picture = "",
             numberPhone = "",
@@ -47,9 +45,8 @@ fun Task<AuthResult>.fromDataToUserFacebook(): User? {
     return if (result != null) {
         User(
             name = result.name,
-            fullName = result.lastName,
+            lastName = result.lastName,
             email = result.email,
-            legalDocument = "",
             birthdate = "",
             picture = result.picture.url,
             numberPhone = "",
@@ -63,10 +60,9 @@ fun Task<AuthResult>.fromDataToUserGitHub(email: String): User? {
 
     return if (result != null) {
         User(
-            name = "",
-            fullName = result.name,
+            name = result.name.substringAfter(delimiter = "\u0020"),
+            lastName = "",
             email = result.email ?: email,
-            legalDocument = "",
             birthdate = "",
             picture = "",
             numberPhone = "",
@@ -75,7 +71,7 @@ fun Task<AuthResult>.fromDataToUserGitHub(email: String): User? {
     } else null
 }
 
-fun Task<DataSnapshot?>?.fromDataToPrivacy() : Privacy? {
+fun Task<DataSnapshot?>?.fromDataToPrivacy(): Privacy? {
     val result = this?.result?.value?.mapTo<Privacy>()
 
     return if (result != null) {

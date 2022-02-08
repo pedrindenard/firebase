@@ -15,6 +15,7 @@ data class AuthUseCase (
     val loginWithNumberProneUseCase: LoginWithNumberProneUseCase,
     val recoveryUserUseCase: RecoveryPasswordUseCase,
 
+    val addInfoSocialUserUseCase: AddInfoSocialUserUseCase,
     val registerUserUseCase: RegisterUserUseCase,
     val addInfoUserUseCase: AddInfoUserUseCase,
     val emailVerificationUseCase: EmailVerificationUseCase,

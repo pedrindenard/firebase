@@ -17,6 +17,8 @@
     <string name="sign_in_email">EMAIL</string>
     <string name="sign_in_password">SENHA</string>
     <string name="sign_in_login">Login</string>
+    <string name="sign_in_number">NÚMERO DE TELEFONE</string>
+    <string name="sign_in_ddi">DDI</string>
     <string name="sign_in_recovery_password">Esqueceu sua senha?</string>
     <string name="sign_in_email_verify">Verifique seu endereço de email</string>
     <string name="sign_in_google">Tente novamente mais tarde</string>
@@ -49,6 +51,7 @@
     <string name="error_legal_document">CPF inválido</string>
     <string name="error_email">Email inválido</string>
     <string name="error_fields">Campos inválidos</string>
+    <string name="error_number">Número de telefone inválido</string>
 
     <string name="or">ou</string>
     <string name="todo">todo</string>
@@ -72,8 +75,20 @@
     <string name="menu_profile">Minha conta</string>
     <string name="menu_settings">Configurações</string>
 
+    <string name="login_number_phone">Verificar número de telefone</string>
     <string name="login_git_hub">Entrar com Github</string>
     <string name="login_title">Firebase App</string>
     <string name="back">Voltar</string>
+
+    <string name="phone_code_verification">Verifique o código enviado para o seu número de telefone</string>
+    <string name="phone_resend_code">Reenviar código de verificação</string>
+    <string name="code_verification">Código de verificação</string>
+    <string name="verify_code_send">Verificar código</string>
+    <string name="ddi_brazil">+55</string>
+    <string name="man_radio">Homem</string>
+    <string name="girl_radio">Mulher</string>
+    <string name="other_radio">Outro</string>
+    <string name="sign_up_gender">Gênero</string>
+    <string name="polity_privacy_text">Ao se cadastrar, você concorda com nossa\n <u>Política de Privacidade</u></string>
 
 </resources>

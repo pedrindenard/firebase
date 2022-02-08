@@ -38,6 +38,17 @@ class ProfileDataSourceImpl : ProfileDataSource {
         }
     }
 
+    override suspend fun addUserInfo(uid: String, user: User): Task<Void>? {
+        return try {
+            FirebaseDatabase.getInstance().getReference(USERS_DATABASE)
+                .child(uid)
+                .setValue(user)
+        } catch (e: Throwable) {
+            Log.e(ERROR_SERVICE, e.toString())
+            null
+        }
+    }
+
     override suspend fun deleteUser(currentUser: FirebaseUser): Task<Void>? {
         return try {
             currentUser.delete()

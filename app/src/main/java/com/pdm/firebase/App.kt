@@ -4,6 +4,8 @@ import android.app.Application
 import android.util.Log
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 import com.google.firebase.messaging.FirebaseMessaging
 import com.pdm.firebase.di.dataSourceModule
 import com.pdm.firebase.di.repositoryModule
@@ -40,6 +42,7 @@ class App : Application() {
 
     private fun startFirebase() {
         FirebaseApp.initializeApp(applicationContext)
+
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
                 Log.i("Token", "Error generate token ${task.exception!!.message.toString()}")
@@ -48,5 +51,9 @@ class App : Application() {
 
             Log.i("Token", "Success generate token ${task.result}")
         })
+
+        FirebaseAppCheck.getInstance().installAppCheckProviderFactory(
+            SafetyNetAppCheckProviderFactory.getInstance()
+        )
     }
 }

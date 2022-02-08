@@ -16,7 +16,6 @@ class SignUpViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
     val lastNameEmpty = MutableLiveData<Unit>()
     val birthDateError = MutableLiveData<Unit>()
     val emailError = MutableLiveData<Unit>()
-    val legalDocumentError = MutableLiveData<Unit>()
     val passwordError = MutableLiveData<Unit>()
     val confirmPasswordError = MutableLiveData<Unit>()
 
@@ -49,9 +48,6 @@ class SignUpViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                     }
                     if (it.contains(InvalidAuth.INVALID_EMAIL.value)) {
                         emailError.postValue(Unit)
-                    }
-                    if (it.contains(InvalidAuth.INVALID_LEGAL_DOCUMENT.value)) {
-                        legalDocumentError.postValue(Unit)
                     }
                     if (it.contains(InvalidAuth.INVALID_BIRTHDATE.value)) {
                         birthDateError.postValue(Unit)
@@ -103,9 +99,6 @@ class SignUpViewModel(private val useCase: AuthUseCase) : BaseViewModel() {
                     }
                     if (it.contains(InvalidAuth.INVALID_EMAIL.value)) {
                         emailError.postValue(Unit)
-                    }
-                    if (it.contains(InvalidAuth.INVALID_LEGAL_DOCUMENT.value)) {
-                        legalDocumentError.postValue(Unit)
                     }
                     if (it.contains(InvalidAuth.INVALID_BIRTHDATE.value)) {
                         birthDateError.postValue(Unit)

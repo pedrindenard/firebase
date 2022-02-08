@@ -7,9 +7,9 @@ import android.content.res.ColorStateList
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
-import android.text.Editable
-import android.text.InputType
-import android.text.TextWatcher
+import android.text.*
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -191,6 +191,17 @@ fun View?.disableIt() {
     this?.isActivated = false
 }
 
+fun View.animateAlpha(delayMillis: Long? = null, isVisible: Boolean? = true) {
+    when (isVisible) {
+        true -> {
+            animate().alpha(1F).duration = delayMillis ?: 500
+        }
+        else -> {
+            animate().alpha(0F).duration = delayMillis ?: 500
+        }
+    }
+}
+
 fun View.rotateView(rotate: Boolean, speed: Long, angleN: Float, angleP: Float): Boolean {
     this.animate().setDuration(speed)
         .setListener(object : AnimatorListenerAdapter() {})
@@ -236,4 +247,30 @@ fun View.collapse(speed: Int) {
     }
     a.duration = ((initialHeight / this.context.resources.displayMetrics.density).toInt().toLong() * speed)
     this.startAnimation(a)
+}
+
+fun TextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
+    val spannableString = SpannableString(this.text)
+    var startIndexOfLink = -1
+    for (link in links) {
+        val clickableSpan = object : ClickableSpan() {
+            override fun updateDrawState(textPaint: TextPaint) {
+                textPaint.color = textPaint.linkColor
+                textPaint.isUnderlineText = true
+            }
+
+            override fun onClick(view: View) {
+                Selection.setSelection((view as TextView).text as Spannable, 0)
+                view.invalidate()
+                link.second.onClick(view)
+            }
+        }
+        startIndexOfLink = this.text.toString().indexOf(link.first, startIndexOfLink + 1)
+        spannableString.setSpan(
+            clickableSpan, startIndexOfLink, startIndexOfLink + link.first.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+    }
+    this.movementMethod = LinkMovementMethod.getInstance()
+    this.setText(spannableString, TextView.BufferType.SPANNABLE)
 }

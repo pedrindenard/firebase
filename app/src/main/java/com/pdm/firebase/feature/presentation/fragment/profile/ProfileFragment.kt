@@ -59,12 +59,11 @@ class ProfileFragment : BaseFragment() {
     private fun initObservers() {
         viewModel.successGetUserInfo.observe(viewLifecycleOwner, {
             it?.let {
-                binding.profileName.text = ("${it.name} ${it.fullName}")
+                binding.profileName.text = ("${it.name} ${it.lastName}")
                 binding.profileEmail.text = it.email
-                binding.nameField.text = it.fullName.toEditable()
+                binding.nameField.text = it.lastName.toEditable()
                 binding.emailField.text = it.email.toEditable()
                 binding.birthDateField.text = it.birthdate.toEditable()
-                binding.legalDocumentField.text = it.legalDocument.toEditable()
                 binding.numberPhoneField.text = it.numberPhone.toEditable()
 
                 Glide.with(requireContext())

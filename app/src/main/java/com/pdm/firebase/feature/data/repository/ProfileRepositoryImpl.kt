@@ -16,6 +16,10 @@ class ProfileRepositoryImpl(private val dataSource: ProfileDataSource) : Profile
         return dataSource.editProfile(currentUser, user)
     }
 
+    override suspend fun addUserInfo(uid: String, user: User): Task<Void>? {
+        return dataSource.addUserInfo(uid, user)
+    }
+
     override suspend fun deleteUser(currentUser: FirebaseUser): Task<Void>? {
         return dataSource.deleteUser(currentUser)
     }

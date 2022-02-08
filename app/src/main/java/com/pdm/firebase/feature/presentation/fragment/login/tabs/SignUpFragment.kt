@@ -13,6 +13,7 @@ import com.pdm.firebase.R
 import com.pdm.firebase.databinding.FragmentSignUpBinding
 import com.pdm.firebase.feature.domain.model.auth.User
 import com.pdm.firebase.feature.presentation.activity.MainActivity
+import com.pdm.firebase.feature.presentation.activity.PrivacyActivity
 import com.pdm.firebase.feature.presentation.base.BaseFragment
 import com.pdm.firebase.feature.presentation.fragment.login.viewmodel.SignUpViewModel
 import com.pdm.firebase.util.*
@@ -22,7 +23,6 @@ class SignUpFragment : BaseFragment() {
 
     private lateinit var firebaseAuth: FirebaseAuth
 
-    //private val argument by navArgs<SignUpFragmentArgs>()
     private val viewModel by viewModel<SignUpViewModel>()
     private var _binding: FragmentSignUpBinding? = null
     private val binding get() = _binding!!
@@ -43,18 +43,26 @@ class SignUpFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initOnClickListener()
+        initObservers()
+    }
+
+    private fun initOnClickListener() {
+        binding.toggleConfirmPassword.toggle(binding.confirmPasswordField)
+        binding.togglePassword.toggle(binding.passwordField)
+        binding.birthDateField.formatToDate()
         binding.registerBtn.setOnSingleClickListener {
             onRegisterUserFirebase()
             showProgressDialog()
             hideKeyboard()
         }
 
-        binding.toggleConfirmPassword.toggle(binding.confirmPasswordField)
-        binding.togglePassword.toggle(binding.passwordField)
-        binding.legalDocumentField.formatToLegalDocument()
-        binding.birthDateField.formatToDate()
-        initObservers()
-        updateUI()
+        binding.privacyPolity.makeLinks(
+            Pair(POLITY_PRIVACY, View.OnClickListener {
+                val intent = Intent(context, PrivacyActivity::class.java)
+                startActivity(intent)
+            })
+        )
     }
 
     private fun initObservers() {
@@ -83,13 +91,6 @@ class SignUpFragment : BaseFragment() {
             activity?.setErrorInput(
                 textInputLayout = binding.emailInput,
                 textInputEditText = binding.emailField,
-            )
-        })
-
-        viewModel.legalDocumentError.observe(viewLifecycleOwner, {
-            activity?.setErrorInput(
-                textInputLayout = binding.legalDocumentInput,
-                textInputEditText = binding.legalDocumentField,
             )
         })
 
@@ -143,48 +144,32 @@ class SignUpFragment : BaseFragment() {
         val lastName = binding.lastNameField.text.toString()
         val birthDate = binding.birthDateField.text.toString()
         val email = binding.emailField.text.toString()
-        val legalDocument = binding.legalDocumentField.text.toString()
         val password = binding.passwordField.text.toString()
         val confirmPassword = binding.confirmPasswordField.text.toString()
 
-        //if (argument.value == null) {
-            viewModel.registerWithUser(
-                user = User(
-                    name = name,
-                    fullName = lastName,
-                    email = email,
-                    legalDocument = legalDocument,
-                    birthdate = birthDate,
-                    gender = 1
-                ),
-                password = password,
-                confirmPassword = confirmPassword,
-                firebaseAuth = firebaseAuth
-            )
-//        } else {
-//            viewModel.addInfoToUser(
-//                firebaseAuth = firebaseAuth,
-//                user = User(
-//                    name = name,
-//                    fullName = lastName,
-//                    email = email,
-//                    legalDocument = legalDocument,
-//                    birthdate = birthDate,
-//                    gender = 1
-//                )
-//            )
-//        }
+        viewModel.registerWithUser(
+            user = User(
+                name = name,
+                lastName = ("$name $lastName"),
+                email = email,
+                birthdate = birthDate,
+                gender = genderPicker()
+            ),
+            password = password,
+            confirmPassword = confirmPassword,
+            firebaseAuth = firebaseAuth
+        )
     }
 
-    private fun updateUI() {
-//        argument.value?.let {
-//            binding.emailInput.isVisible = false
-//            binding.passwordLayout.isVisible = false
-//            binding.confirmPasswordLayout.isVisible = false
-//            binding.nameField.text = it.firstName.toEditable()
-//            binding.lastNameField.text = it.familyName.toEditable()
-//            binding.emailField.text = it.email.toEditable()
-//        }
+    private fun genderPicker(): Int {
+        binding.genderPicker.checkedRadioButtonId.also {
+            return when (it) {
+                R.id.manRadioButton -> 1
+                R.id.womanRadioButton -> 2
+                R.id.otherRadioButton -> 3
+                else -> 0
+            }
+        }
     }
 
     override fun onDestroyView() {

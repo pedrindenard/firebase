@@ -11,7 +11,6 @@ import com.pdm.firebase.databinding.FragmentHomeBinding
 import com.pdm.firebase.feature.presentation.base.BaseFragment
 import com.pdm.firebase.util.BLACK
 import com.pdm.firebase.util.hasPermissions
-import com.pdm.firebase.util.setOnSingleClickListener
 import com.pdm.firebase.util.storagePermissions
 
 class HomeFragment : BaseFragment() {

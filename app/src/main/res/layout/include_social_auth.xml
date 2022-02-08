@@ -33,11 +33,23 @@
         android:id="@+id/github"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginHorizontal="16dp"
         android:clickable="true"
         android:contentDescription="@string/todo"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:src="@drawable/ic_github" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/loginWithNumberPhone"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:clickable="true"
+        android:layout_gravity="center"
+        android:contentDescription="@string/todo"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:src="@drawable/ic_phone" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

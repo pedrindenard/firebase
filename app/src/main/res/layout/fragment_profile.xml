@@ -246,35 +246,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/legalDocumentInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:hint="@string/profile_cpf"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidth="0.5dp"
-                app:boxStrokeWidthFocused="0.5dp"
-                app:hintTextColor="@color/black">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/legalDocumentField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:clickable="true"
-                    android:drawableStart="@drawable/ic_check"
-                    android:drawablePadding="10dp"
-                    android:drawableTint="@color/black"
-                    android:focusable="true"
-                    android:imeOptions="actionNext"
-                    android:importantForAutofill="no"
-                    android:inputType="number"
-                    android:maxLength="42"
-                    tools:text="098.567.876-41" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/numberPhoneInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -291,7 +262,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:clickable="true"
-                    android:drawableStart="@drawable/ic_phone"
+                    android:drawableStart="@drawable/ic_number_phone"
                     android:drawablePadding="10dp"
                     android:drawableTint="@color/black"
                     android:focusable="true"

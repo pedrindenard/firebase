@@ -19,8 +19,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.OAuthProvider
+import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.pdm.firebase.R
@@ -28,17 +29,23 @@ import com.pdm.firebase.databinding.FragmentSignInBinding
 import com.pdm.firebase.feature.presentation.activity.MainActivity
 import com.pdm.firebase.feature.presentation.base.BaseFragment
 import com.pdm.firebase.feature.presentation.fragment.login.LoginFragmentDirections
-import com.pdm.firebase.feature.presentation.fragment.login.dialog.GitHubDialog
+import com.pdm.firebase.feature.presentation.fragment.login.dialog.CodeVerificationDialog
+import com.pdm.firebase.feature.presentation.fragment.login.dialog.GitHubLoginDialog
+import com.pdm.firebase.feature.presentation.fragment.login.dialog.NumberPhoneDialog
 import com.pdm.firebase.feature.presentation.fragment.login.viewmodel.SignInViewModel
 import com.pdm.firebase.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.concurrent.TimeUnit
 
 class SignInFragment : BaseFragment() {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var callbackManager: CallbackManager
     private lateinit var activityResult: ActivityResultLauncher<Intent>
-    private lateinit var dialogFragment: GitHubDialog
+    private lateinit var dialogGitHub: GitHubLoginDialog
+    private lateinit var dialogNumberPhone: NumberPhoneDialog
+    private lateinit var dialogCodeVerification: CodeVerificationDialog
+    private lateinit var callbackAuth: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
     private val viewModel by viewModel<SignInViewModel>()
     private var _binding: FragmentSignInBinding? = null
@@ -47,6 +54,7 @@ class SignInFragment : BaseFragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         firebaseAuth = Firebase.auth
+        firebaseAuth.useAppLanguage()
         activityResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
@@ -111,6 +119,11 @@ class SignInFragment : BaseFragment() {
             hideKeyboard()
         }
 
+        binding.socialNetwork.loginWithNumberPhone.setOnSingleClickListener {
+            loginWithNumberPhone()
+            hideKeyboard()
+        }
+
         binding.recoveryPassword.setOnSingleClickListener {
             findNavController().navigate(
                 LoginFragmentDirections.actionSignInFragmentToRecoveryPasswordFragment()
@@ -132,13 +145,6 @@ class SignInFragment : BaseFragment() {
                 textInputLayout = binding.passwordInput,
                 textInputEditText = binding.passwordField
             )
-        })
-
-        viewModel.successCreatedUserWithSocialLogin.observe(viewLifecycleOwner, {
-            findNavController().navigate(
-                LoginFragmentDirections.actionSignInFragmentToSignUpFragment()
-            )
-            hideProgressDialog()
         })
 
         viewModel.successLoginWithUser.observe(viewLifecycleOwner, {
@@ -173,10 +179,6 @@ class SignInFragment : BaseFragment() {
                 showSnackBar(description = getString(R.string.error_fields), RED)
                 hideProgressDialog()
             }
-        })
-
-        viewModel.dismissDialogFragment.observe(viewLifecycleOwner, {
-            it.let { dialogFragment.dismiss() }
         })
     }
 
@@ -229,16 +231,16 @@ class SignInFragment : BaseFragment() {
 
     private fun loginWithGitHub() {
         activity?.let {
-            dialogFragment = GitHubDialog().apply {
-                show(it.supportFragmentManager, DIALOG_GITHUB)
-                setOnItemClickListener(object : GitHubDialog.ClickListener {
+            dialogGitHub = GitHubLoginDialog().apply {
+                show(it.supportFragmentManager, DIALOG)
+                setOnItemClickListener(object : GitHubLoginDialog.ClickListener {
                     override fun onClickListener(email: String) {
                         val authProvider = OAuthProvider.newBuilder(GITHUB_PROVIDER)
                         authProvider.addCustomParameter(GITHUB_PARAM_KEY, email)
                         authProvider.scopes = GITHUB_SCOPES
 
                         if (firebaseAuth.pendingAuthResult == null) {
-                            initAuthProvider(authProvider, email)
+                            initGitHubAuthProvider(authProvider, email)
                             showProgressDialog()
                         }
                     }
@@ -255,18 +257,128 @@ class SignInFragment : BaseFragment() {
         }
     }
 
-    private fun loginWithNumberPhone() {
-        viewModel.loginWithNumberPhone(
-            numberPhone = ""
-        )
-    }
-
-    private fun initAuthProvider(authProvider: OAuthProvider.Builder, email: String) {
+    private fun initGitHubAuthProvider(authProvider: OAuthProvider.Builder, email: String) {
         viewModel.loginWithGitHub(
             firebaseAuth.startActivityForSignInWithProvider(
                 requireActivity(), authProvider.build()
             ), email
-        )
+        ); dialogGitHub.dismiss()
+    }
+
+    private fun loginWithNumberPhone() {
+        activity?.let {
+            dialogNumberPhone = NumberPhoneDialog().apply {
+                show(it.supportFragmentManager, DIALOG)
+                setOnItemClickListener(object : NumberPhoneDialog.ClickListener {
+                    override fun onClickListener(phoneNumber: String) {
+                        handlerPhoneCallback(
+                            numberPhone = phoneNumber
+                        )
+                        PhoneAuthProvider.verifyPhoneNumber(
+                            PhoneAuthOptions.newBuilder(firebaseAuth)
+                                .setPhoneNumber(phoneNumber)
+                                .setTimeout(60L, TimeUnit.SECONDS)
+                                .setActivity(requireActivity())
+                                .setCallbacks(callbackAuth)
+                                .build()
+                        )
+                        showProgressDialog()
+                    }
+
+                    override fun showKeyBoard(textInputEditText: TextInputEditText) {
+                        textInputEditText.showKeyBoard()
+                    }
+
+                    override fun hideKeyBoard() {
+                        hideKeyboard()
+                    }
+                })
+            }
+        }
+    }
+
+    private fun handlerPhoneCallback(numberPhone: String) {
+        callbackAuth = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+            override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                dialogCodeVerification.dismiss()
+
+                viewModel.loginWithNumberPhone(
+                    credential = credential
+                )
+            }
+
+            override fun onVerificationFailed(exception: FirebaseException) {
+                showSnackBar(
+                    description = when (exception) {
+                        is FirebaseAuthInvalidCredentialsException -> {
+                            exception.message.toString()
+                        }
+                        is FirebaseTooManyRequestsException -> {
+                            exception.message.toString()
+                        }
+                        else -> {
+                            getString(R.string.error_number)
+                        }
+                    },
+                    color = RED
+                )
+                hideProgressDialog()
+            }
+
+            override fun onCodeSent(
+                verificationId: String,
+                token: PhoneAuthProvider.ForceResendingToken
+            ) {
+                dialogNumberPhone.dismiss()
+                hideProgressDialog()
+
+                showSnackBar(
+                    description = getString(R.string.phone_code_verification),
+                    color = BLACK
+                )
+
+                if (!dialogCodeVerification.isVisible) {
+                    verifyCodeNumber(
+                        verificationId = verificationId,
+                        phoneNumber = numberPhone,
+                        resendingToken = token
+                    )
+                }
+            }
+        }
+    }
+
+    private fun verifyCodeNumber(
+        resendingToken: PhoneAuthProvider.ForceResendingToken,
+        phoneNumber: String,
+        verificationId: String
+    ) {
+        activity?.let {
+            dialogCodeVerification = CodeVerificationDialog().apply {
+                show(it.supportFragmentManager, DIALOG)
+                setOnItemClickListener(object : CodeVerificationDialog.ClickListener {
+                    override fun resendVerificationCode() {
+                        PhoneAuthProvider.verifyPhoneNumber(
+                            PhoneAuthOptions.newBuilder(firebaseAuth)
+                                .setPhoneNumber(phoneNumber)
+                                .setTimeout(60L, TimeUnit.SECONDS)
+                                .setActivity(requireActivity())
+                                .setCallbacks(callbackAuth)
+                                .setForceResendingToken(resendingToken)
+                                .build()
+                        )
+                    }
+
+                    override fun verifyPhoneNumberWithCode(code: String) {
+                        PhoneAuthProvider.getCredential(verificationId, code)
+                    }
+
+                    override fun hideKeyBoard() {
+                        hideKeyBoard()
+                    }
+                })
+            }
+        }
     }
 
     private fun startMainActivity() {
@@ -284,7 +396,6 @@ class SignInFragment : BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewModel.invalidateErrors()
         _binding = null
     }
 }

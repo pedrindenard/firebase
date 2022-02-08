@@ -8,7 +8,7 @@ const val SERVER_TOKEN_ID = "69746215362-uqmcndm854knipthbhs1rokssb21c5r6.apps.g
 
 const val ERROR_SERVICE = "Error service"
 
-const val DIALOG_GITHUB = "GitHub Dialog"
+const val DIALOG = "Dialog"
 
 const val RED = "red"
 
@@ -37,6 +37,8 @@ const val DATABASE_APP = "firebase-database.db"
 const val BAD_REQUEST = "Bad request"
 
 const val ARGS = "ARGS"
+
+const val POLITY_PRIVACY = "Política de Privacidade"
 
 val FACEBOOK_PERMISSIONS = arrayListOf("email", "public_profile")
 

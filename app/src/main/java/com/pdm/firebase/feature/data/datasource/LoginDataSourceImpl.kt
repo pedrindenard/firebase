@@ -3,10 +3,7 @@ package com.pdm.firebase.feature.data.datasource
 import android.util.Log
 import com.facebook.AccessToken
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FacebookAuthProvider
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.pdm.firebase.feature.domain.datasource.LoginDataSource
@@ -59,13 +56,9 @@ class LoginDataSourceImpl : LoginDataSource {
         }
     }
 
-    override suspend fun loginWithNumberPhone(): Task<AuthResult>? {
+    override suspend fun loginWithNumberPhone(credential: PhoneAuthCredential): Task<AuthResult>? {
         return try {
-            firebaseAuth.signInWithCredential(
-                FacebookAuthProvider.getCredential(
-                    ""
-                )
-            )
+            firebaseAuth.signInWithCredential(credential)
         } catch (e: Throwable) {
             Log.e(ERROR_SERVICE, e.toString())
             null

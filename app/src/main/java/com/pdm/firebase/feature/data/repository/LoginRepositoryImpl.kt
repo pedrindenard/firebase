@@ -4,6 +4,7 @@ import com.facebook.AccessToken
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.OAuthProvider
+import com.google.firebase.auth.PhoneAuthCredential
 import com.pdm.firebase.feature.domain.datasource.LoginDataSource
 import com.pdm.firebase.feature.domain.repository.LoginRepository
 
@@ -25,8 +26,8 @@ class LoginRepositoryImpl(private val dataSource: LoginDataSource) : LoginReposi
         return dataSource.loginWithGitHub(task)
     }
 
-    override suspend fun loginWithNumberPhone(): Task<AuthResult>? {
-        return dataSource.loginWithNumberPhone()
+    override suspend fun loginWithNumberPhone(credential: PhoneAuthCredential): Task<AuthResult>? {
+        return dataSource.loginWithNumberPhone(credential)
     }
 
     override suspend fun recoveryPassword(email: String): Task<Void>? {

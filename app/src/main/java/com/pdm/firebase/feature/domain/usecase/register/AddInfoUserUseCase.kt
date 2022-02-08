@@ -7,7 +7,6 @@ import com.pdm.firebase.feature.domain.model.auth.User
 import com.pdm.firebase.feature.domain.repository.ProfileRepository
 import com.pdm.firebase.util.isValidBirthDate
 import com.pdm.firebase.util.isValidEmail
-import com.pdm.firebase.util.isValidLegalDocument
 
 class AddInfoUserUseCase(private val repository: ProfileRepository) {
 
@@ -21,14 +20,11 @@ class AddInfoUserUseCase(private val repository: ProfileRepository) {
         if (user.name.isBlank()) {
             throws += InvalidAuth.EMPTY_NAME.value
         }
-        if (user.fullName.isBlank()) {
+        if (user.lastName.isBlank()) {
             throws += InvalidAuth.EMPTY_LAST_NAME.value
         }
         if (!isValidEmail(user.email)) {
             throws += InvalidAuth.INVALID_EMAIL.value
-        }
-        if (!isValidLegalDocument(user.legalDocument)) {
-            throws += InvalidAuth.INVALID_LEGAL_DOCUMENT.value
         }
         if (!isValidBirthDate(user.birthdate)) {
             throws += InvalidAuth.INVALID_BIRTHDATE.value

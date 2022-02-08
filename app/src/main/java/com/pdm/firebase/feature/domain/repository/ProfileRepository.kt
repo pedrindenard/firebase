@@ -11,6 +11,8 @@ interface ProfileRepository {
 
     suspend fun editProfile(currentUser: FirebaseUser, user: User): Task<Void>?
 
+    suspend fun addUserInfo(uid: String, user: User): Task<Void>?
+
     suspend fun deleteUser(currentUser: FirebaseUser): Task<Void>?
 
     suspend fun logOutFirebase() : Unit?

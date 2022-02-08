@@ -63,11 +63,19 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-ktx:23.0.0'
     implementation platform('com.google.firebase:firebase-bom:29.0.4')
 
+    //Verification App
+    implementation "androidx.browser:browser:1.4.0"
+    implementation 'com.google.firebase:firebase-appcheck-safetynet:16.0.0-beta04'
+
     //Facebook
     implementation 'com.facebook.android:facebook-login:12.0.0'
+    implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
 
     //PDF Adobe
     implementation 'com.itextpdf:itext7-core:7.2.1'
+
+    //Code View
+    implementation 'com.chaos.view:pinview:1.4.4'
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.8'

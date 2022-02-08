@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.textfield.TextInputEditText
 import com.pdm.firebase.R
-import com.pdm.firebase.databinding.DialogGitHubBinding
+import com.pdm.firebase.databinding.DialogGitHubLoginBinding
 import com.pdm.firebase.feature.presentation.base.BaseDialogFragment
 import com.pdm.firebase.util.*
 
-class GitHubDialog : BaseDialogFragment() {
+class GitHubLoginDialog : BaseDialogFragment() {
 
     private lateinit var mClickListener: ClickListener
 
-    private var _binding: DialogGitHubBinding? = null
+    private var _binding: DialogGitHubLoginBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,7 +22,7 @@ class GitHubDialog : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DialogGitHubBinding.inflate(inflater, container, false)
+        _binding = DialogGitHubLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
 

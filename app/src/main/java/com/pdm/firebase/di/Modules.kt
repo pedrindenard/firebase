@@ -25,6 +25,7 @@ import com.pdm.firebase.feature.domain.usecase.profile.DeleteUserUseCase
 import com.pdm.firebase.feature.domain.usecase.profile.EditUserUseCase
 import com.pdm.firebase.feature.domain.usecase.profile.GetUserInfoUseCase
 import com.pdm.firebase.feature.domain.usecase.profile.LogOutUseCase
+import com.pdm.firebase.feature.domain.usecase.register.AddInfoSocialUserUseCase
 import com.pdm.firebase.feature.domain.usecase.register.AddInfoUserUseCase
 import com.pdm.firebase.feature.domain.usecase.register.EmailVerificationUseCase
 import com.pdm.firebase.feature.domain.usecase.register.RegisterUserUseCase
@@ -54,6 +55,7 @@ val userCasesModule = module(override = true) {
             loginWithGitHubUseCase = get(),
             loginWithNumberProneUseCase = get(),
             registerUserUseCase = get(),
+            addInfoSocialUserUseCase = get(),
             addInfoUserUseCase = get(),
             getUserInfoUseCase = get(),
             editUserUseCase = get(),
@@ -69,6 +71,7 @@ val userCasesModule = module(override = true) {
     single { LoginWithGitHubUseCase(repository = get()) }
     single { LoginWithNumberProneUseCase(repository = get()) }
     single { RegisterUserUseCase(repository = get()) }
+    single { AddInfoSocialUserUseCase(repository = get()) }
     single { AddInfoUserUseCase(repository = get()) }
     single { GetUserInfoUseCase(repository = get()) }
     single { EditUserUseCase(repository = get()) }
