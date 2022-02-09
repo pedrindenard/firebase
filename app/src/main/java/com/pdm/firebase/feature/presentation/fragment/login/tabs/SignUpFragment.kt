@@ -1,6 +1,7 @@
 package com.pdm.firebase.feature.presentation.fragment.login.tabs
 
 import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,6 @@ import com.pdm.firebase.R
 import com.pdm.firebase.databinding.FragmentSignUpBinding
 import com.pdm.firebase.feature.domain.model.auth.User
 import com.pdm.firebase.feature.presentation.activity.MainActivity
-import com.pdm.firebase.feature.presentation.activity.PrivacyActivity
 import com.pdm.firebase.feature.presentation.base.BaseFragment
 import com.pdm.firebase.feature.presentation.fragment.login.viewmodel.SignUpViewModel
 import com.pdm.firebase.util.*
@@ -48,62 +48,71 @@ class SignUpFragment : BaseFragment() {
     }
 
     private fun initOnClickListener() {
+        binding.nameInput.defaultStateColor()
+        binding.lastNameInput.defaultStateColor()
+        binding.birthDateInput.defaultStateColor()
+        binding.emailInput.defaultStateColor()
+        binding.passwordInput.defaultStateColor()
+        binding.confirmPasswordInput.defaultStateColor()
         binding.toggleConfirmPassword.toggle(binding.confirmPasswordField)
         binding.togglePassword.toggle(binding.passwordField)
         binding.birthDateField.formatToDate()
-        binding.registerBtn.setOnSingleClickListener {
+        binding.registerButton.setOnSingleClickListener {
             onRegisterUserFirebase()
             showProgressDialog()
             hideKeyboard()
         }
 
-        binding.privacyPolity.makeLinks(
-            Pair(POLITY_PRIVACY, View.OnClickListener {
-                val intent = Intent(context, PrivacyActivity::class.java)
-                startActivity(intent)
-            })
-        )
+        binding.loginDescription.enterLogin.apply {
+            text = getString(R.string.skip_back)
+            paintFlags = Paint.UNDERLINE_TEXT_FLAG
+            setOnSingleClickListener {
+                findNavController().popBackStack()
+                hideKeyboard()
+            }
+        }
+
+//        binding.privacyPolity.makeLinks(
+//            Pair(POLITY_PRIVACY, View.OnClickListener {
+//                val intent = Intent(context, PrivacyActivity::class.java)
+//                startActivity(intent)
+//            })
+//        )
     }
 
     private fun initObservers() {
         viewModel.nameEmpty.observe(viewLifecycleOwner, {
-            activity?.setErrorInput(
-                textInputLayout = binding.nameInput,
+            binding.nameInput.setErrorInput(
                 textInputEditText = binding.nameField,
             )
         })
 
         viewModel.lastNameEmpty.observe(viewLifecycleOwner, {
-            activity?.setErrorInput(
-                textInputLayout = binding.lastNameInput,
+            binding.lastNameInput.setErrorInput(
                 textInputEditText = binding.lastNameField,
             )
         })
 
         viewModel.birthDateError.observe(viewLifecycleOwner, {
-            activity?.setErrorInput(
-                textInputLayout = binding.birthDateInput,
+            binding.birthDateInput.setErrorInput(
                 textInputEditText = binding.birthDateField,
             )
         })
 
         viewModel.emailError.observe(viewLifecycleOwner, {
-            activity?.setErrorInput(
-                textInputLayout = binding.emailInput,
+            binding.emailInput.setErrorInput(
                 textInputEditText = binding.emailField,
             )
         })
 
         viewModel.passwordError.observe(viewLifecycleOwner, {
-            activity?.setErrorInput(
-                textInputLayout = binding.passwordInput,
+            binding.passwordInput.setErrorInput(
                 textInputEditText = binding.passwordField,
             )
         })
 
         viewModel.confirmPasswordError.observe(viewLifecycleOwner, {
-            activity?.setErrorInput(
-                textInputLayout = binding.confirmPasswordInput,
+            binding.confirmPasswordInput.setErrorInput(
                 textInputEditText = binding.confirmPasswordField,
             )
         })
@@ -124,7 +133,7 @@ class SignUpFragment : BaseFragment() {
             }, BLACK)
 
             activity?.onBackPressedListener(viewLifecycleOwner)
-            binding.registerBtn.disableIt()
+            binding.registerButton.disableIt()
             hideProgressDialog()
         })
 

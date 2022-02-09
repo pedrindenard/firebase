@@ -70,7 +70,7 @@
         android:id="@+id/gradient"
         android:layout_width="match_parent"
         android:layout_height="16dp"
-        android:background="@drawable/background_transparent"
+        android:background="@drawable/background_gradient_white"
         android:rotation="180"
         app:layout_constraintTop_toBottomOf="@+id/toolBar" />
 

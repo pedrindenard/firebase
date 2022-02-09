@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.textfield.TextInputEditText
 import com.pdm.firebase.R
 import com.pdm.firebase.databinding.DialogNumberPhoneBinding
 import com.pdm.firebase.feature.presentation.base.BaseDialogFragment
-import com.pdm.firebase.util.*
+import com.pdm.firebase.util.RED
+import com.pdm.firebase.util.handlerDelay
+import com.pdm.firebase.util.isValidPhone
+import com.pdm.firebase.util.setOnSingleClickListener
 
 class NumberPhoneDialog : BaseDialogFragment() {
 
@@ -35,6 +37,7 @@ class NumberPhoneDialog : BaseDialogFragment() {
             )
         }
 
+        binding.numberInput.defaultStateColor()
         handlerClicksDialog()
     }
 
@@ -47,8 +50,7 @@ class NumberPhoneDialog : BaseDialogFragment() {
 
             when {
                 !isValidPhone(number) -> {
-                    activity?.setErrorInput(
-                        textInputLayout = binding.numberInput,
+                    binding.numberInput.setErrorInput(
                         textInputEditText = binding.numberField
                     )
                     showSnackBar(

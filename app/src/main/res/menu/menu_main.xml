@@ -15,7 +15,7 @@
     <item
         android:id="@+id/wishlistFragment"
         android:enabled="true"
-        android:icon="@drawable/ic_favorite"
+        android:icon="@drawable/ic_favorite_off"
         android:title="@string/menu_wishlist" />
 
     <item

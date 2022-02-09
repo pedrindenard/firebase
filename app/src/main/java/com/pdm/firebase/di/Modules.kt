@@ -1,5 +1,6 @@
 package com.pdm.firebase.di
 
+import com.pdm.firebase.App
 import com.pdm.firebase.feature.data.datasource.LoginDataSourceImpl
 import com.pdm.firebase.feature.data.datasource.PrivacyDataSourceImpl
 import com.pdm.firebase.feature.data.datasource.ProfileDataSourceImpl
@@ -97,6 +98,7 @@ val dataSourceModule = module(override = true) {
 }
 
 val dataModule = module {
+    single { App() }
     single { CacheImpl(context = androidContext()) }
     single { ConnectDb.getInstance(context = androidContext()) }
 }

@@ -1,20 +1,17 @@
 <resources>
+    <!--  App Name  -->
     <string name="app_name">Firebase</string>
 
+    <!--  Facebook  -->
     <string name="facebook_app_id">3066054920284139</string>
 
-    <string name="home_message">Sem as permissões não é possivel executar o aplicativo corretamente.</string>
-    <string name="home_download">Baixar</string>
-    <string name="home_crud">CRUD</string>
-    <string name="home_list">Listagem</string>
-    <string name="home_read">Informações</string>
-    <string name="home_upload">Postar</string>
-
+    <!--  Dialogs  -->
     <string name="dialog_alert">Confirmar</string>
     <string name="dialog_progress">Aguarde…</string>
 
+    <!--  Sign In  -->
     <string name="sign_in_title">Login</string>
-    <string name="sign_in_email">EMAIL</string>
+    <string name="sign_in_email">E-MAIL</string>
     <string name="sign_in_password">SENHA</string>
     <string name="sign_in_login">Login</string>
     <string name="sign_in_number">NÚMERO DE TELEFONE</string>
@@ -25,23 +22,27 @@
     <string name="sign_in_new_acc">Não tem uma conta?</string>
     <string name="sign_in_register">Cadastrar-se</string>
 
+    <!--  Sign Up  -->
     <string name="sign_up_title">Registrar</string>
     <string name="sign_up_email">EMAIL*</string>
     <string name="sign_up_password">SENHA*</string>
     <string name="sign_up_confirm_password">CONFIRMAR SENHA*</string>
     <string name="sign_up_name">NOME*</string>
     <string name="sign_up_cpf">CPF*</string>
+    <string name="sign_up_gender">Gênero</string>
     <string name="sign_up_last_name">SOBRENOME*</string>
     <string name="sign_up_date">DATA DE NASCIMENTO*</string>
     <string name="sign_up_confirm">Confirmar</string>
     <string name="sign_up_registered">Usuário cadastrado com sucesso. Verifique seu endereço de email</string>
     <string name="sign_up_social">Usuário cadastrado com sucesso.</string>
 
+    <!--  Recovery Password  -->
     <string name="recovery_password_title">Recuperar senha</string>
-    <string name="recovery_submit">Enviar</string>
+    <string name="recovery_submit">Recuperar senha</string>
     <string name="recovery_message">Digite seu endereço de e-mail\n para recuperar sua senha.</string>
     <string name="recovery_email_send">Email enviado com sucesso!</string>
 
+    <!--  Errors  -->
     <string name="error_register_user">Erro ao cadastrar usuário, tente novamente mais tarde</string>
     <string name="error_number_phone">Número de telefone inválido</string>
     <string name="error_password">Senha inválida</string>
@@ -53,11 +54,13 @@
     <string name="error_fields">Campos inválidos</string>
     <string name="error_number">Número de telefone inválido</string>
 
+    <!--  Random  -->
     <string name="or">ou</string>
     <string name="todo">todo</string>
     <string name="failure">Erro de conexão com o serviço,\ntente novamente mais tarde</string>
     <string name="last_update">Última atualização %s</string>
 
+    <!--  Profile  -->
     <string name="profile_email">Email</string>
     <string name="profile_password">Senha</string>
     <string name="profile_name">Nome completo</string>
@@ -69,26 +72,80 @@
     <string name="profile_address">Endereços</string>
     <string name="profile_sign_out">Sair</string>
 
+    <!--  Menu  -->
     <string name="menu_home">Home</string>
     <string name="menu_search">Pesquisar</string>
     <string name="menu_wishlist">Favoritos</string>
     <string name="menu_profile">Minha conta</string>
     <string name="menu_settings">Configurações</string>
 
+    <!--  Login  -->
+    <string name="content_login">Vantagens de um usuário logado:</string>
+    <string name="content_description_login">* Salve seus filmes/séries favotiros na nuvem\n* Chat com outras pessoas\n* Publique postagens\n* Avalie filmes e séries</string>
     <string name="login_number_phone">Verificar número de telefone</string>
     <string name="login_git_hub">Entrar com Github</string>
     <string name="login_title">Firebase App</string>
     <string name="back">Voltar</string>
 
+    <!--  Phone Dialog  -->
     <string name="phone_code_verification">Verifique o código enviado para o seu número de telefone</string>
     <string name="phone_resend_code">Reenviar código de verificação</string>
     <string name="code_verification">Código de verificação</string>
     <string name="verify_code_send">Verificar código</string>
     <string name="ddi_brazil">+55</string>
+
+    <!--  Radio Buttons  -->
     <string name="man_radio">Homem</string>
     <string name="girl_radio">Mulher</string>
     <string name="other_radio">Outro</string>
-    <string name="sign_up_gender">Gênero</string>
+
+    <!--  Privacy  -->
     <string name="polity_privacy_text">Ao se cadastrar, você concorda com nossa\n <u>Política de Privacidade</u></string>
+
+    <!--  Home  -->
+    <string name="home_message">Sem as permissões não é possivel executar o aplicativo corretamente.</string>
+    <string name="movie_details_storyline">Enredo</string>
+    <string name="play_trailer">Assistir trailer</string>
+    <string name="rate_movie">Avaliar filme</string>
+    <string name="actors">Atores</string>
+    <string name="about_movie">Sobre o filme</string>
+    <string name="original_title">Título original:</string>
+    <string name="type_movie">Tipo:</string>
+    <string name="production_movie">Produções:</string>
+    <string name="premiere">Pré estreia:</string>
+    <string name="description_movie">Descrição:</string>
+    <string name="creators_movie">Criadores</string>
+    <string name="more_movies_like_this">Mais filmes como esse</string>
+    <string name="most_popular_movie">Filmes mais populares</string>
+    <string name="see_more"><u>Ver mais</u></string>
+    <string name="movie_show_time">Confira horários de\nexibição dos filmes</string>
+    <string name="showcase_movie">mostruário</string>
+    <string name="showcase_more_movie"><u>MAIS MOSTRUÁRIO</u></string>
+    <string name="more_actors"><u>MAIS ATORES</u></string>
+    <string name="best_actors">Melhores atores</string>
+
+    <!--  Social Network  -->
+    <string name="enter_with_google">Entrar com Google</string>
+    <string name="enter_with_facebook">Entrar com Facebook</string>
+    <string name="enter_with_github">Entrar com Github</string>
+    <string name="enter_with_number">Entrar com Número de telefone</string>
+    <string name="enter_with_email">Entrar com E-mail</string>
+
+    <!--  Intro  -->
+    <string name="skip_back">Voltar</string>
+    <string name="skip_login">Pular</string>
+    <string name="next_login">Próximo</string>
+    <string name="done_login">Continuar</string>
+    <string name="enter_login"><u>Entrar</u></string>
+    <string name="title_slider_1">Bem-vindo</string>
+    <string name="title_slider_2">Pesquise tudo aqui</string>
+    <string name="title_slider_3">Chat</string>
+    <string name="title_slider_4">Seus favotiros</string>
+    <string name="title_slider_5">Trailers e mais</string>
+    <string name="description_slider_1">Obrigado por baixar Muvis App, divirta-se com este incrível aplicativo Android.</string>
+    <string name="description_slider_2">Pesquise todo o conteúdo em um só lugar: filmes, séries de TV, canal de TV ao vivo e muito mais...</string>
+    <string name="description_slider_3">Adicione pessoas, crie grupos, faça postagens sobre filmes, discussões, análises, e muito mais. Tudo isso dentro do nosso aplicativo.</string>
+    <string name="description_slider_4">Filmes, atores e ou séries na sua lista de favoritos, experimente!</string>
+    <string name="description_slider_5">Graças a API do Youtube, é possível visualizar os trailes disponíveis de filmes e séries através do nosso App e também, transmitir para a tela da sua TV</string>
 
 </resources>

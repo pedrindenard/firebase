@@ -1,13 +1,19 @@
 package com.pdm.firebase.feature.presentation.base
 
+import android.app.Activity
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
+import android.content.res.ColorStateList
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -19,6 +25,7 @@ import com.pdm.firebase.util.RED
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.ContextCompat.getSystemService
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 
 abstract class BaseFragment : Fragment() {
@@ -53,6 +60,83 @@ abstract class BaseFragment : Fragment() {
     fun hideKeyboard() {
         val keyBoarding = activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         keyBoarding.hideSoftInputFromWindow(view?.windowToken, 0)
+    }
+
+    fun TextInputLayout.setErrorInput(
+        textInputEditText: TextInputEditText,
+        appCompatTextView: AppCompatTextView? = null,
+        message: String? = ""
+    ) {
+        val errorColor = ContextCompat.getColor(context, R.color.red)
+        val grayColor = ColorStateList.valueOf(
+            ContextCompat.getColor(
+                context,
+                R.color.yellow_dark
+            )
+        )
+        val blackColor = ColorStateList.valueOf(
+            ContextCompat.getColor(
+                context,
+                R.color.yellow_dark
+            )
+        )
+        val errorStateColor = ColorStateList.valueOf(errorColor)
+
+        this.defaultHintTextColor = errorStateColor
+        this.setBoxStrokeColorStateList(
+            AppCompatResources.getColorStateList(
+                context,
+                R.color.color_state_edit_text_error
+            )
+        )
+
+        activity?.currentFocus?.clearFocus()
+        appCompatTextView?.text = message ?: ""
+        textInputEditText.setTextColor(errorColor)
+        textInputEditText.clearFocus()
+
+        textInputEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (textInputEditText.length() > 0) {
+                    if (this@setErrorInput.boxStrokeColor == errorColor) {
+                        this@setErrorInput.setBoxStrokeColorStateList(
+                            AppCompatResources.getColorStateList(
+                                context,
+                                R.color.color_state_edit_text
+                            )
+                        )
+                        this@setErrorInput.boxStrokeColor = ContextCompat.getColor(
+                            context,
+                            R.color.yellow_dark
+                        )
+                        this@setErrorInput.defaultHintTextColor = blackColor
+                        this@setErrorInput.hintTextColor = grayColor
+                    } else if (textInputEditText.length() > 0) {
+                        this@setErrorInput.defaultHintTextColor = grayColor
+                    }
+                    textInputEditText.setTextColor(blackColor)
+                    appCompatTextView?.text = ""
+                } else {
+                    this@setErrorInput.defaultHintTextColor = blackColor
+                    this@setErrorInput.hintTextColor = grayColor
+                }
+            }
+        })
+    }
+
+    fun TextInputLayout.defaultStateColor() {
+        this.setBoxStrokeColorStateList(
+            AppCompatResources.getColorStateList(
+                context,
+                R.color.color_state_edit_text
+            )
+        )
+        this.boxStrokeColor = ContextCompat.getColor(
+            context,
+            R.color.yellow_dark
+        )
     }
 
     fun showSnackBar(description: String, color: String) {

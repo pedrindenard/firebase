@@ -74,11 +74,17 @@ dependencies {
     //PDF Adobe
     implementation 'com.itextpdf:itext7-core:7.2.1'
 
+    // Indicator
+    implementation 'me.relex:circleindicator:2.1.6'
+
     //Code View
     implementation 'com.chaos.view:pinview:1.4.4'
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.8'
+
+    //ViewPage Indicator
+    implementation 'com.github.vivchar:ViewPagerIndicator:1.1.0'
 
     //EditTexts Masks
     implementation 'com.github.rtoshiro.mflibrary:mflibrary:1.0.0'
@@ -115,7 +121,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.4.0"
 
     //Json
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.8.7'
 
     //Injection dependencies
     implementation 'org.koin:koin-androidx-viewmodel:2.1.6'

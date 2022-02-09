@@ -19,34 +19,29 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ddiInput"
-            android:layout_width="42dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="64dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:hint="@string/sign_in_ddi"
-            app:boxCollapsedPaddingTop="0dp"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidth="0.5dp"
-            app:boxStrokeWidthFocused="0.5dp"
-            app:hintTextColor="@color/black">
+            android:textColorHint="@color/yellow_dark"
+            app:boxStrokeColor="@color/yellow_dark"
+            app:boxStrokeErrorColor="@color/red"
+            app:errorTextColor="@color/red"
+            app:helperTextTextColor="@color/yellow_dark"
+            app:hintTextColor="@color/yellow_dark">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ddiField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="emailAddress"
-                android:backgroundTint="@color/white"
-                android:clickable="true"
-                android:focusable="true"
                 android:imeOptions="actionNext"
-                android:importantForAutofill="yes"
                 android:inputType="phone"
                 android:maxLength="42"
                 android:nextFocusDown="@id/passwordField"
-                android:paddingStart="1dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="0dp"
-                android:paddingBottom="4dp"
                 android:text="@string/ddi_brazil"
+                android:textColor="@color/yellow_dark"
+                android:textCursorDrawable="@drawable/background_cursor"
                 tools:text="+55">
 
                 <requestFocus />
@@ -57,32 +52,27 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/numberInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/sign_in_number"
-            app:boxCollapsedPaddingTop="0dp"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidth="0.5dp"
-            app:boxStrokeWidthFocused="0.5dp"
-            app:hintTextColor="@color/black">
+            android:textColorHint="@color/yellow_dark"
+            app:boxStrokeColor="@color/yellow_dark"
+            app:boxStrokeErrorColor="@color/red"
+            app:errorTextColor="@color/red"
+            app:helperTextTextColor="@color/yellow_dark"
+            app:hintTextColor="@color/yellow_dark">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/numberField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="emailAddress"
-                android:backgroundTint="@color/white"
-                android:clickable="true"
-                android:focusable="true"
-                android:imeOptions="actionSend"
-                android:importantForAutofill="yes"
+                android:imeOptions="actionDone"
                 android:inputType="phone"
                 android:maxLength="42"
                 android:nextFocusDown="@id/passwordField"
-                android:paddingStart="1dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="0dp"
-                android:paddingBottom="4dp"
+                android:textColor="@color/yellow_dark"
+                android:textCursorDrawable="@drawable/background_cursor"
                 tools:text="(014) 98454-1410">
 
                 <requestFocus />
@@ -99,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginVertical="32dp"
-        android:background="@color/blue"
+        android:background="@drawable/background_button_rectangle"
         android:clickable="true"
         android:focusable="true"
         android:fontFamily="@font/stellar_bold"

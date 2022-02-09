@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/collapsingToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_dark"
+                app:layout_collapseMode="parallax">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/logoMovie"
+                    android:layout_width="0dp"
+                    android:layout_height="465dp"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@color/gray" />
+
+                <View
+                    android:id="@+id/gradientDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/background_gradient_dark"
+                    app:layout_constraintBottom_toBottomOf="@+id/logoMovie"
+                    app:layout_constraintTop_toBottomOf="@+id/averageMovie" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/yearMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/background_yellow"
+                    android:fontFamily="@font/stellar_bold"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/averageMovie"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="2022" />
+
+                <RatingBar
+                    android:id="@+id/movieRateStar"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="7dp"
+                    android:layout_marginBottom="2dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:theme="@style/ratingBar"
+                    app:layout_constraintBottom_toTopOf="@+id/votesMovie"
+                    app:layout_constraintEnd_toStartOf="@+id/averageMovie"
+                    tools:rating="4.5" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/votesMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/stellar_bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/averageMovie"
+                    app:layout_constraintEnd_toStartOf="@+id/averageMovie"
+                    tools:text="786587 VOTES" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/averageMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="280dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/white"
+                    android:textSize="42sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/logoMovie"
+                    tools:text="9,75" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/titleMovie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/stellar_regular"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/averageMovie"
+                    tools:text="Fantastic Beasts and Where to Find Them" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/durationMovie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/yellow"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    app:drawableStartCompat="@drawable/ic_time"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/titleMovie"
+                    tools:text="2h 13min" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/genderMovie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="@+id/durationMovie"
+                    app:layout_constraintEnd_toStartOf="@+id/loveMovie"
+                    app:layout_constraintStart_toEndOf="@+id/durationMovie"
+                    app:layout_constraintTop_toTopOf="@+id/durationMovie"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_gender" />
+
+                <CheckBox
+                    android:id="@+id/loveMovie"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/background_button_favorite"
+                    android:button="@null"
+                    android:tint="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/titleMovie"
+                    tools:checked="true" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/storyline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/stellar_bold"
+                    android:text="@string/movie_details_storyline"
+                    android:textAllCaps="true"
+                    android:textColor="@color/gray_light"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/durationMovie" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/storylineMovie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/stellar_regular"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/storyline"
+                    tools:text="We approach our demand-driven logistics technologies with passion. From advanced warehouse management and load-planning software" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/trailerMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/background_button_corner"
+                    android:drawableStart="@drawable/ic_play"
+                    android:drawablePadding="8dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="16dp"
+                    android:text="@string/play_trailer"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/storylineMovie" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rateMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/background_button_stroke"
+                    android:drawableStart="@drawable/ic_star"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/yellow"
+                    android:paddingHorizontal="16dp"
+                    android:text="@string/rate_movie"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toEndOf="@+id/trailerMovie"
+                    app:layout_constraintTop_toBottomOf="@+id/storylineMovie" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbarDetail"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_back_stack" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintTop_toBottomOf="@+id/collapsingToolbar">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/actorsConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_light">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/actorsMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/stellar_bold"
+                    android:text="@string/actors"
+                    android:textAllCaps="true"
+                    android:textColor="@color/gray_light"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/actorsRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="24dp"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/actorsMovie"
+                    tools:ignore="RtlSymmetry"
+                    tools:itemCount="6"
+                    tools:listitem="@layout/item_actors" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/infoConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_dark">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/aboutMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/stellar_bold"
+                    android:text="@string/about_movie"
+                    android:textAllCaps="true"
+                    android:textColor="@color/dark_light"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/originalTitleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/original_title"
+                    android:textColor="@color/dark_medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/aboutMovie" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/originalTitleMovie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/originalTitleLabel"
+                    app:layout_constraintTop_toTopOf="@+id/originalTitleLabel"
+                    tools:text="We approach our demand-driven" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/typeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/type_movie"
+                    android:textColor="@color/dark_medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/originalTitleMovie" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/typeMovie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/originalTitleMovie"
+                    app:layout_constraintTop_toTopOf="@+id/typeLabel"
+                    tools:text="We approach our demand-driven" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/productionLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/production_movie"
+                    android:textColor="@color/dark_medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/typeMovie" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/productionMovie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/typeMovie"
+                    app:layout_constraintTop_toTopOf="@+id/productionLabel"
+                    tools:text="We approach our demand-driven" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/premiereLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/premiere"
+                    android:textColor="@color/dark_medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/productionMovie" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/premiereMovie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/productionMovie"
+                    app:layout_constraintTop_toTopOf="@+id/premiereLabel"
+                    tools:text="We approach our demand-driven" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/descriptionLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/description_movie"
+                    android:textColor="@color/dark_medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/premiereMovie" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/descriptionMovie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/premiereMovie"
+                    app:layout_constraintTop_toTopOf="@+id/descriptionLabel"
+                    tools:text="We approach our demand-driven" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/creatorsConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_light">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/creatorsMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/stellar_bold"
+                    android:text="@string/creators_movie"
+                    android:textAllCaps="true"
+                    android:textColor="@color/dark_light"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/creatorsRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="24dp"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/creatorsMovie"
+                    tools:ignore="RtlSymmetry"
+                    tools:itemCount="6"
+                    tools:listitem="@layout/item_actors" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/moreLikeThisConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_dark">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/moreLikeThisMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/stellar_bold"
+                    android:text="@string/more_movies_like_this"
+                    android:textAllCaps="true"
+                    android:textColor="@color/dark_light"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/moreLikeThisRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:fitsSystemWindows="true"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/moreLikeThisMovie"
+                    app:spanCount="3"
+                    tools:itemCount="9"
+                    tools:listitem="@layout/item_search_movie" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

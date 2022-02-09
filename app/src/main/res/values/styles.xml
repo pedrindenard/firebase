@@ -13,4 +13,23 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textSize">15sp</item>
     </style>
+
+    <style name="ratingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/gray_night</item>
+        <item name="colorControlActivated">@color/yellow</item>
+    </style>
+
+    <style name="menuItemSelected" parent="">
+        <item name="android:fontFamily">@font/stellar_bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/background_menu_movie</item>
+    </style>
+
+    <style name="menuItemUnselected" parent="">
+        <item name="android:fontFamily">@font/stellar_bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/gray_light</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 </resources>

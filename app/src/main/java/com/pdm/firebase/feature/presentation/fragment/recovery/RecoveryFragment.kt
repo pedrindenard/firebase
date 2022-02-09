@@ -1,5 +1,6 @@
 package com.pdm.firebase.feature.presentation.fragment.recovery
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,6 @@ import com.pdm.firebase.databinding.FragmentRecoveryBinding
 import com.pdm.firebase.feature.presentation.base.BaseFragment
 import com.pdm.firebase.feature.presentation.fragment.recovery.viewmodel.RecoveryViewModel
 import com.pdm.firebase.util.RED
-import com.pdm.firebase.util.setErrorInput
 import com.pdm.firebase.util.setOnSingleClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -46,18 +46,24 @@ class RecoveryFragment : BaseFragment() {
     }
 
     private fun initClickListener() {
-        binding.submitBtn.setOnSingleClickListener {
+        binding.confirm.setOnSingleClickListener {
             val email = binding.emailField.text.toString()
             viewModel.recoveryPassword(email)
             showProgressDialog()
             hideKeyboard()
         }
 
-        binding.popBackStack.setOnSingleClickListener {
-            findNavController().popBackStack()
+        binding.loginDescription.enterLogin.apply {
+            text = getString(R.string.skip_back)
+            paintFlags = Paint.UNDERLINE_TEXT_FLAG
+            setOnSingleClickListener {
+                findNavController().popBackStack()
+                hideKeyboard()
+            }
         }
 
         binding.emailField.showKeyBoard()
+        binding.emailInput.defaultStateColor()
     }
 
     private fun initObservers() {
@@ -68,8 +74,7 @@ class RecoveryFragment : BaseFragment() {
         })
 
         viewModel.emailError.observe(viewLifecycleOwner, {
-            activity?.setErrorInput(
-                textInputLayout = binding.emailInput,
+            binding.emailInput.setErrorInput(
                 textInputEditText = binding.emailField,
                 message = getString(R.string.error_email)
             )

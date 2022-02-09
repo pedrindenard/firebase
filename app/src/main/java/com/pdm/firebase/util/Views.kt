@@ -1,9 +1,7 @@
 package com.pdm.firebase.util
 
 import android.animation.AnimatorListenerAdapter
-import android.app.Activity
 import android.content.Context
-import android.content.res.ColorStateList
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
@@ -17,14 +15,10 @@ import android.view.animation.Animation
 import android.view.animation.Transformation
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.AppCompatToggleButton
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.pdm.firebase.R
 
 fun View.setOnSingleClickListener(debounceTime: Long = 600, action: () -> Unit) {
@@ -71,71 +65,6 @@ fun AppBarLayout.initCollapsingToolbar() {
             }
         }
     )
-}
-
-fun Activity.setErrorInput(
-    textInputEditText: TextInputEditText,
-    textInputLayout: TextInputLayout,
-    appCompatTextView: AppCompatTextView? = null,
-    message: String? = ""
-) {
-    val errorColor = ContextCompat.getColor(this, R.color.red)
-    val grayColor = ColorStateList.valueOf(
-        ContextCompat.getColor(
-            this,
-            R.color.gray
-        )
-    )
-    val blackColor = ColorStateList.valueOf(
-        ContextCompat.getColor(
-            this,
-            R.color.black
-        )
-    )
-    val errorStateColor = ColorStateList.valueOf(errorColor)
-
-    textInputLayout.defaultHintTextColor = errorStateColor
-    textInputLayout.setBoxStrokeColorStateList(
-        AppCompatResources.getColorStateList(
-            this,
-            R.color.color_state_edit_text_error
-        )
-    )
-
-    this.currentFocus?.clearFocus()
-    appCompatTextView?.text = message ?: ""
-    textInputEditText.setTextColor(errorColor)
-    textInputEditText.clearFocus()
-
-    textInputEditText.addTextChangedListener(object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        override fun afterTextChanged(s: Editable?) {
-            if (textInputEditText.length() > 0) {
-                if (textInputLayout.boxStrokeColor == errorColor) {
-                    textInputLayout.setBoxStrokeColorStateList(
-                        AppCompatResources.getColorStateList(
-                            this@setErrorInput,
-                            R.color.color_state_edit_text
-                        )
-                    )
-                    textInputLayout.boxStrokeColor = ContextCompat.getColor(
-                        this@setErrorInput,
-                        R.color.gray
-                    )
-                    textInputLayout.defaultHintTextColor = blackColor
-                    textInputLayout.hintTextColor = grayColor
-                } else if (textInputEditText.length() > 0) {
-                    textInputLayout.defaultHintTextColor = grayColor
-                }
-                textInputEditText.setTextColor(blackColor)
-                appCompatTextView?.text = ""
-            } else {
-                textInputLayout.defaultHintTextColor = blackColor
-                textInputLayout.hintTextColor = grayColor
-            }
-        }
-    })
 }
 
 fun AppCompatToggleButton.toggle(editText: TextInputEditText) {
@@ -216,8 +145,9 @@ fun View.expand(speed: Int) {
     this.visibility = View.VISIBLE
     val a: Animation = object : Animation() {
         override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
-            this@expand.layoutParams.height = if (interpolatedTime == 1f) LinearLayout.LayoutParams.WRAP_CONTENT
-            else (targetHeight * interpolatedTime).toInt()
+            this@expand.layoutParams.height =
+                if (interpolatedTime == 1f) LinearLayout.LayoutParams.WRAP_CONTENT
+                else (targetHeight * interpolatedTime).toInt()
             this@expand.requestLayout()
         }
 
@@ -225,7 +155,8 @@ fun View.expand(speed: Int) {
             return true
         }
     }
-    a.duration = ((targetHeight / this.context.resources.displayMetrics.density).toInt().toLong() * speed)
+    a.duration =
+        ((targetHeight / this.context.resources.displayMetrics.density).toInt().toLong() * speed)
     this.startAnimation(a)
 }
 
@@ -236,7 +167,8 @@ fun View.collapse(speed: Int) {
             if (interpolatedTime == 1f) {
                 this@collapse.visibility = View.GONE
             } else {
-                this@collapse.layoutParams.height = initialHeight - (initialHeight * interpolatedTime).toInt()
+                this@collapse.layoutParams.height =
+                    initialHeight - (initialHeight * interpolatedTime).toInt()
                 this@collapse.requestLayout()
             }
         }
@@ -245,7 +177,8 @@ fun View.collapse(speed: Int) {
             return true
         }
     }
-    a.duration = ((initialHeight / this.context.resources.displayMetrics.density).toInt().toLong() * speed)
+    a.duration =
+        ((initialHeight / this.context.resources.displayMetrics.density).toInt().toLong() * speed)
     this.startAnimation(a)
 }
 

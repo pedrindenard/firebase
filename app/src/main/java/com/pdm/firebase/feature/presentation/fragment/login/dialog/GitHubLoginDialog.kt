@@ -8,7 +8,10 @@ import com.google.android.material.textfield.TextInputEditText
 import com.pdm.firebase.R
 import com.pdm.firebase.databinding.DialogGitHubLoginBinding
 import com.pdm.firebase.feature.presentation.base.BaseDialogFragment
-import com.pdm.firebase.util.*
+import com.pdm.firebase.util.RED
+import com.pdm.firebase.util.handlerDelay
+import com.pdm.firebase.util.isValidEmail
+import com.pdm.firebase.util.setOnSingleClickListener
 
 class GitHubLoginDialog : BaseDialogFragment() {
 
@@ -35,8 +38,7 @@ class GitHubLoginDialog : BaseDialogFragment() {
 
             when {
                 !isValidEmail(email) -> {
-                    activity?.setErrorInput(
-                        textInputLayout = binding.emailInput,
+                    binding.emailInput.setErrorInput(
                         textInputEditText = binding.emailField
                     )
                     showSnackBar(
@@ -55,6 +57,8 @@ class GitHubLoginDialog : BaseDialogFragment() {
                 textInputEditText = binding.emailField
             )
         }
+
+        binding.emailInput.defaultStateColor()
     }
 
     fun setOnItemClickListener(aClickListener: ClickListener) {

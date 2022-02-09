@@ -11,15 +11,8 @@
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_signInFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment"
-            app:enterAnim="@anim/anim_fade_in"
-            app:exitAnim="@anim/anim_fade_out"
-            app:popEnterAnim="@anim/anim_fade_in"
-            app:popExitAnim="@anim/anim_fade_out" />
-        <action
-            android:id="@+id/action_signInFragment_to_recoveryPasswordFragment"
-            app:destination="@id/recoveryFragment"
+            android:id="@+id/action_loginFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
             app:enterAnim="@anim/anim_fade_in"
             app:exitAnim="@anim/anim_fade_out"
             app:popEnterAnim="@anim/anim_fade_in"
@@ -30,7 +23,22 @@
         android:id="@+id/signInFragment"
         android:name="com.pdm.firebase.feature.presentation.fragment.login.tabs.SignInFragment"
         android:label="SignInFragment"
-        tools:layout="@layout/fragment_sign_in" />
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_signInFragment_to_recoveryFragment"
+            app:destination="@id/recoveryFragment"
+            app:enterAnim="@anim/anim_fade_in"
+            app:exitAnim="@anim/anim_fade_out"
+            app:popEnterAnim="@anim/anim_fade_in"
+            app:popExitAnim="@anim/anim_fade_out" />
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/anim_fade_in"
+            app:exitAnim="@anim/anim_fade_out"
+            app:popEnterAnim="@anim/anim_fade_in"
+            app:popExitAnim="@anim/anim_fade_out"/>
+    </fragment>
 
     <fragment
         android:id="@+id/signUpFragment"

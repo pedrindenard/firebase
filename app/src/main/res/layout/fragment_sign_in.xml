@@ -1,177 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    android:layout_height="match_parent"
+    android:background="@drawable/background_default"
+    android:orientation="vertical"
+    tools:context=".feature.presentation.activity.LoginActivity">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/linearLayoutCompat"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@color/black_light">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailInput"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:elevation="5dp"
-            android:hint="@string/sign_in_email"
-            app:boxCollapsedPaddingTop="0dp"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidth="0.5dp"
-            app:boxStrokeWidthFocused="0.5dp"
-            app:hintTextColor="@color/black">
+            android:layout_alignParentBottom="true">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/emailField"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="emailAddress"
-                android:backgroundTint="@color/white"
-                android:clickable="true"
-                android:focusable="true"
-                android:imeOptions="actionNext"
-                android:importantForAutofill="yes"
-                android:inputType="textEmailAddress"
-                android:maxLength="42"
-                android:nextFocusDown="@id/passwordField"
-                android:paddingStart="1dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="0dp"
-                android:paddingBottom="4dp"
-                tools:text="pedrominuzzi21@gmail.com" />
+                android:background="@drawable/background_gradient_black"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="32dp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <include
+                    android:id="@+id/logoApp"
+                    layout="@layout/include_logo" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp">
+                <include
+                    android:id="@+id/loginDescription"
+                    layout="@layout/include_login" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/passwordInput"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/sign_up_password"
-                app:boxCollapsedPaddingTop="0dp"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidth="0.5dp"
-                app:boxStrokeWidthFocused="0.5dp"
-                app:hintTextColor="@color/black">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/passwordField"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emailInput"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:imeOptions="actionNext"
-                    android:importantForAutofill="yes"
-                    android:inputType="textPassword"
-                    android:maxLength="32"
-                    android:paddingStart="1dp"
-                    android:paddingTop="16dp"
-                    android:paddingEnd="0dp"
-                    android:paddingBottom="4dp"
-                    tools:text="12345678" />
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="16dp"
+                    android:hint="@string/sign_in_email"
+                    android:textColorHint="@color/yellow_dark"
+                    app:boxStrokeColor="@color/yellow_dark"
+                    app:boxStrokeErrorColor="@color/red"
+                    app:errorTextColor="@color/red"
+                    app:helperTextTextColor="@color/yellow_dark"
+                    app:hintTextColor="@color/yellow_dark">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/emailField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/yellow_dark"
+                        android:textCursorDrawable="@drawable/background_cursor"
+                        tools:text="pedrominuzzi21@gmail.com" />
 
-            <androidx.appcompat.widget.AppCompatToggleButton
-                android:id="@+id/togglePassword"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@drawable/ic_toggle"
-                android:checked="false"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:text=""
-                android:textOff=""
-                android:textOn=""
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/passwordInput"
-                app:layout_constraintTop_toTopOf="parent" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/passwordLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="8dp">
 
-        <TextView
-            android:id="@+id/recoveryPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:text="@string/sign_in_recovery_password"
-            android:textSize="12sp"
-            android:textStyle="normal" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/passwordInput"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/sign_in_password"
+                        android:textColorHint="@color/yellow_dark"
+                        app:boxStrokeColor="@color/yellow_dark"
+                        app:boxStrokeErrorColor="@color/red"
+                        app:errorTextColor="@color/red"
+                        app:helperTextTextColor="@color/yellow_dark"
+                        app:hintTextColor="@color/yellow_dark"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/loginBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="42dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/blue"
-            android:clickable="true"
-            android:elevation="5dp"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:text="@string/sign_in_login"
-            android:textStyle="normal" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/passwordField"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:textColor="@color/yellow_dark"
+                            android:textCursorDrawable="@drawable/background_cursor"
+                            tools:text="987654321" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            <View
-                android:id="@+id/separatorOne"
-                android:layout_width="wrap_content"
-                android:layout_height="0.5dp"
-                android:layout_marginEnd="16dp"
-                android:background="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView"
-                app:layout_constraintEnd_toStartOf="@+id/appCompatTextView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/appCompatTextView" />
+                    <androidx.appcompat.widget.AppCompatToggleButton
+                        android:id="@+id/togglePassword"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/ic_toggle"
+                        android:backgroundTint="@color/yellow_dark"
+                        android:checked="false"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:text=""
+                        android:textOff=""
+                        android:textOn=""
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/or"
-                android:textAllCaps="true"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toStartOf="@+id/separatorTwo"
-                app:layout_constraintStart_toEndOf="@+id/separatorOne" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View
-                android:id="@+id/separatorTwo"
-                android:layout_width="wrap_content"
-                android:layout_height="0.5dp"
-                android:layout_marginStart="16dp"
-                android:background="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/appCompatTextView"
-                app:layout_constraintTop_toTopOf="@+id/appCompatTextView" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/resetPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/sign_in_recovery_password"
+                    android:textColor="@color/gray_light" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
 
-        <include
-            android:id="@+id/socialNetwork"
-            layout="@layout/include_social_auth" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/registerButton"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/background_button_rectangle"
+                        android:backgroundTint="@color/green"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:text="@string/sign_in_register"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toStartOf="@+id/loginButton"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="RtlSymmetry" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/loginButton"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/background_button_rectangle"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:text="@string/sign_in_login"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/registerButton"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="RtlSymmetry" />
 
-</androidx.core.widget.NestedScrollView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

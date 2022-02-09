@@ -24,13 +24,13 @@
             android:cursorVisible="true"
             android:inputType="number"
             android:itemBackground="@color/white"
-            app:cursorColor="@color/blue"
+            app:cursorColor="@color/yellow_dark"
             app:hideLineWhenFilled="true"
             app:itemCount="6"
             app:itemHeight="50dp"
             app:itemRadius="5dp"
             app:itemWidth="50dp"
-            app:lineColor="@color/blue" />
+            app:lineColor="@color/yellow_dark" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/resendCodeNumber"
@@ -42,14 +42,15 @@
             android:focusable="true"
             android:fontFamily="@font/stellar_regular"
             android:foreground="?android:attr/selectableItemBackground"
-            android:text="@string/phone_resend_code" />
+            android:text="@string/phone_resend_code"
+            android:textColor="@color/gray_light" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/verifyCode"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop="32dp"
-            android:background="@color/blue"
+            android:background="@drawable/background_button_rectangle"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/stellar_bold"

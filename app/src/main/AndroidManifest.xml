@@ -20,7 +20,7 @@
         android:theme="@style/Theme.Firebase">
 
         <activity
-            android:name=".feature.presentation.activity.LoginActivity"
+            android:name=".feature.presentation.activity.InitActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:exported="true">
             <intent-filter>
@@ -42,14 +42,24 @@
         </activity>
 
         <activity
+            android:name=".feature.presentation.activity.IntroActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:exported="true" />
+
+        <activity
+            android:name=".feature.presentation.activity.LoginActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:exported="true" />
+
+        <activity
             android:name=".feature.presentation.activity.PrivacyActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:exported="true"/>
+            android:exported="true" />
 
         <activity
             android:name=".feature.presentation.activity.ErrorActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:exported="true"/>
+            android:exported="true" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
