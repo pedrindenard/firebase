@@ -13,10 +13,10 @@
         <action
             android:id="@+id/action_loginFragment_to_signInFragment"
             app:destination="@id/signInFragment"
-            app:enterAnim="@anim/anim_fade_in"
-            app:exitAnim="@anim/anim_fade_out"
-            app:popEnterAnim="@anim/anim_fade_in"
-            app:popExitAnim="@anim/anim_fade_out" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
 
     <fragment
@@ -27,17 +27,17 @@
         <action
             android:id="@+id/action_signInFragment_to_recoveryFragment"
             app:destination="@id/recoveryFragment"
-            app:enterAnim="@anim/anim_fade_in"
-            app:exitAnim="@anim/anim_fade_out"
-            app:popEnterAnim="@anim/anim_fade_in"
-            app:popExitAnim="@anim/anim_fade_out" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
-            app:enterAnim="@anim/anim_fade_in"
-            app:exitAnim="@anim/anim_fade_out"
-            app:popEnterAnim="@anim/anim_fade_in"
-            app:popExitAnim="@anim/anim_fade_out"/>
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
 
     <fragment

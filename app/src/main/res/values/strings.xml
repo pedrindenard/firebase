@@ -64,13 +64,11 @@
     <string name="profile_email">Email</string>
     <string name="profile_password">Senha</string>
     <string name="profile_name">Nome completo</string>
-    <string name="profile_cpf">CPF</string>
     <string name="profile_date">Data de nascimento</string>
     <string name="profile_save">Salvar alterações</string>
+    <string name="profile_edit">Alterações salvas com sucesso</string>
     <string name="profile_phone">Telefone</string>
-    <string name="profile_notification">Notificações</string>
-    <string name="profile_address">Endereços</string>
-    <string name="profile_sign_out">Sair</string>
+    <string name="profile_pw">987654321</string>
 
     <!--  Menu  -->
     <string name="menu_home">Home</string>
@@ -78,6 +76,9 @@
     <string name="menu_wishlist">Favoritos</string>
     <string name="menu_profile">Minha conta</string>
     <string name="menu_settings">Configurações</string>
+    <string name="menu_post">Publicar</string>
+    <string name="menu_discover">Descubra</string>
+    <string name="menu_chat">Chat</string>
 
     <!--  Login  -->
     <string name="content_login">Vantagens de um usuário logado:</string>
@@ -115,13 +116,13 @@
     <string name="premiere">Pré estreia:</string>
     <string name="description_movie">Descrição:</string>
     <string name="creators_movie">Criadores</string>
-    <string name="more_movies_like_this">Mais filmes como esse</string>
-    <string name="most_popular_movie">Filmes mais populares</string>
+    <string name="more_movies_like_this">Semelhantes</string>
+    <string name="most_popular">Mais populares</string>
     <string name="see_more"><u>Ver mais</u></string>
     <string name="movie_show_time">Confira horários de\nexibição dos filmes</string>
     <string name="showcase_movie">mostruário</string>
-    <string name="showcase_more_movie"><u>MAIS MOSTRUÁRIO</u></string>
-    <string name="more_actors"><u>MAIS ATORES</u></string>
+    <string name="showcase_more_movie"><u>VER MAIS</u></string>
+    <string name="more_actors"><u>VER MAIS</u></string>
     <string name="best_actors">Melhores atores</string>
 
     <!--  Social Network  -->
@@ -137,15 +138,37 @@
     <string name="next_login">Próximo</string>
     <string name="done_login">Continuar</string>
     <string name="enter_login"><u>Entrar</u></string>
+
+    <!--  Title Slide  -->
     <string name="title_slider_1">Bem-vindo</string>
     <string name="title_slider_2">Pesquise tudo aqui</string>
     <string name="title_slider_3">Chat</string>
     <string name="title_slider_4">Seus favotiros</string>
     <string name="title_slider_5">Trailers e mais</string>
+
+    <!--  Description Slide  -->
     <string name="description_slider_1">Obrigado por baixar Muvis App, divirta-se com este incrível aplicativo Android.</string>
-    <string name="description_slider_2">Pesquise todo o conteúdo em um só lugar: filmes, séries de TV, canal de TV ao vivo e muito mais...</string>
+    <string name="description_slider_2">Pesquise todo o conteúdo em um só lugar: filmes, séries de TV, canal de TV ao vivo e muito mais…</string>
     <string name="description_slider_3">Adicione pessoas, crie grupos, faça postagens sobre filmes, discussões, análises, e muito mais. Tudo isso dentro do nosso aplicativo.</string>
     <string name="description_slider_4">Filmes, atores e ou séries na sua lista de favoritos, experimente!</string>
     <string name="description_slider_5">Graças a API do Youtube, é possível visualizar os trailes disponíveis de filmes e séries através do nosso App e também, transmitir para a tela da sua TV</string>
+
+    <!--  Genres  -->
+    <string name="genres">Gêneros</string>
+    <string name="genre_movie">Filmes</string>
+    <string name="genre_tv">Tv</string>
+    <string name="drawer_home">Home</string>
+    <string name="drawer_profile">Meu perfil</string>
+    <string name="drawer_notification">Notificações</string>
+    <string name="drawer_alter_password">Alterar senha</string>
+    <string name="drawer_login">Entrar / Registrar</string>
+    <string name="drawer_my_list">Favoritos</string>
+    <string name="drawer_logout">Logout</string>
+    <string name="drawer_settings">Configurações</string>
+    <string name="drawer_rate">Avaliar</string>
+    <string name="drawer_share">Compartilhar</string>
+    <string name="drawer_help">Precisa de ajuda?</string>
+    <string name="drawer_privacy">Política de privacidade</string>
+    <string name="drawer_exit">Sair</string>
 
 </resources>

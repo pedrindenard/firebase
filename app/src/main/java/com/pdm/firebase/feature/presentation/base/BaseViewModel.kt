@@ -11,4 +11,5 @@ open class BaseViewModel : ViewModel() {
 
     val failureResponse: MutableLiveData<Throwable> = MutableLiveData()
 
+    val invalidAuth: MutableLiveData<String> = MutableLiveData()
 }

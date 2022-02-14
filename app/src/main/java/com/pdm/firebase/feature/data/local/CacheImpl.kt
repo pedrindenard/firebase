@@ -40,6 +40,14 @@ class CacheImpl(private val context: Context) : Cache {
     }
 
     companion object {
-        const val HOME = "HOME"
+        const val DEFAULT = "DEFAULT"
+        const val HOME_BANNER = "HOME_BANNER"
+        const val POPULAR_MOVIE = "POPULAR_MOVIE"
+        const val RATED_MOVIE = "RATED_MOVIE"
+        const val GENDERS_MOVIE = "GENDER_MOVIE"
+        const val GENDERS_TV = "GENDER_TV"
+        const val MOVIE_BY_GENDER = "MOVIE_BY_GENDER"
+        const val UPCOMING_MOVIE = "UPCOMING_MOVIE"
+        const val BEST_ACTORS = "BEST_ACTORS"
     }
 }

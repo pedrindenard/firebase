@@ -61,6 +61,11 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:exported="true" />
 
+        <activity
+            android:name=".feature.presentation.activity.ProfileActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:exported="true" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

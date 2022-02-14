@@ -2,6 +2,7 @@ package com.pdm.firebase.util
 
 import android.animation.AnimatorListenerAdapter
 import android.content.Context
+import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
@@ -16,8 +17,12 @@ import android.view.animation.Transformation
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatToggleButton
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.get
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputEditText
 import com.pdm.firebase.R
 
@@ -32,25 +37,9 @@ fun View.setOnSingleClickListener(debounceTime: Long = 600, action: () -> Unit) 
     })
 }
 
-fun View.setMargin(
-    left: Float? = null,
-    top: Float? = null,
-    right: Float? = null,
-    bottom: Float? = null
-) {
-    layoutParams<ViewGroup.MarginLayoutParams> {
-        left?.run { leftMargin = dpToPx(this) }
-        top?.run { topMargin = dpToPx(this) }
-        right?.run { rightMargin = dpToPx(this) }
-        bottom?.run { bottomMargin = dpToPx(this) }
-    }
-}
-
 inline fun <reified T : ViewGroup.LayoutParams> View.layoutParams(block: T.() -> Unit) {
     if (layoutParams is T) block(layoutParams as T)
 }
-
-fun View.dpToPx(dp: Float): Int = context.dpToPx(dp)
 
 fun Context.dpToPx(dp: Float): Int =
     TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics).toInt()
@@ -118,17 +107,6 @@ fun View?.disableIt() {
     this?.isEnabled = false
     this?.isClickable = false
     this?.isActivated = false
-}
-
-fun View.animateAlpha(delayMillis: Long? = null, isVisible: Boolean? = true) {
-    when (isVisible) {
-        true -> {
-            animate().alpha(1F).duration = delayMillis ?: 500
-        }
-        else -> {
-            animate().alpha(0F).duration = delayMillis ?: 500
-        }
-    }
 }
 
 fun View.rotateView(rotate: Boolean, speed: Long, angleN: Float, angleP: Float): Boolean {
@@ -206,4 +184,14 @@ fun TextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
     }
     this.movementMethod = LinkMovementMethod.getInstance()
     this.setText(spannableString, TextView.BufferType.SPANNABLE)
+}
+
+fun NavigationView.setMenu(position: Int, isVisible: Boolean) {
+    this.menu[position].isVisible = isVisible
+}
+
+fun SwipeRefreshLayout.setSwipeRefresh(onSwipe: () -> Unit) {
+    setColorSchemeColors(ContextCompat.getColor(context, R.color.yellow_dark))
+    setProgressBackgroundColorSchemeColor(Color.BLACK)
+    setOnRefreshListener { onSwipe() }
 }

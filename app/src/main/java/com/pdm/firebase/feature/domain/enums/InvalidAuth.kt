@@ -7,6 +7,7 @@ enum class InvalidAuth(val value: String) {
     INVALID_EMAIL("invalid.email "),
     INVALID_BIRTHDATE("invalid.birthdate "),
     INVALID_PASSWORD("invalid.password "),
+    INVALID_GENDER("invalid.gender"),
     INVALID_CONFIRM_PASSWORD("invalid.confirm.password "),
     INVALID_NUMBER_PHONE("invalid.number.phone"),
 

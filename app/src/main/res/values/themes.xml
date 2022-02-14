@@ -12,9 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/black</item>
         <!-- Customize your theme here. -->
-        <item name="android:windowTranslucentNavigation">false</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
-        <item name="android:fitsSystemWindows">true</item>
         <item name="android:configChanges">keyboard|keyboardHidden|screenLayout|screenSize|orientation</item>
     </style>
 </resources>

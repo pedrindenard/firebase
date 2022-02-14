@@ -36,7 +36,7 @@ abstract class BaseDialogFragment : DialogFragment() {
             ColorDrawable(
                 ContextCompat.getColor(
                     requireContext(),
-                    R.color.dark_medium
+                    R.color.gray_background
                 )
             )
         )

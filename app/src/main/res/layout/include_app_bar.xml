@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@drawable/background_gradient_blue"
-                android:src="@drawable/ic_firebase"
+                android:src="@drawable/ic_logo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

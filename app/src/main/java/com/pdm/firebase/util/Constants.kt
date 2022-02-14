@@ -14,6 +14,8 @@ const val RED = "red"
 
 const val BLACK = "black"
 
+const val ERROR_SERVER = "Error_Server"
+
 const val WHATSAPP_COMMON = "com.whatsapp"
 
 const val WHATSAPP_BUSINESS = "com.whatsapp.w4b"
@@ -38,7 +40,15 @@ const val BAD_REQUEST = "Bad request"
 
 const val ARGS = "ARGS"
 
+const val SMALL_IMAGE = "w300"
+
+const val MEDIUM_IMAGE = "w780"
+
+const val LARGE_IMAGE = "w1280"
+
 const val POLITY_PRIVACY = "Política de Privacidade"
+
+const val DRAWER = 0
 
 val FACEBOOK_PERMISSIONS = arrayListOf("email", "public_profile")
 

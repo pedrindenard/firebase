@@ -2,6 +2,7 @@ package com.pdm.firebase.util
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -26,6 +27,13 @@ private fun Activity.startWhatsApp(pack: String, url: String) {
     i.setPackage(pack)
     i.data = Uri.parse(url)
     startActivity(i)
+}
+
+inline fun <reified T : Any> Context.launchActivity(extra: String? = null) {
+    val intent = Intent(this, T::class.java)
+    extra ?.let { intent.putExtra("Navigation", it) }
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    startActivity(intent)
 }
 
 fun Activity.selectWhatsAppOrPlayStore(url: String) {

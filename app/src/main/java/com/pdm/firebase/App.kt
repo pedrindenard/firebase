@@ -3,15 +3,12 @@ package com.pdm.firebase
 import android.app.Application
 import android.util.Log
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.BuildConfig
 import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.FirebaseAppCheck
-import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
+import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
 import com.google.firebase.messaging.FirebaseMessaging
-import com.pdm.firebase.di.dataSourceModule
-import com.pdm.firebase.di.repositoryModule
-import com.pdm.firebase.di.userCasesModule
-import com.pdm.firebase.di.viewModelModule
-import com.pdm.firebase.di.dataModule
+import com.pdm.firebase.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -52,8 +49,17 @@ class App : Application() {
             Log.i("Token", "Success generate token ${task.result}")
         })
 
+
         FirebaseAppCheck.getInstance().installAppCheckProviderFactory(
-            SafetyNetAppCheckProviderFactory.getInstance()
+            when (BuildConfig.BUILD_TYPE) {
+                "release" -> {
+                    //SafetyNetAppCheckProviderFactory.getInstance()
+                    DebugAppCheckProviderFactory.getInstance()
+                }
+                else -> {
+                    DebugAppCheckProviderFactory.getInstance()
+                }
+            }
         )
     }
 }

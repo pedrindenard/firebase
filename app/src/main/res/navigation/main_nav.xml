@@ -12,9 +12,15 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/profileFragment"
+        android:id="@+id/discoverFragment"
         android:name="com.pdm.firebase.feature.presentation.fragment.profile.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/genderFragment"
+        android:name="com.pdm.firebase.feature.presentation.fragment.gender.GenderFragment"
+        android:label="GenderFragment"
+        tools:layout="@layout/fragment_gender" />
 
 </navigation>

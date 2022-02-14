@@ -15,5 +15,4 @@ interface ProfileDataSource {
 
     suspend fun deleteUser(currentUser: FirebaseUser): Task<Void>?
 
-    suspend fun logOutFirebase() : Unit?
 }

@@ -100,10 +100,10 @@ class PrivacyFragment : BaseFragment() {
                         putSerializable(ARGS, paragraph)
                     },
                     NavOptions.Builder().apply {
-                        setEnterAnim(R.anim.anim_fade_in)
-                        setExitAnim(R.anim.anim_fade_out)
-                        setPopEnterAnim(R.anim.anim_fade_in)
-                        setPopExitAnim(R.anim.anim_fade_out)
+                        setEnterAnim(R.anim.fade_in)
+                        setExitAnim(R.anim.fade_out)
+                        setPopEnterAnim(R.anim.fade_in)
+                        setPopExitAnim(R.anim.fade_out)
                     }.build()
                 )
             }

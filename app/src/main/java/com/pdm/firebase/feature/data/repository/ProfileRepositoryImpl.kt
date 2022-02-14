@@ -23,8 +23,4 @@ class ProfileRepositoryImpl(private val dataSource: ProfileDataSource) : Profile
     override suspend fun deleteUser(currentUser: FirebaseUser): Task<Void>? {
         return dataSource.deleteUser(currentUser)
     }
-
-    override suspend fun logOutFirebase(): Unit? {
-        return dataSource.logOutFirebase()
-    }
 }

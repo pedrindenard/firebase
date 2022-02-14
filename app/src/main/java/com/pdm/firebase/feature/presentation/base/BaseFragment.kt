@@ -1,14 +1,10 @@
 package com.pdm.firebase.feature.presentation.base
 
-import android.app.Activity
-import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.res.ColorStateList
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.Gravity
-import android.view.View
-import android.view.WindowManager
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -18,15 +14,12 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.pdm.firebase.R
 import com.pdm.firebase.feature.presentation.dialog.ProgressDialog
 import com.pdm.firebase.util.BLACK
 import com.pdm.firebase.util.RED
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.ContextCompat.getSystemService
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
-
 
 abstract class BaseFragment : Fragment() {
 
@@ -159,7 +152,8 @@ abstract class BaseFragment : Fragment() {
                 )
             )
             val view = this.view
-            val textView = view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+            val textView =
+                view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
             val params = view.layoutParams
 
             try {
@@ -174,5 +168,9 @@ abstract class BaseFragment : Fragment() {
             view.layoutParams = params
             this.show()
         }
+    }
+
+    companion object {
+        private const val EXCEPTION = "Binding only is valid after onCreateView"
     }
 }

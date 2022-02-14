@@ -8,7 +8,6 @@ import com.pdm.firebase.R
 import com.pdm.firebase.databinding.ActivityIntroBinding
 import com.pdm.firebase.feature.presentation.activity.adapter.IntroAdapter
 import com.pdm.firebase.feature.presentation.view.ClickableViewPager
-import com.pdm.firebase.util.setOnSingleClickListener
 import java.util.*
 
 class IntroActivity : AppCompatActivity() {
@@ -46,26 +45,26 @@ class IntroActivity : AppCompatActivity() {
         viewPageSlide.apply {
             setOnItemClickListener(object : ClickableViewPager.OnItemClickListener {
                 override fun onItemClick(position: Int) {
-                    if (position < 6) {
+                    if (position != 4) {
                         currentItem = position + 1
                     } else {
-                        redirectToLogin()
+                        redirectToHome()
                     }
                 }
             })
         }
 
         nextButton.apply {
-            setOnSingleClickListener {
+            setOnClickListener {
                 if (text == getString(R.string.done_login)) {
-                    redirectToLogin()
+                    redirectToHome()
                 }
 
                 viewPageSlide.takeIf {
                     it.currentItem < slides.size
                 }?.let {
                     viewPageSlide.currentItem += 1
-                    return@setOnSingleClickListener
+                    return@setOnClickListener
                 }
             }
         }
@@ -98,14 +97,10 @@ class IntroActivity : AppCompatActivity() {
         viewPageSlide.pageMargin = 0
 
         binding.viewPagerIndicator.setupWithViewPager(viewPageSlide)
-
-        binding.skip.setOnSingleClickListener {
-            redirectToLogin()
-        }
     }
 
-    private fun redirectToLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
+    private fun redirectToHome() {
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }

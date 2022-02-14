@@ -1,11 +1,13 @@
 package com.pdm.firebase.feature.domain.usecase
 
 import com.pdm.firebase.feature.domain.usecase.login.*
-import com.pdm.firebase.feature.domain.usecase.register.*
 import com.pdm.firebase.feature.domain.usecase.profile.DeleteUserUseCase
 import com.pdm.firebase.feature.domain.usecase.profile.EditUserUseCase
 import com.pdm.firebase.feature.domain.usecase.profile.GetUserInfoUseCase
-import com.pdm.firebase.feature.domain.usecase.profile.LogOutUseCase
+import com.pdm.firebase.feature.domain.usecase.register.AddInfoSocialUserUseCase
+import com.pdm.firebase.feature.domain.usecase.register.AddInfoUserUseCase
+import com.pdm.firebase.feature.domain.usecase.register.EmailVerificationUseCase
+import com.pdm.firebase.feature.domain.usecase.register.RegisterUserUseCase
 
 data class AuthUseCase (
     val loginWithUserUseCase: LoginWithUserUseCase,
@@ -22,7 +24,6 @@ data class AuthUseCase (
 
     val getUserInfoUseCase: GetUserInfoUseCase,
     val editUserUseCase: EditUserUseCase,
-    val deleteUserUseCase: DeleteUserUseCase,
-    val logOutUseCase: LogOutUseCase
+    val deleteUserUseCase: DeleteUserUseCase
 )
 

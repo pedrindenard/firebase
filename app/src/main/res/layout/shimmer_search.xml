@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/shimmerEffect"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    app:shimmer_auto_start="true">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/superBanner">
+
+        <include layout="@layout/include_shimmer" />
+
+        <include layout="@layout/include_shimmer" />
+
+        <include layout="@layout/include_shimmer" />
+
+        <include layout="@layout/include_shimmer" />
+
+        <include layout="@layout/include_shimmer" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</com.facebook.shimmer.ShimmerFrameLayout>

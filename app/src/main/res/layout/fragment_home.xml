@@ -1,266 +1,283 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refreshHomeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/superBanner"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:background="@color/gray_light" />
-
-        <me.relex.circleindicator.CircleIndicator3
-            android:id="@+id/indicator"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            app:ci_animator="@animator/anim_indicator"
-            app:ci_drawable="@drawable/indicator_circle_on"
-            app:ci_drawable_unselected="@drawable/indicator_circle_off"
-            app:ci_height="10dp"
-            app:ci_width="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/superBanner" />
-
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/superBanner">
+            android:background="@color/black">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/black">
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/mostPopularLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/stellar_bold"
-                    android:text="@string/most_popular_movie"
-                    android:textAllCaps="true"
-                    android:textColor="@color/yellow_dark"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <include
+                    android:id="@+id/includeLayout"
+                    layout="@layout/shimmer_home"
+                    tools:visibility="gone" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/popularRecyclerView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:clipToPadding="false"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/mostPopularLabel"
-                    tools:ignore="RtlSymmetry"
-                    tools:itemCount="6"
-                    tools:listitem="@layout/item_best_movie" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/superBanner"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:background="@color/gray_light" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/black">
+                    <me.relex.circleindicator.CircleIndicator3
+                        android:id="@+id/indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:background="@color/transparent"
+                        app:ci_animator="@animator/anim_indicator"
+                        app:ci_drawable="@drawable/indicator_circle_on"
+                        app:ci_drawable_unselected="@drawable/indicator_circle_off"
+                        app:ci_height="10dp"
+                        app:ci_width="10dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/superBanner" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/mapsMovie"
-                    android:layout_width="0dp"
-                    android:layout_height="140dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/background_maps"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/stellar_bold"
-                    android:text="@string/movie_show_time"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    app:layout_constraintStart_toStartOf="@+id/mapsMovie"
-                    app:layout_constraintTop_toTopOf="@+id/mapsMovie" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/seeMoreShowTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:fontFamily="@font/stellar_bold"
-                    android:text="@string/see_more"
-                    android:textColor="@color/yellow_dark"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/mapsMovie"
-                    app:layout_constraintStart_toStartOf="@+id/mapsMovie" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/mostPopularLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/stellar_bold"
+                        android:text="@string/most_popular"
+                        android:textAllCaps="true"
+                        android:textColor="@color/yellow_dark"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/popularRecyclerView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/mostPopularLabel"
+                        tools:ignore="RtlSymmetry"
+                        tools:itemCount="6"
+                        tools:listitem="@layout/item_best_movie" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/black">
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/menuMovieRecyclerView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="RtlSymmetry"
-                    tools:itemCount="12"
-                    tools:listitem="@layout/item_menu" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/movieRecyclerView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="32dp"
-                    android:clipToPadding="false"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/menuMovieRecyclerView"
-                    tools:ignore="RtlSymmetry"
-                    tools:itemCount="6"
-                    tools:listitem="@layout/item_best_movie" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/mapsMovie"
+                        android:layout_width="0dp"
+                        android:layout_height="140dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/background_maps"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/stellar_bold"
+                        android:text="@string/movie_show_time"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        app:layout_constraintStart_toStartOf="@+id/mapsMovie"
+                        app:layout_constraintTop_toTopOf="@+id/mapsMovie" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/black">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/seeMoreShowTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/stellar_bold"
+                        android:text="@string/see_more"
+                        android:textColor="@color/yellow_dark"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/mapsMovie"
+                        app:layout_constraintStart_toStartOf="@+id/mapsMovie" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/showcaseLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:fontFamily="@font/stellar_bold"
-                    android:text="@string/showcase_movie"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/showcaseMoreLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/stellar_bold"
-                    android:text="@string/showcase_more_movie"
-                    android:textColor="@color/yellow_dark"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/showcaseRecyclerView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:clipToPadding="false"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/showcaseLabel"
-                    tools:ignore="RtlSymmetry"
-                    tools:itemCount="6"
-                    tools:listitem="@layout/item_showcase" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/menuMovieRecyclerView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="RtlSymmetry"
+                        tools:itemCount="12"
+                        tools:listitem="@layout/item_menu" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/movieRecyclerView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="32dp"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/menuMovieRecyclerView"
+                        tools:ignore="RtlSymmetry"
+                        tools:itemCount="6"
+                        tools:listitem="@layout/item_best_movie" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/black">
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/actorsLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:fontFamily="@font/stellar_bold"
-                    android:text="@string/best_actors"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/actorsMoreLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/stellar_bold"
-                    android:text="@string/more_actors"
-                    android:textColor="@color/yellow_dark"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/showcaseLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="24dp"
+                        android:fontFamily="@font/stellar_bold"
+                        android:text="@string/showcase_movie"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/actorsRecyclerView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:clipToPadding="false"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/actorsLabel"
-                    tools:ignore="RtlSymmetry"
-                    tools:itemCount="6"
-                    tools:listitem="@layout/item_actors" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/showcaseMoreLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/stellar_bold"
+                        android:text="@string/showcase_more_movie"
+                        android:textColor="@color/yellow_dark"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/showcaseRecyclerView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/showcaseLabel"
+                        tools:ignore="RtlSymmetry"
+                        tools:itemCount="6"
+                        tools:listitem="@layout/item_showcase" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-</androidx.core.widget.NestedScrollView>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/actorsLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="24dp"
+                        android:fontFamily="@font/stellar_bold"
+                        android:text="@string/best_actors"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/actorsMoreLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/stellar_bold"
+                        android:text="@string/more_actors"
+                        android:textColor="@color/yellow_dark"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/actorsRecyclerView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/actorsLabel"
+                        tools:ignore="RtlSymmetry"
+                        tools:itemCount="6"
+                        tools:listitem="@layout/item_actors" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

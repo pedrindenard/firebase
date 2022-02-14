@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="loginTabSelect" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/stellar_bold</item>
         <item name="android:textColor">@color/black</item>
@@ -19,17 +20,34 @@
         <item name="colorControlActivated">@color/yellow</item>
     </style>
 
-    <style name="menuItemSelected" parent="">
+    <style name="menuItemSelected" parent="Theme.AppCompat">
         <item name="android:fontFamily">@font/stellar_bold</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/background_menu_movie</item>
     </style>
 
-    <style name="menuItemUnselected" parent="">
+    <style name="menuItemUnselected" parent="Theme.AppCompat">
         <item name="android:fontFamily">@font/stellar_bold</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/gray_light</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
+
+    <style name="genderTabLayout" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/stellar_bold</item>
+    </style>
+
+    <style name="navigationDrawer" parent="Theme.AppCompat">
+        <item name="android:listDivider">@color/white</item>
+        <item name="android:textColorSecondary">@color/yellow_dark</item>
+    </style>
+
+    <style name="imageViewRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>
