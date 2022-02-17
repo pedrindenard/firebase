@@ -48,7 +48,7 @@ class FilterDialog(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initFilterLoading()
-        initAdapterRegion()
+        //initAdapterRegion()
         initAdapterFilter()
         initActions()
     }

@@ -7,6 +7,7 @@ import com.pdm.firebase.feature.data.local.CacheImpl.Companion.BEST_ACTORS
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.GENDERS_MOVIE
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.GENDERS_TV
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.HOME_BANNER
+import com.pdm.firebase.feature.data.local.CacheImpl.Companion.NOW_PLAYING_MOVIE
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.POPULAR_MOVIE
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.RATED_MOVIE
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.UPCOMING_MOVIE
@@ -147,8 +148,20 @@ class MovieRepositoryImpl(
         }
     }
 
-    override suspend fun getMovieNowPlaying(page: Int): Resource<MovieResponse?> {
-        return dataSource.getMovieNowPlaying(page)
+    override suspend fun getMovieNowPlaying(page: Int, refresh: Boolean): Resource<MovieResponse?> {
+        return when {
+            cache.get(NOW_PLAYING_MOVIE).isEmpty() -> {
+                dataSource.getMovieNowPlaying(page)
+            }
+            else -> {
+                Resource.Success(
+                    Gson().fromJson(
+                        cache.get(NOW_PLAYING_MOVIE),
+                        MovieResponse::class.java
+                    )
+                )
+            }
+        }
     }
 
     override suspend fun getBestActors(refresh: Boolean): Resource<ActorsResponse?> {

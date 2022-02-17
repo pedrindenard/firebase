@@ -186,4 +186,5 @@
     <string name="filter_error">Não foi possível aplicar o filtro</string>
 
     <string name="empty" />
+    <string name="home_cine">Filmes nos cinemas</string>
 </resources>

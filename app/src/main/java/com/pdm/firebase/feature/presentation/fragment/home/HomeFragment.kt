@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.pdm.firebase.R
 import com.pdm.firebase.databinding.FragmentHomeBinding
@@ -20,6 +18,7 @@ import com.pdm.firebase.feature.presentation.fragment.home.adapter.*
 import com.pdm.firebase.feature.presentation.fragment.home.viewmodel.HomeViewModel
 import com.pdm.firebase.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class HomeFragment : BaseFragment() {
 
@@ -29,9 +28,11 @@ class HomeFragment : BaseFragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    private var bannerTimer: Timer? = null
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        onAttached()
+        initHomeData()
     }
 
     override fun onCreateView(
@@ -47,7 +48,7 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         onRequestPermission()
         initObservers()
-        initRefresh()
+        initActions()
     }
 
     private fun initObservers() {
@@ -66,6 +67,9 @@ class HomeFragment : BaseFragment() {
                 }
             }
             mutableList.initBannerMovieAdapter()
+            binding.superBanner.initAutomaticSlide(
+                it = mutableList
+            )
         })
 
         viewModel.getPopularMovie.observe(viewLifecycleOwner, {
@@ -92,6 +96,7 @@ class HomeFragment : BaseFragment() {
         })
 
         viewModel.getMovieByGender.observe(viewLifecycleOwner, {
+            binding.progressGenres.visibility = View.GONE
             it.results.initMovieAdapter()
         })
 
@@ -152,6 +157,7 @@ class HomeFragment : BaseFragment() {
             adapter = GenderAdapter(mutableList = this@initGenderAdapter).apply {
                 setOnItemClickListener(object : GenderAdapter.ClickListener {
                     override fun onItemClickListener(gender: Gender) {
+                        binding.progressGenres.visibility = View.VISIBLE
                         viewModel.getMovieByGender(
                             id = gender.id
                         )
@@ -202,6 +208,23 @@ class HomeFragment : BaseFragment() {
         }
     }
 
+    private fun ViewPager2.initAutomaticSlide(it: MutableList<Movie>) {
+        val timerTask = object : TimerTask() {
+            override fun run() {
+                this@initAutomaticSlide.post {
+                    this@initAutomaticSlide.currentItem = (
+                        this@initAutomaticSlide.currentItem + 1
+                    ) % it.size
+                }
+            }
+        }
+        bannerTimer = Timer().apply {
+            schedule(
+                timerTask, 2000, 3000
+            )
+        }
+    }
+
     private fun List<Gender>.initMovieByGenres() {
         viewModel.getMovieByGender(
             id = this.first().id
@@ -232,20 +255,26 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    private fun initRefresh() {
+    private fun initActions() {
         binding.refreshHomeFragment.setSwipeRefresh {
-            onAttached(cleanCache = true)
+            initHomeData(refresh = true)
         }
     }
 
-    private fun onAttached(cleanCache: Boolean? = false) {
-        viewModel.getSuperBanner(cleanCache)
-        viewModel.getPopularMovie(cleanCache)
-        viewModel.getRatedMovie(cleanCache)
-        viewModel.getGendersMovie(cleanCache)
-        viewModel.getUpcomingMovie(cleanCache)
-        viewModel.getBestActors(cleanCache)
+    private fun initHomeData(refresh: Boolean? = false) {
+        viewModel.getSuperBanner(refresh = refresh)
+        viewModel.getPopularMovie(refresh = refresh)
+        viewModel.getRatedMovie(refresh = refresh)
+        viewModel.getGendersMovie(refresh = refresh)
+        viewModel.getUpcomingMovie(refresh = refresh)
+        viewModel.getBestActors(refresh = refresh)
+        viewModel.getNowPlayingMovie(refresh = refresh)
         viewModel.addInfoOnCache()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        bannerTimer?.cancel()
     }
 
     override fun onDestroyView() {

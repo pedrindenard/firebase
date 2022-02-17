@@ -8,9 +8,10 @@ import java.io.IOException
 
 class GetNowPlayingMovieUseCase(private val repository: MovieRepository) {
 
-    suspend operator fun invoke(page: Int): Resource<MovieResponse?> {
+    suspend operator fun invoke(page: Int, refresh: Boolean? = false): Resource<MovieResponse?> {
         return try {
             repository.getMovieNowPlaying(
+                refresh = refresh!!,
                 page = page
             )
         } catch (e: HttpException) {

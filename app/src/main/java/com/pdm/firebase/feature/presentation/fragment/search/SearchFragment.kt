@@ -66,7 +66,7 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun initSearch() {
-        binding.searchField.addListenerSearch(
+        binding.searchField.addListenerSearch(listener = false,
             beforeTextChanged = { handlerProgressBar(isVisible = true) },
             onTextChanged = { viewModel.clearOldLists() },
             onTextWrite = { resetAdapter = true },
@@ -150,6 +150,7 @@ class SearchFragment : BaseFragment() {
 
                         }
                     })
+                    setHasStableIds(true)
                     adapter = this
                 }
                 startIntroAnimation(); resetAdapter = false

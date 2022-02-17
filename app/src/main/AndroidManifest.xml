@@ -21,7 +21,6 @@
 
         <activity
             android:name=".feature.presentation.activity.InitActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +31,6 @@
 
         <activity
             android:name=".feature.presentation.activity.MainActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:exported="true">
             <intent-filter>
 
@@ -43,27 +41,30 @@
 
         <activity
             android:name=".feature.presentation.activity.IntroActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:exported="true" />
 
         <activity
             android:name=".feature.presentation.activity.LoginActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:exported="true" />
 
         <activity
             android:name=".feature.presentation.activity.PrivacyActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:exported="true" />
 
         <activity
             android:name=".feature.presentation.activity.ErrorActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:exported="true" />
 
         <activity
             android:name=".feature.presentation.activity.ProfileActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:exported="true" />
+
+        <activity
+            android:name=".feature.presentation.activity.SocialActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".feature.presentation.activity.SettingsActivity"
             android:exported="true" />
 
         <meta-data

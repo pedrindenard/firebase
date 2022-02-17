@@ -47,6 +47,7 @@ class CacheImpl(private val context: Context) : Cache {
         const val RATED_MOVIE = "RATED_MOVIE"
         const val GENDERS_MOVIE = "GENDER_MOVIE"
         const val GENDERS_TV = "GENDER_TV"
+        const val NOW_PLAYING_MOVIE = "NOW_PLAYING_MOVIE"
         const val MOVIE_BY_GENDER = "MOVIE_BY_GENDER"
         const val UPCOMING_MOVIE = "UPCOMING_MOVIE"
         const val BEST_ACTORS = "BEST_ACTORS"

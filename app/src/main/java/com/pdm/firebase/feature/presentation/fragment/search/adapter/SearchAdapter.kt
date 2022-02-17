@@ -34,6 +34,10 @@ class SearchAdapter(private var mutableList: MutableList<Search>) : RecyclerView
         holder.handlerImage(mutableList)
     }
 
+    override fun getItemId(position: Int): Long {
+        return mutableList[position].id.toLong()
+    }
+
     override fun getItemCount(): Int = mutableList.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
@@ -50,7 +54,7 @@ class SearchAdapter(private var mutableList: MutableList<Search>) : RecyclerView
 
         fun handlerImage(it: Search) {
             imageMovie.loadImage(
-                thumbnail = it.posterPath ?: it.profilePath,
+                thumbnail = it.posterPath ?: it.profilePath ?: "",
                 itemView = itemView,
                 size = SMALL_IMAGE
             )

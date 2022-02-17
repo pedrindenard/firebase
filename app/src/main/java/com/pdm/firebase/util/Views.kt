@@ -207,31 +207,25 @@ fun View.handler(isEnabled: Boolean) {
 }
 
 fun TextInputEditText.addListenerSearch(
+    listener: Boolean? = true,
     beforeTextChanged: ((CharSequence?) -> Unit)? = null,
     onTextChanged: ((CharSequence?) -> Unit)? = null,
     onTextWrite: ((CharSequence?) -> Unit)? = null,
     afterTextChanged: ((Editable?) -> Unit)? = null
-) {
+) { var enableListenerAgain: Boolean = listener!!
     this.addTextChangedListener(object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            if (beforeTextChanged != null) {
-                beforeTextChanged(s)
-            }
+            if (beforeTextChanged != null && enableListenerAgain) { beforeTextChanged(s) }
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            if (onTextChanged != null) {
-                onTextChanged(s)
-            }
-            if (onTextWrite != null) {
-                onTextWrite(s)
-            }
+            if (onTextChanged != null && enableListenerAgain) { onTextChanged(s) }
+            if (onTextWrite != null && enableListenerAgain) { onTextWrite(s) }
         }
 
         override fun afterTextChanged(s: Editable?) {
-            if (afterTextChanged != null) {
-                afterTextChanged(s)
-            }
+            if (afterTextChanged != null && enableListenerAgain) { afterTextChanged(s) }
+            else { enableListenerAgain = true }
         }
     })
 }

@@ -35,6 +35,9 @@ class HomeViewModel(
     private val _getUpcomingMovie: MutableLiveData<MovieResponse> = MutableLiveData()
     val getUpcomingMovie = _getUpcomingMovie as LiveData<MovieResponse>
 
+    private val _getNowPlayingMovie: MutableLiveData<MovieResponse> = MutableLiveData()
+    val getNowPlayingMovie = _getNowPlayingMovie as LiveData<MovieResponse>
+
     private val _getBestActors: MutableLiveData<ActorsResponse> = MutableLiveData()
     val getBestActors = _getBestActors as LiveData<ActorsResponse>
 
@@ -138,6 +141,25 @@ class HomeViewModel(
             when (val response = useCase.getUpcomingMovie.invoke(refresh)) {
                 is Resource.Success -> {
                     _getUpcomingMovie.postValue(response.data!!)
+                }
+                is Resource.Error -> {
+                    errorResponse.postValue(response.message)
+                }
+                is Resource.Failure -> {
+                    failureResponse.postValue(response.throwable)
+                }
+                is Resource.InvalidAuth -> {
+                    invalidAuth.postValue(response.message)
+                }
+            }
+        }
+    }
+
+    fun getNowPlayingMovie(refresh: Boolean? = false) {
+        viewModelScope.launch {
+            when (val response = useCase.getNowPlayingMovie.invoke(page = 1, refresh)) {
+                is Resource.Success -> {
+                    _getNowPlayingMovie.postValue(response.data!!)
                 }
                 is Resource.Error -> {
                     errorResponse.postValue(response.message)
