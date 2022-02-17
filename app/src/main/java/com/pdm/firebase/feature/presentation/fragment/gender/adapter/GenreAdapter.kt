@@ -21,7 +21,7 @@ class GenreAdapter(private val mutableList: List<Gender>) : RecyclerView.Adapter
             LayoutInflater.from(
                 parent.context
             ).inflate(
-                R.layout.item_genres,
+                R.layout.item_search,
                 parent,
                 false
             )
@@ -41,8 +41,8 @@ class GenreAdapter(private val mutableList: List<Gender>) : RecyclerView.Adapter
     override fun getItemCount(): Int = mutableList.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
-        var name: AppCompatTextView = itemView.findViewById(R.id.genreName)
-        var thumbnail: AppCompatImageView = itemView.findViewById(R.id.genreImage)
+        var name: AppCompatTextView = itemView.findViewById(R.id.searchName)
+        var thumbnail: AppCompatImageView = itemView.findViewById(R.id.searchImage)
 
         init { itemView.setOnClickListener(this) }
 

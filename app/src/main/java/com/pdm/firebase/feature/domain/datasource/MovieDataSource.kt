@@ -21,6 +21,8 @@ interface MovieDataSource {
 
     suspend fun getUpcomingMovie(): Resource<MovieResponse?>
 
+    suspend fun getMovieNowPlaying(page: Int): Resource<MovieResponse?>
+
     suspend fun getBestActors(): Resource<ActorsResponse?>
 
 }

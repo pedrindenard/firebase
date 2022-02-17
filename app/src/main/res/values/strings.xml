@@ -170,5 +170,20 @@
     <string name="drawer_help">Precisa de ajuda?</string>
     <string name="drawer_privacy">Política de privacidade</string>
     <string name="drawer_exit">Sair</string>
+    <string name="search">Pesquisar</string>
+    <string name="adult_content">Conteúdo adulto (pornografia)</string>
+    <string name="filters">Filtros</string>
+    <string name="search_by">Categorias</string>
+    <string name="filter_on">ON</string>
+    <string name="filter_off">OFF</string>
+    <string name="filter_by_year">Ano/lançamento</string>
+    <string name="filter_by_region">Região</string>
+    <string name="filter_apply">Aplicar</string>
+    <string name="filter_clear">Limpar</string>
 
+    <string name="filter_remove_region">Não é possível filtrar por região e ano</string>
+    <string name="filter_remove_year">Não é possível filtrar por ano</string>
+    <string name="filter_error">Não foi possível aplicar o filtro</string>
+
+    <string name="empty" />
 </resources>

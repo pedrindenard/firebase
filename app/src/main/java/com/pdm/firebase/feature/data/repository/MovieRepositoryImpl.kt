@@ -147,6 +147,10 @@ class MovieRepositoryImpl(
         }
     }
 
+    override suspend fun getMovieNowPlaying(page: Int): Resource<MovieResponse?> {
+        return dataSource.getMovieNowPlaying(page)
+    }
+
     override suspend fun getBestActors(refresh: Boolean): Resource<ActorsResponse?> {
         return when {
             refresh -> {

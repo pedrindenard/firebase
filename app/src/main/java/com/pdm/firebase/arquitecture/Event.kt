@@ -2,6 +2,8 @@ package com.pdm.firebase.arquitecture
 
 import android.util.Log
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import com.pdm.firebase.util.ERROR_SERVER
 import retrofit2.Response
 
@@ -42,6 +44,14 @@ class Event {
                     )
                 }
             }
+        }
+
+        inline fun <reified T : Any> Any.mapTo(): T = GsonBuilder().create().run {
+            fromJson(toJsonTree(this@mapTo), T::class.java)
+        }
+
+        inline fun <reified T : Any> Any.toMutable(): T = GsonBuilder().create().run {
+            fromJson(toJson(this@toMutable), object : TypeToken<T>() {}.type)
         }
 
         fun adapterClick(onClick: () -> Unit) = try { onClick() } catch (e: Exception) { }

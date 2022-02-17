@@ -33,12 +33,14 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initNavigation() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.mainNavHost) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.mainNavHost) as NavHostFragment
         val navController = navHostFragment.navController
         navDrawerLayout = binding.drawerLayout
         navController.initNavigationDrawer()
         navController.initNavigationView()
         navController.initNavAppBar()
+        navController.initListener()
         Firebase.auth.initNavItems()
     }
 
@@ -158,6 +160,12 @@ class MainActivity : BaseActivity() {
                     setMenu(position = 5, isVisible = false)
                 }
             }
+        }
+    }
+
+    private fun NavController.initListener() {
+        this.addOnDestinationChangedListener { _, _, _ ->
+
         }
     }
 

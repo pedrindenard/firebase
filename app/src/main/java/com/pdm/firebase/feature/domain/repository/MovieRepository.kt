@@ -21,7 +21,8 @@ interface MovieRepository {
 
     suspend fun getUpcomingMovie(refresh: Boolean): Resource<MovieResponse?>
 
-    suspend fun getBestActors(refresh: Boolean): Resource<ActorsResponse?>
+    suspend fun getMovieNowPlaying(page: Int): Resource<MovieResponse?>
 
+    suspend fun getBestActors(refresh: Boolean): Resource<ActorsResponse?>
 
 }

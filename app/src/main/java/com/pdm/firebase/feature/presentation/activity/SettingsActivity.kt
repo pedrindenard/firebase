@@ -19,8 +19,8 @@ class SettingsActivity : BaseActivity() {
     }
 
     private fun initNavigation() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.socialNavHost) as NavHostFragment
-        val graph = navHostFragment.navController.navInflater.inflate(R.navigation.social_nav)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.settingsNavHost) as NavHostFragment
+        val graph = navHostFragment.navController.navInflater.inflate(R.navigation.settings_nav)
 
         when (intent.getStringExtra("Navigation")) {
             "Settings" -> {

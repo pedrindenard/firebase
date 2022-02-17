@@ -21,6 +21,6 @@
         android:paddingVertical="4dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="3"
-        tools:listitem="@layout/item_genres" />
+        tools:listitem="@layout/item_search" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

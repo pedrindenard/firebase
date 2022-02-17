@@ -8,13 +8,13 @@ import com.pdm.firebase.R
 import com.pdm.firebase.feature.domain.model.gender.Gender
 import com.pdm.firebase.feature.domain.model.gender.GenreDataImage
 
-fun AppCompatImageView.loadImage(itemView: View, thumbnail: String, size: String) {
+fun AppCompatImageView.loadImage(itemView: View, thumbnail: String?, size: String) {
 
     val image = BuildConfig.BASE_IMAGE_URL + size + thumbnail
 
     Glide.with(itemView)
         .load(image)
-        .error(R.drawable.placeholder_error)
+        .error(R.drawable.placeholder_movie)
         .placeholder(R.drawable.placeholder_movie)
         .into(this)
 }

@@ -18,10 +18,7 @@ import com.pdm.firebase.feature.domain.model.movie.Movie
 import com.pdm.firebase.feature.presentation.base.BaseFragment
 import com.pdm.firebase.feature.presentation.fragment.home.adapter.*
 import com.pdm.firebase.feature.presentation.fragment.home.viewmodel.HomeViewModel
-import com.pdm.firebase.util.BLACK
-import com.pdm.firebase.util.hasPermissions
-import com.pdm.firebase.util.setSwipeRefresh
-import com.pdm.firebase.util.storagePermissions
+import com.pdm.firebase.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment() {
@@ -239,17 +236,6 @@ class HomeFragment : BaseFragment() {
         binding.refreshHomeFragment.setSwipeRefresh {
             onAttached(cleanCache = true)
         }
-    }
-
-    private fun RecyclerView.startIntroAnimation() {
-        this.translationY = 0F
-        this.alpha = 0F
-        this.animate()
-            .translationY(0F)
-            .setDuration(500)
-            .alpha(1F)
-            .setInterpolator(AccelerateDecelerateInterpolator())
-            .start()
     }
 
     private fun onAttached(cleanCache: Boolean? = false) {

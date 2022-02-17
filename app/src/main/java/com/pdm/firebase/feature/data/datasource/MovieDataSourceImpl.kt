@@ -168,6 +168,25 @@ class MovieDataSourceImpl(private val api: Api, private val cache: CacheImpl) : 
         }
     }
 
+    override suspend fun getMovieNowPlaying(page: Int): Resource<MovieResponse?> {
+        return safeCallApi {
+            val response = api.getMovieNowPlaying(page = page)
+
+            when {
+                response.isSuccessful -> {
+                    Resource.Success(data = response.body())
+                }
+                else -> {
+                    response.errorCallApi {
+                        Resource.InvalidAuth(
+                            message = response.message()
+                        )
+                    }
+                }
+            }
+        }
+    }
+
     override suspend fun getBestActors(): Resource<ActorsResponse?> {
         return safeCallApi {
             val response = api.getBestActors()

@@ -4,7 +4,6 @@ import android.text.Editable
 import com.github.rtoshiro.util.format.SimpleMaskFormatter
 import com.github.rtoshiro.util.format.text.MaskTextWatcher
 import com.google.android.material.textfield.TextInputEditText
-import com.google.gson.GsonBuilder
 
 fun TextInputEditText?.formatToDate() {
     val smf = SimpleMaskFormatter("NN/NN/NNNNN")
@@ -109,8 +108,3 @@ fun handlerPhone(phone: String): String {
     }
     return sb.toString()
 }
-
-inline fun <reified T : Any> Any.mapTo(): T =
-    GsonBuilder().create().run {
-        fromJson(toJsonTree(this@mapTo), T::class.java)
-    }

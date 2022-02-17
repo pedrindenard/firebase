@@ -27,11 +27,11 @@ class App : Application() {
             androidContext(this@App)
             koin.loadModules(
                 listOf(
-                    dataSourceModule,
-                    repositoryModule,
-                    userCasesModule,
-                    viewModelModule,
-                    dataModule
+                    DataModule.get,
+                    DataSourceModule.get,
+                    RepositoryModule.get,
+                    UseCaseModule.get,
+                    ViewModelModule.get
                 )
             )
         }

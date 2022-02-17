@@ -10,5 +10,6 @@ data class MovieUseCase(
     val getGendersTv: GetGendersTvUseCase,
     val getMovieByGender: GetMovieByGenderUseCase,
     val getUpcomingMovie: GetUpcomingMovieUseCase,
+    val getNowPlayingMovie: GetNowPlayingMovieUseCase,
     val getBestActors: GetBestActorsUseCase
 )

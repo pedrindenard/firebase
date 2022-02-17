@@ -12,6 +12,7 @@ import android.text.style.ClickableSpan
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.Transformation
 import android.widget.LinearLayout
@@ -20,6 +21,7 @@ import androidx.appcompat.widget.AppCompatToggleButton
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.get
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigation.NavigationView
@@ -194,4 +196,53 @@ fun SwipeRefreshLayout.setSwipeRefresh(onSwipe: () -> Unit) {
     setColorSchemeColors(ContextCompat.getColor(context, R.color.yellow_dark))
     setProgressBackgroundColorSchemeColor(Color.BLACK)
     setOnRefreshListener { onSwipe() }
+}
+
+fun View.handler(isEnabled: Boolean) {
+    this.background.alpha = when (isEnabled) {
+        true -> 255
+        false -> 185
+    }
+    this.isEnabled = isEnabled
+}
+
+fun TextInputEditText.addListenerSearch(
+    beforeTextChanged: ((CharSequence?) -> Unit)? = null,
+    onTextChanged: ((CharSequence?) -> Unit)? = null,
+    onTextWrite: ((CharSequence?) -> Unit)? = null,
+    afterTextChanged: ((Editable?) -> Unit)? = null
+) {
+    this.addTextChangedListener(object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            if (beforeTextChanged != null) {
+                beforeTextChanged(s)
+            }
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            if (onTextChanged != null) {
+                onTextChanged(s)
+            }
+            if (onTextWrite != null) {
+                onTextWrite(s)
+            }
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            if (afterTextChanged != null) {
+                afterTextChanged(s)
+            }
+        }
+    })
+}
+
+fun RecyclerView.startIntroAnimation() {
+    this.translationY = 0F
+    this.alpha = 0F
+    this.animate()
+        .translationY(0F)
+        .setDuration(500)
+        .alpha(1F)
+        .setInterpolator(AccelerateDecelerateInterpolator())
+        .start()
 }

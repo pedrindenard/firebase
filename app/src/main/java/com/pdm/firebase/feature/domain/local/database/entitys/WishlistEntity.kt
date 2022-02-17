@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.pdm.firebase.feature.domain.local.database.converters.CollectionConverter
 import com.pdm.firebase.feature.domain.local.database.converters.ImagesConverter
-import com.pdm.firebase.feature.domain.model.Collection
+import com.pdm.firebase.feature.domain.model.MyList
 
 @Entity(tableName = "wishlist")
 data class WishlistEntity(
@@ -20,5 +20,5 @@ data class WishlistEntity(
     @ColumnInfo(name = "image") val images: List<String> = listOf(),
 
     @TypeConverters(CollectionConverter::class)
-    @ColumnInfo(name = "collection") val collection: List<Collection> = listOf()
+    @ColumnInfo(name = "collection") val myList: List<MyList> = listOf()
 )

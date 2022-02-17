@@ -3,12 +3,12 @@ package com.pdm.firebase.feature.data.fromto
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.database.DataSnapshot
+import com.pdm.firebase.arquitecture.Event.Companion.mapTo
 import com.pdm.firebase.feature.domain.model.auth.User
 import com.pdm.firebase.feature.domain.model.auth.UserFacebook
 import com.pdm.firebase.feature.domain.model.auth.UserGitHub
 import com.pdm.firebase.feature.domain.model.auth.UserGoogle
 import com.pdm.firebase.feature.domain.model.privacy.Privacy
-import com.pdm.firebase.util.mapTo
 
 fun Task<DataSnapshot>.fromDataToUser(): User {
     val user = this.result.getValue(User::class.java)

@@ -7,7 +7,7 @@
     android:layout_margin="4dp">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/genreImage"
+        android:id="@+id/searchImage"
         android:layout_width="0dp"
         android:layout_height="180dp"
         android:adjustViewBounds="true"
@@ -19,29 +19,29 @@
         tools:src="@color/gray_light" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/genreImageGradient"
+        android:id="@+id/searchImageGradient"
         android:layout_width="0dp"
         android:layout_height="180dp"
         android:adjustViewBounds="true"
         android:alpha="0.6"
         android:scaleType="centerCrop"
         android:src="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/genreImage"
-        app:layout_constraintEnd_toEndOf="@+id/genreImage"
-        app:layout_constraintStart_toStartOf="@+id/genreImage"
-        app:layout_constraintTop_toTopOf="@+id/genreImage" />
+        app:layout_constraintBottom_toBottomOf="@+id/searchImage"
+        app:layout_constraintEnd_toEndOf="@+id/searchImage"
+        app:layout_constraintStart_toStartOf="@+id/searchImage"
+        app:layout_constraintTop_toTopOf="@+id/searchImage" />
 
     <TextView
-        android:id="@+id/genreName"
+        android:id="@+id/searchName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/genreImageGradient"
-        app:layout_constraintEnd_toEndOf="@+id/genreImageGradient"
-        app:layout_constraintStart_toStartOf="@+id/genreImageGradient"
-        app:layout_constraintTop_toTopOf="@+id/genreImageGradient" />
+        app:layout_constraintBottom_toBottomOf="@+id/searchImageGradient"
+        app:layout_constraintEnd_toEndOf="@+id/searchImageGradient"
+        app:layout_constraintStart_toStartOf="@+id/searchImageGradient"
+        app:layout_constraintTop_toTopOf="@+id/searchImageGradient" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
