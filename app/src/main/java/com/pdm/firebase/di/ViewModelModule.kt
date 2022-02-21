@@ -1,5 +1,6 @@
 package com.pdm.firebase.di
 
+import com.pdm.firebase.feature.presentation.fragment.discover.viewmodel.DiscoveryViewModel
 import com.pdm.firebase.feature.presentation.fragment.gender.viewmodel.GenderViewModel
 import com.pdm.firebase.feature.presentation.fragment.home.viewmodel.HomeViewModel
 import com.pdm.firebase.feature.presentation.fragment.login.viewmodel.SignInViewModel
@@ -14,14 +15,15 @@ import org.koin.dsl.module
 
 object ViewModelModule {
     val get = module(override = true) {
-        viewModel { SplashViewModel(useCase = get(), cache = get()) }
-        viewModel { HomeViewModel(useCase = get(), cache = get()) }
+        viewModel { SplashViewModel(movieUseCase = get(), tvShowUseCase = get(), cache = get()) }
+        viewModel { HomeViewModel(movieUseCase = get(), tvShowUseCase = get(), cache = get()) }
+        viewModel { GenderViewModel(movieUseCase = get(), tvShowUseCase = get()) }
         viewModel { SearchViewModel(useCase = get()) }
         viewModel { SignInViewModel(useCase = get()) }
         viewModel { SignUpViewModel(useCase = get()) }
         viewModel { RecoveryViewModel(useCase = get()) }
         viewModel { ProfileViewModel(useCase = get()) }
         viewModel { PrivacyViewModel(useCase = get()) }
-        viewModel { GenderViewModel(useCase = get()) }
+        viewModel { DiscoveryViewModel(useCase = get()) }
     }
 }

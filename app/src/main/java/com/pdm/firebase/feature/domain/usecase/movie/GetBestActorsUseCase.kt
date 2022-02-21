@@ -8,10 +8,10 @@ import java.io.IOException
 
 class GetBestActorsUseCase(private val repository: MovieRepository) {
 
-    suspend operator fun invoke(refresh: Boolean? = false): Resource<ActorsResponse?> {
+    suspend operator fun invoke(page: Int, ignoreCache: Boolean? = false): Resource<ActorsResponse?> {
         return try {
             repository.getBestActors(
-                refresh = refresh!!
+                page = page, ignoreCache = ignoreCache!!
             )
         } catch (e: HttpException) {
             Resource.Error(

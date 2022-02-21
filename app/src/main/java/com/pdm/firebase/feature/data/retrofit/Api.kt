@@ -48,10 +48,29 @@ interface Api {
     ): Response<MovieResponse>
 
     @Headers(value = ["Content-Type: application/json"])
+    @GET(value = "discover/tv?sort_by=popularity.desc")
+    suspend fun getTvShowByGender(
+        @Query(value = "with_genres") id: Int,
+        @Query(value = "page") page: Int? = 1
+    ): Response<TvShowResponse>
+
+    @Headers(value = ["Content-Type: application/json"])
     @GET(value = "movie/upcoming")
     suspend fun getUpcomingMovie(
         @Query(value = "page") page: Int? = 1
     ): Response<MovieResponse>
+
+    @Headers(value = ["Content-Type: application/json"])
+    @GET(value = "tv/popular")
+    suspend fun getTvShowPopular(
+        @Query(value = "page") page: Int? = 1
+    ): Response<TvShowResponse>
+
+    @Headers(value = ["Content-Type: application/json"])
+    @GET(value = "tv/top_rated")
+    suspend fun getTvShowTopRated(
+        @Query(value = "page") page: Int? = 1
+    ): Response<TvShowResponse>
 
     @Headers(value = ["Content-Type: application/json"])
     @GET(value = "person/popular")
@@ -113,4 +132,20 @@ interface Api {
     @Headers(value = ["Content-Type: application/json"])
     @GET(value = "watch/providers/regions")
     suspend fun getRegions() : Response<RegionResponse>
+
+    @Headers(value = ["Content-Type: application/json"])
+    @GET(value = "discover/movie")
+    suspend fun getMovieByQuery(
+        @Query(value = "sort_by") sort: String,
+        @Query(value = "with_genres") id: Int,
+        @Query(value = "page") page: Int
+    ): Response<MovieResponse>
+
+    @Headers(value = ["Content-Type: application/json"])
+    @GET(value = "discover/tv")
+    suspend fun getTvShowByQuery(
+        @Query(value = "sort_by") sort: String,
+        @Query(value = "with_genres") id: Int,
+        @Query(value = "page") page: Int
+    ): Response<TvShowResponse>
 }

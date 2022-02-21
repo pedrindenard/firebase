@@ -7,22 +7,20 @@ import com.pdm.firebase.feature.domain.model.movie.MovieResponse
 
 interface MovieRepository {
 
-    suspend fun getSuperBanner(refresh: Boolean): Resource<MovieResponse?>
+    suspend fun getSuperBanner(page: Int, ignoreCache: Boolean): Resource<MovieResponse?>
 
-    suspend fun getPopularMovie(refresh: Boolean): Resource<MovieResponse?>
+    suspend fun getPopularMovie(page: Int, ignoreCache: Boolean): Resource<MovieResponse?>
 
-    suspend fun getRatedMovie(refresh: Boolean): Resource<MovieResponse?>
+    suspend fun getRatedMovie(page: Int, ignoreCache: Boolean): Resource<MovieResponse?>
 
-    suspend fun getGendersMovie(refresh: Boolean): Resource<GenderResponse?>
+    suspend fun getGendersMovie(ignoreCache: Boolean): Resource<GenderResponse?>
 
-    suspend fun getGendersTv(refresh: Boolean): Resource<GenderResponse?>
+    suspend fun getMovieByGender(page: Int, id: Int, ignoreCache: Boolean): Resource<MovieResponse?>
 
-    suspend fun getMovieByGender(id: Int, refresh: Boolean): Resource<MovieResponse?>
+    suspend fun getUpcomingMovie(page: Int, ignoreCache: Boolean): Resource<MovieResponse?>
 
-    suspend fun getUpcomingMovie(refresh: Boolean): Resource<MovieResponse?>
+    suspend fun getMovieNowPlaying(page: Int, ignoreCache: Boolean): Resource<MovieResponse?>
 
-    suspend fun getMovieNowPlaying(page: Int, refresh: Boolean): Resource<MovieResponse?>
-
-    suspend fun getBestActors(refresh: Boolean): Resource<ActorsResponse?>
+    suspend fun getBestActors(page: Int, ignoreCache: Boolean): Resource<ActorsResponse?>
 
 }

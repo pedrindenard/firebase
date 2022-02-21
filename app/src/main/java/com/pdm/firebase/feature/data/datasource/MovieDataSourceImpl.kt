@@ -7,7 +7,6 @@ import com.pdm.firebase.arquitecture.Resource
 import com.pdm.firebase.feature.data.local.CacheImpl
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.BEST_ACTORS
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.GENDERS_MOVIE
-import com.pdm.firebase.feature.data.local.CacheImpl.Companion.GENDERS_TV
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.HOME_BANNER
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.MOVIE_BY_GENDER
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.POPULAR_MOVIE
@@ -21,9 +20,9 @@ import com.pdm.firebase.feature.domain.model.movie.MovieResponse
 
 class MovieDataSourceImpl(private val api: Api, private val cache: CacheImpl) : MovieDataSource {
 
-    override suspend fun getSuperBanner(): Resource<MovieResponse?> {
+    override suspend fun getSuperBanner(page: Int): Resource<MovieResponse?> {
         return safeCallApi {
-            val response = api.getSuperBanner()
+            val response = api.getSuperBanner(page = page)
 
             when {
                 response.isSuccessful -> {
@@ -42,9 +41,9 @@ class MovieDataSourceImpl(private val api: Api, private val cache: CacheImpl) : 
         }
     }
 
-    override suspend fun getPopularMovie(): Resource<MovieResponse?> {
+    override suspend fun getPopularMovie(page: Int): Resource<MovieResponse?> {
         return safeCallApi {
-            val response = api.getPopularMovie()
+            val response = api.getPopularMovie(page = page)
 
             when {
                 response.isSuccessful -> {
@@ -63,9 +62,9 @@ class MovieDataSourceImpl(private val api: Api, private val cache: CacheImpl) : 
         }
     }
 
-    override suspend fun getRatedMovie(): Resource<MovieResponse?> {
+    override suspend fun getRatedMovie(page: Int): Resource<MovieResponse?> {
         return safeCallApi {
-            val response = api.getRatedMovie()
+            val response = api.getRatedMovie(page = page)
 
             when {
                 response.isSuccessful -> {
@@ -105,30 +104,9 @@ class MovieDataSourceImpl(private val api: Api, private val cache: CacheImpl) : 
         }
     }
 
-    override suspend fun getGendersTv(): Resource<GenderResponse?> {
+    override suspend fun getMovieByGender(page: Int, id: Int): Resource<MovieResponse?> {
         return safeCallApi {
-            val response = api.getGendersTv()
-
-            when {
-                response.isSuccessful -> {
-                    Resource.Success(data = response.body().also {
-                        cache.insert(GENDERS_TV, it.toJson())
-                    })
-                }
-                else -> {
-                    response.errorCallApi {
-                        Resource.InvalidAuth(
-                            message = response.message()
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    override suspend fun getMovieByGender(id: Int): Resource<MovieResponse?> {
-        return safeCallApi {
-            val response = api.getMovieByGender(id = id)
+            val response = api.getMovieByGender(page = page, id = id)
 
             when {
                 response.isSuccessful -> {
@@ -147,9 +125,9 @@ class MovieDataSourceImpl(private val api: Api, private val cache: CacheImpl) : 
         }
     }
 
-    override suspend fun getUpcomingMovie(): Resource<MovieResponse?> {
+    override suspend fun getUpcomingMovie(page: Int): Resource<MovieResponse?> {
         return safeCallApi {
-            val response = api.getUpcomingMovie()
+            val response = api.getUpcomingMovie(page = page)
 
             when {
                 response.isSuccessful -> {
@@ -187,9 +165,9 @@ class MovieDataSourceImpl(private val api: Api, private val cache: CacheImpl) : 
         }
     }
 
-    override suspend fun getBestActors(): Resource<ActorsResponse?> {
+    override suspend fun getBestActors(page: Int): Resource<ActorsResponse?> {
         return safeCallApi {
-            val response = api.getBestActors()
+            val response = api.getBestActors(page = page)
 
             when {
                 response.isSuccessful -> {

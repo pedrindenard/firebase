@@ -8,10 +8,10 @@ import java.io.IOException
 
 class GetRatedMovieUseCase(private val repository: MovieRepository) {
 
-    suspend operator fun invoke(refresh: Boolean? = false): Resource<MovieResponse?> {
+    suspend operator fun invoke(page: Int, ignoreCache: Boolean? = false): Resource<MovieResponse?> {
         return try {
             repository.getRatedMovie(
-                refresh = refresh!!
+                page = page, ignoreCache = ignoreCache!!
             )
         } catch (e: HttpException) {
             Resource.Error(

@@ -4,13 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
+import com.pdm.firebase.R
 import com.pdm.firebase.databinding.FragmentGenreBinding
+import com.pdm.firebase.feature.domain.model.discovery.Discovery
 import com.pdm.firebase.feature.domain.model.gender.Gender
 import com.pdm.firebase.feature.presentation.base.BaseFragment
 import com.pdm.firebase.feature.presentation.fragment.gender.adapter.GenreAdapter
 import com.pdm.firebase.feature.presentation.fragment.gender.viewmodel.GenderViewModel
+import com.pdm.firebase.util.ARGS
 import com.pdm.firebase.util.addImages
-import com.pdm.firebase.util.handlerDelay
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GenderTvFragment : BaseFragment() {
@@ -66,7 +70,20 @@ class GenderTvFragment : BaseFragment() {
         ).apply {
             setOnItemClickListener(object : GenreAdapter.ClickListener {
                 override fun onItemClickListener(gender: Gender) {
-
+                    findNavController().navigate(
+                        R.id.discoverFragment,
+                        Bundle().apply {
+                            putSerializable(ARGS, Discovery(
+                                gender = gender, param = "Tv"
+                            ))
+                        },
+                        NavOptions.Builder().apply {
+                            setEnterAnim(R.anim.fade_in)
+                            setExitAnim(R.anim.fade_out)
+                            setPopEnterAnim(R.anim.fade_in)
+                            setPopExitAnim(R.anim.fade_out)
+                        }.build()
+                    )
                 }
             })
         }

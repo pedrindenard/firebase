@@ -8,10 +8,10 @@ import java.io.IOException
 
 class GetMovieByGenderUseCase(private val repository: MovieRepository) {
 
-    suspend operator fun invoke(id: Int, refresh: Boolean? = false): Resource<MovieResponse?> {
+    suspend operator fun invoke(id: Int, page: Int, ignoreCache: Boolean? = false): Resource<MovieResponse?> {
         return try {
             repository.getMovieByGender(
-                id = id, refresh = refresh!!
+                id = id, page = page, ignoreCache = ignoreCache!!
             )
         } catch (e: HttpException) {
             Resource.Error(

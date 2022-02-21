@@ -10,7 +10,9 @@ object RepositoryModule {
         single<RegisterRepository> { RegisterRepositoryImpl(dataSource = get()) }
         single<ProfileRepository> { ProfileRepositoryImpl(dataSource = get()) }
         single<PrivacyRepository> { PrivacyRepositoryImpl(dataSource = get()) }
+        single<DiscoveryRepository> { DiscoveryRepositoryImpl(dataSource = get()) }
         single<MovieRepository> { MovieRepositoryImpl(dataSource = get(), cache = get()) }
+        single<TvShowRepository> { TvShowRepositoryImpl(dataSource = get(), cache = get()) }
         single<SearchRepository> { SearchRepositoryImpl(dataSource = get(), cache = get()) }
     }
 }

@@ -5,8 +5,8 @@ import com.pdm.firebase.arquitecture.Resource
 import com.pdm.firebase.feature.data.local.CacheImpl
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.BEST_ACTORS
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.GENDERS_MOVIE
-import com.pdm.firebase.feature.data.local.CacheImpl.Companion.GENDERS_TV
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.HOME_BANNER
+import com.pdm.firebase.feature.data.local.CacheImpl.Companion.MOVIE_BY_GENDER
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.NOW_PLAYING_MOVIE
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.POPULAR_MOVIE
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.RATED_MOVIE
@@ -22,13 +22,10 @@ class MovieRepositoryImpl(
     private val cache: CacheImpl
 ) : MovieRepository {
 
-    override suspend fun getSuperBanner(refresh: Boolean): Resource<MovieResponse?> {
+    override suspend fun getSuperBanner(page: Int, ignoreCache: Boolean): Resource<MovieResponse?> {
         return when {
-            refresh -> {
-                dataSource.getSuperBanner()
-            }
-            cache.get(HOME_BANNER).isEmpty() -> {
-                dataSource.getSuperBanner()
+            cache.get(HOME_BANNER).isEmpty() || ignoreCache -> {
+                dataSource.getSuperBanner(page = page)
             }
             else -> {
                 Resource.Success(
@@ -41,13 +38,10 @@ class MovieRepositoryImpl(
         }
     }
 
-    override suspend fun getPopularMovie(refresh: Boolean): Resource<MovieResponse?> {
+    override suspend fun getPopularMovie(page: Int, ignoreCache: Boolean): Resource<MovieResponse?> {
         return when {
-            refresh -> {
-                dataSource.getPopularMovie()
-            }
-            cache.get(POPULAR_MOVIE).isEmpty() -> {
-                dataSource.getPopularMovie()
+            cache.get(POPULAR_MOVIE).isEmpty() || ignoreCache -> {
+                dataSource.getPopularMovie(page = page)
             }
             else -> {
                 Resource.Success(
@@ -60,13 +54,10 @@ class MovieRepositoryImpl(
         }
     }
 
-    override suspend fun getRatedMovie(refresh: Boolean): Resource<MovieResponse?> {
+    override suspend fun getRatedMovie(page: Int, ignoreCache: Boolean): Resource<MovieResponse?> {
         return when {
-            refresh -> {
-                dataSource.getRatedMovie()
-            }
-            cache.get(RATED_MOVIE).isEmpty() -> {
-                dataSource.getRatedMovie()
+            cache.get(RATED_MOVIE).isEmpty() || ignoreCache -> {
+                dataSource.getRatedMovie(page = page)
             }
             else -> {
                 Resource.Success(
@@ -79,12 +70,9 @@ class MovieRepositoryImpl(
         }
     }
 
-    override suspend fun getGendersMovie(refresh: Boolean): Resource<GenderResponse?> {
+    override suspend fun getGendersMovie(ignoreCache: Boolean): Resource<GenderResponse?> {
         return when {
-            refresh -> {
-                dataSource.getGendersMovie()
-            }
-            cache.get(GENDERS_MOVIE).isEmpty() -> {
+            cache.get(GENDERS_MOVIE).isEmpty() || ignoreCache -> {
                 dataSource.getGendersMovie()
             }
             else -> {
@@ -98,44 +86,31 @@ class MovieRepositoryImpl(
         }
     }
 
-    override suspend fun getGendersTv(refresh: Boolean): Resource<GenderResponse?> {
-        return when {
-            refresh -> {
-                dataSource.getGendersTv()
-            }
-            cache.get(GENDERS_TV).isEmpty() -> {
-                dataSource.getGendersTv()
+
+
+    override suspend fun getMovieByGender(page: Int, id: Int, ignoreCache: Boolean): Resource<MovieResponse?> {
+        return when (ignoreCache) {
+            true -> {
+                dataSource.getMovieByGender(
+                    page = page,
+                    id = id
+                )
             }
             else -> {
                 Resource.Success(
                     Gson().fromJson(
-                        cache.get(GENDERS_TV),
-                        GenderResponse::class.java
+                        cache.get(MOVIE_BY_GENDER),
+                        MovieResponse::class.java
                     )
                 )
             }
         }
     }
 
-    override suspend fun getMovieByGender(id: Int, refresh: Boolean): Resource<MovieResponse?> {
-        return when (refresh) {
-            true -> {
-                dataSource.getMovieByGender(
-                    id = id
-                )
-            }
-            else -> {
-                dataSource.getMovieByGender(
-                    id = id
-                )
-            }
-        }
-    }
-
-    override suspend fun getUpcomingMovie(refresh: Boolean): Resource<MovieResponse?> {
+    override suspend fun getUpcomingMovie(page: Int, ignoreCache: Boolean): Resource<MovieResponse?> {
         return when {
-            cache.get(UPCOMING_MOVIE).isEmpty() -> {
-                dataSource.getUpcomingMovie()
+            cache.get(UPCOMING_MOVIE).isEmpty() || ignoreCache -> {
+                dataSource.getUpcomingMovie(page = page)
             }
             else -> {
                 Resource.Success(
@@ -148,10 +123,10 @@ class MovieRepositoryImpl(
         }
     }
 
-    override suspend fun getMovieNowPlaying(page: Int, refresh: Boolean): Resource<MovieResponse?> {
+    override suspend fun getMovieNowPlaying(page: Int, ignoreCache: Boolean): Resource<MovieResponse?> {
         return when {
-            cache.get(NOW_PLAYING_MOVIE).isEmpty() -> {
-                dataSource.getMovieNowPlaying(page)
+            cache.get(NOW_PLAYING_MOVIE).isEmpty() || ignoreCache -> {
+                dataSource.getMovieNowPlaying(page = page)
             }
             else -> {
                 Resource.Success(
@@ -164,13 +139,10 @@ class MovieRepositoryImpl(
         }
     }
 
-    override suspend fun getBestActors(refresh: Boolean): Resource<ActorsResponse?> {
+    override suspend fun getBestActors(page: Int, ignoreCache: Boolean): Resource<ActorsResponse?> {
         return when {
-            refresh -> {
-                dataSource.getBestActors()
-            }
-            cache.get(BEST_ACTORS).isEmpty() -> {
-                dataSource.getBestActors()
+            cache.get(BEST_ACTORS).isEmpty() || ignoreCache -> {
+                dataSource.getBestActors(page = page)
             }
             else -> {
                 Resource.Success(

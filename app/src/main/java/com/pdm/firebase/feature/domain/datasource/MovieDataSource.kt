@@ -7,22 +7,20 @@ import com.pdm.firebase.feature.domain.model.movie.MovieResponse
 
 interface MovieDataSource {
 
-    suspend fun getSuperBanner(): Resource<MovieResponse?>
+    suspend fun getSuperBanner(page: Int): Resource<MovieResponse?>
 
-    suspend fun getPopularMovie(): Resource<MovieResponse?>
+    suspend fun getPopularMovie(page: Int): Resource<MovieResponse?>
 
-    suspend fun getRatedMovie(): Resource<MovieResponse?>
+    suspend fun getRatedMovie(page: Int): Resource<MovieResponse?>
 
     suspend fun getGendersMovie(): Resource<GenderResponse?>
 
-    suspend fun getGendersTv(): Resource<GenderResponse?>
+    suspend fun getMovieByGender(page: Int, id: Int): Resource<MovieResponse?>
 
-    suspend fun getMovieByGender(id: Int): Resource<MovieResponse?>
-
-    suspend fun getUpcomingMovie(): Resource<MovieResponse?>
+    suspend fun getUpcomingMovie(page: Int): Resource<MovieResponse?>
 
     suspend fun getMovieNowPlaying(page: Int): Resource<MovieResponse?>
 
-    suspend fun getBestActors(): Resource<ActorsResponse?>
+    suspend fun getBestActors(page: Int): Resource<ActorsResponse?>
 
 }

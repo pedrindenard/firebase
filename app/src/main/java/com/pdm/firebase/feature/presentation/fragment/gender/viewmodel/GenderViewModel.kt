@@ -6,10 +6,14 @@ import androidx.lifecycle.viewModelScope
 import com.pdm.firebase.arquitecture.Resource
 import com.pdm.firebase.feature.domain.model.gender.GenderResponse
 import com.pdm.firebase.feature.domain.usecase.MovieUseCase
+import com.pdm.firebase.feature.domain.usecase.TvShowUseCase
 import com.pdm.firebase.feature.presentation.base.BaseViewModel
 import kotlinx.coroutines.launch
 
-class GenderViewModel(private val useCase: MovieUseCase) : BaseViewModel() {
+class GenderViewModel(
+    private val movieUseCase: MovieUseCase,
+    private val tvShowUseCase: TvShowUseCase
+) : BaseViewModel() {
 
     private val _getGendersMovie: MutableLiveData<GenderResponse> = MutableLiveData()
     val getGendersMovie = _getGendersMovie as LiveData<GenderResponse>
@@ -19,7 +23,7 @@ class GenderViewModel(private val useCase: MovieUseCase) : BaseViewModel() {
 
     fun getGendersMovie() {
         viewModelScope.launch {
-            when (val response = useCase.getGendersMovie.invoke()) {
+            when (val response = movieUseCase.getGendersMovie.invoke()) {
                 is Resource.Success -> {
                     _getGendersMovie.postValue(response.data!!)
                 }
@@ -38,7 +42,7 @@ class GenderViewModel(private val useCase: MovieUseCase) : BaseViewModel() {
 
     fun getGendersTv() {
         viewModelScope.launch {
-            when (val response = useCase.getGendersTv.invoke()) {
+            when (val response = tvShowUseCase.getGendersTvShow.invoke()) {
                 is Resource.Success -> {
                     _getGendersTV.postValue(response.data!!)
                 }

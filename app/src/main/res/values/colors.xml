@@ -38,4 +38,5 @@
     <color name="transparent">#00000000</color>
 
     <color name="green">#009137</color>
+    <color name="green_light">#63B166</color>
 </resources>

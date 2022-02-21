@@ -187,4 +187,7 @@
 
     <string name="empty" />
     <string name="home_cine">Filmes nos cinemas</string>
+    <string name="movie_last">Populares</string>
+    <string name="home_popular_tv">Populares da televisão</string>
+    <string name="home_top_rated_tv">Shows de televisão</string>
 </resources>

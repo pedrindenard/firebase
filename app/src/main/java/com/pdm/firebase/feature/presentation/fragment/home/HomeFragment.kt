@@ -104,6 +104,26 @@ class HomeFragment : BaseFragment() {
             it.results.initShowcaseAdapter()
         })
 
+        viewModel.getTvShowTopRated.observe(viewLifecycleOwner, {
+            //create
+        })
+
+        viewModel.getTvShowPopular.observe(viewLifecycleOwner, {
+            //create
+        })
+
+        viewModel.getGendersTv.observe(viewLifecycleOwner, {
+            //create
+        })
+
+        viewModel.getTvShowByGender.observe(viewLifecycleOwner, {
+            //create
+        })
+
+        viewModel.getNowPlayingMovie.observe(viewLifecycleOwner, {
+            //create
+        })
+
         viewModel.getBestActors.observe(viewLifecycleOwner, {
             it.results.initActorsAdapter()
         })
@@ -257,18 +277,20 @@ class HomeFragment : BaseFragment() {
 
     private fun initActions() {
         binding.refreshHomeFragment.setSwipeRefresh {
-            initHomeData(refresh = true)
+            initHomeData(ignoreCache = true)
         }
     }
 
-    private fun initHomeData(refresh: Boolean? = false) {
-        viewModel.getSuperBanner(refresh = refresh)
-        viewModel.getPopularMovie(refresh = refresh)
-        viewModel.getRatedMovie(refresh = refresh)
-        viewModel.getGendersMovie(refresh = refresh)
-        viewModel.getUpcomingMovie(refresh = refresh)
-        viewModel.getBestActors(refresh = refresh)
-        viewModel.getNowPlayingMovie(refresh = refresh)
+    private fun initHomeData(ignoreCache: Boolean? = false) {
+        viewModel.getSuperBanner(ignoreCache = ignoreCache)
+        viewModel.getPopularMovie(ignoreCache = ignoreCache)
+        viewModel.getRatedMovie(ignoreCache = ignoreCache)
+        viewModel.getGendersMovie(ignoreCache = ignoreCache)
+        viewModel.getUpcomingMovie(ignoreCache = ignoreCache)
+        viewModel.getBestActors(ignoreCache = ignoreCache)
+        viewModel.getNowPlayingMovie(ignoreCache = ignoreCache)
+        viewModel.getTvShowPopular(ignoreCache = ignoreCache)
+        viewModel.getTvShowTopRated(ignoreCache = ignoreCache)
         viewModel.addInfoOnCache()
     }
 

@@ -1,9 +1,8 @@
 package com.pdm.firebase.di
 
-import com.pdm.firebase.feature.domain.usecase.AuthUseCase
-import com.pdm.firebase.feature.domain.usecase.MovieUseCase
-import com.pdm.firebase.feature.domain.usecase.PrivacyUseCase
-import com.pdm.firebase.feature.domain.usecase.SearchUseCase
+import com.pdm.firebase.feature.domain.usecase.*
+import com.pdm.firebase.feature.domain.usecase.discover.GetMovieByQueryUseCase
+import com.pdm.firebase.feature.domain.usecase.discover.GetTvShowByQueryUseCase
 import com.pdm.firebase.feature.domain.usecase.login.*
 import com.pdm.firebase.feature.domain.usecase.movie.*
 import com.pdm.firebase.feature.domain.usecase.profile.DeleteUserUseCase
@@ -14,6 +13,10 @@ import com.pdm.firebase.feature.domain.usecase.register.AddInfoUserUseCase
 import com.pdm.firebase.feature.domain.usecase.register.EmailVerificationUseCase
 import com.pdm.firebase.feature.domain.usecase.register.RegisterUserUseCase
 import com.pdm.firebase.feature.domain.usecase.search.*
+import com.pdm.firebase.feature.domain.usecase.tv.GetGendersTvUseCase
+import com.pdm.firebase.feature.domain.usecase.tv.GetTvShowByGenderUseCase
+import com.pdm.firebase.feature.domain.usecase.tv.GetTvShowPopularUseCase
+import com.pdm.firebase.feature.domain.usecase.tv.GetTvShowTopRatedUseCase
 import org.koin.dsl.module
 
 object UseCaseModule {
@@ -40,7 +43,6 @@ object UseCaseModule {
                 getBestActors = get(),
                 getGendersMovie = get(),
                 getMovieByGender = get(),
-                getGendersTv = get(),
                 getPopularMovie = get(),
                 getRatedMovie = get(),
                 getSuperBanner = get(),
@@ -58,6 +60,25 @@ object UseCaseModule {
                 getSearchTvShows = get()
             )
         }
+        single {
+            DiscoverUseCase(
+                getMovieByQuery = get(),
+                getTvShowByQuery = get()
+            )
+        }
+        single {
+            TvShowUseCase(
+                getTvShowPopular = get(),
+                getTvShowTopRated = get(),
+                getGendersTvShow = get(),
+                getTvShowByGender = get()
+            )
+        }
+        single { GetTvShowByGenderUseCase(repository = get()) }
+        single { GetTvShowTopRatedUseCase(repository = get()) }
+        single { GetTvShowPopularUseCase(repository = get()) }
+        single { GetMovieByQueryUseCase(repository = get()) }
+        single { GetTvShowByQueryUseCase(repository = get()) }
         single { GetRegionsUseCase(repository = get()) }
         single { GetSearchCollectionUseCase(repository = get()) }
         single { GetSearchMovieUseCase(repository = get()) }

@@ -10,7 +10,9 @@ object DataSourceModule {
         single<RegisterDataSource> { RegisterDataSourceImpl() }
         single<ProfileDataSource> { ProfileDataSourceImpl() }
         single<PrivacyDataSource> { PrivacyDataSourceImpl() }
+        single<DiscoveryDataSource> { DiscoveryDataSourceImpl(api = get()) }
         single<MovieDataSource> { MovieDataSourceImpl(api = get(), cache = get()) }
+        single<TvShowDataSource> { TvShowDataSourceImpl(api = get(), cache = get()) }
         single<SearchDataSource> { SearchDataSourceImpl(api = get(), cache = get()) }
     }
 }
