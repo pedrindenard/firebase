@@ -61,7 +61,7 @@ class FilterDialog(
             val releaseDates = binding.yearSlider.value
 
             mClickListener.onClickListener(
-                filter = FilterCreated(
+                filters = FilterCreated(
                     releaseDate = if (releaseIsEnable) releaseDates else null,
                     region = if (regionIsEnable) regionSelected else null,
                     category = categorySelected.toInt(),
@@ -72,7 +72,7 @@ class FilterDialog(
 
         binding.clearButton.setOnSingleClickListener {
             mClickListener.onClickListener(
-                filter = null
+                filters = null
             )
         }
     }
@@ -158,6 +158,6 @@ class FilterDialog(
     }
 
     interface ClickListener {
-        fun onClickListener(filter: FilterCreated?)
+        fun onClickListener(filters: FilterCreated?)
     }
 }

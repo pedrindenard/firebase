@@ -33,7 +33,6 @@ class SearchFragment : BaseFragment() {
 
     private var scrollListener: RecyclerView.OnScrollListener? = null
     private var regionResponse: RegionResponse? = null
-    private var resetAdapter: Boolean? = true
     private var filter: FilterCreated? = null
     private var timer: CountDownTimer? = null
     private var query: String? = null
@@ -61,6 +60,7 @@ class SearchFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.searchInput.defaultStateColor()
+        initAdapterSearch()
         initObservers()
         initSearch()
     }
@@ -68,22 +68,26 @@ class SearchFragment : BaseFragment() {
     private fun initSearch() {
         binding.searchField.addListenerSearch(listener = false,
             beforeTextChanged = { handlerProgressBar(isVisible = true) },
-            onTextChanged = { viewModel.clearOldLists() },
-            onTextWrite = { resetAdapter = true },
+            onTextChanged = { viewModel.setFilters() },
             afterTextChanged = {
                 if (it?.length!! != 0) {
                     handlerScrollListener()
-                    handlerSearch(param = filter?.category, it = it.toString())
+                    handlerSearch(
+                        param = filter?.category,
+                        it = it.toString()
+                    )
                 } else {
                     handlerScrollListener()
-                    handlerSearch(param = filter?.category)
+                    handlerSearch(
+                        param = filter?.category
+                    )
                 }
             }
         )
 
         binding.filter.setOnSingleClickListener {
             regionResponse?.let {
-                setDialogFilter(response = it, filter = filter)
+                setDialogFilter(response = it, filters = filter)
             }
         }
     }
@@ -91,36 +95,41 @@ class SearchFragment : BaseFragment() {
     private fun initObservers() {
         viewModel.getSearchMulti.observe(viewLifecycleOwner, {
             it?.let {
-                it.results.initAdapterSearch()
+                searchAdapter.updateAdapter(mutableList = it.results)
                 setScrollListener(it = it.mapTo(), param = 1)
+                handlerProgressBar(isVisible = false)
             }
         })
 
         viewModel.getSearchCollections.observe(viewLifecycleOwner, {
             it?.let {
-                it.results.toMutable<MutableList<Search>>().initAdapterSearch()
+                searchAdapter.updateAdapter(mutableList = it.results.toMutable())
                 setScrollListener(it = it.mapTo(), param = 2)
+                handlerProgressBar(isVisible = false)
             }
         })
 
         viewModel.getSearchActors.observe(viewLifecycleOwner, {
             it?.let {
-                it.results.toMutable<MutableList<Search>>().initAdapterSearch()
+                searchAdapter.updateAdapter(mutableList = it.results.toMutable())
                 setScrollListener(it = it.mapTo(), param = 3)
+                handlerProgressBar(isVisible = false)
             }
         })
 
         viewModel.getSearchMovies.observe(viewLifecycleOwner, {
             it?.let {
-                it.results.toMutable<MutableList<Search>>().initAdapterSearch()
+                searchAdapter.updateAdapter(mutableList = it.results.toMutable())
                 setScrollListener(it = it.mapTo(), param = 4)
+                handlerProgressBar(isVisible = false)
             }
         })
 
         viewModel.getSearchTvShows.observe(viewLifecycleOwner, {
             it?.let {
-                it.results.toMutable<MutableList<Search>>().initAdapterSearch()
+                searchAdapter.updateAdapter(mutableList = it.results.toMutable())
                 setScrollListener(it = it.mapTo(), param = 5)
+                handlerProgressBar(isVisible = false)
             }
         })
 
@@ -141,23 +150,18 @@ class SearchFragment : BaseFragment() {
         })
     }
 
-    private fun MutableList<Search>.initAdapterSearch() {
+    private fun initAdapterSearch() {
         binding.recyclerViewSearch.apply {
-            if (resetAdapter == true) {
-                searchAdapter = SearchAdapter(mutableList = this@initAdapterSearch).apply {
-                    setOnItemClickListener(object : SearchAdapter.ClickListener {
-                        override fun onItemClickListener(search: Search) {
+            searchAdapter = SearchAdapter().apply {
+                setOnItemClickListener(object : SearchAdapter.ClickListener {
+                    override fun onItemClickListener(search: Search) {
 
-                        }
-                    })
-                    setHasStableIds(true)
-                    adapter = this
-                }
-                startIntroAnimation(); resetAdapter = false
-            } else {
-                searchAdapter.updateAdapter(mutableList = this@initAdapterSearch)
+                    }
+                })
+                setHasStableIds(true)
+                adapter = this
             }
-            handlerProgressBar(isVisible = false)
+            startIntroAnimation()
         }
     }
 
@@ -173,9 +177,12 @@ class SearchFragment : BaseFragment() {
                 val isLastPage = it.currentPage != it.totalPage
 
                 if ((totalItemVisible >= totalItemCount) && isLastPage) {
-                    binding.recyclerViewSearch.removeOnScrollListener(scrollListener!!)
                     handlerProgressBar(isVisible = true)
-                    handlerSearch(param = param, it = query)
+                    handlerScrollListener()
+                    handlerSearch(
+                        param = param,
+                        it = query
+                    )
                 }
             }
         }
@@ -184,17 +191,16 @@ class SearchFragment : BaseFragment() {
         )
     }
 
-    private fun setDialogFilter(response: RegionResponse, filter: FilterCreated?) {
+    private fun setDialogFilter(response: RegionResponse, filters: FilterCreated?) {
         activity?.let {
-            FilterDialog(response, filter).apply {
+            FilterDialog(response, filters).apply {
                 show(it.supportFragmentManager, "")
                 setOnItemClickListener(object : FilterDialog.ClickListener {
-                    override fun onClickListener(filter: FilterCreated?) {
-                        viewModel.clearOldLists(); resetAdapter = true
-                        handlerScrollListener(); this@SearchFragment.filter = filter
-                        handlerProgressBar(isVisible = true)
+                    override fun onClickListener(filters: FilterCreated?) {
+                        handlerScrollListener(); viewModel.setFilters()
+                        handlerProgressBar(isVisible = true); filter = filters
                         handlerSearch(param = filter?.category)
-                        dismiss()
+                        dismiss(); binding.searchField.text?.clear()
                     }
                 })
             }
@@ -280,13 +286,8 @@ class SearchFragment : BaseFragment() {
         }
     }
 
-    private fun onDestroyFragment() {
-        resetAdapter = true
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
-        onDestroyFragment()
         _binding = null
     }
 }

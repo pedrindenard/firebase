@@ -12,8 +12,9 @@ import com.pdm.firebase.feature.presentation.fragment.search.adapter.SearchAdapt
 import com.pdm.firebase.util.SMALL_IMAGE
 import com.pdm.firebase.util.loadImage
 
-class SearchAdapter(private var mutableList: MutableList<Search>) : RecyclerView.Adapter<ViewHolder>() {
+class SearchAdapter : RecyclerView.Adapter<ViewHolder>() {
 
+    private var mutableList: MutableList<Search> = mutableListOf()
     private lateinit var mClickListener: ClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

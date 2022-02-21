@@ -251,10 +251,12 @@ class DiscoverFragment : BaseFragment() {
             GenreType.MOVIE.value -> {
                 viewModel.setFilters()
                 viewModel.getMovies(id = filter!!.id, sort = filter!!.sort)
+                handlerProgressBar(isVisible = true)
             }
             GenreType.TV.value -> {
                 viewModel.setFilters()
                 viewModel.getTvShows(id = filter!!.id, sort = filter!!.sort)
+                handlerProgressBar(isVisible = true)
             }
         }
     }

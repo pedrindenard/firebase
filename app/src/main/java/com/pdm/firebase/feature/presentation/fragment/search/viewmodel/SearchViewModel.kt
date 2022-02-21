@@ -187,18 +187,21 @@ class SearchViewModel(private val useCase: SearchUseCase) : BaseViewModel() {
         }
     }
 
-    fun clearOldLists() {
+    fun setFilters() {
         _getSearchCollections.value = null
-        _getSearchMovies.value = null
-        _getSearchTvShows.value = null
-        _getSearchMulti.value = null
-        _getSearchActors.value = null
-
         searchCollectionListOld = null
-        searchTvShowsListOld = null
+
+        _getSearchMovies.value = null
         searchMoviesListOld = null
-        searchActorsListOld = null
+
+        _getSearchTvShows.value = null
+        searchTvShowsListOld = null
+
+        _getSearchMulti.value = null
         searchMultiListOld = null
+
+        _getSearchActors.value = null
+        searchActorsListOld = null
 
         currentSearchPage = 1
     }
