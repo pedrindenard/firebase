@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.ArrayAdapter
+import androidx.appcompat.widget.ListPopupWindow
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +18,7 @@ import com.pdm.firebase.databinding.FragmentDiscoverBinding
 import com.pdm.firebase.feature.domain.enums.GenreType
 import com.pdm.firebase.feature.domain.model.discovery.Discovery
 import com.pdm.firebase.feature.domain.model.discovery.Filter
+import com.pdm.firebase.feature.domain.model.gender.Gender
 import com.pdm.firebase.feature.domain.model.search.Search
 import com.pdm.firebase.feature.presentation.base.BaseFragment
 import com.pdm.firebase.feature.presentation.fragment.discover.adapter.DiscoverAdapter
@@ -28,6 +32,10 @@ class DiscoverFragment : BaseFragment() {
 
     private lateinit var scrollListener: RecyclerView.OnScrollListener
     private lateinit var discoveryAdapter: DiscoverAdapter
+    private lateinit var listPopupGender: ListPopupWindow
+    private lateinit var listPopupSort: ListPopupWindow
+    private lateinit var listSorts: List<Pair<String, String>>
+    private lateinit var listGenres: List<Gender>
 
     private val viewModel by viewModel<DiscoveryViewModel>()
     private var _binding: FragmentDiscoverBinding? = null
@@ -41,16 +49,20 @@ class DiscoverFragment : BaseFragment() {
             when (discovery.param) {
                 GenreType.MOVIE.value -> {
                     viewModel.getMovies(id = discovery.gender.id)
+                    viewModel.getGenresMovies()
                 }
                 GenreType.TV.value -> {
                     viewModel.getTvShows(id = discovery.gender.id)
+                    viewModel.getGenresTv()
                 }
             }
             filter = Filter(
+                genreType = discovery.param,
                 genre = discovery.gender,
                 id = discovery.gender.id
             )
         }
+        viewModel.getSorts()
     }
 
     override fun onCreateView(
@@ -82,13 +94,13 @@ class DiscoverFragment : BaseFragment() {
         }
 
         binding.filtersDiscover.setOnSingleClickListener {
-
+            listPopupSort.show()
         }
 
         binding.genresDiscover.apply {
             text = filter!!.genre.name
             setOnSingleClickListener {
-
+                listPopupGender.show()
             }
         }
     }
@@ -99,7 +111,7 @@ class DiscoverFragment : BaseFragment() {
             handlerProgressBar(isVisible = false)
             setScrollListener(
                 notIsLastPage = it.totalPage != it.currentPage,
-                param = GenreType.MOVIE.value
+                param = filter!!.genreType
             )
         })
 
@@ -108,13 +120,30 @@ class DiscoverFragment : BaseFragment() {
             handlerProgressBar(isVisible = false)
             setScrollListener(
                 notIsLastPage = it.totalPage != it.currentPage,
-                param = GenreType.TV.value
+                param = filter!!.genreType
             )
         })
 
-//        viewModel.getGenres.observe(viewLifecycleOwner, {
-//
-//        })
+        viewModel.getGenresMovie.observe(viewLifecycleOwner, { it ->
+            val mutable = mutableListOf<String>()
+            it.genres.forEach { mutable.add(it.name) }
+            initDrawerGender(mutable)
+            listGenres = it.genres
+        })
+
+        viewModel.getGenresTv.observe(viewLifecycleOwner, { it ->
+            val mutable = mutableListOf<String>()
+            it.genres.forEach { mutable.add(it.name) }
+            initDrawerGender(mutable)
+            listGenres = it.genres
+        })
+
+        viewModel.getSortsAvailable.observe(viewLifecycleOwner, { it ->
+            val mutable = mutableListOf<String>()
+            it.forEach { mutable.add(it.first) }
+            initDrawerSort(mutable)
+            listSorts = it
+        })
 
         viewModel.errorResponse.observe(viewLifecycleOwner, {
 
@@ -175,6 +204,59 @@ class DiscoverFragment : BaseFragment() {
         binding.recyclerViewDiscover.addOnScrollListener(
             scrollListener
         )
+    }
+
+    private fun initDrawerGender(items: List<String>) {
+        val adapter = ArrayAdapter(requireContext(), R.layout.item_drawer, items)
+        listPopupGender = ListPopupWindow(requireContext(), null, R.attr.dropDownListViewStyle)
+        listPopupGender.anchorView = binding.genresDiscover
+        listPopupGender.setBackgroundDrawable(
+            ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.background_drawer_menu
+            )
+        )
+        listPopupGender.setOnItemClickListener { _, _, position, _ ->
+            binding.genresDiscover.text = listGenres[position].name
+            filter!!.id = listGenres[position].id
+            listPopupGender.dismiss()
+            handlerScrollListener()
+            setFilter()
+        }
+        listPopupGender.setAdapter(adapter)
+    }
+
+    private fun initDrawerSort(items: List<String>) {
+        val adapter = ArrayAdapter(requireContext(), R.layout.item_drawer, items)
+        listPopupSort = ListPopupWindow(requireContext(), null, R.attr.dropDownListViewStyle)
+        listPopupSort.anchorView = binding.filtersDiscover
+        listPopupSort.setBackgroundDrawable(
+            ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.background_drawer_menu
+            )
+        )
+        listPopupSort.setOnItemClickListener { _, _, position, _ ->
+            binding.filtersDiscover.text = listSorts[position].first
+            filter!!.sort = listSorts[position].second
+            listPopupSort.dismiss()
+            handlerScrollListener()
+            setFilter()
+        }
+        listPopupSort.setAdapter(adapter)
+    }
+
+    private fun setFilter() {
+        when (filter!!.genreType) {
+            GenreType.MOVIE.value -> {
+                viewModel.setFilters()
+                viewModel.getMovies(id = filter!!.id, sort = filter!!.sort)
+            }
+            GenreType.TV.value -> {
+                viewModel.setFilters()
+                viewModel.getTvShows(id = filter!!.id, sort = filter!!.sort)
+            }
+        }
     }
 
     private fun View.startAnimation(anim: String) {

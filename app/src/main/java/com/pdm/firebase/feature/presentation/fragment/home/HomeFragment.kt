@@ -13,6 +13,7 @@ import com.pdm.firebase.databinding.FragmentHomeBinding
 import com.pdm.firebase.feature.domain.model.actor.Actor
 import com.pdm.firebase.feature.domain.model.gender.Gender
 import com.pdm.firebase.feature.domain.model.movie.Movie
+import com.pdm.firebase.feature.domain.model.tv.TvShow
 import com.pdm.firebase.feature.presentation.base.BaseFragment
 import com.pdm.firebase.feature.presentation.fragment.home.adapter.*
 import com.pdm.firebase.feature.presentation.fragment.home.viewmodel.HomeViewModel
@@ -21,8 +22,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 class HomeFragment : BaseFragment() {
-
-    private lateinit var movieAdapter: MovieAdapter
 
     private val viewModel by viewModel<HomeViewModel>()
     private var _binding: FragmentHomeBinding? = null
@@ -52,7 +51,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun initObservers() {
-        viewModel.getSuperBanner.observe(viewLifecycleOwner, {
+        viewModel.getUpcomingMovie.observe(viewLifecycleOwner, {
             val mutableList: MutableList<Movie> = mutableListOf()
             it.results.forEachIndexed { index, movie ->
                 when (index < 5) {
@@ -67,31 +66,30 @@ class HomeFragment : BaseFragment() {
                 }
             }
             mutableList.initBannerMovieAdapter()
+            binding.refreshHomeFragment.stopSwipe()
             binding.superBanner.initAutomaticSlide(
                 it = mutableList
             )
-        })
-
-        viewModel.getPopularMovie.observe(viewLifecycleOwner, {
-            it.results.initPopularMovieAdapter()
 
             binding.includeLayout.shimmerEffect.apply {
                 visibility = View.GONE
                 stopShimmer()
-            }
-
-            binding.refreshHomeFragment.apply {
-                if (this.isRefreshing) {
-                    this.isRefreshing = false
-                }
             }
         })
 
         viewModel.getGendersMovie.observe(viewLifecycleOwner, {
             it.genres.run {
                 first().isSelect = true
-                initGenderAdapter()
+                initMovieGenderAdapter()
                 initMovieByGenres()
+            }
+        })
+
+        viewModel.getGendersTv.observe(viewLifecycleOwner, {
+            it.genres.run {
+                first().isSelect = true
+                initTvGenderAdapter()
+                initTvByGenres()
             }
         })
 
@@ -100,28 +98,33 @@ class HomeFragment : BaseFragment() {
             it.results.initMovieAdapter()
         })
 
-        viewModel.getUpcomingMovie.observe(viewLifecycleOwner, {
-            it.results.initShowcaseAdapter()
-        })
-
-        viewModel.getTvShowTopRated.observe(viewLifecycleOwner, {
-            //create
-        })
-
-        viewModel.getTvShowPopular.observe(viewLifecycleOwner, {
-            //create
-        })
-
-        viewModel.getGendersTv.observe(viewLifecycleOwner, {
-            //create
-        })
-
         viewModel.getTvShowByGender.observe(viewLifecycleOwner, {
-            //create
+            binding.progressTvGenres.visibility = View.GONE
+            it.results.initTvAdapter()
+        })
+
+        viewModel.getTopRatedMovie.observe(viewLifecycleOwner, {
+            it.results.initTopRatedMovieAdapter()
         })
 
         viewModel.getNowPlayingMovie.observe(viewLifecycleOwner, {
-            //create
+            it.results.initShowcaseAdapter()
+        })
+
+        viewModel.getPopularMovie.observe(viewLifecycleOwner, {
+            it.results.initPopularMovieAdapter()
+        })
+
+        viewModel.getTvShowTopRated.observe(viewLifecycleOwner, {
+            it.results.initTopRatedTvAdapter()
+        })
+
+        viewModel.getTvShowPopular.observe(viewLifecycleOwner, {
+            it.results.initPopularTvAdapter()
+        })
+
+        viewModel.getTvShowOnAir.observe(viewLifecycleOwner, {
+            it.results.initOnAirTvAdapter()
         })
 
         viewModel.getBestActors.observe(viewLifecycleOwner, {
@@ -171,14 +174,28 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    private fun List<Gender>.initGenderAdapter() {
+    private fun MutableList<Movie>.initTopRatedMovieAdapter() {
+        binding.topMovieRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext(), horizontalFadingEdgeLength, false)
+            adapter = MovieAdapter(mutableList = this@initTopRatedMovieAdapter).apply {
+                setOnItemClickListener(object : MovieAdapter.ClickListener {
+                    override fun onItemClickListener(movie: Movie) {
+
+                    }
+                })
+            }
+        }
+    }
+
+    private fun List<Gender>.initMovieGenderAdapter() {
         binding.menuMovieRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext(), horizontalFadingEdgeLength, false)
-            adapter = GenderAdapter(mutableList = this@initGenderAdapter).apply {
+            adapter = GenderAdapter(mutableList = this@initMovieGenderAdapter).apply {
                 setOnItemClickListener(object : GenderAdapter.ClickListener {
                     override fun onItemClickListener(gender: Gender) {
                         binding.progressGenres.visibility = View.VISIBLE
                         viewModel.getMovieByGender(
+                            ignoreCache = true,
                             id = gender.id
                         )
                     }
@@ -187,8 +204,79 @@ class HomeFragment : BaseFragment() {
         }
     }
 
+    private fun MutableList<TvShow>.initPopularTvAdapter() {
+        binding.popularTvRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext(), horizontalFadingEdgeLength, false)
+            adapter = TvAdapter(mutableList = this@initPopularTvAdapter).apply {
+                setOnItemClickListener(object : TvAdapter.ClickListener {
+                    override fun onItemClickListener(tvShow: TvShow) {
+
+                    }
+                })
+            }
+        }
+    }
+
+    private fun MutableList<TvShow>.initOnAirTvAdapter() {
+        binding.showcaseTvRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext(), horizontalFadingEdgeLength, false)
+            adapter = OnAirAdapter(mutableList = this@initOnAirTvAdapter).apply {
+                setOnItemClickListener(object : OnAirAdapter.ClickListener {
+                    override fun onItemClickListener(tvShow: TvShow) {
+
+                    }
+                })
+            }
+        }
+    }
+
+    private fun List<Gender>.initTvGenderAdapter() {
+        binding.menuTvRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext(), horizontalFadingEdgeLength, false)
+            adapter = GenderAdapter(mutableList = this@initTvGenderAdapter).apply {
+                setOnItemClickListener(object : GenderAdapter.ClickListener {
+                    override fun onItemClickListener(gender: Gender) {
+                        binding.progressTvGenres.visibility = View.VISIBLE
+                        viewModel.getTvShowByGender(
+                            ignoreCache = true,
+                            id = gender.id
+                        )
+                    }
+                })
+            }
+        }
+    }
+
+    private fun MutableList<TvShow>.initTvAdapter() {
+        val tvAdapter = TvAdapter(mutableList = this@initTvAdapter).apply {
+            setOnItemClickListener(object : TvAdapter.ClickListener {
+                override fun onItemClickListener(tvShow: TvShow) {
+
+                }
+            })
+        }
+        binding.tvRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext(), horizontalFadingEdgeLength, false)
+            adapter = tvAdapter
+            startIntroAnimation()
+        }
+    }
+
+    private fun MutableList<TvShow>.initTopRatedTvAdapter() {
+        binding.topTvRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext(), horizontalFadingEdgeLength, false)
+            adapter = TvAdapter(mutableList = this@initTopRatedTvAdapter).apply {
+                setOnItemClickListener(object : TvAdapter.ClickListener {
+                    override fun onItemClickListener(tvShow: TvShow) {
+
+                    }
+                })
+            }
+        }
+    }
+
     private fun MutableList<Movie>.initMovieAdapter() {
-        movieAdapter = MovieAdapter(mutableList = this@initMovieAdapter).apply {
+        val movieAdapter = MovieAdapter(mutableList = this@initMovieAdapter).apply {
             setOnItemClickListener(object : MovieAdapter.ClickListener {
                 override fun onItemClickListener(movie: Movie) {
 
@@ -233,11 +321,11 @@ class HomeFragment : BaseFragment() {
             override fun run() {
                 this@initAutomaticSlide.post {
                     this@initAutomaticSlide.currentItem = (
-                        this@initAutomaticSlide.currentItem + 1
-                    ) % it.size
+                            this@initAutomaticSlide.currentItem + 1
+                            ) % it.size
                 }
             }
-        }
+        }; stopBanner()
         bannerTimer = Timer().apply {
             schedule(
                 timerTask, 2000, 3000
@@ -247,6 +335,12 @@ class HomeFragment : BaseFragment() {
 
     private fun List<Gender>.initMovieByGenres() {
         viewModel.getMovieByGender(
+            id = this.first().id
+        )
+    }
+
+    private fun List<Gender>.initTvByGenres() {
+        viewModel.getTvShowByGender(
             id = this.first().id
         )
     }
@@ -282,20 +376,20 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun initHomeData(ignoreCache: Boolean? = false) {
-        viewModel.getSuperBanner(ignoreCache = ignoreCache)
+        viewModel.getNowPlayingMovie(ignoreCache = ignoreCache)
         viewModel.getPopularMovie(ignoreCache = ignoreCache)
-        viewModel.getRatedMovie(ignoreCache = ignoreCache)
+        viewModel.getTopRatedMovie(ignoreCache = ignoreCache)
         viewModel.getGendersMovie(ignoreCache = ignoreCache)
         viewModel.getUpcomingMovie(ignoreCache = ignoreCache)
         viewModel.getBestActors(ignoreCache = ignoreCache)
-        viewModel.getNowPlayingMovie(ignoreCache = ignoreCache)
         viewModel.getTvShowPopular(ignoreCache = ignoreCache)
         viewModel.getTvShowTopRated(ignoreCache = ignoreCache)
+        viewModel.getGendersTvShow(ignoreCache = ignoreCache)
+        viewModel.getTvShowOnAir(ignoreCache = ignoreCache)
         viewModel.addInfoOnCache()
     }
 
-    override fun onPause() {
-        super.onPause()
+    private fun stopBanner() {
         bannerTimer?.cancel()
     }
 

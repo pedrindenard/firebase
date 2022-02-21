@@ -3,6 +3,7 @@ package com.pdm.firebase.feature.data.repository
 import com.google.gson.Gson
 import com.pdm.firebase.arquitecture.Resource
 import com.pdm.firebase.feature.data.local.CacheImpl
+import com.pdm.firebase.feature.data.local.CacheImpl.Companion.ON_AIR_TV
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.POPULAR_TV
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.TOP_RATED_TV
 import com.pdm.firebase.feature.domain.datasource.TvShowDataSource
@@ -31,10 +32,10 @@ class TvShowRepositoryImpl(
         }
     }
 
-    override suspend fun getGendersTv(ignoreCache: Boolean): Resource<GenderResponse?> {
+    override suspend fun getTvShowGenders(ignoreCache: Boolean): Resource<GenderResponse?> {
         return when {
             cache.get(CacheImpl.GENDERS_TV).isEmpty() || ignoreCache -> {
-                dataSource.getGendersTv()
+                dataSource.getTvShowGenders()
             }
             else -> {
                 Resource.Success(
@@ -58,7 +59,7 @@ class TvShowRepositoryImpl(
             else -> {
                 Resource.Success(
                     Gson().fromJson(
-                        cache.get(CacheImpl.MOVIE_BY_GENDER),
+                        cache.get(CacheImpl.TV_BY_GENDER),
                         TvShowResponse::class.java
                     )
                 )
@@ -69,12 +70,28 @@ class TvShowRepositoryImpl(
     override suspend fun getTvShowTopRated(page: Int, ignoreCache: Boolean): Resource<TvShowResponse?> {
         return when {
             cache.get(TOP_RATED_TV).isEmpty() || ignoreCache -> {
-                dataSource.getTvShowPopular(page)
+                dataSource.getTvShowTopRated(page)
             }
             else -> {
                 Resource.Success(
                     Gson().fromJson(
                         cache.get(TOP_RATED_TV),
+                        TvShowResponse::class.java
+                    )
+                )
+            }
+        }
+    }
+
+    override suspend fun getTvShowOnAir(page: Int, ignoreCache: Boolean): Resource<TvShowResponse?> {
+        return when {
+            cache.get(ON_AIR_TV).isEmpty() || ignoreCache -> {
+                dataSource.getTvShowOnAir(page)
+            }
+            else -> {
+                Resource.Success(
+                    Gson().fromJson(
+                        cache.get(ON_AIR_TV),
                         TvShowResponse::class.java
                     )
                 )

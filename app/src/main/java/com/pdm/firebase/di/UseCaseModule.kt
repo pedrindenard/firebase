@@ -13,10 +13,7 @@ import com.pdm.firebase.feature.domain.usecase.register.AddInfoUserUseCase
 import com.pdm.firebase.feature.domain.usecase.register.EmailVerificationUseCase
 import com.pdm.firebase.feature.domain.usecase.register.RegisterUserUseCase
 import com.pdm.firebase.feature.domain.usecase.search.*
-import com.pdm.firebase.feature.domain.usecase.tv.GetGendersTvUseCase
-import com.pdm.firebase.feature.domain.usecase.tv.GetTvShowByGenderUseCase
-import com.pdm.firebase.feature.domain.usecase.tv.GetTvShowPopularUseCase
-import com.pdm.firebase.feature.domain.usecase.tv.GetTvShowTopRatedUseCase
+import com.pdm.firebase.feature.domain.usecase.tv.*
 import org.koin.dsl.module
 
 object UseCaseModule {
@@ -45,7 +42,6 @@ object UseCaseModule {
                 getMovieByGender = get(),
                 getPopularMovie = get(),
                 getRatedMovie = get(),
-                getSuperBanner = get(),
                 getUpcomingMovie = get(),
                 getNowPlayingMovie = get(),
             )
@@ -71,9 +67,11 @@ object UseCaseModule {
                 getTvShowPopular = get(),
                 getTvShowTopRated = get(),
                 getGendersTvShow = get(),
-                getTvShowByGender = get()
+                getTvShowByGender = get(),
+                getTvShowOnAir = get()
             )
         }
+        single { GetTvShowOnAirUseCase(repository = get()) }
         single { GetTvShowByGenderUseCase(repository = get()) }
         single { GetTvShowTopRatedUseCase(repository = get()) }
         single { GetTvShowPopularUseCase(repository = get()) }
@@ -92,7 +90,6 @@ object UseCaseModule {
         single { GetMovieByGenderUseCase(repository = get()) }
         single { GetPopularMovieUseCase(repository = get()) }
         single { GetRatedMovieUseCase(repository = get()) }
-        single { GetSuperBannerUseCase(repository = get()) }
         single { GetUpcomingMovieUseCase(repository = get()) }
         single { LoginWithUserUseCase(repository = get()) }
         single { LoginWithGoogleUseCase(repository = get()) }

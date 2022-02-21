@@ -1,16 +1,16 @@
-package com.pdm.firebase.feature.domain.usecase.movie
+package com.pdm.firebase.feature.domain.usecase.tv
 
 import com.pdm.firebase.arquitecture.Resource
-import com.pdm.firebase.feature.domain.model.movie.MovieResponse
-import com.pdm.firebase.feature.domain.repository.MovieRepository
+import com.pdm.firebase.feature.domain.model.tv.TvShowResponse
+import com.pdm.firebase.feature.domain.repository.TvShowRepository
 import retrofit2.HttpException
 import java.io.IOException
 
-class GetSuperBannerUseCase(private val repository: MovieRepository) {
+class GetTvShowOnAirUseCase(private val repository: TvShowRepository) {
 
-    suspend operator fun invoke(page: Int, ignoreCache: Boolean? = false): Resource<MovieResponse?> {
+    suspend operator fun invoke(page: Int, ignoreCache: Boolean? = false): Resource<TvShowResponse?> {
         return try {
-            repository.getSuperBanner(
+            repository.getTvShowOnAir(
                 page = page, ignoreCache = ignoreCache!!
             )
         } catch (e: HttpException) {

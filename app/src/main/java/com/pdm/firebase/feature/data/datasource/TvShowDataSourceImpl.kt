@@ -5,6 +5,7 @@ import com.pdm.firebase.arquitecture.Event.Companion.safeCallApi
 import com.pdm.firebase.arquitecture.Event.Companion.toJson
 import com.pdm.firebase.arquitecture.Resource
 import com.pdm.firebase.feature.data.local.CacheImpl
+import com.pdm.firebase.feature.data.local.CacheImpl.Companion.ON_AIR_TV
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.POPULAR_TV
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.TOP_RATED_TV
 import com.pdm.firebase.feature.data.retrofit.Api
@@ -35,7 +36,7 @@ class TvShowDataSourceImpl(private val api: Api, private val cache: CacheImpl) :
         }
     }
 
-    override suspend fun getGendersTv(): Resource<GenderResponse?> {
+    override suspend fun getTvShowGenders(): Resource<GenderResponse?> {
         return safeCallApi {
             val response = api.getGendersTv()
 
@@ -63,7 +64,7 @@ class TvShowDataSourceImpl(private val api: Api, private val cache: CacheImpl) :
             when {
                 response.isSuccessful -> {
                     Resource.Success(data = response.body().also {
-                        cache.insert(CacheImpl.MOVIE_BY_GENDER, it.toJson())
+                        cache.insert(CacheImpl.TV_BY_GENDER, it.toJson())
                     })
                 }
                 else -> {
@@ -85,6 +86,27 @@ class TvShowDataSourceImpl(private val api: Api, private val cache: CacheImpl) :
                 response.isSuccessful -> {
                     Resource.Success(data = response.body().also {
                         cache.insert(TOP_RATED_TV, it.toJson())
+                    })
+                }
+                else -> {
+                    response.errorCallApi {
+                        Resource.InvalidAuth(
+                            message = response.message()
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    override suspend fun getTvShowOnAir(page: Int): Resource<TvShowResponse?> {
+        return safeCallApi {
+            val response = api.getTvShowOnAir(page = page)
+
+            when {
+                response.isSuccessful -> {
+                    Resource.Success(data = response.body().also {
+                        cache.insert(ON_AIR_TV, it.toJson())
                     })
                 }
                 else -> {

@@ -7,7 +7,6 @@ import com.pdm.firebase.arquitecture.Resource
 import com.pdm.firebase.feature.data.local.CacheImpl
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.BEST_ACTORS
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.GENDERS_MOVIE
-import com.pdm.firebase.feature.data.local.CacheImpl.Companion.HOME_BANNER
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.MOVIE_BY_GENDER
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.POPULAR_MOVIE
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.RATED_MOVIE
@@ -19,27 +18,6 @@ import com.pdm.firebase.feature.domain.model.gender.GenderResponse
 import com.pdm.firebase.feature.domain.model.movie.MovieResponse
 
 class MovieDataSourceImpl(private val api: Api, private val cache: CacheImpl) : MovieDataSource {
-
-    override suspend fun getSuperBanner(page: Int): Resource<MovieResponse?> {
-        return safeCallApi {
-            val response = api.getSuperBanner(page = page)
-
-            when {
-                response.isSuccessful -> {
-                    Resource.Success(data = response.body().also {
-                        cache.insert(HOME_BANNER, it.toJson())
-                    })
-                }
-                else -> {
-                    response.errorCallApi {
-                        Resource.InvalidAuth(
-                            message = response.message()
-                        )
-                    }
-                }
-            }
-        }
-    }
 
     override suspend fun getPopularMovie(page: Int): Resource<MovieResponse?> {
         return safeCallApi {

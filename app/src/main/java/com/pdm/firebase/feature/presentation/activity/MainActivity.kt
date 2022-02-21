@@ -58,7 +58,7 @@ class MainActivity : BaseActivity() {
                 R.id.postFragment -> {
                     launchActivity<SocialActivity>(extra = "Post")
                 }
-                R.id.discoverFragment -> {
+                R.id.socialFragment -> {
                     launchActivity<SocialActivity>(extra = "Discover")
                 }
                 R.id.chatFragment -> {

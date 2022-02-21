@@ -117,10 +117,11 @@
     <string name="description_movie">Descrição:</string>
     <string name="creators_movie">Criadores</string>
     <string name="more_movies_like_this">Semelhantes</string>
-    <string name="most_popular">Mais populares</string>
+    <string name="most_popular">Populares do cinema</string>
     <string name="see_more"><u>Ver mais</u></string>
     <string name="movie_show_time">Confira horários de\nexibição dos filmes</string>
-    <string name="showcase_movie">mostruário</string>
+    <string name="showcase_movie">Em exibição nos cinemas</string>
+    <string name="showcase_tv">Em exibição nas televisões</string>
     <string name="showcase_more_movie"><u>VER MAIS</u></string>
     <string name="more_actors"><u>VER MAIS</u></string>
     <string name="best_actors">Melhores atores</string>
@@ -189,5 +190,6 @@
     <string name="home_cine">Filmes nos cinemas</string>
     <string name="movie_last">Populares</string>
     <string name="home_popular_tv">Populares da televisão</string>
-    <string name="home_top_rated_tv">Shows de televisão</string>
+    <string name="home_top_rated_tv">Programas mais avaliados</string>
+    <string name="home_top_rated_movie">Filmes mais avaliados</string>
 </resources>

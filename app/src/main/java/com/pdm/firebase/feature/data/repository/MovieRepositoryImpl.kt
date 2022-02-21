@@ -5,7 +5,6 @@ import com.pdm.firebase.arquitecture.Resource
 import com.pdm.firebase.feature.data.local.CacheImpl
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.BEST_ACTORS
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.GENDERS_MOVIE
-import com.pdm.firebase.feature.data.local.CacheImpl.Companion.HOME_BANNER
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.MOVIE_BY_GENDER
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.NOW_PLAYING_MOVIE
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.POPULAR_MOVIE
@@ -21,22 +20,6 @@ class MovieRepositoryImpl(
     private val dataSource: MovieDataSource,
     private val cache: CacheImpl
 ) : MovieRepository {
-
-    override suspend fun getSuperBanner(page: Int, ignoreCache: Boolean): Resource<MovieResponse?> {
-        return when {
-            cache.get(HOME_BANNER).isEmpty() || ignoreCache -> {
-                dataSource.getSuperBanner(page = page)
-            }
-            else -> {
-                Resource.Success(
-                    Gson().fromJson(
-                        cache.get(HOME_BANNER),
-                        MovieResponse::class.java
-                    )
-                )
-            }
-        }
-    }
 
     override suspend fun getPopularMovie(page: Int, ignoreCache: Boolean): Resource<MovieResponse?> {
         return when {

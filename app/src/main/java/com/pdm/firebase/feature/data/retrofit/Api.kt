@@ -15,12 +15,6 @@ import retrofit2.http.Query
 interface Api {
 
     @Headers(value = ["Content-Type: application/json"])
-    @GET(value = "movie/now_playing")
-    suspend fun getSuperBanner(
-        @Query(value = "page") page: Int? = 1
-    ): Response<MovieResponse>
-
-    @Headers(value = ["Content-Type: application/json"])
     @GET(value = "movie/popular")
     suspend fun getPopularMovie(
         @Query(value = "page") page: Int? = 1
@@ -146,6 +140,12 @@ interface Api {
     suspend fun getTvShowByQuery(
         @Query(value = "sort_by") sort: String,
         @Query(value = "with_genres") id: Int,
+        @Query(value = "page") page: Int
+    ): Response<TvShowResponse>
+
+    @Headers(value = ["Content-Type: application/json"])
+    @GET(value = "tv/on_the_air")
+    suspend fun getTvShowOnAir(
         @Query(value = "page") page: Int
     ): Response<TvShowResponse>
 }

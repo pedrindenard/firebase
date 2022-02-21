@@ -20,14 +20,14 @@ class HomeViewModel(
     private val cache: CacheImpl
 ) : BaseViewModel() {
 
-    private val _getSuperBanner: MutableLiveData<MovieResponse> = MutableLiveData()
-    val getSuperBanner = _getSuperBanner as LiveData<MovieResponse>
+    private val _getNowPlayingMovie: MutableLiveData<MovieResponse> = MutableLiveData()
+    val getNowPlayingMovie = _getNowPlayingMovie as LiveData<MovieResponse>
 
     private val _getPopularMovie: MutableLiveData<MovieResponse> = MutableLiveData()
     val getPopularMovie = _getPopularMovie as LiveData<MovieResponse>
 
-    private val _getRatedMovie: MutableLiveData<MovieResponse> = MutableLiveData()
-    val getRatedMovie = _getRatedMovie as LiveData<MovieResponse>
+    private val _getTopRatedMovie: MutableLiveData<MovieResponse> = MutableLiveData()
+    val getTopRatedMovie = _getTopRatedMovie as LiveData<MovieResponse>
 
     private val _getGendersMovie: MutableLiveData<GenderResponse> = MutableLiveData()
     val getGendersMovie = _getGendersMovie as LiveData<GenderResponse>
@@ -38,14 +38,14 @@ class HomeViewModel(
     private val _getUpcomingMovie: MutableLiveData<MovieResponse> = MutableLiveData()
     val getUpcomingMovie = _getUpcomingMovie as LiveData<MovieResponse>
 
-    private val _getNowPlayingMovie: MutableLiveData<MovieResponse> = MutableLiveData()
-    val getNowPlayingMovie = _getNowPlayingMovie as LiveData<MovieResponse>
-
     private val _getTvShowPopular: MutableLiveData<TvShowResponse> = MutableLiveData()
     val getTvShowPopular = _getTvShowPopular as LiveData<TvShowResponse>
 
     private val _getTvShowTopRated: MutableLiveData<TvShowResponse> = MutableLiveData()
     val getTvShowTopRated = _getTvShowTopRated as LiveData<TvShowResponse>
+
+    private val _getTvShowOnAir: MutableLiveData<TvShowResponse> = MutableLiveData()
+    val getTvShowOnAir = _getTvShowOnAir as LiveData<TvShowResponse>
 
     private val _getGendersTv: MutableLiveData<GenderResponse> = MutableLiveData()
     val getGendersTv = _getGendersTv as LiveData<GenderResponse>
@@ -56,11 +56,11 @@ class HomeViewModel(
     private val _getBestActors: MutableLiveData<ActorsResponse> = MutableLiveData()
     val getBestActors = _getBestActors as LiveData<ActorsResponse>
 
-    fun getSuperBanner(ignoreCache: Boolean? = false) {
+    fun getNowPlayingMovie(ignoreCache: Boolean? = false) {
         viewModelScope.launch {
-            when (val response = movieUseCase.getSuperBanner.invoke(page = 1, ignoreCache)) {
+            when (val response = movieUseCase.getNowPlayingMovie.invoke(page = 1, ignoreCache)) {
                 is Resource.Success -> {
-                    _getSuperBanner.postValue(response.data!!)
+                    _getNowPlayingMovie.postValue(response.data!!)
                 }
                 is Resource.Error -> {
                     errorResponse.postValue(response.message)
@@ -94,11 +94,11 @@ class HomeViewModel(
         }
     }
 
-    fun getRatedMovie(ignoreCache: Boolean? = false) {
+    fun getTopRatedMovie(ignoreCache: Boolean? = false) {
         viewModelScope.launch {
             when (val response = movieUseCase.getRatedMovie.invoke(page = 1, ignoreCache)) {
                 is Resource.Success -> {
-                    _getRatedMovie.postValue(response.data!!)
+                    _getTopRatedMovie.postValue(response.data!!)
                 }
                 is Resource.Error -> {
                     errorResponse.postValue(response.message)
@@ -156,25 +156,6 @@ class HomeViewModel(
             when (val response = movieUseCase.getUpcomingMovie.invoke(page = 1, ignoreCache)) {
                 is Resource.Success -> {
                     _getUpcomingMovie.postValue(response.data!!)
-                }
-                is Resource.Error -> {
-                    errorResponse.postValue(response.message)
-                }
-                is Resource.Failure -> {
-                    failureResponse.postValue(response.throwable)
-                }
-                is Resource.InvalidAuth -> {
-                    invalidAuth.postValue(response.message)
-                }
-            }
-        }
-    }
-
-    fun getNowPlayingMovie(ignoreCache: Boolean? = false) {
-        viewModelScope.launch {
-            when (val response = movieUseCase.getNowPlayingMovie.invoke(page = 1, ignoreCache)) {
-                is Resource.Success -> {
-                    _getNowPlayingMovie.postValue(response.data!!)
                 }
                 is Resource.Error -> {
                     errorResponse.postValue(response.message)
@@ -251,6 +232,25 @@ class HomeViewModel(
             when (val response = tvShowUseCase.getTvShowTopRated.invoke(page = 1, ignoreCache)) {
                 is Resource.Success -> {
                     _getTvShowTopRated.postValue(response.data!!)
+                }
+                is Resource.Error -> {
+                    errorResponse.postValue(response.message)
+                }
+                is Resource.Failure -> {
+                    failureResponse.postValue(response.throwable)
+                }
+                is Resource.InvalidAuth -> {
+                    invalidAuth.postValue(response.message)
+                }
+            }
+        }
+    }
+
+    fun getTvShowOnAir(ignoreCache: Boolean? = false) {
+        viewModelScope.launch {
+            when (val response = tvShowUseCase.getTvShowOnAir.invoke(page = 1, ignoreCache)) {
+                is Resource.Success -> {
+                    _getTvShowOnAir.postValue(response.data!!)
                 }
                 is Resource.Error -> {
                     errorResponse.postValue(response.message)

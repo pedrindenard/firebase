@@ -6,6 +6,8 @@
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/drawable-v24/background_button.xml" value="0.3854166666666667" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/drawable-v24/background_button_filter.xml" value="0.3854166666666667" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/drawable-v24/background_button_rectangle.xml" value="0.3854166666666667" />
+        <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/drawable-v24/background_drawer_item.xml" value="0.3854166666666667" />
+        <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/drawable-v24/background_drawer_menu.xml" value="0.3854166666666667" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/drawable-v24/background_radious.xml" value="0.3854166666666667" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3854166666666667" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/drawable/background_button.xml" value="0.3854166666666667" />
@@ -17,6 +19,7 @@
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/drawable/background_button_stroke.xml" value="0.3854166666666667" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/drawable/background_cursor.xml" value="0.37948717948717947" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/drawable/background_dark.xml" value="0.3854166666666667" />
+        <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/drawable/background_drawer_menu.xml" value="0.3854166666666667" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/drawable/background_favorite.xml" value="0.3854166666666667" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/drawable/background_gradient.xml" value="0.3854166666666667" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/drawable/background_gradient_black.xml" value="0.3854166666666667" />
@@ -106,7 +109,7 @@
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/layout/dialog_git_hub_login.xml" value="0.3692708333333333" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/layout/dialog_number_phone.xml" value="0.3692708333333333" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/layout/dialog_progress.xml" value="0.3692708333333333" />
-        <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/layout/fragment_discover.xml" value="0.33" />
+        <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/layout/fragment_discover.xml" value="0.5" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/layout/fragment_filter.xml" value="0.33" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/layout/fragment_first.xml" value="0.33" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/layout/fragment_gender.xml" value="0.33" />
@@ -133,6 +136,7 @@
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/layout/item_best_movie.xml" value="0.67" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/layout/item_content.xml" value="0.3692708333333333" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/layout/item_creators.xml" value="0.3692708333333333" />
+        <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/layout/item_drawer.xml" value="2.0" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/layout/item_filter.xml" value="0.3692708333333333" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/layout/item_gender.xml" value="0.9" />
         <entry key="..\:/Users/pedro/AndroidStudioProjects/FirebaseStorageDatabase/app/src/main/res/layout/item_genres.xml" value="0.3692708333333333" />

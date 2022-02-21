@@ -7,8 +7,6 @@ import com.pdm.firebase.feature.domain.model.movie.MovieResponse
 
 interface MovieDataSource {
 
-    suspend fun getSuperBanner(page: Int): Resource<MovieResponse?>
-
     suspend fun getPopularMovie(page: Int): Resource<MovieResponse?>
 
     suspend fun getRatedMovie(page: Int): Resource<MovieResponse?>

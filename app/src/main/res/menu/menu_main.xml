@@ -19,7 +19,7 @@
         android:title="@string/menu_post" />
 
     <item
-        android:id="@+id/discoverFragment"
+        android:id="@+id/socialFragment"
         android:enabled="true"
         android:icon="@drawable/ic_discover"
         android:title="@string/menu_discover" />

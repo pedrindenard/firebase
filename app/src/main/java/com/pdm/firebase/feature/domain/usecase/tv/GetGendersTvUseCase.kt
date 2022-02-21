@@ -10,7 +10,7 @@ class GetGendersTvUseCase(private val repository: TvShowRepository) {
 
     suspend operator fun invoke(ignoreCache: Boolean? = false): Resource<GenderResponse?> {
         return try {
-            repository.getGendersTv(
+            repository.getTvShowGenders(
                 ignoreCache = ignoreCache!!
             )
         } catch (e: HttpException) {

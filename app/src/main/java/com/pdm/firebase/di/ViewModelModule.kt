@@ -9,12 +9,13 @@ import com.pdm.firebase.feature.presentation.fragment.privacy.viewmodel.PrivacyV
 import com.pdm.firebase.feature.presentation.fragment.profile.viewmodel.ProfileViewModel
 import com.pdm.firebase.feature.presentation.fragment.recovery.viewmodel.RecoveryViewModel
 import com.pdm.firebase.feature.presentation.fragment.search.viewmodel.SearchViewModel
-import com.pdm.firebase.feature.presentation.fragment.splash.viewModel.SplashViewModel
+import com.pdm.firebase.feature.presentation.fragment.init.viewModel.SplashViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 object ViewModelModule {
     val get = module(override = true) {
+        viewModel { DiscoveryViewModel(movieUseCase = get(), tvShowUseCase = get(), discoverUseCase = get()) }
         viewModel { SplashViewModel(movieUseCase = get(), tvShowUseCase = get(), cache = get()) }
         viewModel { HomeViewModel(movieUseCase = get(), tvShowUseCase = get(), cache = get()) }
         viewModel { GenderViewModel(movieUseCase = get(), tvShowUseCase = get()) }
@@ -24,6 +25,5 @@ object ViewModelModule {
         viewModel { RecoveryViewModel(useCase = get()) }
         viewModel { ProfileViewModel(useCase = get()) }
         viewModel { PrivacyViewModel(useCase = get()) }
-        viewModel { DiscoveryViewModel(useCase = get()) }
     }
 }

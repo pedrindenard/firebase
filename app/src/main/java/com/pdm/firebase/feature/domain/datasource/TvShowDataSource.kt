@@ -8,10 +8,11 @@ interface TvShowDataSource {
 
     suspend fun getTvShowPopular(page: Int): Resource<TvShowResponse?>
 
-    suspend fun getGendersTv(): Resource<GenderResponse?>
+    suspend fun getTvShowGenders(): Resource<GenderResponse?>
 
     suspend fun getTvShowByGender(page: Int, id: Int): Resource<TvShowResponse?>
 
     suspend fun getTvShowTopRated(page: Int): Resource<TvShowResponse?>
 
+    suspend fun getTvShowOnAir(page: Int): Resource<TvShowResponse?>
 }

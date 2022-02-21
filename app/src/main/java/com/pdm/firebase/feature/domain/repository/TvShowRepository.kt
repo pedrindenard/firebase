@@ -8,10 +8,11 @@ interface TvShowRepository {
 
     suspend fun getTvShowPopular(page: Int, ignoreCache: Boolean): Resource<TvShowResponse?>
 
-    suspend fun getGendersTv(ignoreCache: Boolean): Resource<GenderResponse?>
+    suspend fun getTvShowGenders(ignoreCache: Boolean): Resource<GenderResponse?>
 
     suspend fun getTvShowByGender(page: Int, id: Int, ignoreCache: Boolean): Resource<TvShowResponse?>
 
     suspend fun getTvShowTopRated(page: Int, ignoreCache: Boolean): Resource<TvShowResponse?>
 
+    suspend fun getTvShowOnAir(page: Int, ignoreCache: Boolean): Resource<TvShowResponse?>
 }

@@ -7,8 +7,6 @@ import com.pdm.firebase.feature.domain.model.movie.MovieResponse
 
 interface MovieRepository {
 
-    suspend fun getSuperBanner(page: Int, ignoreCache: Boolean): Resource<MovieResponse?>
-
     suspend fun getPopularMovie(page: Int, ignoreCache: Boolean): Resource<MovieResponse?>
 
     suspend fun getRatedMovie(page: Int, ignoreCache: Boolean): Resource<MovieResponse?>

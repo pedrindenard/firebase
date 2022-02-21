@@ -1,4 +1,4 @@
-package com.pdm.firebase.feature.presentation.fragment.splash.viewModel
+package com.pdm.firebase.feature.presentation.fragment.init.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -23,6 +23,7 @@ class SplashViewModel(
                 is Resource.Success -> {
                     movieUseCase.getMovieByGender.invoke(
                         id = response.data!!.genres.first().id,
+                        ignoreCache = true,
                         page = 1
                     )
                 }
@@ -31,13 +32,28 @@ class SplashViewModel(
                 }
             }
 
-            movieUseCase.getSuperBanner.invoke(page = 1)
-            movieUseCase.getPopularMovie.invoke(page = 1)
-            movieUseCase.getUpcomingMovie.invoke(page = 1)
-            movieUseCase.getBestActors.invoke(page = 1)
+            movieUseCase.getRatedMovie.invoke(page = 1, ignoreCache = true)
+            movieUseCase.getNowPlayingMovie.invoke(page = 1, ignoreCache = true)
+            movieUseCase.getPopularMovie.invoke(page = 1, ignoreCache = true)
+            movieUseCase.getUpcomingMovie.invoke(page = 1, ignoreCache = true)
+            movieUseCase.getBestActors.invoke(page = 1, ignoreCache = true)
 
-            tvShowUseCase.getTvShowPopular.invoke(page = 1)
-            tvShowUseCase.getTvShowTopRated.invoke(page = 1)
+            when (val response = tvShowUseCase.getGendersTvShow.invoke()) {
+                is Resource.Success -> {
+                    tvShowUseCase.getTvShowByGender.invoke(
+                        id = response.data!!.genres.first().id,
+                        ignoreCache = true,
+                        page = 1
+                    )
+                }
+                else -> {
+                    /** Do nothing **/
+                }
+            }
+
+            tvShowUseCase.getTvShowPopular.invoke(page = 1, ignoreCache = true)
+            tvShowUseCase.getTvShowTopRated.invoke(page = 1, ignoreCache = true)
+            tvShowUseCase.getTvShowOnAir.invoke(page = 1, ignoreCache = true)
 
             startIntroActivity.postValue(
                 cache.get(CacheImpl.DEFAULT).isEmpty()
@@ -47,7 +63,6 @@ class SplashViewModel(
 
     fun clearCache() {
         viewModelScope.launch {
-            cache.delete(CacheImpl.HOME_BANNER)
             cache.delete(CacheImpl.POPULAR_MOVIE)
             cache.delete(CacheImpl.RATED_MOVIE)
             cache.delete(CacheImpl.GENDERS_MOVIE)
@@ -59,6 +74,8 @@ class SplashViewModel(
             cache.delete(CacheImpl.REGIONS)
             cache.delete(CacheImpl.POPULAR_TV)
             cache.delete(CacheImpl.NOW_PLAYING_MOVIE)
+            cache.delete(CacheImpl.TV_BY_GENDER)
+            cache.delete(CacheImpl.ON_AIR_TV)
         }
     }
 }
