@@ -30,6 +30,9 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:maxLength="32"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?selectableItemBackground"
             android:textColor="@color/yellow_dark"
             android:textCursorDrawable="@drawable/background_cursor"
             tools:text="Sons of Anarchy's" />

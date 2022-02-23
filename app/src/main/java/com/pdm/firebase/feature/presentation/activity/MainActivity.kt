@@ -164,8 +164,14 @@ class MainActivity : BaseActivity() {
     }
 
     private fun NavController.initListener() {
-        this.addOnDestinationChangedListener { _, _, _ ->
-
+        this.addOnDestinationChangedListener { _, destination, _ ->
+            binding.bottomNavigation.visibility = if (
+                destination.id == R.id.movieFragment
+            ) {
+                View.VISIBLE
+            } else {
+                View.VISIBLE
+            }
         }
     }
 

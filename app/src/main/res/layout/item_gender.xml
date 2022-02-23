@@ -6,7 +6,7 @@
     android:layout_marginEnd="8dp"
     android:id="@+id/nameGender"
     android:background="@drawable/background_yellow"
-    android:backgroundTint="@color/blue_night"
+    android:backgroundTint="@color/gray_background"
     android:fontFamily="@font/stellar_regular"
     android:textStyle="bold"
     android:paddingHorizontal="8dp"

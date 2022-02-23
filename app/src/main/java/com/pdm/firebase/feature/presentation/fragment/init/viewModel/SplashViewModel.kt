@@ -17,9 +17,11 @@ class SplashViewModel(
 
     val startIntroActivity = MutableLiveData<Boolean>()
 
+    init { clearCache() }
+
     fun start() {
         viewModelScope.launch {
-            when (val response = movieUseCase.getGendersMovie.invoke()) {
+            when (val response = movieUseCase.getGendersMovie.invoke(ignoreCache = true)) {
                 is Resource.Success -> {
                     movieUseCase.getMovieByGender.invoke(
                         id = response.data!!.genres.first().id,
@@ -38,7 +40,7 @@ class SplashViewModel(
             movieUseCase.getUpcomingMovie.invoke(page = 1, ignoreCache = true)
             movieUseCase.getBestActors.invoke(page = 1, ignoreCache = true)
 
-            when (val response = tvShowUseCase.getGendersTvShow.invoke()) {
+            when (val response = tvShowUseCase.getGendersTvShow.invoke(ignoreCache = true)) {
                 is Resource.Success -> {
                     tvShowUseCase.getTvShowByGender.invoke(
                         id = response.data!!.genres.first().id,
@@ -61,7 +63,7 @@ class SplashViewModel(
         }
     }
 
-    fun clearCache() {
+    private fun clearCache() {
         viewModelScope.launch {
             cache.delete(CacheImpl.POPULAR_MOVIE)
             cache.delete(CacheImpl.RATED_MOVIE)

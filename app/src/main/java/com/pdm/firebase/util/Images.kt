@@ -3,19 +3,22 @@ package com.pdm.firebase.util
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
+import com.google.android.material.imageview.ShapeableImageView
 import com.pdm.firebase.BuildConfig
 import com.pdm.firebase.R
 import com.pdm.firebase.feature.domain.model.gender.Gender
 import com.pdm.firebase.feature.domain.model.gender.GenreDataImage
 
-fun AppCompatImageView.loadImage(itemView: View, thumbnail: String?, size: String) {
+fun AppCompatImageView.loadImage(itemView: View, thumbnail: String?, size: String, error: Int? = null) {
 
-    val image = BuildConfig.BASE_IMAGE_URL + size + thumbnail
+    val image = BuildConfig.BASE_IMAGE_TMDB + size + thumbnail
+
+    val placeHolder = error ?: R.drawable.placeholder_movie
 
     Glide.with(itemView)
         .load(image)
-        .error(R.drawable.placeholder_movie)
-        .placeholder(R.drawable.placeholder_movie)
+        .error(placeHolder)
+        .placeholder(placeHolder)
         .into(this)
 }
 
@@ -40,4 +43,15 @@ fun List<Gender>.addImages(param: String) {
             }
         }
     }
+}
+
+fun ShapeableImageView.loadThumbnail(itemView: View, key: String, quality: String) {
+
+    val url = BuildConfig.BASE_IMAGE_YOUTUBE + key + quality
+
+    Glide.with(itemView)
+        .load(url)
+        .error(R.drawable.placeholder_movie)
+        .placeholder(R.drawable.placeholder_movie)
+        .into(this)
 }

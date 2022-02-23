@@ -1,9 +1,18 @@
 package com.pdm.firebase.util
 
 import android.text.Editable
+import android.text.format.DateUtils
 import com.github.rtoshiro.util.format.SimpleMaskFormatter
 import com.github.rtoshiro.util.format.text.MaskTextWatcher
 import com.google.android.material.textfield.TextInputEditText
+import com.pdm.firebase.feature.domain.model.credit.Crew
+import com.pdm.firebase.feature.domain.model.gender.Gender
+import com.pdm.firebase.feature.domain.model.movie.details.ProductionCompany
+import com.pdm.firebase.feature.domain.model.movie.details.ProductionCountry
+import com.pdm.firebase.feature.domain.model.movie.provider.Provider
+import com.pdm.firebase.feature.domain.model.movie.provider.ProviderCountry
+import com.pdm.firebase.feature.domain.model.movie.provider.ProviderFlatRate
+import okhttp3.Request
 
 fun TextInputEditText?.formatToDate() {
     val smf = SimpleMaskFormatter("NN/NN/NNNNN")
@@ -22,89 +31,109 @@ fun handlerJustNumber(s: String): String {
     }
 }
 
-fun handlerPhone(phone: String): String {
-    val phoneNumber = handlerJustNumber(phone)
-    val sb = StringBuilder()
-    if (phoneNumber.length in 5..8) {
-        sb.append(phoneNumber.subSequence(0, 4))
-        sb.append('-')
-        sb.append(phoneNumber.subSequence(4, phoneNumber.length))
-    } else if (phoneNumber.length == 9) {
-        sb.append(phoneNumber.subSequence(0, 5))
-        sb.append('-')
-        sb.append(phoneNumber.subSequence(5, phoneNumber.length))
-    } else if (phoneNumber.length == 10) {
-        sb.append("(")
-        sb.append(phoneNumber.subSequence(0, 2))
-        sb.append(") ")
-        sb.append(phoneNumber.subSequence(2, 6))
-        sb.append("-")
-        sb.append(phoneNumber.subSequence(6, phoneNumber.length))
-    } else if (phoneNumber.length == 11) {
-        if (phoneNumber.startsWith("0")) {
-            sb.append("(")
-            sb.append(phoneNumber.subSequence(0, 3))
-            sb.append(") ")
-            sb.append(phoneNumber.subSequence(3, 7))
-            sb.append("-")
-            sb.append(phoneNumber.subSequence(7, phoneNumber.length))
+fun Float.formatDuration(): String {
+    val runtime = DateUtils.formatElapsedTime(toLong())
+    val formatted = runtime.replace(oldValue = ":", newValue = "h\u0020")
+    return formatted + "min"
+}
+
+fun List<ProductionCountry>.formatCountry(): String {
+    var productionCountry = String()
+    forEachIndexed { index, country ->
+        productionCountry += if (index != lastIndex) {
+            "${country.name},\u0020"
         } else {
-            sb.append("(")
-            sb.append(phoneNumber.subSequence(0, 2))
-            sb.append(") ")
-            sb.append(phoneNumber.subSequence(2, 7))
-            sb.append("-")
-            sb.append(phoneNumber.subSequence(7, phoneNumber.length))
+            country.name
         }
-    } else if (phoneNumber.length == 12) {
-        if (phoneNumber.startsWith("0")) {
-            sb.append("(")
-            sb.append(phoneNumber.subSequence(0, 3))
-            sb.append(") ")
-            sb.append(phoneNumber.subSequence(3, 8))
-            sb.append("-")
-            sb.append(phoneNumber.subSequence(8, phoneNumber.length))
-        } else {
-            sb.append("(")
-            sb.append(phoneNumber.subSequence(0, 2))
-            sb.append(" ")
-            sb.append(phoneNumber.subSequence(2, 4))
-            sb.append(") ")
-            sb.append(phoneNumber.subSequence(4, 8))
-            sb.append("-")
-            sb.append(phoneNumber.subSequence(8, phoneNumber.length))
-        }
-    } else if (phoneNumber.length == 13) {
-        if (phoneNumber.startsWith("0")) {
-            sb.append("(")
-            sb.append(phoneNumber.subSequence(0, 3))
-            sb.append(" ")
-            sb.append(phoneNumber.subSequence(3, 5))
-            sb.append(") ")
-            sb.append(phoneNumber.subSequence(5, 9))
-            sb.append("-")
-            sb.append(phoneNumber.subSequence(9, phoneNumber.length))
-        } else {
-            sb.append("(")
-            sb.append(phoneNumber.subSequence(0, 2))
-            sb.append(" ")
-            sb.append(phoneNumber.subSequence(2, 4))
-            sb.append(") ")
-            sb.append(phoneNumber.subSequence(4, 9))
-            sb.append("-")
-            sb.append(phoneNumber.subSequence(9, phoneNumber.length))
-        }
-    } else if (phoneNumber.length == 14) {
-        sb.append("(")
-        sb.append(phoneNumber.subSequence(0, 3))
-        sb.append(" ")
-        sb.append(phoneNumber.subSequence(3, 5))
-        sb.append(") ")
-        sb.append(phoneNumber.subSequence(5, 10))
-        sb.append("-")
-        sb.append(phoneNumber.subSequence(10, phoneNumber.length))
-    } else {
-        sb.append(phoneNumber)
     }
-    return sb.toString()
+    return productionCountry
+}
+
+fun List<ProductionCompany>.formatCompany(): String {
+    var productionCompany = String()
+    forEachIndexed { index, company ->
+        productionCompany += if (index != lastIndex) {
+            "${company.name},\u0020"
+        } else {
+            company.name
+        }
+    }
+    return productionCompany
+}
+
+fun List<Gender>.formatGenres(): String {
+    var movieGenres = String()
+    forEachIndexed { index, company ->
+        movieGenres += if (index != lastIndex) {
+            "${company.name},\u0020"
+        } else {
+            company.name
+        }
+    }
+    return movieGenres
+}
+
+fun List<Crew>.formatCrew(): String {
+    var movieCrews = String()
+    forEachIndexed { index, crew ->
+        movieCrews += if (index != lastIndex) {
+            "${crew.name},\u0020"
+        } else {
+            crew.name
+        }
+    }
+    return movieCrews
+}
+
+fun Provider.formatToList(): MutableList<ProviderFlatRate> {
+    val mutableList: MutableList<ProviderCountry> = mutableListOf()
+    val providerList: MutableList<ProviderFlatRate> = mutableListOf()
+    mutableList.apply {
+        if (br != null) add(br); if (us != null) add(us); if (ar != null) add(ar)
+        if (at != null) add(at); if (au != null) add(au); if (be != null) add(be)
+        if (ca != null) add(ca); if (ch != null) add(ch); if (cl != null) add(cl)
+        if (co != null) add(co); if (cz != null) add(cz); if (de != null) add(de)
+        if (dk != null) add(dk); if (ec != null) add(ec); if (ee != null) add(ee)
+        if (es != null) add(es); if (fi != null) add(fi); if (fr != null) add(fr)
+        if (gb != null) add(gb); if (gr != null) add(gr); if (hu != null) add(hu)
+        if (id != null) add(id); if (ie != null) add(ie); if (za != null) add(za)
+        if (it != null) add(it); if (jp != null) add(jp); if (kr != null) add(kr)
+        if (lt != null) add(lt); if (lv != null) add(lv); if (mx != null) add(mx)
+        if (my != null) add(my); if (nl != null) add(nl); if (no != null) add(no)
+        if (nz != null) add(nz); if (pe != null) add(pe); if (ph != null) add(ph)
+        if (pl != null) add(pl); if (pt != null) add(pt); if (ro != null) add(ro)
+        if (ru != null) add(ru); if (se != null) add(se); if (sg != null) add(sg)
+        if (th != null) add(th); if (tr != null) add(tr); if (ve != null) add(ve)
+        if (`in` != null) add(`in`)
+    }
+    mutableList.forEach { country ->
+        country.flatRate?.forEach { flat ->
+            providerList.add(flat)
+        }
+    }
+
+    val hashSet: Set<ProviderFlatRate> = LinkedHashSet(providerList)
+    val removedDuplicates = ArrayList(hashSet)
+    return removedDuplicates.toMutableList()
+}
+
+fun String.formatDate() = substringBefore(delimiter = "-")
+
+fun Request.setLanguage() = run {
+    if ("reviews".contains(
+            this.url.toString()
+                .substringAfter(delimiter = "movie/")
+                .substringAfter(delimiter = "/")
+                .substringBefore(delimiter = "?")
+        ) || "images".contains(
+            this.url.toString()
+                .substringAfter(delimiter = "movie/")
+                .substringAfter(delimiter = "/")
+                .substringBefore(delimiter = "?")
+        )
+    ) {
+        null
+    } else {
+        "pt-BR"
+    }
 }

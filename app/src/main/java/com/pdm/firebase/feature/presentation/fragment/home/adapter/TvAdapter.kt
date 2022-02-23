@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pdm.firebase.R
 import com.pdm.firebase.feature.domain.model.tv.TvShow
 import com.pdm.firebase.feature.presentation.fragment.home.adapter.TvAdapter.ViewHolder
-import com.pdm.firebase.util.SMALL_IMAGE
+import com.pdm.firebase.util.TMDB_SMALL_IMAGE
 import com.pdm.firebase.util.loadImage
 
 class TvAdapter(private val mutableList: MutableList<TvShow>) : RecyclerView.Adapter<ViewHolder>() {
@@ -22,7 +22,7 @@ class TvAdapter(private val mutableList: MutableList<TvShow>) : RecyclerView.Ada
             LayoutInflater.from(
                 parent.context
             ).inflate(
-                R.layout.item_best_movie,
+                R.layout.item_default,
                 parent,
                 false
             )
@@ -37,7 +37,7 @@ class TvAdapter(private val mutableList: MutableList<TvShow>) : RecyclerView.Ada
         holder.thumbnail.loadImage(
             thumbnail = mutableList.foreground,
             itemView = holder.itemView,
-            size = SMALL_IMAGE
+            size = TMDB_SMALL_IMAGE
         )
     }
 

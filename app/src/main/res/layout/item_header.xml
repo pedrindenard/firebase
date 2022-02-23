@@ -15,9 +15,13 @@
         android:src="@drawable/placeholder_background" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/headerActionBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background_gradient_black"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -26,8 +30,11 @@
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_marginTop="80dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?selectableItemBackground"
             android:src="@drawable/placeholder_profile"
-            app:shapeAppearanceOverlay="@style/imageViewRounded"
+            app:shapeAppearanceOverlay="@style/imageViewLargeRounded"
             app:strokeColor="@color/yellow_dark"
             app:strokeWidth="1dp" />
 

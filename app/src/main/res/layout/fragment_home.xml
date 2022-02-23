@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/refreshHomeFragment"
     android:layout_width="match_parent"
+    android:background="@color/black"
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
@@ -12,8 +13,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/black">
+            android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -99,7 +99,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/topMovieLabel"
                         tools:ignore="RtlSymmetry"
                         tools:itemCount="6"
-                        tools:listitem="@layout/item_best_movie" />
+                        tools:listitem="@layout/item_default" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -148,7 +148,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/topTvLabel"
                         tools:ignore="RtlSymmetry"
                         tools:itemCount="6"
-                        tools:listitem="@layout/item_best_movie" />
+                        tools:listitem="@layout/item_default" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -164,6 +164,9 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="16dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?selectableItemBackground"
                         android:scaleType="fitXY"
                         android:src="@drawable/background_maps"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -243,7 +246,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/mostPopularLabel"
                         tools:ignore="RtlSymmetry"
                         tools:itemCount="6"
-                        tools:listitem="@layout/item_best_movie" />
+                        tools:listitem="@layout/item_default" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -283,7 +286,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/menuMovieRecyclerView"
                         tools:ignore="RtlSymmetry"
                         tools:itemCount="6"
-                        tools:listitem="@layout/item_best_movie" />
+                        tools:listitem="@layout/item_default" />
 
                     <com.google.android.material.progressindicator.LinearProgressIndicator
                         android:id="@+id/progressGenres"
@@ -394,7 +397,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/popularTvLabel"
                         tools:ignore="RtlSymmetry"
                         tools:itemCount="6"
-                        tools:listitem="@layout/item_best_movie" />
+                        tools:listitem="@layout/item_default" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -434,7 +437,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/menuTvRecyclerView"
                         tools:ignore="RtlSymmetry"
                         tools:itemCount="6"
-                        tools:listitem="@layout/item_best_movie" />
+                        tools:listitem="@layout/item_default" />
 
                     <com.google.android.material.progressindicator.LinearProgressIndicator
                         android:id="@+id/progressTvGenres"

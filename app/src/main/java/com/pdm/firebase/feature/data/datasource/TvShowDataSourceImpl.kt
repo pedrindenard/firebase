@@ -2,6 +2,7 @@ package com.pdm.firebase.feature.data.datasource
 
 import com.pdm.firebase.arquitecture.Event.Companion.errorCallApi
 import com.pdm.firebase.arquitecture.Event.Companion.safeCallApi
+import com.pdm.firebase.arquitecture.Event.Companion.safeReturn
 import com.pdm.firebase.arquitecture.Event.Companion.toJson
 import com.pdm.firebase.arquitecture.Resource
 import com.pdm.firebase.feature.data.local.CacheImpl
@@ -21,9 +22,11 @@ class TvShowDataSourceImpl(private val api: Api, private val cache: CacheImpl) :
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body().also {
-                        cache.insert(POPULAR_TV, it.toJson())
-                    })
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!.also {
+                            cache.insert(POPULAR_TV, it.toJson())
+                        })
+                    }
                 }
                 else -> {
                     response.errorCallApi {
@@ -42,9 +45,11 @@ class TvShowDataSourceImpl(private val api: Api, private val cache: CacheImpl) :
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body().also {
-                        cache.insert(CacheImpl.GENDERS_TV, it.toJson())
-                    })
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!.also {
+                            cache.insert(CacheImpl.GENDERS_TV, it.toJson())
+                        })
+                    }
                 }
                 else -> {
                     response.errorCallApi {
@@ -63,9 +68,11 @@ class TvShowDataSourceImpl(private val api: Api, private val cache: CacheImpl) :
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body().also {
-                        cache.insert(CacheImpl.TV_BY_GENDER, it.toJson())
-                    })
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!.also {
+                            cache.insert(CacheImpl.TV_BY_GENDER, it.toJson())
+                        })
+                    }
                 }
                 else -> {
                     response.errorCallApi {
@@ -84,9 +91,11 @@ class TvShowDataSourceImpl(private val api: Api, private val cache: CacheImpl) :
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body().also {
-                        cache.insert(TOP_RATED_TV, it.toJson())
-                    })
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!.also {
+                            cache.insert(TOP_RATED_TV, it.toJson())
+                        })
+                    }
                 }
                 else -> {
                     response.errorCallApi {
@@ -105,9 +114,11 @@ class TvShowDataSourceImpl(private val api: Api, private val cache: CacheImpl) :
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body().also {
-                        cache.insert(ON_AIR_TV, it.toJson())
-                    })
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!.also {
+                            cache.insert(ON_AIR_TV, it.toJson())
+                        })
+                    }
                 }
                 else -> {
                     response.errorCallApi {

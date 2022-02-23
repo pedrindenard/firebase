@@ -2,6 +2,7 @@ package com.pdm.firebase.feature.data.datasource
 
 import com.pdm.firebase.arquitecture.Event
 import com.pdm.firebase.arquitecture.Event.Companion.errorCallApi
+import com.pdm.firebase.arquitecture.Event.Companion.safeReturn
 import com.pdm.firebase.arquitecture.Event.Companion.toJson
 import com.pdm.firebase.arquitecture.Resource
 import com.pdm.firebase.feature.data.local.CacheImpl
@@ -21,17 +22,15 @@ class SearchDataSourceImpl(
     private val cache: CacheImpl
 ) : SearchDataSource {
 
-    override suspend fun getSearchCollections(
-        query: String, page: Int
-    ): Resource<CollectionResponse?> {
+    override suspend fun getSearchCollections(query: String, page: Int): Resource<CollectionResponse?> {
         return Event.safeCallApi {
-            val response = api.searchCollection(
-                query = query, page = page
-            )
+            val response = api.searchCollection(query = query, page = page)
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body())
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!)
+                    }
                 }
                 else -> {
                     response.errorCallApi {
@@ -58,7 +57,9 @@ class SearchDataSourceImpl(
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body())
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!)
+                    }
                 }
                 else -> {
                     response.errorCallApi {
@@ -81,7 +82,9 @@ class SearchDataSourceImpl(
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body())
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!)
+                    }
                 }
                 else -> {
                     response.errorCallApi {
@@ -107,7 +110,9 @@ class SearchDataSourceImpl(
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body())
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!)
+                    }
                 }
                 else -> {
                     response.errorCallApi {
@@ -130,7 +135,9 @@ class SearchDataSourceImpl(
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body())
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!)
+                    }
                 }
                 else -> {
                     response.errorCallApi {
@@ -149,9 +156,11 @@ class SearchDataSourceImpl(
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body().also {
-                        cache.insert(REGIONS, it.toJson())
-                    })
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!.also {
+                            cache.insert(REGIONS, it.toJson())
+                        })
+                    }
                 }
                 else -> {
                     response.errorCallApi {

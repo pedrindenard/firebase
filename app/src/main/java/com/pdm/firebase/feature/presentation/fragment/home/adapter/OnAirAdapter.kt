@@ -7,10 +7,9 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pdm.firebase.R
-import com.pdm.firebase.feature.domain.model.movie.Movie
 import com.pdm.firebase.feature.domain.model.tv.TvShow
 import com.pdm.firebase.feature.presentation.fragment.home.adapter.OnAirAdapter.ViewHolder
-import com.pdm.firebase.util.MEDIUM_IMAGE
+import com.pdm.firebase.util.TMDB_MEDIUM_IMAGE
 import com.pdm.firebase.util.loadImage
 
 class OnAirAdapter(private val mutableList: MutableList<TvShow>) : RecyclerView.Adapter<ViewHolder>() {
@@ -36,7 +35,7 @@ class OnAirAdapter(private val mutableList: MutableList<TvShow>) : RecyclerView.
         holder.thumbnail.loadImage(
             thumbnail = mutableList.background,
             itemView = holder.itemView,
-            size = MEDIUM_IMAGE
+            size = TMDB_MEDIUM_IMAGE
         )
     }
 

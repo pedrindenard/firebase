@@ -20,11 +20,11 @@ const val WHATSAPP_COMMON = "com.whatsapp"
 
 const val WHATSAPP_BUSINESS = "com.whatsapp.w4b"
 
-const val INTENT_WHATSAPP = "https://api.whatsapp.com/send?phone=551142000145"
+const val INTENT_WHATSAPP = "https://api.whatsapp.com/send?phone=5501498454141"
 
-const val INTENT_PHONE = "tel:30032145"
+const val INTENT_PHONE = "tel:+55014984541410"
 
-const val INTENT_EMAIL = "mailto:atendimento@iguatemi365.com.br"
+const val INTENT_EMAIL = "mailto:pedrominuzzi21@gmail.com"
 
 const val INTENT_PLAY_STORE_APP = "market://details?id=$WHATSAPP_COMMON"
 
@@ -40,11 +40,17 @@ const val BAD_REQUEST = "Bad request"
 
 const val ARGS = "ARGS"
 
-const val SMALL_IMAGE = "w300"
+const val TMDB_SMALL_IMAGE = "w300"
 
-const val MEDIUM_IMAGE = "w780"
+const val TMDB_MEDIUM_IMAGE = "w780"
 
-const val LARGE_IMAGE = "w1280"
+const val TMDB_LARGE_IMAGE = "w1280"
+
+const val MAXIMUM_QUALITY_YOUTUBE = "/maxresdefault.jpg"
+
+const val MEDIUM_QUALITY_YOUTUBE = "/mqdefault.jpg"
+
+const val HIGH_QUALITY_YOUTUBE = "/hqdefault.jpg"
 
 const val POLITY_PRIVACY = "Política de Privacidade"
 

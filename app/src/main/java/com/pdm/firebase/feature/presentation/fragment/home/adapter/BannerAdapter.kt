@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pdm.firebase.R
 import com.pdm.firebase.feature.domain.model.movie.Movie
 import com.pdm.firebase.feature.presentation.fragment.home.adapter.BannerAdapter.ViewHolder
-import com.pdm.firebase.util.LARGE_IMAGE
+import com.pdm.firebase.util.TMDB_LARGE_IMAGE
 import com.pdm.firebase.util.loadImage
 
 class BannerAdapter(private val mutableList: MutableList<Movie>) : RecyclerView.Adapter<ViewHolder>() {
@@ -34,7 +34,7 @@ class BannerAdapter(private val mutableList: MutableList<Movie>) : RecyclerView.
         holder.thumbnail.loadImage(
             thumbnail = mutableList.imgBackground,
             itemView = holder.itemView,
-            size = LARGE_IMAGE
+            size = TMDB_LARGE_IMAGE
         )
     }
 

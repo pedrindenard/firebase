@@ -5,6 +5,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     android:layoutDirection="ltr"
     tools:context=".feature.presentation.activity.MainActivity"
     tools:openDrawer="start">
@@ -19,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@drawable/background_gradient_menu"
-            android:fitsSystemWindows="true"
             android:translationZ="1dp"
             app:menu="@menu/menu_app"
             app:navigationIcon="@drawable/ic_menu" />

@@ -5,6 +5,7 @@ import com.pdm.firebase.feature.domain.usecase.discover.GetMovieByQueryUseCase
 import com.pdm.firebase.feature.domain.usecase.discover.GetTvShowByQueryUseCase
 import com.pdm.firebase.feature.domain.usecase.login.*
 import com.pdm.firebase.feature.domain.usecase.movie.*
+import com.pdm.firebase.feature.domain.usecase.movie.details.*
 import com.pdm.firebase.feature.domain.usecase.profile.DeleteUserUseCase
 import com.pdm.firebase.feature.domain.usecase.profile.EditUserUseCase
 import com.pdm.firebase.feature.domain.usecase.profile.GetUserInfoUseCase
@@ -71,6 +72,26 @@ object UseCaseModule {
                 getTvShowOnAir = get()
             )
         }
+        single {
+            MovieDetailsUseCase(
+                getMovieCredits = get(),
+                getMovieDetails = get(),
+                getMovieImages = get(),
+                getMovieProviders = get(),
+                getMovieRecommendations = get(),
+                getMovieReviews = get(),
+                getMovieSimilar = get(),
+                getMovieVideos = get(),
+            )
+        }
+        single { GetMovieCreditsUseCase(repository = get()) }
+        single { GetMovieDetailsUseCase(repository = get()) }
+        single { GetMovieImagesUseCase(repository = get()) }
+        single { GetMovieProvidersUseCase(repository = get()) }
+        single { GetMovieRecommendationsUseCase(repository = get()) }
+        single { GetMovieReviewsUseCase(repository = get()) }
+        single { GetMovieSimilarUseCase(repository = get()) }
+        single { GetMovieVideosUseCase(repository = get()) }
         single { GetTvShowOnAirUseCase(repository = get()) }
         single { GetTvShowByGenderUseCase(repository = get()) }
         single { GetTvShowTopRatedUseCase(repository = get()) }

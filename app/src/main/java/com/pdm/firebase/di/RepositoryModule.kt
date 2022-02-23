@@ -14,5 +14,6 @@ object RepositoryModule {
         single<MovieRepository> { MovieRepositoryImpl(dataSource = get(), cache = get()) }
         single<TvShowRepository> { TvShowRepositoryImpl(dataSource = get(), cache = get()) }
         single<SearchRepository> { SearchRepositoryImpl(dataSource = get(), cache = get()) }
+        single<MovieDetailsRepository> { MovieDetailsRepositoryImpl(dataSource = get()) }
     }
 }

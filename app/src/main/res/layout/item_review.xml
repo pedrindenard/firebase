@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground"
+    app:cardBackgroundColor="@color/gray_background"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profileAuthor"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?selectableItemBackground"
+            android:src="@drawable/placeholder_profile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/imageViewLargeRounded" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/nameAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/stellar_regular"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/ratingAuthor"
+            app:layout_constraintStart_toEndOf="@+id/profileAuthor"
+            app:layout_constraintTop_toTopOf="@+id/profileAuthor"
+            tools:text="Pedro Denardi Minuzzi" />
+
+        <RatingBar
+            android:id="@+id/ratingAuthor"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:theme="@style/ratingBar"
+            app:layout_constraintBottom_toBottomOf="@+id/profileAuthor"
+            app:layout_constraintStart_toEndOf="@+id/profileAuthor"
+            app:layout_constraintTop_toBottomOf="@+id/nameAuthor"
+            tools:rating="4.5" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/createdAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/stellar_regular"
+            android:textColor="@color/gray_light"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/nameAuthor"
+            app:layout_constraintStart_toEndOf="@+id/nameAuthor"
+            app:layout_constraintTop_toTopOf="@+id/nameAuthor"
+            tools:text="2018/06/09" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/contentAuthor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/stellar_regular"
+            android:lineSpacingExtra="4dp"
+            android:maxLines="5"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileAuthor"
+            tools:text="Author content go here" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/updatedAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/stellar_regular"
+            android:textColor="@color/gray_light"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contentAuthor"
+            tools:text="Last update: 2020/08/12" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -10,6 +10,7 @@ import com.pdm.firebase.feature.presentation.activity.IntroActivity
 import com.pdm.firebase.feature.presentation.activity.MainActivity
 import com.pdm.firebase.feature.presentation.base.BaseFragment
 import com.pdm.firebase.feature.presentation.fragment.init.viewModel.SplashViewModel
+import com.pdm.firebase.util.handlerDelay
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class InitFragment : BaseFragment() {
@@ -29,7 +30,6 @@ class InitFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.clearCache()
         viewModel.start()
         initObservers()
     }

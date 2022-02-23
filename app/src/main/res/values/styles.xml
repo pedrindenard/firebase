@@ -45,9 +45,19 @@
         <item name="android:textColorSecondary">@color/yellow_dark</item>
     </style>
 
-    <style name="imageViewRounded">
+    <style name="imageViewLargeRounded">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="imageViewMediumRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16%</item>
+    </style>
+
+    <style name="imageViewSmallRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8%</item>
     </style>
 
 </resources>

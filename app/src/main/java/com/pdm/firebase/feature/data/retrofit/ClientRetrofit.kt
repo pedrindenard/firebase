@@ -2,6 +2,7 @@ package com.pdm.firebase.feature.data.retrofit
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.pdm.firebase.BuildConfig
+import com.pdm.firebase.util.setLanguage
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -40,7 +41,7 @@ class ClientRetrofit {
                     this.newBuilder().url(
                         this.url.newBuilder()
                             .addQueryParameter(name = "api_key", value = BuildConfig.BASE_API_KEY)
-                            .addQueryParameter(name = "language", value = "pt-BR")
+                            .addQueryParameter(name = "language", value = this.setLanguage())
                             .build()
                     ).build()
                 )

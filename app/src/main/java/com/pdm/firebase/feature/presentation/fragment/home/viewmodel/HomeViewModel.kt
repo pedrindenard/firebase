@@ -134,7 +134,7 @@ class HomeViewModel(
 
     fun getMovieByGender(id: Int, ignoreCache: Boolean? = false) {
         viewModelScope.launch {
-            when (val response = movieUseCase.getMovieByGender.invoke(id = id, page = 1, ignoreCache)) {
+            when (val response = movieUseCase.getMovieByGender.invoke(id = id, page = 1, true)) {
                 is Resource.Success -> {
                     _getMovieByGender.postValue(response.data!!)
                 }

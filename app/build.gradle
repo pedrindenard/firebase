@@ -25,7 +25,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "BASE_API_URL", '"https://api.themoviedb.org/3/"'
-            buildConfigField "String", "BASE_IMAGE_URL", '"https://image.tmdb.org/t/p/"'
+            buildConfigField "String", "BASE_IMAGE_TMDB", '"https://image.tmdb.org/t/p/"'
+            buildConfigField "String", "BASE_IMAGE_YOUTUBE", '"https://img.youtube.com/vi/"'
             buildConfigField "String", "BASE_API_KEY", '"5179442a4d6ed6eb656ad05e611bad78"'
         }
 
@@ -33,7 +34,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "BASE_API_URL", '"https://api.themoviedb.org/3/"'
-            buildConfigField "String", "BASE_IMAGE_URL", '"https://image.tmdb.org/t/p/"'
+            buildConfigField "String", "BASE_IMAGE_TMDB", '"https://image.tmdb.org/t/p/"'
+            buildConfigField "String", "BASE_IMAGE_YOUTUBE", '"https://img.youtube.com/vi/"'
             buildConfigField "String", "BASE_API_KEY", '"5179442a4d6ed6eb656ad05e611bad78"'
         }
 
@@ -41,7 +43,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "BASE_API_URL", '"https://api.themoviedb.org/3/"'
-            buildConfigField "String", "BASE_IMAGE_URL", '"https://image.tmdb.org/t/p/"'
+            buildConfigField "String", "BASE_IMAGE_TMDB", '"https://image.tmdb.org/t/p/"'
+            buildConfigField "String", "BASE_IMAGE_YOUTUBE", '"https://img.youtube.com/vi/"'
             buildConfigField "String", "BASE_API_KEY", '"5179442a4d6ed6eb656ad05e611bad78"'
         }
     }

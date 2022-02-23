@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pdm.firebase.R
 import com.pdm.firebase.feature.domain.model.gender.Gender
 import com.pdm.firebase.feature.presentation.fragment.gender.adapter.GenreAdapter.ViewHolder
-import com.pdm.firebase.util.SMALL_IMAGE
+import com.pdm.firebase.util.TMDB_SMALL_IMAGE
 import com.pdm.firebase.util.loadImage
 
 class GenreAdapter(private val mutableList: List<Gender>) : RecyclerView.Adapter<ViewHolder>() {
@@ -34,7 +34,7 @@ class GenreAdapter(private val mutableList: List<Gender>) : RecyclerView.Adapter
         holder.thumbnail.loadImage(
             itemView = holder.itemView,
             thumbnail = mutableList.image ?: "",
-            size = SMALL_IMAGE
+            size = TMDB_SMALL_IMAGE
         )
     }
 

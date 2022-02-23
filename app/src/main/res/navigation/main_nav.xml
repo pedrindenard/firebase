@@ -29,4 +29,28 @@
         android:label="DiscoverFragment"
         tools:layout="@layout/fragment_discover" />
 
+    <fragment
+        android:id="@+id/collectionFragment"
+        android:name="com.pdm.firebase.feature.presentation.fragment.collection.CollectionFragment"
+        android:label="CollectionFragment"
+        tools:layout="@layout/fragment_discover" />
+
+    <fragment
+        android:id="@+id/reviewsFragment"
+        android:name="com.pdm.firebase.feature.presentation.fragment.review.ReviewsFragment"
+        android:label="ReviewsFragment"
+        tools:layout="@layout/fragment_reviews" />
+
+    <fragment
+        android:id="@+id/castFragment"
+        android:name="com.pdm.firebase.feature.presentation.fragment.details.people.PeopleFragment"
+        android:label="PeopleFragment"
+        tools:layout="@layout/fragment_people" />
+
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.pdm.firebase.feature.presentation.fragment.details.movie.MovieFragment"
+        android:label="MovieFragment"
+        tools:layout="@layout/fragment_movie" />
+
 </navigation>

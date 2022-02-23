@@ -1,5 +1,6 @@
 package com.pdm.firebase.di
 
+import com.pdm.firebase.feature.presentation.fragment.details.movie.viewmodel.MovieViewModel
 import com.pdm.firebase.feature.presentation.fragment.discover.viewmodel.DiscoveryViewModel
 import com.pdm.firebase.feature.presentation.fragment.gender.viewmodel.GenderViewModel
 import com.pdm.firebase.feature.presentation.fragment.home.viewmodel.HomeViewModel
@@ -25,5 +26,6 @@ object ViewModelModule {
         viewModel { RecoveryViewModel(useCase = get()) }
         viewModel { ProfileViewModel(useCase = get()) }
         viewModel { PrivacyViewModel(useCase = get()) }
+        viewModel { MovieViewModel(useCase = get()) }
     }
 }

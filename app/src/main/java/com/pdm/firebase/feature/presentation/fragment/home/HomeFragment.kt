@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.pdm.firebase.R
@@ -167,7 +169,16 @@ class HomeFragment : BaseFragment() {
             adapter = MovieAdapter(mutableList = this@initPopularMovieAdapter).apply {
                 setOnItemClickListener(object : MovieAdapter.ClickListener {
                     override fun onItemClickListener(movie: Movie) {
-
+                        findNavController().navigate(
+                            R.id.movieFragment, Bundle().apply {
+                                putSerializable(ARGS, movie.id)
+                            }, NavOptions.Builder().apply {
+                                setEnterAnim(R.anim.fade_in)
+                                setExitAnim(R.anim.fade_out)
+                                setPopEnterAnim(R.anim.fade_in)
+                                setPopExitAnim(R.anim.fade_out)
+                            }.build()
+                        )
                     }
                 })
             }

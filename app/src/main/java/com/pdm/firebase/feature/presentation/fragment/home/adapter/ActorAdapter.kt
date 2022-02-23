@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pdm.firebase.R
 import com.pdm.firebase.feature.domain.model.actor.Actor
 import com.pdm.firebase.feature.presentation.fragment.home.adapter.ActorAdapter.ViewHolder
-import com.pdm.firebase.util.SMALL_IMAGE
+import com.pdm.firebase.util.TMDB_SMALL_IMAGE
 import com.pdm.firebase.util.loadImage
 
 class ActorAdapter(private val mutableList: MutableList<Actor>) : RecyclerView.Adapter<ViewHolder>() {
@@ -34,7 +34,7 @@ class ActorAdapter(private val mutableList: MutableList<Actor>) : RecyclerView.A
         holder.picture.loadImage(
             thumbnail = mutableList.imgProfile,
             itemView = holder.itemView,
-            size = SMALL_IMAGE
+            size = TMDB_SMALL_IMAGE
         )
     }
 

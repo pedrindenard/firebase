@@ -9,7 +9,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.pdm.firebase.R
 import com.pdm.firebase.feature.domain.model.search.Search
 import com.pdm.firebase.feature.presentation.fragment.search.adapter.SearchAdapter.ViewHolder
-import com.pdm.firebase.util.SMALL_IMAGE
+import com.pdm.firebase.util.TMDB_SMALL_IMAGE
 import com.pdm.firebase.util.loadImage
 
 class SearchAdapter : RecyclerView.Adapter<ViewHolder>() {
@@ -57,7 +57,7 @@ class SearchAdapter : RecyclerView.Adapter<ViewHolder>() {
             imageMovie.loadImage(
                 thumbnail = it.posterPath ?: it.profilePath ?: "",
                 itemView = itemView,
-                size = SMALL_IMAGE
+                size = TMDB_SMALL_IMAGE
             )
         }
     }

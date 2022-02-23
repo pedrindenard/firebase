@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp">
+    android:layout_margin="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/searchImage"
@@ -16,6 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/imageViewSmallRounded"
         tools:src="@color/gray_light" />
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -26,6 +30,7 @@
         android:alpha="0.6"
         android:scaleType="centerCrop"
         android:src="@color/black"
+        app:shapeAppearanceOverlay="@style/imageViewSmallRounded"
         app:layout_constraintBottom_toBottomOf="@+id/searchImage"
         app:layout_constraintEnd_toEndOf="@+id/searchImage"
         app:layout_constraintStart_toStartOf="@+id/searchImage"

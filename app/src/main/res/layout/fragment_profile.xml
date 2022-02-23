@@ -25,7 +25,7 @@
                 android:focusable="false"
                 android:longClickable="false"
                 android:src="@drawable/placeholder_profile"
-                app:shapeAppearanceOverlay="@style/imageViewRounded"
+                app:shapeAppearanceOverlay="@style/imageViewLargeRounded"
                 app:strokeColor="@color/yellow_dark"
                 app:strokeWidth="1dp" />
 

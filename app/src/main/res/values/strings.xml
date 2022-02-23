@@ -106,17 +106,20 @@
     <!--  Home  -->
     <string name="home_message">Sem as permissões não é possivel executar o aplicativo corretamente.</string>
     <string name="movie_details_storyline">Enredo</string>
-    <string name="play_trailer">Assistir trailer</string>
-    <string name="rate_movie">Avaliar filme</string>
+    <string name="play_trailer">Assistir videos</string>
+    <string name="rate_movie">Avaliar</string>
     <string name="actors">Atores</string>
     <string name="about_movie">Sobre o filme</string>
     <string name="original_title">Título original:</string>
     <string name="type_movie">Tipo:</string>
-    <string name="production_movie">Produções:</string>
+    <string name="production_movie">Slogan:</string>
     <string name="premiere">Pré estreia:</string>
-    <string name="description_movie">Descrição:</string>
+    <string name="description_movie">Países de produção:</string>
     <string name="creators_movie">Criadores</string>
+    <string name="review_created">Criado em: %s</string>
+    <string name="review_updated">Última atualização: %s</string>
     <string name="more_movies_like_this">Semelhantes</string>
+    <string name="movies_recommendations">Recomendações</string>
     <string name="most_popular">Populares do cinema</string>
     <string name="see_more"><u>Ver mais</u></string>
     <string name="movie_show_time">Confira horários de\nexibição dos filmes</string>
@@ -192,4 +195,11 @@
     <string name="home_popular_tv">Populares da televisão</string>
     <string name="home_top_rated_tv">Programas mais avaliados</string>
     <string name="home_top_rated_movie">Filmes mais avaliados</string>
+    <string name="movie_favorite">Favoritar</string>
+    <string name="movie_reviews">Avaliações (%s)</string>
+    <string name="see_all_reviews"><u>Ver tudo</u></string>
+    <string name="provider_movie">Fornecedores</string>
+    <string name="crew_movie"><b><u>Criadores:</u></b></string>
+    <string name="company_production">Empresas de produção</string>
+    <string name="know_for">Conhecido por</string>
 </resources>

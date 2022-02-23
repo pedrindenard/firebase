@@ -12,11 +12,18 @@ class Event {
     companion object {
 
         inline fun <T> safeCallApi(apiCall: () -> Resource<T>): Resource<T> {
-            return try {
-                apiCall()
-            } catch (e: Throwable) {
+            return try { apiCall() } catch (e: Throwable) {
                 Log.e(ERROR_SERVER, e.toString())
                 Resource.Failure(e)
+            }
+        }
+
+        inline fun <T> Response<T>.safeReturn(returnResource: () -> Resource<T>): Resource<T> {
+            return if (this.body() != null) { returnResource() } else {
+                Resource.Error(
+                    message = "null",
+                    code = 404
+                )
             }
         }
 

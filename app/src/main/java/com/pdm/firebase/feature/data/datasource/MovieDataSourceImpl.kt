@@ -2,6 +2,7 @@ package com.pdm.firebase.feature.data.datasource
 
 import com.pdm.firebase.arquitecture.Event.Companion.errorCallApi
 import com.pdm.firebase.arquitecture.Event.Companion.safeCallApi
+import com.pdm.firebase.arquitecture.Event.Companion.safeReturn
 import com.pdm.firebase.arquitecture.Event.Companion.toJson
 import com.pdm.firebase.arquitecture.Resource
 import com.pdm.firebase.feature.data.local.CacheImpl
@@ -25,9 +26,11 @@ class MovieDataSourceImpl(private val api: Api, private val cache: CacheImpl) : 
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body().also {
-                        cache.insert(POPULAR_MOVIE, it.toJson())
-                    })
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!.also {
+                            cache.insert(POPULAR_MOVIE, it.toJson())
+                        })
+                    }
                 }
                 else -> {
                     response.errorCallApi {
@@ -46,9 +49,11 @@ class MovieDataSourceImpl(private val api: Api, private val cache: CacheImpl) : 
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body().also {
-                        cache.insert(RATED_MOVIE, it.toJson())
-                    })
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!.also {
+                            cache.insert(RATED_MOVIE, it.toJson())
+                        })
+                    }
                 }
                 else -> {
                     response.errorCallApi {
@@ -67,9 +72,11 @@ class MovieDataSourceImpl(private val api: Api, private val cache: CacheImpl) : 
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body().also {
-                        cache.insert(GENDERS_MOVIE, it.toJson())
-                    })
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!.also {
+                            cache.insert(GENDERS_MOVIE, it.toJson())
+                        })
+                    }
                 }
                 else -> {
                     response.errorCallApi {
@@ -88,9 +95,11 @@ class MovieDataSourceImpl(private val api: Api, private val cache: CacheImpl) : 
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body().also {
-                        cache.insert(MOVIE_BY_GENDER, it.toJson())
-                    })
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!.also {
+                            cache.insert(MOVIE_BY_GENDER, it.toJson())
+                        })
+                    }
                 }
                 else -> {
                     response.errorCallApi {
@@ -109,9 +118,11 @@ class MovieDataSourceImpl(private val api: Api, private val cache: CacheImpl) : 
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body().also {
-                        cache.insert(UPCOMING_MOVIE, it.toJson())
-                    })
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!.also {
+                            cache.insert(UPCOMING_MOVIE, it.toJson())
+                        })
+                    }
                 }
                 else -> {
                     response.errorCallApi {
@@ -130,7 +141,9 @@ class MovieDataSourceImpl(private val api: Api, private val cache: CacheImpl) : 
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body())
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!)
+                    }
                 }
                 else -> {
                     response.errorCallApi {
@@ -149,9 +162,11 @@ class MovieDataSourceImpl(private val api: Api, private val cache: CacheImpl) : 
 
             when {
                 response.isSuccessful -> {
-                    Resource.Success(data = response.body().also {
-                        cache.insert(BEST_ACTORS, it.toJson())
-                    })
+                    response.safeReturn {
+                        Resource.Success(data = response.body()!!.also {
+                            cache.insert(BEST_ACTORS, it.toJson())
+                        })
+                    }
                 }
                 else -> {
                     response.errorCallApi {
