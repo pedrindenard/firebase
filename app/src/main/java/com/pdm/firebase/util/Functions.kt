@@ -9,6 +9,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.util.TypedValue
 import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.TextView
 import androidx.core.view.get
 import com.google.android.material.navigation.NavigationView
@@ -58,6 +59,21 @@ fun handlerDelay(delayMillis: Long = 1000, action: () -> Unit) {
     Handler(Looper.getMainLooper()).postDelayed({
         action()
     }, delayMillis)
+}
+
+inline fun View.waitForLayout(crossinline action: () -> Unit) {
+    val vto = viewTreeObserver
+    vto.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+        override fun onGlobalLayout() {
+            when {
+                vto.isAlive -> {
+                    vto.removeOnGlobalLayoutListener(this)
+                    action()
+                }
+                else -> viewTreeObserver.removeOnGlobalLayoutListener(this)
+            }
+        }
+    })
 }
 
 fun Context.dpToPx(dp: Float): Int =

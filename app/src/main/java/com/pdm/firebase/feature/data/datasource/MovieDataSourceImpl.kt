@@ -6,7 +6,6 @@ import com.pdm.firebase.arquitecture.Event.Companion.safeReturn
 import com.pdm.firebase.arquitecture.Event.Companion.toJson
 import com.pdm.firebase.arquitecture.Resource
 import com.pdm.firebase.feature.data.local.CacheImpl
-import com.pdm.firebase.feature.data.local.CacheImpl.Companion.BEST_ACTORS
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.GENDERS_MOVIE
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.MOVIE_BY_GENDER
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.POPULAR_MOVIE
@@ -14,7 +13,6 @@ import com.pdm.firebase.feature.data.local.CacheImpl.Companion.RATED_MOVIE
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.UPCOMING_MOVIE
 import com.pdm.firebase.feature.data.retrofit.Api
 import com.pdm.firebase.feature.domain.datasource.MovieDataSource
-import com.pdm.firebase.feature.domain.model.actor.ActorsResponse
 import com.pdm.firebase.feature.domain.model.gender.GenderResponse
 import com.pdm.firebase.feature.domain.model.movie.MovieResponse
 
@@ -143,29 +141,6 @@ class MovieDataSourceImpl(private val api: Api, private val cache: CacheImpl) : 
                 response.isSuccessful -> {
                     response.safeReturn {
                         Resource.Success(data = response.body()!!)
-                    }
-                }
-                else -> {
-                    response.errorCallApi {
-                        Resource.InvalidAuth(
-                            message = response.message()
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    override suspend fun getBestActors(page: Int): Resource<ActorsResponse?> {
-        return safeCallApi {
-            val response = api.getBestActors(page = page)
-
-            when {
-                response.isSuccessful -> {
-                    response.safeReturn {
-                        Resource.Success(data = response.body()!!.also {
-                            cache.insert(BEST_ACTORS, it.toJson())
-                        })
                     }
                 }
                 else -> {

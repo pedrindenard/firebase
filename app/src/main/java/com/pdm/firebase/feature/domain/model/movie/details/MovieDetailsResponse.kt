@@ -23,7 +23,7 @@ data class MovieDetailsResponse(
     @SerializedName(value = "release_date") val releaseDate: String,
     @SerializedName(value = "revenue") val revenue: Float,
     @SerializedName(value = "runtime") val runtime: Float?,
-    @SerializedName(value = "tagline") val slogan: String,
+    @SerializedName(value = "tagline") val slogan: String?,
     @SerializedName(value = "vote_average") val voteAverage: Float,
     @SerializedName(value = "vote_count") val voteCount: Float
 ) : Serializable

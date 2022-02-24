@@ -29,7 +29,7 @@ data class Search(
     @SerializedName(value = "origin_country") val originalCountry: List<String>?, //Tv
     @SerializedName(value = "original_name") val originalName: String?, //Tv
 
-    @SerializedName(value = "name") val name: String?, //People, Collection
+    @SerializedName(value = "name") val name: String?, //People, Collection, Tv
 
     @SerializedName(value = "known_for") val knownFor: List<Any>?, //People
     @SerializedName(value = "known_for_department") val knownForDepartment: String?, //People

@@ -6,6 +6,11 @@ import com.pdm.firebase.feature.domain.usecase.discover.GetTvShowByQueryUseCase
 import com.pdm.firebase.feature.domain.usecase.login.*
 import com.pdm.firebase.feature.domain.usecase.movie.*
 import com.pdm.firebase.feature.domain.usecase.movie.details.*
+import com.pdm.firebase.feature.domain.usecase.people.GetBestActorsUseCase
+import com.pdm.firebase.feature.domain.usecase.people.details.GetPeopleCreditsUseCase
+import com.pdm.firebase.feature.domain.usecase.people.details.GetPeopleDetailsUseCase
+import com.pdm.firebase.feature.domain.usecase.people.details.GetPeopleImagesUseCase
+import com.pdm.firebase.feature.domain.usecase.people.details.GetPeopleTaggedUseCase
 import com.pdm.firebase.feature.domain.usecase.profile.DeleteUserUseCase
 import com.pdm.firebase.feature.domain.usecase.profile.EditUserUseCase
 import com.pdm.firebase.feature.domain.usecase.profile.GetUserInfoUseCase
@@ -38,7 +43,6 @@ object UseCaseModule {
         }
         single {
             MovieUseCase(
-                getBestActors = get(),
                 getGendersMovie = get(),
                 getMovieByGender = get(),
                 getPopularMovie = get(),
@@ -84,6 +88,19 @@ object UseCaseModule {
                 getMovieVideos = get(),
             )
         }
+        single {
+            PeopleUseCase(
+                getPeopleCredits = get(),
+                getPeopleDetails = get(),
+                getPeopleImages = get(),
+                getPeopleTagged = get(),
+                getBestActors = get()
+            )
+        }
+        single { GetPeopleCreditsUseCase(repository = get()) }
+        single { GetPeopleDetailsUseCase(repository = get()) }
+        single { GetPeopleImagesUseCase(repository = get()) }
+        single { GetPeopleTaggedUseCase(repository = get()) }
         single { GetMovieCreditsUseCase(repository = get()) }
         single { GetMovieDetailsUseCase(repository = get()) }
         single { GetMovieImagesUseCase(repository = get()) }

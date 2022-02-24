@@ -2,6 +2,7 @@ package com.pdm.firebase.feature.presentation.fragment.review.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,7 @@ import com.pdm.firebase.R
 import com.pdm.firebase.feature.domain.model.review.Review
 import com.pdm.firebase.feature.presentation.fragment.review.adapter.ReviewsAdapter.ViewHolder
 
-class ReviewsAdapter : RecyclerView.Adapter<ViewHolder>() {
+class ReviewsAdapter(private val maxLineContent: Int? = null) : RecyclerView.Adapter<ViewHolder>() {
 
     private var mutableList: MutableList<Review> = mutableListOf()
     private lateinit var mClickListener: ClickListener
@@ -39,6 +40,7 @@ class ReviewsAdapter : RecyclerView.Adapter<ViewHolder>() {
         holder.content.text = mutableList.content
         holder.handlerDates(mutableList)
         holder.handlerImage(mutableList)
+        holder.handlerContent()
     }
 
     override fun getItemCount(): Int = mutableList.size
@@ -76,6 +78,15 @@ class ReviewsAdapter : RecyclerView.Adapter<ViewHolder>() {
                 format = mContext.getString(R.string.review_created),
                 args = arrayOf(it.createdAt.substringBefore(delimiter = "T"))
             )
+        }
+
+        fun handlerContent() {
+            content.apply {
+                maxLineContent.takeIf { it != null }?.let {
+                    ellipsize = TextUtils.TruncateAt.END
+                    maxLines = it
+                }
+            }
         }
     }
 

@@ -1,157 +1,375 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/collapsingToolbar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_background">
+    android:background="@color/black">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/peopleProfile"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingContainer"
             android:layout_width="match_parent"
-            android:layout_height="480dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:background="@color/black" />
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-        <View
-            android:id="@+id/gradientView"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_collapseMode="parallax">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/peopleProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="480dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/gradientView"
+                    android:layout_width="match_parent"
+                    android:layout_height="224dp"
+                    android:background="@drawable/background_gradient_dark"
+                    app:layout_constraintBottom_toBottomOf="@+id/peopleProfile" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/namePeople"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginEnd="64dp"
+                    android:layout_marginBottom="82dp"
+                    android:fontFamily="@font/caveat_regular"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="48sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/peopleProfile"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="Tony Stark" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/ratingPeople"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:drawableStart="@drawable/ic_star"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/yellow"
+                    android:gravity="center"
+                    android:textColor="@color/yellow"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/birthDatePeople"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/namePeople"
+                    tools:text="9.8" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/birthDatePeople"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:drawableStart="@drawable/ic_calendar"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/yellow"
+                    android:gravity="center"
+                    android:textColor="@color/yellow"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/ratingPeople"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/ratingPeople"
+                    app:layout_constraintTop_toTopOf="@+id/ratingPeople"
+                    tools:text="22/06/2001" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:background="@drawable/background_gradient_dark"
-            app:layout_constraintBottom_toBottomOf="@+id/peopleProfile" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/back"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@null"
-            android:drawableTop="@drawable/ic_back_stack"
-            android:drawableTint="@color/white"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/fav"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@null"
-            android:drawableTop="@drawable/ic_favorite_off"
-            android:drawableTint="@color/white"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/namePeople"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="258dp"
-            android:layout_marginEnd="64dp"
-            android:fontFamily="@font/caveat_regular"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="48sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/gradientView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/peopleProfile"
-            tools:text="Tony Stark" />
+            android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/ratingPeople"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:drawableStart="@drawable/ic_star"
-            android:drawablePadding="8dp"
-            android:drawableTint="@color/yellow"
-            android:gravity="center"
-            android:textColor="@color/yellow"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/birthDatePeople"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toEndOf="@+id/peopleProfile"
-            app:layout_constraintTop_toBottomOf="@+id/namePeople"
-            tools:text="9.8" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/actionConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/birthDatePeople"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_calendar"
-            android:drawablePadding="8dp"
-            android:drawableTint="@color/yellow"
-            android:gravity="center"
-            android:textColor="@color/yellow"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ratingPeople"
-            app:layout_constraintEnd_toStartOf="@+id/peopleProfile"
-            app:layout_constraintStart_toEndOf="@+id/ratingPeople"
-            app:layout_constraintTop_toTopOf="@+id/ratingPeople"
-            tools:text="22/06/2001" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/storyline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/stellar_bold"
+                    android:text="@string/people_biography"
+                    android:textAllCaps="true"
+                    android:textColor="@color/yellow_dark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/biographyPeople"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/birthDatePeople"
-            tools:text="Stanley Holland is an English actor and dancer. He is best known for playing Peter Parker / Spider-Man in the Marvel Cinematic Universe and has appeared as the character in six films" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/storylineMovie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/stellar_regular"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/storyline"
+                    tools:text="We approach our demand-driven logistics technologies with passion. From advanced warehouse management and load-planning software" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/knowForLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/stellar_bold"
-            android:text="@string/know_for"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/biographyPeople" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rateMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:drawableTop="@drawable/ic_star"
+                    android:drawableTint="@color/white"
+                    android:text="@string/rate_movie"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/shareMovie"
+                    app:layout_constraintEnd_toStartOf="@+id/shareMovie"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/shareMovie" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/knowForRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:paddingStart="16dp"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/knowForLabel"
-            tools:ignore="RtlSymmetry"
-            tools:itemCount="4"
-            tools:listitem="@layout/item_movie" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/shareMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@null"
+                    android:drawableTop="@drawable/ic_share"
+                    android:drawableTint="@color/white"
+                    android:text="@string/drawer_share"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/favMovie"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/rateMovie"
+                    app:layout_constraintTop_toBottomOf="@+id/storylineMovie" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/favMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@null"
+                    android:drawableTop="@drawable/ic_favorite_off"
+                    android:drawableTint="@color/white"
+                    android:text="@string/movie_favorite"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/shareMovie"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/shareMovie"
+                    app:layout_constraintTop_toTopOf="@+id/shareMovie" />
 
-</androidx.core.widget.NestedScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/aboutMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/stellar_bold"
+                    android:text="@string/people_about"
+                    android:textAllCaps="true"
+                    android:textColor="@color/yellow_dark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/originalTitleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/people_department"
+                    android:textColor="@color/gray_light"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/aboutMovie" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/originalTitleMovie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/aboutMovie"
+                    app:layout_constraintTop_toTopOf="@+id/originalTitleLabel"
+                    tools:text="We approach our demand-driven" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/typeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/people_birth_place"
+                    android:textColor="@color/gray_light"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/originalTitleMovie" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/typeMovie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/aboutMovie"
+                    app:layout_constraintTop_toTopOf="@+id/typeLabel"
+                    tools:text="We approach our demand-driven" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/premiereLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/people_know_as"
+                    android:textColor="@color/gray_light"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/typeMovie" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/premiereMovie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/aboutMovie"
+                    app:layout_constraintTop_toTopOf="@+id/premiereLabel"
+                    tools:text="We approach our demand-driven" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/knowForConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/knowForLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/stellar_bold"
+                    android:text="@string/know_for"
+                    android:textAllCaps="true"
+                    android:textColor="@color/yellow_dark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/seeMore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/stellar_bold"
+                    android:text="@string/see_more"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/knowForRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/knowForLabel"
+                    tools:ignore="RtlSymmetry"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/item_movie" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/taggedConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/taggedLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/stellar_bold"
+                    android:text="@string/people_tagged"
+                    android:textAllCaps="true"
+                    android:textColor="@color/yellow_dark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/taggedRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:clipToPadding="false"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/taggedLabel"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_tagged" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,7 +1,7 @@
 package com.pdm.firebase.feature.domain.usecase.search
 
 import com.pdm.firebase.arquitecture.Resource
-import com.pdm.firebase.feature.domain.model.actor.ActorsResponse
+import com.pdm.firebase.feature.domain.model.people.PeopleResponse
 import com.pdm.firebase.feature.domain.model.filter.FilterCreated
 import com.pdm.firebase.feature.domain.repository.SearchRepository
 import retrofit2.HttpException
@@ -11,7 +11,7 @@ class GetSearchPeopleUseCase(private val repository: SearchRepository) {
 
     suspend operator fun invoke(
         query: String, page: Int, filter: FilterCreated?
-    ): Resource<ActorsResponse?> {
+    ): Resource<PeopleResponse?> {
         return try {
             repository.getSearchPeoples(
                 query = query, page = page, filter = filter

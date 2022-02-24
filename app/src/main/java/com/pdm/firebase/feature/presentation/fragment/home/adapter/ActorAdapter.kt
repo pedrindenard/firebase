@@ -7,12 +7,12 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pdm.firebase.R
-import com.pdm.firebase.feature.domain.model.actor.Actor
+import com.pdm.firebase.feature.domain.model.people.People
 import com.pdm.firebase.feature.presentation.fragment.home.adapter.ActorAdapter.ViewHolder
 import com.pdm.firebase.util.TMDB_SMALL_IMAGE
 import com.pdm.firebase.util.loadImage
 
-class ActorAdapter(private val mutableList: MutableList<Actor>) : RecyclerView.Adapter<ViewHolder>() {
+class ActorAdapter(private val mutableList: MutableList<People>) : RecyclerView.Adapter<ViewHolder>() {
 
     private lateinit var mClickListener: ClickListener
 
@@ -48,7 +48,7 @@ class ActorAdapter(private val mutableList: MutableList<Actor>) : RecyclerView.A
 
         override fun onClick(view: View?) {
             mClickListener.onItemClickListener(
-                actor = mutableList[absoluteAdapterPosition]
+                people = mutableList[absoluteAdapterPosition]
             )
         }
     }
@@ -58,6 +58,6 @@ class ActorAdapter(private val mutableList: MutableList<Actor>) : RecyclerView.A
     }
 
     interface ClickListener {
-        fun onItemClickListener(actor: Actor)
+        fun onItemClickListener(people: People)
     }
 }

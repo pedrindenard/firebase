@@ -1,6 +1,7 @@
 package com.pdm.firebase.di
 
 import com.pdm.firebase.feature.presentation.fragment.details.movie.viewmodel.MovieViewModel
+import com.pdm.firebase.feature.presentation.fragment.details.people.viewmodel.PeopleViewModel
 import com.pdm.firebase.feature.presentation.fragment.discover.viewmodel.DiscoveryViewModel
 import com.pdm.firebase.feature.presentation.fragment.gender.viewmodel.GenderViewModel
 import com.pdm.firebase.feature.presentation.fragment.home.viewmodel.HomeViewModel
@@ -16,9 +17,9 @@ import org.koin.dsl.module
 
 object ViewModelModule {
     val get = module(override = true) {
+        viewModel { HomeViewModel(movieUseCase = get(), tvShowUseCase = get(), cache = get(), peopleUseCase = get()) }
         viewModel { DiscoveryViewModel(movieUseCase = get(), tvShowUseCase = get(), discoverUseCase = get()) }
         viewModel { SplashViewModel(movieUseCase = get(), tvShowUseCase = get(), cache = get()) }
-        viewModel { HomeViewModel(movieUseCase = get(), tvShowUseCase = get(), cache = get()) }
         viewModel { GenderViewModel(movieUseCase = get(), tvShowUseCase = get()) }
         viewModel { SearchViewModel(useCase = get()) }
         viewModel { SignInViewModel(useCase = get()) }
@@ -27,5 +28,6 @@ object ViewModelModule {
         viewModel { ProfileViewModel(useCase = get()) }
         viewModel { PrivacyViewModel(useCase = get()) }
         viewModel { MovieViewModel(useCase = get()) }
+        viewModel { PeopleViewModel(useCase = get()) }
     }
 }

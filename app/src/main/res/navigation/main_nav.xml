@@ -42,15 +42,15 @@
         tools:layout="@layout/fragment_reviews" />
 
     <fragment
-        android:id="@+id/castFragment"
-        android:name="com.pdm.firebase.feature.presentation.fragment.details.people.PeopleFragment"
-        android:label="PeopleFragment"
-        tools:layout="@layout/fragment_people" />
-
-    <fragment
         android:id="@+id/movieFragment"
         android:name="com.pdm.firebase.feature.presentation.fragment.details.movie.MovieFragment"
         android:label="MovieFragment"
         tools:layout="@layout/fragment_movie" />
+
+    <fragment
+        android:id="@+id/peopleFragment"
+        android:name="com.pdm.firebase.feature.presentation.fragment.details.people.PeopleFragment"
+        android:label="PeopleFragment"
+        tools:layout="@layout/fragment_people" />
 
 </navigation>

@@ -1,14 +1,14 @@
-package com.pdm.firebase.feature.domain.usecase.movie
+package com.pdm.firebase.feature.domain.usecase.people
 
 import com.pdm.firebase.arquitecture.Resource
-import com.pdm.firebase.feature.domain.model.actor.ActorsResponse
-import com.pdm.firebase.feature.domain.repository.MovieRepository
+import com.pdm.firebase.feature.domain.model.people.PeopleResponse
+import com.pdm.firebase.feature.domain.repository.PeopleRepository
 import retrofit2.HttpException
 import java.io.IOException
 
-class GetBestActorsUseCase(private val repository: MovieRepository) {
+class GetBestActorsUseCase(private val repository: PeopleRepository) {
 
-    suspend operator fun invoke(page: Int, ignoreCache: Boolean? = false): Resource<ActorsResponse?> {
+    suspend operator fun invoke(page: Int, ignoreCache: Boolean? = false): Resource<PeopleResponse?> {
         return try {
             repository.getBestActors(
                 page = page, ignoreCache = ignoreCache!!

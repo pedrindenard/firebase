@@ -11,8 +11,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:visibility="visible">
+        android:background="@android:color/transparent">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingContainer"
@@ -132,14 +131,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    android:clipToPadding="false"
                     android:orientation="horizontal"
                     android:overScrollMode="never"
+                    android:paddingEnd="16dp"
                     app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="@+id/durationMovie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/durationMovie"
-                    app:layout_constraintTop_toTopOf="@+id/durationMovie"
+                    app:layout_constraintTop_toBottomOf="@+id/titleMovie"
+                    tools:ignore="RtlSymmetry"
                     tools:itemCount="4"
                     tools:listitem="@layout/item_gender" />
 
@@ -161,6 +162,7 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/actionConstraint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -382,7 +384,7 @@
                     android:layout_marginEnd="16dp"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/typeMovie"
+                    app:layout_constraintStart_toStartOf="@+id/originalTitleMovie"
                     app:layout_constraintTop_toTopOf="@+id/sloganLabel"
                     tools:text="We approach our demand-driven" />
 
@@ -404,7 +406,7 @@
                     android:layout_marginEnd="16dp"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/sloganMovie"
+                    app:layout_constraintStart_toStartOf="@+id/originalTitleMovie"
                     app:layout_constraintTop_toTopOf="@+id/premiereLabel"
                     tools:text="We approach our demand-driven" />
 
@@ -481,13 +483,14 @@
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/premiereMovie"
+                    app:layout_constraintStart_toStartOf="@+id/originalTitleMovie"
                     app:layout_constraintTop_toTopOf="@+id/crewLabel"
                     tools:text="We approach our demand-driven" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/providersConstraint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

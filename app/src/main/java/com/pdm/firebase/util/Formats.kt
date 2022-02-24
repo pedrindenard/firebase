@@ -5,13 +5,14 @@ import android.text.format.DateUtils
 import com.github.rtoshiro.util.format.SimpleMaskFormatter
 import com.github.rtoshiro.util.format.text.MaskTextWatcher
 import com.google.android.material.textfield.TextInputEditText
-import com.pdm.firebase.feature.domain.model.credit.Crew
+import com.pdm.firebase.feature.domain.model.credit.movie.MovieCredits
 import com.pdm.firebase.feature.domain.model.gender.Gender
 import com.pdm.firebase.feature.domain.model.movie.details.ProductionCompany
 import com.pdm.firebase.feature.domain.model.movie.details.ProductionCountry
 import com.pdm.firebase.feature.domain.model.movie.provider.Provider
 import com.pdm.firebase.feature.domain.model.movie.provider.ProviderCountry
 import com.pdm.firebase.feature.domain.model.movie.provider.ProviderFlatRate
+import com.pdm.firebase.feature.domain.model.search.Search
 import okhttp3.Request
 
 fun TextInputEditText?.formatToDate() {
@@ -61,6 +62,18 @@ fun List<ProductionCompany>.formatCompany(): String {
     return productionCompany
 }
 
+fun List<Search>.formatMovie(): String {
+    var searchType = String()
+    forEachIndexed { index, search ->
+        searchType += if (index != lastIndex) {
+            "${search.name ?: search.title},\u0020"
+        } else {
+            search.name ?: search.title
+        }
+    }
+    return searchType
+}
+
 fun List<Gender>.formatGenres(): String {
     var movieGenres = String()
     forEachIndexed { index, company ->
@@ -73,7 +86,7 @@ fun List<Gender>.formatGenres(): String {
     return movieGenres
 }
 
-fun List<Crew>.formatCrew(): String {
+fun List<MovieCredits>.formatCrew(): String {
     var movieCrews = String()
     forEachIndexed { index, crew ->
         movieCrews += if (index != lastIndex) {
@@ -84,6 +97,20 @@ fun List<Crew>.formatCrew(): String {
     }
     return movieCrews
 }
+
+fun List<String>.formatKnowAs(): String {
+    var alsoKnowAs = String()
+    forEachIndexed { index, names ->
+        alsoKnowAs += if (index != lastIndex) {
+            "${names},\u0020"
+        } else {
+            names
+        }
+    }
+    return alsoKnowAs
+}
+
+fun String.delimiterDate() = substringBefore(delimiter = "T")
 
 fun Provider.formatToList(): MutableList<ProviderFlatRate> {
     val mutableList: MutableList<ProviderCountry> = mutableListOf()

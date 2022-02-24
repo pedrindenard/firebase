@@ -38,7 +38,6 @@ class SplashViewModel(
             movieUseCase.getNowPlayingMovie.invoke(page = 1, ignoreCache = true)
             movieUseCase.getPopularMovie.invoke(page = 1, ignoreCache = true)
             movieUseCase.getUpcomingMovie.invoke(page = 1, ignoreCache = true)
-            movieUseCase.getBestActors.invoke(page = 1, ignoreCache = true)
 
             when (val response = tvShowUseCase.getGendersTvShow.invoke(ignoreCache = true)) {
                 is Resource.Success -> {

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.pdm.firebase.arquitecture.Resource
-import com.pdm.firebase.feature.domain.model.actor.ActorsResponse
+import com.pdm.firebase.feature.domain.model.people.PeopleResponse
 import com.pdm.firebase.feature.domain.model.collection.CollectionResponse
 import com.pdm.firebase.feature.domain.model.filter.FilterCreated
 import com.pdm.firebase.feature.domain.model.movie.MovieResponse
@@ -33,9 +33,9 @@ class SearchViewModel(private val useCase: SearchUseCase) : BaseViewModel() {
     val getSearchMulti = _getSearchMulti as LiveData<SearchResponse?>
     private var searchMultiListOld: SearchResponse? = null
 
-    private val _getSearchActors: MutableLiveData<ActorsResponse?> = MutableLiveData()
-    val getSearchActors = _getSearchActors as LiveData<ActorsResponse?>
-    private var searchActorsListOld: ActorsResponse? = null
+    private val _getSearchPeople: MutableLiveData<PeopleResponse?> = MutableLiveData()
+    val getSearchActors = _getSearchPeople as LiveData<PeopleResponse?>
+    private var searchPeopleListOld: PeopleResponse? = null
 
     private val _getRegions: MutableLiveData<RegionResponse> = MutableLiveData()
     val getRegions = _getRegions as LiveData<RegionResponse>
@@ -148,11 +148,11 @@ class SearchViewModel(private val useCase: SearchUseCase) : BaseViewModel() {
             when (val response = useCase.getSearchPeople.invoke(query, currentSearchPage, filter)) {
                 is Resource.Success -> {
                     response.data!!.let {
-                        searchActorsListOld?.apply {
+                        searchPeopleListOld?.apply {
                             results.addAll(it.results)
                             currentPage = currentSearchPage
-                        } ?: run { searchActorsListOld = it }
-                        _getSearchActors.postValue(searchActorsListOld ?: it)
+                        } ?: run { searchPeopleListOld = it }
+                        _getSearchPeople.postValue(searchPeopleListOld ?: it)
                     }; currentSearchPage++
                 }
                 is Resource.Error -> {
@@ -200,8 +200,8 @@ class SearchViewModel(private val useCase: SearchUseCase) : BaseViewModel() {
         _getSearchMulti.value = null
         searchMultiListOld = null
 
-        _getSearchActors.value = null
-        searchActorsListOld = null
+        _getSearchPeople.value = null
+        searchPeopleListOld = null
 
         currentSearchPage = 1
     }

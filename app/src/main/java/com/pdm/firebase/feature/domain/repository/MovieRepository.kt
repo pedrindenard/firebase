@@ -1,7 +1,6 @@
 package com.pdm.firebase.feature.domain.repository
 
 import com.pdm.firebase.arquitecture.Resource
-import com.pdm.firebase.feature.domain.model.actor.ActorsResponse
 import com.pdm.firebase.feature.domain.model.gender.GenderResponse
 import com.pdm.firebase.feature.domain.model.movie.MovieResponse
 
@@ -18,7 +17,5 @@ interface MovieRepository {
     suspend fun getUpcomingMovie(page: Int, ignoreCache: Boolean): Resource<MovieResponse?>
 
     suspend fun getMovieNowPlaying(page: Int, ignoreCache: Boolean): Resource<MovieResponse?>
-
-    suspend fun getBestActors(page: Int, ignoreCache: Boolean): Resource<ActorsResponse?>
 
 }

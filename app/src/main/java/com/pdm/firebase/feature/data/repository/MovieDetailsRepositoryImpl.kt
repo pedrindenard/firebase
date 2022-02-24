@@ -2,7 +2,7 @@ package com.pdm.firebase.feature.data.repository
 
 import com.pdm.firebase.arquitecture.Resource
 import com.pdm.firebase.feature.domain.datasource.MovieDetailsDataSource
-import com.pdm.firebase.feature.domain.model.credit.CreditsResponse
+import com.pdm.firebase.feature.domain.model.credit.movie.MovieCreditsResponse
 import com.pdm.firebase.feature.domain.model.image.ImageResponse
 import com.pdm.firebase.feature.domain.model.movie.MovieResponse
 import com.pdm.firebase.feature.domain.model.movie.details.MovieDetailsResponse
@@ -17,7 +17,7 @@ class MovieDetailsRepositoryImpl(private val dataSource: MovieDetailsDataSource)
         return dataSource.getMovieDetails(id)
     }
 
-    override suspend fun getMovieCredits(id: Int): Resource<CreditsResponse?> {
+    override suspend fun getMovieCredits(id: Int): Resource<MovieCreditsResponse?> {
         return dataSource.getMovieCredits(id)
     }
 

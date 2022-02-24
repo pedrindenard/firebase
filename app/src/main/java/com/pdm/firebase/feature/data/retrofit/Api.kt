@@ -1,14 +1,17 @@
 package com.pdm.firebase.feature.data.retrofit
 
-import com.pdm.firebase.feature.domain.model.actor.ActorsResponse
+import com.pdm.firebase.feature.domain.model.people.PeopleResponse
 import com.pdm.firebase.feature.domain.model.collection.CollectionResponse
 import com.pdm.firebase.feature.domain.model.company.CompanyResponse
 import com.pdm.firebase.feature.domain.model.gender.GenderResponse
 import com.pdm.firebase.feature.domain.model.movie.MovieResponse
 import com.pdm.firebase.feature.domain.model.movie.details.MovieDetailsResponse
 import com.pdm.firebase.feature.domain.model.movie.provider.ProviderResponse
-import com.pdm.firebase.feature.domain.model.credit.CreditsResponse
+import com.pdm.firebase.feature.domain.model.credit.movie.MovieCreditsResponse
+import com.pdm.firebase.feature.domain.model.credit.people.PeopleCreditsResponse
 import com.pdm.firebase.feature.domain.model.image.ImageResponse
+import com.pdm.firebase.feature.domain.model.people.details.PeopleDetailsResponse
+import com.pdm.firebase.feature.domain.model.tagged.TaggedResponse
 import com.pdm.firebase.feature.domain.model.region.RegionResponse
 import com.pdm.firebase.feature.domain.model.review.ReviewResponse
 import com.pdm.firebase.feature.domain.model.search.SearchResponse
@@ -22,12 +25,12 @@ import retrofit2.http.Query
 
 interface Api {
 
-    /** Actors **/
+    /** People **/
     @Headers(value = ["Content-Type: application/json"])
     @GET(value = "person/popular")
     suspend fun getBestActors(
         @Query(value = "page") page: Int? = 1
-    ): Response<ActorsResponse>
+    ): Response<PeopleResponse>
 
     /** Movies **/
     @Headers(value = ["Content-Type: application/json"])
@@ -84,7 +87,7 @@ interface Api {
     @GET(value = "movie/{movie_id}/credits")
     suspend fun getMovieCredits(
         @Path(value = "movie_id") id: Int
-    ): Response<CreditsResponse>
+    ): Response<MovieCreditsResponse>
 
     @Headers(value = ["Content-Type: application/json"])
     @GET(value = "movie/{movie_id}/recommendations")
@@ -123,6 +126,32 @@ interface Api {
     @GET(value = "movie/{movie_id}/images")
     suspend fun getMovieImages(
         @Path(value = "movie_id") id: Int
+    ): Response<ImageResponse>
+
+    /** People details **/
+    @Headers(value = ["Content-Type: application/json"])
+    @GET(value = "person/{person_id}")
+    suspend fun getPeopleDetails(
+        @Path(value = "person_id") id: Int
+    ): Response<PeopleDetailsResponse>
+
+    @Headers(value = ["Content-Type: application/json"])
+    @GET(value = "person/{person_id}/combined_credits")
+    suspend fun getPeopleCredits(
+        @Path(value = "person_id") id: Int
+    ): Response<PeopleCreditsResponse>
+
+    @Headers(value = ["Content-Type: application/json"])
+    @GET(value = "person/{person_id}/tagged_images")
+    suspend fun getPeopleTagged(
+        @Path(value = "person_id") id: Int,
+        @Query(value = "page") page: Int? = 1
+    ): Response<TaggedResponse>
+
+    @Headers(value = ["Content-Type: application/json"])
+    @GET(value = "person/{person_id}/images")
+    suspend fun getPeopleImages(
+        @Path(value = "person_id") id: Int
     ): Response<ImageResponse>
 
     /** Company details **/
@@ -176,7 +205,7 @@ interface Api {
         @Query(value = "region") region: String? = null,
         @Query(value = "query") query: String,
         @Query(value = "page") page: Int? = 1
-    ): Response<ActorsResponse>
+    ): Response<PeopleResponse>
 
     /** Configs **/
     @Headers(value = ["Content-Type: application/json"])

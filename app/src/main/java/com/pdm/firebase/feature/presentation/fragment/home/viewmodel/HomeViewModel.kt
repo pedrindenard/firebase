@@ -5,11 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.pdm.firebase.arquitecture.Resource
 import com.pdm.firebase.feature.data.local.CacheImpl
-import com.pdm.firebase.feature.domain.model.actor.ActorsResponse
 import com.pdm.firebase.feature.domain.model.gender.GenderResponse
 import com.pdm.firebase.feature.domain.model.movie.MovieResponse
+import com.pdm.firebase.feature.domain.model.people.PeopleResponse
 import com.pdm.firebase.feature.domain.model.tv.TvShowResponse
 import com.pdm.firebase.feature.domain.usecase.MovieUseCase
+import com.pdm.firebase.feature.domain.usecase.PeopleUseCase
 import com.pdm.firebase.feature.domain.usecase.TvShowUseCase
 import com.pdm.firebase.feature.presentation.base.BaseViewModel
 import kotlinx.coroutines.launch
@@ -17,6 +18,7 @@ import kotlinx.coroutines.launch
 class HomeViewModel(
     private val movieUseCase: MovieUseCase,
     private val tvShowUseCase: TvShowUseCase,
+    private val peopleUseCase: PeopleUseCase,
     private val cache: CacheImpl
 ) : BaseViewModel() {
 
@@ -53,8 +55,8 @@ class HomeViewModel(
     private val _getTvShowByGender: MutableLiveData<TvShowResponse> = MutableLiveData()
     val getTvShowByGender = _getTvShowByGender as LiveData<TvShowResponse>
 
-    private val _getBestActors: MutableLiveData<ActorsResponse> = MutableLiveData()
-    val getBestActors = _getBestActors as LiveData<ActorsResponse>
+    private val _getBestPeople: MutableLiveData<PeopleResponse> = MutableLiveData()
+    val getBestActors = _getBestPeople as LiveData<PeopleResponse>
 
     fun getNowPlayingMovie(ignoreCache: Boolean? = false) {
         viewModelScope.launch {
@@ -267,9 +269,9 @@ class HomeViewModel(
 
     fun getBestActors(ignoreCache: Boolean? = false) {
         viewModelScope.launch {
-            when (val response = movieUseCase.getBestActors.invoke(page = 1, ignoreCache)) {
+            when (val response = peopleUseCase.getBestActors.invoke(page = 1, ignoreCache)) {
                 is Resource.Success -> {
-                    _getBestActors.postValue(response.data!!)
+                    _getBestPeople.postValue(response.data!!)
                 }
                 is Resource.Error -> {
                     errorResponse.postValue(response.message)

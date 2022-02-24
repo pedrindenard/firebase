@@ -14,6 +14,8 @@ object DataSourceModule {
         single<MovieDataSource> { MovieDataSourceImpl(api = get(), cache = get()) }
         single<TvShowDataSource> { TvShowDataSourceImpl(api = get(), cache = get()) }
         single<SearchDataSource> { SearchDataSourceImpl(api = get(), cache = get()) }
+        single<PeopleDataSource> { PeopleDataSourceImpl(api = get(), cache = get()) }
         single<MovieDetailsDataSource> { MovieDetailsDataSourceImpl(api = get()) }
+        single<PeopleDetailsDataSource> { PeopleDetailsDataSourceImpl(api = get()) }
     }
 }

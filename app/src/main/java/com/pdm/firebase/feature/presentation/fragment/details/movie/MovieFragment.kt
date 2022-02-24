@@ -8,13 +8,15 @@ import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.pdm.firebase.R
 import com.pdm.firebase.databinding.FragmentMovieBinding
-import com.pdm.firebase.feature.domain.model.credit.Cast
+import com.pdm.firebase.feature.domain.model.credit.movie.MovieCredits
 import com.pdm.firebase.feature.domain.model.gender.Gender
 import com.pdm.firebase.feature.domain.model.image.Image
 import com.pdm.firebase.feature.domain.model.movie.Movie
+import com.pdm.firebase.feature.domain.model.movie.details.MovieDetailsResponse
 import com.pdm.firebase.feature.domain.model.movie.details.ProductionCompany
 import com.pdm.firebase.feature.domain.model.movie.provider.ProviderFlatRate
 import com.pdm.firebase.feature.domain.model.review.Review
+import com.pdm.firebase.feature.domain.model.review.ReviewResponse
 import com.pdm.firebase.feature.domain.model.video.Video
 import com.pdm.firebase.feature.presentation.base.BaseFragment
 import com.pdm.firebase.feature.presentation.fragment.details.movie.adapter.*
@@ -37,7 +39,9 @@ class MovieFragment : BaseFragment() {
         super.onAttach(context)
         arguments?.let {
             movieId = it.getSerializable(ARGS) as Int
-            initMovieDetails(id = movieId!!)
+            viewModel.initViewModel(
+                id = movieId!!
+            )
         }
     }
 
@@ -52,17 +56,6 @@ class MovieFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         initObservers()
         initActions()
-    }
-
-    private fun initMovieDetails(id: Int) {
-        viewModel.getMovieRecommendations(id = id)
-        viewModel.getMovieProviders(id = id)
-        viewModel.getMovieDetails(id = id)
-        viewModel.getMovieCredits(id = id)
-        viewModel.getMovieSimilar(id = id)
-        viewModel.getMovieReviews(id = id)
-        viewModel.getMovieVideos(id = id)
-        viewModel.getMovieImages(id = id)
     }
 
     private fun initActions() {
@@ -99,41 +92,23 @@ class MovieFragment : BaseFragment() {
             binding.averageMovie.text = it.voteAverage.toString()
             binding.votesMovie.text = it.voteCount.toString()
             binding.premiereMovie.text = it.releaseDate
-            binding.storylineMovie.text = it.overview
-            binding.sloganMovie.text = it.slogan
             binding.typeMovie.text = it.genres.formatGenres()
             binding.yearMovie.text = it.releaseDate.formatDate()
-            binding.durationMovie.text = it.runtime?.formatDuration()
-            binding.productionCountryMovie.text = it.countries.formatCountry()
-            binding.productionCompanyMovie.text = it.companies.formatCompany()
-
-            binding.companyRecyclerView.apply {
-                adapter = CompanyAdapter(it.companies).apply {
-                    setOnItemClickListener(object : CompanyAdapter.ClickListener {
-                        override fun onItemClickListener(company: ProductionCompany) {
-
-                        }
-                    })
-                }
-            }
-
-            binding.genderMovieRecyclerView.apply {
-                adapter = GenderAdapter(it.genres).apply {
-                    setOnItemClickListener(object : GenderAdapter.ClickListener {
-                        override fun onItemClickListener(gender: Gender) {
-
-                        }
-                    })
-                }
-            }
+            initAdapterCompany(it.companies)
+            initAdapterGender(it.genres)
+            initMovieDetails(it)
         })
 
         viewModel.getMovieCredits.observe(viewLifecycleOwner, {
-            binding.crewMovie.text = it.crew.formatCrew()
+            binding.crewMovie.apply {
+                it.crew.takeIf { it.isNotEmpty() }?.let { text = it.formatCrew() } ?: run {
+                    visibility = View.GONE
+                }
+            }
             binding.actorsRecyclerView.apply {
                 adapter = CastAdapter(it.cast).apply {
                     setOnItemClickListener(object : CastAdapter.ClickListener {
-                        override fun onItemClickListener(people: Cast) {
+                        override fun onItemClickListener(people: MovieCredits) {
 
                         }
                     })
@@ -141,96 +116,103 @@ class MovieFragment : BaseFragment() {
             }
         })
 
-        viewModel.getMovieRecommendations.observe(viewLifecycleOwner, {
-            binding.moreLikeThisRecyclerView.apply {
-                adapter = MovieAdapter(it.results).apply {
-                    setOnItemClickListener(object : MovieAdapter.ClickListener {
-                        override fun onItemClickListener(movie: Movie) {
+        viewModel.getMovieRecommendations.observe(viewLifecycleOwner, { it ->
+            it.results.takeIf { !it.isNullOrEmpty() }?.let {
+                binding.moreLikeThisRecyclerView.apply {
+                    adapter = MovieAdapter(it).apply {
+                        setOnItemClickListener(object : MovieAdapter.ClickListener {
+                            override fun onItemClickListener(movie: Movie) {
 
-                        }
-                    })
-                }
-            }
-        })
-
-        viewModel.getMovieProviders.observe(viewLifecycleOwner, {
-            binding.providersRecyclerView.apply {
-                adapter = ProviderAdapter(it.results.formatToList()).apply {
-                    setOnItemClickListener(object : ProviderAdapter.ClickListener {
-                        override fun onItemClickListener(provider: ProviderFlatRate) {
-
-                        }
-                    })
-                }
-            }
-        })
-
-        viewModel.getMovieVideos.observe(viewLifecycleOwner, {
-            binding.videosRecyclerView.apply {
-                adapter = VideoAdapter(it.results).apply {
-                    setOnItemClickListener(object : VideoAdapter.ClickListener {
-                        override fun onItemClickListener(video: Video) {
-
-                        }
-                    })
-                }
-            }
-        })
-
-        viewModel.getMovieSimilar.observe(viewLifecycleOwner, {
-            binding.seeTooRecyclerView.apply {
-                adapter = SimilarAdapter().apply {
-                    updateAdapter(it.results)
-                    setOnItemClickListener(object : SimilarAdapter.ClickListener {
-                        override fun onItemClickListener(movie: Movie) {
-
-                        }
-                    })
-                }
-            }
-        })
-
-        viewModel.getMovieReviews.observe(viewLifecycleOwner, {
-            val mutableList: MutableList<Review> = mutableListOf()
-            it.results.forEachIndexed { index, review ->
-                when (index < 3) {
-                    true -> {
-                        mutableList.add(
-                            element = review
-                        )
-                    }
-                    else -> {
-                        /** Do nothing **/
+                            }
+                        })
                     }
                 }
+            } ?: run {
+                binding.moreLikeThisConstraint.visibility = View.GONE
             }
-            binding.reviewsRecyclerView.apply {
-                adapter = ReviewsAdapter().apply {
-                    updateAdapter(mutableList)
-                    setOnItemClickListener(object : ReviewsAdapter.ClickListener {
-                        override fun onItemClickListener(review: Review) {
-
-                        }
-                    })
-                }
-            }
-            binding.reviewsMovie.text = String.format(
-                format = getString(R.string.movie_reviews),
-                args = arrayOf(it.totalResults)
-            )
         })
 
-        viewModel.getMovieImages.observe(viewLifecycleOwner, {
-            binding.logoMovie.apply {
-                initAutomaticSlide(it = it.backdrops)
-                orientation = ViewPager2.ORIENTATION_HORIZONTAL
-                adapter = ImageAdapter(it.backdrops).apply {
-                    setOnItemClickListener(object : ImageAdapter.ClickListener {
-                        override fun onItemClickListener(image: Image) {
+        viewModel.getMovieProviders.observe(viewLifecycleOwner, { it ->
+            it.results.formatToList().takeIf { !it.isNullOrEmpty() }?.let {
+                binding.providersRecyclerView.apply {
+                    adapter = ProviderAdapter(it).apply {
+                        setOnItemClickListener(object : ProviderAdapter.ClickListener {
+                            override fun onItemClickListener(provider: ProviderFlatRate) {
 
-                        }
-                    })
+                            }
+                        })
+                    }
                 }
+            } ?: run {
+                binding.providersConstraint.visibility = View.GONE
+            }
+        })
+
+        viewModel.getMovieVideos.observe(viewLifecycleOwner, { it ->
+            it.results.takeIf { !it.isNullOrEmpty() }?.let {
+                binding.videosRecyclerView.apply {
+                    adapter = VideoAdapter(it).apply {
+                        setOnItemClickListener(object : VideoAdapter.ClickListener {
+                            override fun onItemClickListener(video: Video) {
+
+                            }
+                        })
+                    }
+                }
+            } ?: run {
+                binding.videosConstraint.visibility = View.GONE
+            }
+        })
+
+        viewModel.getMovieSimilar.observe(viewLifecycleOwner, { it ->
+            it.results.takeIf { !it.isNullOrEmpty() }?.let {
+                binding.seeTooRecyclerView.apply {
+                    adapter = SimilarAdapter().apply {
+                        updateAdapter(mutableList = it)
+                        setOnItemClickListener(object : SimilarAdapter.ClickListener {
+                            override fun onItemClickListener(movie: Movie) {
+
+                            }
+                        })
+                    }
+                }
+            } ?: run {
+                binding.seeTooConstraint.visibility = View.GONE
+            }
+        })
+
+        viewModel.getMovieReviews.observe(viewLifecycleOwner, { it ->
+            it.initMovieReviews().takeIf { !it.isNullOrEmpty() }?.let {
+                binding.reviewsRecyclerView.apply {
+                    adapter = ReviewsAdapter(maxLineContent = 3).apply {
+                        updateAdapter(mutableList = it)
+                        setOnItemClickListener(object : ReviewsAdapter.ClickListener {
+                            override fun onItemClickListener(review: Review) {
+
+                            }
+                        })
+                    }
+                }
+            } ?: run {
+                binding.reviewsConstraint.visibility = View.GONE
+            }
+        })
+
+        viewModel.getMovieImages.observe(viewLifecycleOwner, { it ->
+            it.backdrops.takeIf { !it.isNullOrEmpty() }?.let {
+                binding.logoMovie.apply {
+                    initAutomaticSlide(it = it)
+                    orientation = ViewPager2.ORIENTATION_HORIZONTAL
+                    adapter = ImageAdapter(mutableList = it).apply {
+                        setOnItemClickListener(object : ImageAdapter.ClickListener {
+                            override fun onItemClickListener(image: Image) {
+
+                            }
+                        })
+                    }
+                }
+            } ?: run {
+                /** Do nothing here **/
             }
         })
 
@@ -247,13 +229,98 @@ class MovieFragment : BaseFragment() {
         })
     }
 
+    private fun initAdapterGender(it: List<Gender>) {
+        it.takeIf { !it.isNullOrEmpty() }?.let {
+            binding.genderMovieRecyclerView.apply {
+                adapter = GenderAdapter(mutableList = it).apply {
+                    setOnItemClickListener(object : GenderAdapter.ClickListener {
+                        override fun onItemClickListener(gender: Gender) {
+
+                        }
+                    })
+                }
+            }
+        } ?: run {
+            binding.genderMovieRecyclerView.visibility = View.GONE
+        }
+    }
+
+    private fun initAdapterCompany(it: List<ProductionCompany>) {
+        it.takeIf { !it.isNullOrEmpty() }?.let {
+            binding.companyRecyclerView.apply {
+                adapter = CompanyAdapter(mutableList = it).apply {
+                    setOnItemClickListener(object : CompanyAdapter.ClickListener {
+                        override fun onItemClickListener(company: ProductionCompany) {
+
+                        }
+                    })
+                }
+            }
+        } ?: run {
+            binding.companyRecyclerView.visibility = View.GONE
+        }
+    }
+
+    private fun initMovieDetails(it: MovieDetailsResponse) {
+        binding.storylineMovie.apply {
+            it.overview.takeIf { !it.isNullOrEmpty() }?.let { text = it } ?: run {
+                binding.storyline.visibility = View.GONE
+                visibility = View.GONE
+            }
+        }
+        binding.sloganMovie.apply {
+            it.slogan.takeIf { !it.isNullOrEmpty() }?.let { text = it } ?: run {
+                binding.sloganLabel.visibility = View.GONE
+                visibility = View.GONE
+            }
+        }
+        binding.durationMovie.apply {
+            it.runtime.takeIf { it != null }?.let { text = it.formatDuration() } ?: run {
+                visibility = View.GONE
+            }
+        }
+        binding.productionCountryMovie.apply {
+            it.countries.takeIf { it.isNotEmpty() }?.let { text = it.formatCountry() } ?: run {
+                binding.productionCountryLabel.visibility = View.GONE
+                visibility = View.GONE
+            }
+        }
+        binding.productionCompanyMovie.apply {
+            it.companies.takeIf { it.isNotEmpty() }?.let { text = it.formatCompany() } ?: run {
+                binding.productionCompanyLabel.visibility = View.GONE
+                visibility = View.GONE
+            }
+        }
+    }
+
+    private fun ReviewResponse.initMovieReviews(): MutableList<Review> {
+        val mutableList: MutableList<Review> = mutableListOf()
+        results.forEachIndexed { index, review ->
+            when (index < 3) {
+                true -> {
+                    mutableList.add(
+                        element = review
+                    )
+                }
+                else -> {
+                    /** Do nothing **/
+                }
+            }
+        }
+        binding.reviewsMovie.text = String.format(
+            format = getString(R.string.movie_reviews),
+            args = arrayOf(totalResults)
+        )
+        return mutableList
+    }
+
     private fun ViewPager2.initAutomaticSlide(it: List<Image>) {
         val timerTask = object : TimerTask() {
             override fun run() {
                 this@initAutomaticSlide.post {
                     this@initAutomaticSlide.currentItem = (
-                            this@initAutomaticSlide.currentItem + 1
-                            ) % it.size
+                        this@initAutomaticSlide.currentItem + 1
+                    ) % it.size
                 }
             }
         }; stopBanner()

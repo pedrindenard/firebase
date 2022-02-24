@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.pdm.firebase.arquitecture.Resource
-import com.pdm.firebase.feature.domain.model.credit.CreditsResponse
+import com.pdm.firebase.feature.domain.model.credit.movie.MovieCreditsResponse
 import com.pdm.firebase.feature.domain.model.image.ImageResponse
 import com.pdm.firebase.feature.domain.model.movie.MovieResponse
 import com.pdm.firebase.feature.domain.model.movie.details.MovieDetailsResponse
@@ -20,8 +20,8 @@ class MovieViewModel(private val useCase: MovieDetailsUseCase) : BaseViewModel()
     private val _getMovieDetails = MutableLiveData<MovieDetailsResponse>()
     val getMovieDetails = _getMovieDetails as LiveData<MovieDetailsResponse>
 
-    private val _getMovieCredits = MutableLiveData<CreditsResponse>()
-    val getMovieCredits = _getMovieCredits as LiveData<CreditsResponse>
+    private val _getMovieCredits = MutableLiveData<MovieCreditsResponse>()
+    val getMovieCredits = _getMovieCredits as LiveData<MovieCreditsResponse>
 
     private val _getMovieRecommendations = MutableLiveData<MovieResponse>()
     val getMovieRecommendations = _getMovieRecommendations as LiveData<MovieResponse>
@@ -40,6 +40,17 @@ class MovieViewModel(private val useCase: MovieDetailsUseCase) : BaseViewModel()
 
     private val _getMovieImages = MutableLiveData<ImageResponse>()
     val getMovieImages = _getMovieImages as LiveData<ImageResponse>
+
+    fun initViewModel(id: Int) {
+        getMovieRecommendations(id = id)
+        getMovieProviders(id = id)
+        getMovieDetails(id = id)
+        getMovieCredits(id = id)
+        getMovieSimilar(id = id)
+        getMovieReviews(id = id)
+        getMovieVideos(id = id)
+        getMovieImages(id = id)
+    }
 
     fun getMovieDetails(id: Int) {
         viewModelScope.launch {

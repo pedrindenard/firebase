@@ -128,6 +128,7 @@
     <string name="showcase_more_movie"><u>VER MAIS</u></string>
     <string name="more_actors"><u>VER MAIS</u></string>
     <string name="best_actors">Melhores atores</string>
+    <string name="popular_actors">Populares</string>
 
     <!--  Social Network  -->
     <string name="enter_with_google">Entrar com Google</string>
@@ -201,5 +202,14 @@
     <string name="provider_movie">Fornecedores</string>
     <string name="crew_movie"><b><u>Criadores:</u></b></string>
     <string name="company_production">Empresas de produção</string>
-    <string name="know_for">Conhecido por</string>
+    <string name="know_for">Filmes / Programas / Séries</string>
+    <string name="know_for_media">Elenco: %s</string>
+    <string name="media_type_tv">Televisão</string>
+    <string name="media_type_movie">Filme</string>
+    <string name="people_biography">Biografia</string>
+    <string name="people_about">Sobre o ator/produtor</string>
+    <string name="people_department">Departamento:</string>
+    <string name="people_birth_place">Local de nascimento:</string>
+    <string name="people_know_as">Conhecido como:</string>
+    <string name="people_tagged">Marcantes</string>
 </resources>

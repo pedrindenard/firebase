@@ -3,7 +3,6 @@ package com.pdm.firebase.feature.data.repository
 import com.google.gson.Gson
 import com.pdm.firebase.arquitecture.Resource
 import com.pdm.firebase.feature.data.local.CacheImpl
-import com.pdm.firebase.feature.data.local.CacheImpl.Companion.BEST_ACTORS
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.GENDERS_MOVIE
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.MOVIE_BY_GENDER
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.NOW_PLAYING_MOVIE
@@ -11,7 +10,6 @@ import com.pdm.firebase.feature.data.local.CacheImpl.Companion.POPULAR_MOVIE
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.RATED_MOVIE
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.UPCOMING_MOVIE
 import com.pdm.firebase.feature.domain.datasource.MovieDataSource
-import com.pdm.firebase.feature.domain.model.actor.ActorsResponse
 import com.pdm.firebase.feature.domain.model.gender.GenderResponse
 import com.pdm.firebase.feature.domain.model.movie.MovieResponse
 import com.pdm.firebase.feature.domain.repository.MovieRepository
@@ -116,22 +114,6 @@ class MovieRepositoryImpl(
                     Gson().fromJson(
                         cache.get(NOW_PLAYING_MOVIE),
                         MovieResponse::class.java
-                    )
-                )
-            }
-        }
-    }
-
-    override suspend fun getBestActors(page: Int, ignoreCache: Boolean): Resource<ActorsResponse?> {
-        return when {
-            cache.get(BEST_ACTORS).isEmpty() || ignoreCache -> {
-                dataSource.getBestActors(page = page)
-            }
-            else -> {
-                Resource.Success(
-                    Gson().fromJson(
-                        cache.get(BEST_ACTORS),
-                        ActorsResponse::class.java
                     )
                 )
             }

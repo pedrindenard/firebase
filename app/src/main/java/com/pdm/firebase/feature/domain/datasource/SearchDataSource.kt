@@ -1,7 +1,7 @@
 package com.pdm.firebase.feature.domain.datasource
 
 import com.pdm.firebase.arquitecture.Resource
-import com.pdm.firebase.feature.domain.model.actor.ActorsResponse
+import com.pdm.firebase.feature.domain.model.people.PeopleResponse
 import com.pdm.firebase.feature.domain.model.collection.CollectionResponse
 import com.pdm.firebase.feature.domain.model.filter.FilterCreated
 import com.pdm.firebase.feature.domain.model.movie.MovieResponse
@@ -19,7 +19,7 @@ interface SearchDataSource {
 
     suspend fun getSearchTvShows(query: String, page: Int, filter: FilterCreated?): Resource<TvShowResponse?>
 
-    suspend fun getSearchPeoples(query: String, page: Int, filter: FilterCreated?): Resource<ActorsResponse?>
+    suspend fun getSearchPeoples(query: String, page: Int, filter: FilterCreated?): Resource<PeopleResponse?>
 
     suspend fun getRegions(): Resource<RegionResponse?>
 }

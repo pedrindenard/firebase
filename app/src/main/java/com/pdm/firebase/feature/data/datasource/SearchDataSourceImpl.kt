@@ -9,7 +9,7 @@ import com.pdm.firebase.feature.data.local.CacheImpl
 import com.pdm.firebase.feature.data.local.CacheImpl.Companion.REGIONS
 import com.pdm.firebase.feature.data.retrofit.Api
 import com.pdm.firebase.feature.domain.datasource.SearchDataSource
-import com.pdm.firebase.feature.domain.model.actor.ActorsResponse
+import com.pdm.firebase.feature.domain.model.people.PeopleResponse
 import com.pdm.firebase.feature.domain.model.collection.CollectionResponse
 import com.pdm.firebase.feature.domain.model.filter.FilterCreated
 import com.pdm.firebase.feature.domain.model.movie.MovieResponse
@@ -127,7 +127,7 @@ class SearchDataSourceImpl(
 
     override suspend fun getSearchPeoples(
         query: String, page: Int, filter: FilterCreated?
-    ): Resource<ActorsResponse?> {
+    ): Resource<PeopleResponse?> {
         return Event.safeCallApi {
             val response = api.searchActor(
                 query = query, page = page, adult = filter?.adultContent, region = filter?.region

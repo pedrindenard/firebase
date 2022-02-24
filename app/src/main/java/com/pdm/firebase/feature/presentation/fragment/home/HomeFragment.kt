@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.NavOptions
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.pdm.firebase.R
 import com.pdm.firebase.databinding.FragmentHomeBinding
-import com.pdm.firebase.feature.domain.model.actor.Actor
+import com.pdm.firebase.feature.domain.model.people.People
 import com.pdm.firebase.feature.domain.model.gender.Gender
 import com.pdm.firebase.feature.domain.model.movie.Movie
 import com.pdm.firebase.feature.domain.model.tv.TvShow
@@ -28,8 +28,8 @@ class HomeFragment : BaseFragment() {
     private val viewModel by viewModel<HomeViewModel>()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
     private var bannerTimer: Timer? = null
+    private var scrollY: Int? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -79,16 +79,18 @@ class HomeFragment : BaseFragment() {
             }
         })
 
-        viewModel.getGendersMovie.observe(viewLifecycleOwner, {
+        viewModel.getGendersMovie.observe(viewLifecycleOwner, { it ->
             it.genres.run {
+                forEach { it.isSelect = false }
                 first().isSelect = true
                 initMovieGenderAdapter()
                 initMovieByGenres()
             }
         })
 
-        viewModel.getGendersTv.observe(viewLifecycleOwner, {
+        viewModel.getGendersTv.observe(viewLifecycleOwner, { it ->
             it.genres.run {
+                forEach { it.isSelect = false }
                 first().isSelect = true
                 initTvGenderAdapter()
                 initTvByGenres()
@@ -152,7 +154,7 @@ class HomeFragment : BaseFragment() {
             adapter = BannerAdapter(mutableList = this@initBannerMovieAdapter).apply {
                 setOnItemClickListener(object : BannerAdapter.ClickListener {
                     override fun onItemClickListener(movie: Movie) {
-
+                        //upcomingScreen
                     }
                 })
             }
@@ -169,16 +171,7 @@ class HomeFragment : BaseFragment() {
             adapter = MovieAdapter(mutableList = this@initPopularMovieAdapter).apply {
                 setOnItemClickListener(object : MovieAdapter.ClickListener {
                     override fun onItemClickListener(movie: Movie) {
-                        findNavController().navigate(
-                            R.id.movieFragment, Bundle().apply {
-                                putSerializable(ARGS, movie.id)
-                            }, NavOptions.Builder().apply {
-                                setEnterAnim(R.anim.fade_in)
-                                setExitAnim(R.anim.fade_out)
-                                setPopEnterAnim(R.anim.fade_in)
-                                setPopExitAnim(R.anim.fade_out)
-                            }.build()
-                        )
+                        initMovieDetails(it = movie)
                     }
                 })
             }
@@ -191,7 +184,7 @@ class HomeFragment : BaseFragment() {
             adapter = MovieAdapter(mutableList = this@initTopRatedMovieAdapter).apply {
                 setOnItemClickListener(object : MovieAdapter.ClickListener {
                     override fun onItemClickListener(movie: Movie) {
-
+                        initMovieDetails(it = movie)
                     }
                 })
             }
@@ -221,7 +214,7 @@ class HomeFragment : BaseFragment() {
             adapter = TvAdapter(mutableList = this@initPopularTvAdapter).apply {
                 setOnItemClickListener(object : TvAdapter.ClickListener {
                     override fun onItemClickListener(tvShow: TvShow) {
-
+                        //tv
                     }
                 })
             }
@@ -234,7 +227,7 @@ class HomeFragment : BaseFragment() {
             adapter = OnAirAdapter(mutableList = this@initOnAirTvAdapter).apply {
                 setOnItemClickListener(object : OnAirAdapter.ClickListener {
                     override fun onItemClickListener(tvShow: TvShow) {
-
+                        //youtube
                     }
                 })
             }
@@ -262,7 +255,7 @@ class HomeFragment : BaseFragment() {
         val tvAdapter = TvAdapter(mutableList = this@initTvAdapter).apply {
             setOnItemClickListener(object : TvAdapter.ClickListener {
                 override fun onItemClickListener(tvShow: TvShow) {
-
+                    //tv
                 }
             })
         }
@@ -279,7 +272,7 @@ class HomeFragment : BaseFragment() {
             adapter = TvAdapter(mutableList = this@initTopRatedTvAdapter).apply {
                 setOnItemClickListener(object : TvAdapter.ClickListener {
                     override fun onItemClickListener(tvShow: TvShow) {
-
+                        //tv
                     }
                 })
             }
@@ -290,7 +283,7 @@ class HomeFragment : BaseFragment() {
         val movieAdapter = MovieAdapter(mutableList = this@initMovieAdapter).apply {
             setOnItemClickListener(object : MovieAdapter.ClickListener {
                 override fun onItemClickListener(movie: Movie) {
-
+                    initMovieDetails(it = movie)
                 }
             })
         }
@@ -307,20 +300,29 @@ class HomeFragment : BaseFragment() {
             adapter = ShowcaseAdapter(mutableList = this@initShowcaseAdapter).apply {
                 setOnItemClickListener(object : ShowcaseAdapter.ClickListener {
                     override fun onItemClickListener(movie: Movie) {
-
+                        //youtube
                     }
                 })
             }
         }
     }
 
-    private fun MutableList<Actor>.initActorsAdapter() {
+    private fun MutableList<People>.initActorsAdapter() {
         binding.actorsRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext(), horizontalFadingEdgeLength, false)
             adapter = ActorAdapter(mutableList = this@initActorsAdapter).apply {
                 setOnItemClickListener(object : ActorAdapter.ClickListener {
-                    override fun onItemClickListener(actor: Actor) {
-
+                    override fun onItemClickListener(people: People) {
+                        findNavController().navigate(
+                            R.id.peopleFragment, Bundle().apply {
+                                putSerializable(ARGS, people.id)
+                            }, NavOptions.Builder().apply {
+                                setEnterAnim(R.anim.fade_in)
+                                setExitAnim(R.anim.fade_out)
+                                setPopEnterAnim(R.anim.fade_in)
+                                setPopExitAnim(R.anim.fade_out)
+                            }.build()
+                        )
                     }
                 })
             }
@@ -336,7 +338,7 @@ class HomeFragment : BaseFragment() {
                             ) % it.size
                 }
             }
-        }; stopBanner()
+        }; onStopBanner()
         bannerTimer = Timer().apply {
             schedule(
                 timerTask, 2000, 3000
@@ -353,6 +355,48 @@ class HomeFragment : BaseFragment() {
     private fun List<Gender>.initTvByGenres() {
         viewModel.getTvShowByGender(
             id = this.first().id
+        )
+    }
+
+    private fun initActions() {
+        binding.refreshHomeFragment.setSwipeRefresh {
+            initHomeData(ignoreCache = true)
+            scrollY = null
+        }
+
+        binding.homeContainer.waitForLayout {
+            this@HomeFragment.scrollY?.let {
+                binding.nestedScrollView.scrollTo(
+                    0, it
+                )
+            }
+        }
+    }
+
+    private fun initHomeData(ignoreCache: Boolean? = false) {
+        viewModel.getNowPlayingMovie(ignoreCache = ignoreCache)
+        viewModel.getPopularMovie(ignoreCache = ignoreCache)
+        viewModel.getTopRatedMovie(ignoreCache = ignoreCache)
+        viewModel.getGendersMovie(ignoreCache = ignoreCache)
+        viewModel.getUpcomingMovie(ignoreCache = ignoreCache)
+        viewModel.getBestActors(ignoreCache = ignoreCache)
+        viewModel.getTvShowPopular(ignoreCache = ignoreCache)
+        viewModel.getTvShowTopRated(ignoreCache = ignoreCache)
+        viewModel.getGendersTvShow(ignoreCache = ignoreCache)
+        viewModel.getTvShowOnAir(ignoreCache = ignoreCache)
+        viewModel.addInfoOnCache()
+    }
+
+    private fun initMovieDetails(it: Movie) {
+        findNavController().navigate(
+            R.id.movieFragment, Bundle().apply {
+                putSerializable(ARGS, it.id)
+            }, NavOptions.Builder().apply {
+                setEnterAnim(R.anim.fade_in)
+                setExitAnim(R.anim.fade_out)
+                setPopEnterAnim(R.anim.fade_in)
+                setPopExitAnim(R.anim.fade_out)
+            }.build()
         )
     }
 
@@ -380,28 +424,15 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    private fun initActions() {
-        binding.refreshHomeFragment.setSwipeRefresh {
-            initHomeData(ignoreCache = true)
-        }
-    }
-
-    private fun initHomeData(ignoreCache: Boolean? = false) {
-        viewModel.getNowPlayingMovie(ignoreCache = ignoreCache)
-        viewModel.getPopularMovie(ignoreCache = ignoreCache)
-        viewModel.getTopRatedMovie(ignoreCache = ignoreCache)
-        viewModel.getGendersMovie(ignoreCache = ignoreCache)
-        viewModel.getUpcomingMovie(ignoreCache = ignoreCache)
-        viewModel.getBestActors(ignoreCache = ignoreCache)
-        viewModel.getTvShowPopular(ignoreCache = ignoreCache)
-        viewModel.getTvShowTopRated(ignoreCache = ignoreCache)
-        viewModel.getGendersTvShow(ignoreCache = ignoreCache)
-        viewModel.getTvShowOnAir(ignoreCache = ignoreCache)
-        viewModel.addInfoOnCache()
-    }
-
-    private fun stopBanner() {
+    private fun onStopBanner() {
         bannerTimer?.cancel()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.nestedScrollView.let {
+            scrollY = it.scrollY
+        }
     }
 
     override fun onDestroyView() {

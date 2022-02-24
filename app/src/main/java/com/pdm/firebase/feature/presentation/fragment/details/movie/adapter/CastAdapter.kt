@@ -7,13 +7,13 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pdm.firebase.R
-import com.pdm.firebase.feature.domain.model.credit.Cast
+import com.pdm.firebase.feature.domain.model.credit.movie.MovieCredits
 import com.pdm.firebase.feature.presentation.fragment.details.movie.adapter.CastAdapter.ViewHolder
 import com.pdm.firebase.util.TMDB_SMALL_IMAGE
 import com.pdm.firebase.util.loadImage
 
 class CastAdapter(
-    private val mutableList: List<Cast>
+    private val mutableList: List<MovieCredits>
 ) : RecyclerView.Adapter<ViewHolder>() {
 
     private lateinit var mClickListener: ClickListener
@@ -50,7 +50,7 @@ class CastAdapter(
             )
         }
 
-        fun handlerImage(it: Cast) {
+        fun handlerImage(it: MovieCredits) {
             imagePeople.loadImage(
                 thumbnail = it.profile,
                 itemView = itemView,
@@ -64,6 +64,6 @@ class CastAdapter(
     }
 
     interface ClickListener {
-        fun onItemClickListener(people: Cast)
+        fun onItemClickListener(people: MovieCredits)
     }
 }

@@ -6,7 +6,7 @@ import com.pdm.firebase.arquitecture.Event.Companion.safeReturn
 import com.pdm.firebase.arquitecture.Resource
 import com.pdm.firebase.feature.data.retrofit.Api
 import com.pdm.firebase.feature.domain.datasource.MovieDetailsDataSource
-import com.pdm.firebase.feature.domain.model.credit.CreditsResponse
+import com.pdm.firebase.feature.domain.model.credit.movie.MovieCreditsResponse
 import com.pdm.firebase.feature.domain.model.image.ImageResponse
 import com.pdm.firebase.feature.domain.model.movie.MovieResponse
 import com.pdm.firebase.feature.domain.model.movie.details.MovieDetailsResponse
@@ -37,7 +37,7 @@ class MovieDetailsDataSourceImpl(private val api: Api) : MovieDetailsDataSource 
         }
     }
 
-    override suspend fun getMovieCredits(id: Int): Resource<CreditsResponse?> {
+    override suspend fun getMovieCredits(id: Int): Resource<MovieCreditsResponse?> {
         return Event.safeCallApi {
             val response = api.getMovieCredits(id = id)
 
