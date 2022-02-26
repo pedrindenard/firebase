@@ -72,7 +72,7 @@ dependencies {
 
     //Firebase
     implementation 'com.google.firebase:firebase-auth-ktx'
-    implementation 'com.google.firebase:firebase-core:20.0.2'
+    implementation 'com.google.firebase:firebase-core:20.1.0'
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-storage:20.0.0'
     implementation 'com.google.firebase:firebase-database:20.0.3'
@@ -101,17 +101,15 @@ dependencies {
     //PDF Adobe
     implementation 'com.itextpdf:itext7-core:7.2.1'
 
-    // Indicator
+    //Indicator
     implementation 'me.relex:circleindicator:2.1.6'
+    implementation 'com.github.vivchar:ViewPagerIndicator:1.1.0'
+
+    //Youtube library
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
 
     //Code View
     implementation 'com.chaos.view:pinview:1.4.4'
-
-    //Picasso
-    implementation 'com.squareup.picasso:picasso:2.8'
-
-    //ViewPage Indicator
-    implementation 'com.github.vivchar:ViewPagerIndicator:1.1.0'
 
     //EditTexts Masks
     implementation 'com.github.rtoshiro.mflibrary:mflibrary:1.0.0'
@@ -156,7 +154,8 @@ dependencies {
     //Recycler View
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
-    //Glide
+    //Images from URL
+    implementation 'com.squareup.picasso:picasso:2.8'
     implementation "com.github.bumptech.glide:glide:4.12.0"
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
 

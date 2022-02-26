@@ -2,6 +2,7 @@ package com.pdm.firebase.feature.presentation.activity
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -165,13 +166,26 @@ class MainActivity : BaseActivity() {
 
     private fun NavController.initListener() {
         this.addOnDestinationChangedListener { _, destination, _ ->
-            binding.bottomNavigation.visibility = if (
-                destination.id == R.id.movieFragment
-            ) {
-                View.VISIBLE
-            } else {
-                View.VISIBLE
-            }
+            binding.bottomNavigation.startAnimation(
+                anim = if (
+                    destination.id == R.id.movieFragment ||
+                    destination.id == R.id.videoFragment
+                ) {
+                    "out"
+                } else {
+                    "in"
+                }
+            )
+
+            binding.topAppBar.startAnimation(
+                anim = if (
+                    destination.id == R.id.videoFragment
+                ) {
+                    "out"
+                } else {
+                    "in"
+                }
+            )
         }
     }
 
@@ -200,6 +214,29 @@ class MainActivity : BaseActivity() {
                     setPopExitAnim(R.anim.fade_out)
                 }.build()
             )
+        }
+    }
+
+    private fun View.startAnimation(anim: String) {
+        visibility = when (anim) {
+            "in" -> {
+                startAnimation(
+                    AnimationUtils.loadAnimation(
+                        this@MainActivity,
+                        R.anim.fade_in
+                    )
+                )
+                View.VISIBLE
+            }
+            else -> {
+                startAnimation(
+                    AnimationUtils.loadAnimation(
+                        this@MainActivity,
+                        R.anim.fade_out
+                    )
+                )
+                View.GONE
+            }
         }
     }
 }

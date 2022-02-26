@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.pdm.firebase.R
 import com.pdm.firebase.databinding.FragmentMovieBinding
@@ -154,7 +156,16 @@ class MovieFragment : BaseFragment() {
                     adapter = VideoAdapter(it).apply {
                         setOnItemClickListener(object : VideoAdapter.ClickListener {
                             override fun onItemClickListener(video: Video) {
-
+                                findNavController().navigate(
+                                    R.id.videoFragment, Bundle().apply {
+                                    putSerializable(ARGS, video.key)
+                                    }, NavOptions.Builder().apply {
+                                        setEnterAnim(R.anim.fade_in)
+                                        setExitAnim(R.anim.fade_out)
+                                        setPopEnterAnim(R.anim.fade_in)
+                                        setPopExitAnim(R.anim.fade_out)
+                                    }.build()
+                                )
                             }
                         })
                     }

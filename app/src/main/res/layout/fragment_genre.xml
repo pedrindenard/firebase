@@ -15,7 +15,6 @@
         android:id="@+id/recyclerViewGenre"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
         android:clipToPadding="false"
         android:paddingHorizontal="4dp"
         android:paddingVertical="4dp"

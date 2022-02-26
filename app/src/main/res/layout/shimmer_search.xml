@@ -4,7 +4,6 @@
     android:id="@+id/shimmerEffect"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     app:shimmer_auto_start="true">
 
     <androidx.appcompat.widget.LinearLayoutCompat

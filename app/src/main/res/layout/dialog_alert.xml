@@ -4,16 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:background="@color/gray_background">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
         android:layout_marginTop="16dp"
         android:paddingHorizontal="32dp"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
         tools:text="Title here" />
@@ -33,13 +34,13 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:textColor="@color/black"
         android:background="@null"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:paddingHorizontal="64dp"
         android:text="@string/dialog_alert"
+        android:textColor="@color/black"
         android:textStyle="bold" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

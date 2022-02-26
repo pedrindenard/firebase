@@ -128,7 +128,7 @@
     <string name="showcase_more_movie"><u>VER MAIS</u></string>
     <string name="more_actors"><u>VER MAIS</u></string>
     <string name="best_actors">Melhores atores</string>
-    <string name="popular_actors">Populares</string>
+    <string name="popular_actors">Atores populares</string>
 
     <!--  Social Network  -->
     <string name="enter_with_google">Entrar com Google</string>
@@ -212,4 +212,5 @@
     <string name="people_birth_place">Local de nascimento:</string>
     <string name="people_know_as">Conhecido como:</string>
     <string name="people_tagged">Marcantes</string>
+    <string name="error_load_video">Não foi possível carregar o video</string>
 </resources>

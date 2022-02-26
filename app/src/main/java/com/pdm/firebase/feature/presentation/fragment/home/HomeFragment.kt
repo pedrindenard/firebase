@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.pdm.firebase.R
 import com.pdm.firebase.databinding.FragmentHomeBinding
-import com.pdm.firebase.feature.domain.model.people.People
 import com.pdm.firebase.feature.domain.model.gender.Gender
 import com.pdm.firebase.feature.domain.model.movie.Movie
+import com.pdm.firebase.feature.domain.model.people.People
 import com.pdm.firebase.feature.domain.model.tv.TvShow
 import com.pdm.firebase.feature.presentation.base.BaseFragment
 import com.pdm.firebase.feature.presentation.fragment.home.adapter.*
@@ -227,7 +227,7 @@ class HomeFragment : BaseFragment() {
             adapter = OnAirAdapter(mutableList = this@initOnAirTvAdapter).apply {
                 setOnItemClickListener(object : OnAirAdapter.ClickListener {
                     override fun onItemClickListener(tvShow: TvShow) {
-                        //youtube
+                        //upcoming
                     }
                 })
             }
@@ -300,7 +300,7 @@ class HomeFragment : BaseFragment() {
             adapter = ShowcaseAdapter(mutableList = this@initShowcaseAdapter).apply {
                 setOnItemClickListener(object : ShowcaseAdapter.ClickListener {
                     override fun onItemClickListener(movie: Movie) {
-                        //youtube
+                        //upcoming
                     }
                 })
             }
