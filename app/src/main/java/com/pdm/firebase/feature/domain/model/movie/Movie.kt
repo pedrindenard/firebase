@@ -12,6 +12,7 @@ data class Movie(
     @SerializedName(value = "poster_path") val imgForeground: String?,
     @SerializedName(value = "genre_ids") val genres: List<Int>,
     @SerializedName(value = "original_title") val originalTitle: String,
+    @SerializedName(value = "original_language") val originalLanguage: String,
     @SerializedName(value = "overview") val overview: String,
     @SerializedName(value = "popularity") val popularity: BigDecimal,
     @SerializedName(value = "release_date") val releaseDate: String,

@@ -54,9 +54,9 @@
         tools:layout="@layout/fragment_people" />
 
     <fragment
-        android:id="@+id/videoFragment"
-        android:name="com.pdm.firebase.feature.presentation.fragment.video.VideoFragment"
-        android:label="VideoFragment"
-        tools:layout="@layout/fragment_video" />
+        android:id="@+id/upComingFragment"
+        android:name="com.pdm.firebase.feature.presentation.fragment.upcoming.UpComingFragment"
+        android:label="UpComingFragment"
+        tools:layout="@layout/fragment_upcoming" />
 
 </navigation>

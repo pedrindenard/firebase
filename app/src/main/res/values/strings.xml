@@ -213,4 +213,7 @@
     <string name="people_know_as">Conhecido como:</string>
     <string name="people_tagged">Marcantes</string>
     <string name="error_load_video">Não foi possível carregar o video</string>
+    <string name="details">Detalhes</string>
+    <string name="coming">Chegando</string>
+    <string name="trailer_not_found">Este filme não tem trailer</string>
 </resources>

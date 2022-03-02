@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bannerUpComing"
+        android:layout_width="0dp"
+        android:layout_height="216dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imagePlayYoutube"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bannerUpComing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/bannerUpComing"
+        app:layout_constraintTop_toTopOf="@+id/bannerUpComing"
+        app:srcCompat="@drawable/ic_upcoming" />
+
+    <View
+        android:id="@+id/viewGradientUpComing"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:background="@drawable/background_gradient_bottom"
+        app:layout_constraintBottom_toBottomOf="@+id/bannerUpComing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/stellar_bold"
+        android:text="@string/coming"
+        android:textColor="@color/yellow_dark"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewDetail" />
+
+    <TextView
+        android:id="@+id/textDateMovie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/kanit_light"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:text="12/20/2000" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/imageViewDetail"
+        android:layout_width="58dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:drawablePadding="4dp"
+        android:drawableTop="@drawable/ic_information"
+        android:text="@string/details"
+        android:textAllCaps="false"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bannerUpComing" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textNameMovie"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/caveat_regular"
+        android:gravity="start"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDateMovie"
+        tools:text="Avengers Ultimate" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textDesMovie"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/helvetica_medium"
+        android:lineSpacingExtra="4dp"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textNameMovie"
+        tools:text="Description of movie" />
+
+    <RatingBar
+        android:id="@+id/textTypeMovie"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:theme="@style/ratingBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDesMovie"
+        tools:rating="4.5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textVotes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/stellar_regular"
+        android:textColor="@color/yellow"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textTypeMovie"
+        app:layout_constraintStart_toEndOf="@+id/textTypeMovie"
+        app:layout_constraintTop_toTopOf="@+id/textTypeMovie"
+        tools:text="4.546151" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/language"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/background_button_rectangle"
+        android:backgroundTint="@color/gray_background"
+        android:fontFamily="@font/stellar_regular"
+        android:padding="4dp"
+        android:textColor="@color/yellow"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textTypeMovie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textTypeMovie"
+        tools:text="Portuguese" />
+
+    <View
+        android:id="@+id/viewLineUpComing"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/black_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTypeMovie" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

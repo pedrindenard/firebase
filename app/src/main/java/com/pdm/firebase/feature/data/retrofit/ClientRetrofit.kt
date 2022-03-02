@@ -23,7 +23,7 @@ class ClientRetrofit {
                 .build()
 
             val clientRetrofit = Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_API_URL)
+                .baseUrl(BuildConfig.TMDB_API_URL)
                 .client(clientHttp)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
@@ -40,7 +40,7 @@ class ClientRetrofit {
                 return chain.proceed(
                     this.newBuilder().url(
                         this.url.newBuilder()
-                            .addQueryParameter(name = "api_key", value = BuildConfig.BASE_API_KEY)
+                            .addQueryParameter(name = "api_key", value = BuildConfig.TMDB_API_KEY)
                             .addQueryParameter(name = "language", value = this.setLanguage())
                             .build()
                     ).build()

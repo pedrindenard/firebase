@@ -67,10 +67,21 @@
             android:name=".feature.presentation.activity.SettingsActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".feature.presentation.activity.VideoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
     </application>
+
+    <queries>
+        <intent>
+            <action android:name="com.google.android.youtube.api.service.START" />
+        </intent>
+    </queries>
 
 </manifest>

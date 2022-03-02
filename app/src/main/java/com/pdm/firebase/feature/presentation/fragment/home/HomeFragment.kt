@@ -154,7 +154,15 @@ class HomeFragment : BaseFragment() {
             adapter = BannerAdapter(mutableList = this@initBannerMovieAdapter).apply {
                 setOnItemClickListener(object : BannerAdapter.ClickListener {
                     override fun onItemClickListener(movie: Movie) {
-                        //upcomingScreen
+                        findNavController().navigate(
+                            R.id.upComingFragment, null,
+                            NavOptions.Builder().apply {
+                                setEnterAnim(R.anim.fade_in)
+                                setExitAnim(R.anim.fade_out)
+                                setPopEnterAnim(R.anim.fade_in)
+                                setPopExitAnim(R.anim.fade_out)
+                            }.build()
+                        )
                     }
                 })
             }

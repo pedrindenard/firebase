@@ -168,8 +168,7 @@ class MainActivity : BaseActivity() {
         this.addOnDestinationChangedListener { _, destination, _ ->
             binding.bottomNavigation.startAnimation(
                 anim = if (
-                    destination.id == R.id.movieFragment ||
-                    destination.id == R.id.videoFragment
+                    destination.id == R.id.movieFragment
                 ) {
                     "out"
                 } else {
@@ -177,15 +176,15 @@ class MainActivity : BaseActivity() {
                 }
             )
 
-            binding.topAppBar.startAnimation(
-                anim = if (
-                    destination.id == R.id.videoFragment
-                ) {
-                    "out"
-                } else {
-                    "in"
-                }
-            )
+//            binding.topAppBar.startAnimation(
+//                anim = if (
+//                    destination.id == R.id.videoFragment
+//                ) {
+//                    "out"
+//                } else {
+//                    "in"
+//                }
+//            )
         }
     }
 

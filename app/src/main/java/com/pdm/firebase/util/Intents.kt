@@ -10,6 +10,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import com.pdm.firebase.feature.presentation.activity.ErrorActivity
+import com.pdm.firebase.feature.presentation.activity.VideoActivity
 
 fun Activity.startPhone(url: String) {
     val i = Intent(Intent.ACTION_DIAL, Uri.parse(url))
@@ -72,6 +73,12 @@ fun FragmentActivity.onBackPressedListener(
             }
         }
     )
+}
+
+fun Activity.startVideoActivity(key: String) {
+    startActivity(Intent(this, VideoActivity::class.java).apply {
+        putExtra("video", key)
+    })
 }
 
 fun Activity.startErrorActivity() {

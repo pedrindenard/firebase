@@ -24,28 +24,31 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_API_URL", '"https://api.themoviedb.org/3/"'
-            buildConfigField "String", "BASE_IMAGE_TMDB", '"https://image.tmdb.org/t/p/"'
-            buildConfigField "String", "BASE_IMAGE_YOUTUBE", '"https://img.youtube.com/vi/"'
-            buildConfigField "String", "BASE_API_KEY", '"5179442a4d6ed6eb656ad05e611bad78"'
+            buildConfigField "String", "TMDB_API_URL", '"https://api.themoviedb.org/3/"'
+            buildConfigField "String", "TMDB_IMAGE_URL", '"https://image.tmdb.org/t/p/"'
+            buildConfigField "String", "TMDB_API_KEY", '"5179442a4d6ed6eb656ad05e611bad78"'
+            buildConfigField "String", "YOUTUBE_IMAGE_URL", '"https://img.youtube.com/vi/"'
+            buildConfigField "String", "YOUTUBE_API_KEY", '"AIzaSyBAQ89EpPJ6jP7Pp0h187-Pm0Glsq2X3bg"'
         }
 
         development {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_API_URL", '"https://api.themoviedb.org/3/"'
-            buildConfigField "String", "BASE_IMAGE_TMDB", '"https://image.tmdb.org/t/p/"'
-            buildConfigField "String", "BASE_IMAGE_YOUTUBE", '"https://img.youtube.com/vi/"'
-            buildConfigField "String", "BASE_API_KEY", '"5179442a4d6ed6eb656ad05e611bad78"'
+            buildConfigField "String", "TMDB_API_URL", '"https://api.themoviedb.org/3/"'
+            buildConfigField "String", "TMDB_IMAGE_URL", '"https://image.tmdb.org/t/p/"'
+            buildConfigField "String", "TMDB_API_KEY", '"5179442a4d6ed6eb656ad05e611bad78"'
+            buildConfigField "String", "YOUTUBE_IMAGE_URL", '"https://img.youtube.com/vi/"'
+            buildConfigField "String", "YOUTUBE_API_KEY", '"AIzaSyBAQ89EpPJ6jP7Pp0h187-Pm0Glsq2X3bg"'
         }
 
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_API_URL", '"https://api.themoviedb.org/3/"'
-            buildConfigField "String", "BASE_IMAGE_TMDB", '"https://image.tmdb.org/t/p/"'
-            buildConfigField "String", "BASE_IMAGE_YOUTUBE", '"https://img.youtube.com/vi/"'
-            buildConfigField "String", "BASE_API_KEY", '"5179442a4d6ed6eb656ad05e611bad78"'
+            buildConfigField "String", "TMDB_API_URL", '"https://api.themoviedb.org/3/"'
+            buildConfigField "String", "TMDB_IMAGE_URL", '"https://image.tmdb.org/t/p/"'
+            buildConfigField "String", "TMDB_API_KEY", '"5179442a4d6ed6eb656ad05e611bad78"'
+            buildConfigField "String", "YOUTUBE_IMAGE_URL", '"https://img.youtube.com/vi/"'
+            buildConfigField "String", "YOUTUBE_API_KEY", '"AIzaSyBAQ89EpPJ6jP7Pp0h187-Pm0Glsq2X3bg"'
         }
     }
 
@@ -106,7 +109,7 @@ dependencies {
     implementation 'com.github.vivchar:ViewPagerIndicator:1.1.0'
 
     //Youtube library
-    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 
     //Code View
     implementation 'com.chaos.view:pinview:1.4.4'

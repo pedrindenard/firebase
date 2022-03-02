@@ -1,6 +1,7 @@
 package com.pdm.firebase.feature.presentation.fragment.details.movie
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import com.pdm.firebase.feature.domain.model.movie.provider.ProviderFlatRate
 import com.pdm.firebase.feature.domain.model.review.Review
 import com.pdm.firebase.feature.domain.model.review.ReviewResponse
 import com.pdm.firebase.feature.domain.model.video.Video
+import com.pdm.firebase.feature.presentation.activity.VideoActivity
 import com.pdm.firebase.feature.presentation.base.BaseFragment
 import com.pdm.firebase.feature.presentation.fragment.details.movie.adapter.*
 import com.pdm.firebase.feature.presentation.fragment.details.movie.viewmodel.MovieViewModel
@@ -156,15 +158,8 @@ class MovieFragment : BaseFragment() {
                     adapter = VideoAdapter(it).apply {
                         setOnItemClickListener(object : VideoAdapter.ClickListener {
                             override fun onItemClickListener(video: Video) {
-                                findNavController().navigate(
-                                    R.id.videoFragment, Bundle().apply {
-                                    putSerializable(ARGS, video.key)
-                                    }, NavOptions.Builder().apply {
-                                        setEnterAnim(R.anim.fade_in)
-                                        setExitAnim(R.anim.fade_out)
-                                        setPopEnterAnim(R.anim.fade_in)
-                                        setPopExitAnim(R.anim.fade_out)
-                                    }.build()
+                                activity?.startVideoActivity(
+                                    key = video.key
                                 )
                             }
                         })

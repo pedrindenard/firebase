@@ -11,7 +11,7 @@ import com.pdm.firebase.feature.domain.model.gender.GenreDataImage
 
 fun AppCompatImageView.loadImage(itemView: View, thumbnail: String?, size: String, error: Int? = null) {
 
-    val image = BuildConfig.BASE_IMAGE_TMDB + size + thumbnail
+    val image = BuildConfig.TMDB_IMAGE_URL + size + thumbnail
 
     val placeHolder = error ?: R.drawable.placeholder_movie
 
@@ -47,7 +47,7 @@ fun List<Gender>.addImages(param: String) {
 
 fun ShapeableImageView.loadThumbnail(itemView: View, key: String, quality: String) {
 
-    val url = BuildConfig.BASE_IMAGE_YOUTUBE + key + quality
+    val url = BuildConfig.YOUTUBE_IMAGE_URL + key + quality
 
     Glide.with(itemView)
         .load(url)
