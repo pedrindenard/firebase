@@ -1,5 +1,6 @@
 package com.pdm.firebase.util
 
+import android.app.Activity
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
@@ -13,6 +14,8 @@ import android.view.ViewTreeObserver
 import android.widget.TextView
 import androidx.core.view.get
 import com.google.android.material.navigation.NavigationView
+import com.pdm.firebase.R
+import com.pdm.firebase.feature.domain.model.video.VideoResponse
 
 fun TextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
     val spannableString = SpannableString(this.text)
@@ -76,5 +79,28 @@ inline fun View.waitForLayout(crossinline action: () -> Unit) {
     })
 }
 
-fun Context.dpToPx(dp: Float): Int =
-    TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics).toInt()
+fun Context.dpToPx(dp: Float): Int = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics).toInt()
+
+fun Activity.initVideo(it: VideoResponse, action: () -> Unit) {
+    it.results.takeIf { it.isNotEmpty() }?.run {
+        forEach {
+            if (it.type == "Trailer" && it.official) {
+                startVideoActivity(
+                    key = it.key
+                )
+                return@run
+            }
+        }
+        forEach {
+            if (it.type == "Trailer") {
+                startVideoActivity(
+                    key = it.key
+                )
+                return@run
+            }
+        }
+        startVideoActivity(
+            key = first().key
+        )
+    } ?: run { action() }
+}

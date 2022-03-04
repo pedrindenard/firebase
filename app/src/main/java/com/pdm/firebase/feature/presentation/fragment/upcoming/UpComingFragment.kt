@@ -16,10 +16,7 @@ import com.pdm.firebase.feature.domain.model.movie.Movie
 import com.pdm.firebase.feature.presentation.base.BaseFragment
 import com.pdm.firebase.feature.presentation.fragment.upcoming.adapter.UpComingAdapter
 import com.pdm.firebase.feature.presentation.fragment.upcoming.viewmodel.UpComingViewModel
-import com.pdm.firebase.util.ARGS
-import com.pdm.firebase.util.RED
-import com.pdm.firebase.util.startIntroAnimation
-import com.pdm.firebase.util.startVideoActivity
+import com.pdm.firebase.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UpComingFragment: BaseFragment() {
@@ -58,29 +55,9 @@ class UpComingFragment: BaseFragment() {
             handlerProgressBar(isVisible = false)
         })
 
-        viewModel.getMovieVideo.observe(viewLifecycleOwner, { it ->
+        viewModel.getVideo.observe(viewLifecycleOwner, { it ->
             if (onVideoStartup) {
-                it.results.takeIf { it.isNotEmpty() }?.run {
-                    forEach {
-                        if (it.type == "Trailer" && it.official) {
-                            activity?.startVideoActivity(
-                                key = it.key
-                            )
-                            return@run
-                        }
-                    }
-                    forEach {
-                        if (it.type == "Trailer") {
-                            activity?.startVideoActivity(
-                                key = it.key
-                            )
-                            return@run
-                        }
-                    }
-                    activity?.startVideoActivity(
-                        key = first().key
-                    )
-                } ?: run {
+                activity?.initVideo(it) {
                     showSnackBar(
                         description = getString(R.string.trailer_not_found),
                         color = RED

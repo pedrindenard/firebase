@@ -57,8 +57,8 @@ class Event {
             fromJson(toJsonTree(this@mapTo), T::class.java)
         }
 
-        inline fun <reified T : Any> Any.toMutable(): T = GsonBuilder().create().run {
-            fromJson(toJson(this@toMutable), object : TypeToken<T>() {}.type)
+        inline fun <reified T : Any> Any.mapToMutableList(): T = GsonBuilder().create().run {
+            fromJson(toJson(this@mapToMutableList), object : TypeToken<T>() {}.type)
         }
 
         fun adapterClick(onClick: () -> Unit) = try { onClick() } catch (e: Exception) { }

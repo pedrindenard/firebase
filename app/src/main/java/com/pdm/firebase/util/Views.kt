@@ -14,6 +14,7 @@ import androidx.appcompat.widget.AppCompatToggleButton
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.internal.ViewUtils.dpToPx
 import com.google.android.material.textfield.TextInputEditText
 import com.pdm.firebase.R
 
@@ -62,6 +63,26 @@ fun View?.disableIt() {
     this?.isEnabled = false
     this?.isClickable = false
     this?.isActivated = false
+}
+
+fun View.margin(
+    left: Float? = null,
+    top: Float? = null,
+    right: Float? = null,
+    bottom: Float? = null
+) {
+    layoutParams<ViewGroup.MarginLayoutParams> {
+        left?.run { leftMargin = dpToPx(this) }
+        top?.run { topMargin = dpToPx(this) }
+        right?.run { rightMargin = dpToPx(this) }
+        bottom?.run { bottomMargin = dpToPx(this) }
+    }
+}
+
+fun View.dpToPx(dp: Float): Int = context.dpToPx(dp)
+
+inline fun <reified T : ViewGroup.LayoutParams> View.layoutParams(block: T.() -> Unit) {
+    if (layoutParams is T) block(layoutParams as T)
 }
 
 fun View.handler(isEnabled: Boolean) {

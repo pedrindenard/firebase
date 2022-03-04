@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/collectionFragment"
-        android:name="com.pdm.firebase.feature.presentation.fragment.collection.CollectionFragment"
+        android:name="com.pdm.firebase.feature.presentation.fragment.video.VideoFragment"
         android:label="CollectionFragment"
         tools:layout="@layout/fragment_discover" />
 
@@ -58,5 +58,11 @@
         android:name="com.pdm.firebase.feature.presentation.fragment.upcoming.UpComingFragment"
         android:label="UpComingFragment"
         tools:layout="@layout/fragment_upcoming" />
+
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.pdm.firebase.feature.presentation.fragment.video.VideoFragment"
+        android:label="VideoFragment"
+        tools:layout="@layout/fragment_video" />
 
 </navigation>

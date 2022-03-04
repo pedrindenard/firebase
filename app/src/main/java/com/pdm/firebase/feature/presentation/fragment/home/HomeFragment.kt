@@ -28,6 +28,7 @@ class HomeFragment : BaseFragment() {
     private val viewModel by viewModel<HomeViewModel>()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private var onVideoStartup: Boolean = true
     private var bannerTimer: Timer? = null
     private var scrollY: Int? = null
 
@@ -135,6 +136,18 @@ class HomeFragment : BaseFragment() {
             it.results.initActorsAdapter()
         })
 
+        viewModel.getVideo.observe(viewLifecycleOwner, {
+            if (onVideoStartup) {
+                activity?.initVideo(it) {
+                    showSnackBar(
+                        description = getString(R.string.trailer_not_found),
+                        color = RED
+                    )
+                }
+            } else onVideoStartup = true
+            hideProgressDialog()
+        })
+
         viewModel.errorResponse.observe(viewLifecycleOwner, {
 
         })
@@ -179,7 +192,7 @@ class HomeFragment : BaseFragment() {
             adapter = MovieAdapter(mutableList = this@initPopularMovieAdapter).apply {
                 setOnItemClickListener(object : MovieAdapter.ClickListener {
                     override fun onItemClickListener(movie: Movie) {
-                        initMovieDetails(it = movie)
+                        initMovieDetails(id = movie.id)
                     }
                 })
             }
@@ -192,7 +205,7 @@ class HomeFragment : BaseFragment() {
             adapter = MovieAdapter(mutableList = this@initTopRatedMovieAdapter).apply {
                 setOnItemClickListener(object : MovieAdapter.ClickListener {
                     override fun onItemClickListener(movie: Movie) {
-                        initMovieDetails(it = movie)
+                        initMovieDetails(id = movie.id)
                     }
                 })
             }
@@ -235,7 +248,10 @@ class HomeFragment : BaseFragment() {
             adapter = OnAirAdapter(mutableList = this@initOnAirTvAdapter).apply {
                 setOnItemClickListener(object : OnAirAdapter.ClickListener {
                     override fun onItemClickListener(tvShow: TvShow) {
-                        //upcoming
+                        showProgressDialog()
+                        viewModel.getMovieVideo(
+                            id = tvShow.id
+                        )
                     }
                 })
             }
@@ -291,7 +307,7 @@ class HomeFragment : BaseFragment() {
         val movieAdapter = MovieAdapter(mutableList = this@initMovieAdapter).apply {
             setOnItemClickListener(object : MovieAdapter.ClickListener {
                 override fun onItemClickListener(movie: Movie) {
-                    initMovieDetails(it = movie)
+                    initMovieDetails(id = movie.id)
                 }
             })
         }
@@ -308,7 +324,10 @@ class HomeFragment : BaseFragment() {
             adapter = ShowcaseAdapter(mutableList = this@initShowcaseAdapter).apply {
                 setOnItemClickListener(object : ShowcaseAdapter.ClickListener {
                     override fun onItemClickListener(movie: Movie) {
-                        //upcoming
+                        showProgressDialog()
+                        viewModel.getMovieVideo(
+                            id = movie.id
+                        )
                     }
                 })
             }
@@ -379,6 +398,32 @@ class HomeFragment : BaseFragment() {
                 )
             }
         }
+
+        binding.showcaseMoreLabel.setOnSingleClickListener {
+            findNavController().navigate(
+                R.id.videoFragment, Bundle().apply {
+                    putSerializable(ARGS, "Movie")
+                }, NavOptions.Builder().apply {
+                    setEnterAnim(R.anim.fade_in)
+                    setExitAnim(R.anim.fade_out)
+                    setPopEnterAnim(R.anim.fade_in)
+                    setPopExitAnim(R.anim.fade_out)
+                }.build()
+            )
+        }
+
+        binding.showcaseTvMoreLabel.setOnSingleClickListener {
+            findNavController().navigate(
+                R.id.videoFragment, Bundle().apply {
+                    putSerializable(ARGS, "Tv")
+                }, NavOptions.Builder().apply {
+                    setEnterAnim(R.anim.fade_in)
+                    setExitAnim(R.anim.fade_out)
+                    setPopEnterAnim(R.anim.fade_in)
+                    setPopExitAnim(R.anim.fade_out)
+                }.build()
+            )
+        }
     }
 
     private fun initHomeData(ignoreCache: Boolean? = false) {
@@ -395,10 +440,10 @@ class HomeFragment : BaseFragment() {
         viewModel.addInfoOnCache()
     }
 
-    private fun initMovieDetails(it: Movie) {
+    private fun initMovieDetails(id: Int) {
         findNavController().navigate(
             R.id.movieFragment, Bundle().apply {
-                putSerializable(ARGS, it.id)
+                putSerializable(ARGS, id)
             }, NavOptions.Builder().apply {
                 setEnterAnim(R.anim.fade_in)
                 setExitAnim(R.anim.fade_out)
@@ -432,6 +477,11 @@ class HomeFragment : BaseFragment() {
         }
     }
 
+    private fun onViewDestroy() {
+        onVideoStartup = false
+        _binding = null
+    }
+
     private fun onStopBanner() {
         bannerTimer?.cancel()
     }
@@ -445,6 +495,6 @@ class HomeFragment : BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        onViewDestroy()
     }
 }

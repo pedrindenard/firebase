@@ -9,6 +9,8 @@ import com.pdm.firebase.feature.domain.model.gender.GenderResponse
 import com.pdm.firebase.feature.domain.model.movie.MovieResponse
 import com.pdm.firebase.feature.domain.model.people.PeopleResponse
 import com.pdm.firebase.feature.domain.model.tv.TvShowResponse
+import com.pdm.firebase.feature.domain.model.video.VideoResponse
+import com.pdm.firebase.feature.domain.usecase.MovieDetailsUseCase
 import com.pdm.firebase.feature.domain.usecase.MovieUseCase
 import com.pdm.firebase.feature.domain.usecase.PeopleUseCase
 import com.pdm.firebase.feature.domain.usecase.TvShowUseCase
@@ -19,6 +21,8 @@ class HomeViewModel(
     private val movieUseCase: MovieUseCase,
     private val tvShowUseCase: TvShowUseCase,
     private val peopleUseCase: PeopleUseCase,
+    private val movieDetailsUseCase: MovieDetailsUseCase,
+    private val tvDetailsUseCase: MovieDetailsUseCase,
     private val cache: CacheImpl
 ) : BaseViewModel() {
 
@@ -57,6 +61,9 @@ class HomeViewModel(
 
     private val _getBestPeople: MutableLiveData<PeopleResponse> = MutableLiveData()
     val getBestActors = _getBestPeople as LiveData<PeopleResponse>
+
+    private val _getVideo: MutableLiveData<VideoResponse> = MutableLiveData()
+    val getVideo = _getVideo as LiveData<VideoResponse>
 
     fun getNowPlayingMovie(ignoreCache: Boolean? = false) {
         viewModelScope.launch {
@@ -272,6 +279,25 @@ class HomeViewModel(
             when (val response = peopleUseCase.getBestActors.invoke(page = 1, ignoreCache)) {
                 is Resource.Success -> {
                     _getBestPeople.postValue(response.data!!)
+                }
+                is Resource.Error -> {
+                    errorResponse.postValue(response.message)
+                }
+                is Resource.Failure -> {
+                    failureResponse.postValue(response.throwable)
+                }
+                is Resource.InvalidAuth -> {
+                    invalidAuth.postValue(response.message)
+                }
+            }
+        }
+    }
+
+    fun getMovieVideo(id: Int) {
+        viewModelScope.launch {
+            when (val response = movieDetailsUseCase.getMovieVideos.invoke(id)) {
+                is Resource.Success -> {
+                    _getVideo.postValue(response.data!!)
                 }
                 is Resource.Error -> {
                     errorResponse.postValue(response.message)

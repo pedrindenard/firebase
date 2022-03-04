@@ -13,7 +13,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pdm.firebase.R
-import com.pdm.firebase.arquitecture.Event.Companion.toMutable
+import com.pdm.firebase.arquitecture.Event.Companion.mapToMutableList
 import com.pdm.firebase.databinding.FragmentDiscoverBinding
 import com.pdm.firebase.feature.domain.enums.GenreType
 import com.pdm.firebase.feature.domain.model.discovery.Discovery
@@ -107,7 +107,7 @@ class DiscoverFragment : BaseFragment() {
 
     private fun initObservers() {
         viewModel.getMovies.observe(viewLifecycleOwner, {
-            discoveryAdapter.updateAdapter(mutableList = it.results.toMutable())
+            discoveryAdapter.updateAdapter(mutableList = it.results.mapToMutableList())
             handlerProgressBar(isVisible = false)
             setScrollListener(
                 notIsLastPage = it.totalPage != it.currentPage,
@@ -116,7 +116,7 @@ class DiscoverFragment : BaseFragment() {
         })
 
         viewModel.getTvShows.observe(viewLifecycleOwner, {
-            discoveryAdapter.updateAdapter(mutableList = it.results.toMutable())
+            discoveryAdapter.updateAdapter(mutableList = it.results.mapToMutableList())
             handlerProgressBar(isVisible = false)
             setScrollListener(
                 notIsLastPage = it.totalPage != it.currentPage,

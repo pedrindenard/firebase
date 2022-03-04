@@ -91,6 +91,10 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor"
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
 
+    //RxJava2
+    implementation "io.reactivex.rxjava2:rxjava:2.2.11"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+
     //Verification App
     implementation "androidx.browser:browser:1.4.0"
     implementation 'com.google.firebase:firebase-appcheck-debug:16.0.0-beta04'
@@ -121,7 +125,7 @@ dependencies {
     implementation 'androidx.datastore:datastore-preferences:1.0.0'
 
     //DataBase Room
-    def roomVersion = "2.4.1"
+    def roomVersion = "2.4.2"
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-runtime:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")

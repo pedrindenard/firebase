@@ -23,7 +23,7 @@ class VideoAdapter(
             LayoutInflater.from(
                 parent.context
             ).inflate(
-                R.layout.item_video,
+                R.layout.item_trailer,
                 parent,
                 false
             )
@@ -33,18 +33,12 @@ class VideoAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val mutableList = mutableList[position]
         holder.handlerVideo(mutableList)
-        //holder.name.text = mutableList.name
-        //holder.type.text = mutableList.type
-        //holder.date.text = mutableList.publishedAt.substringBefore(delimiter = "T")
     }
 
     override fun getItemCount(): Int = mutableList.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         private var video: ShapeableImageView = itemView.findViewById(R.id.videoImage)
-        var name: AppCompatTextView = itemView.findViewById(R.id.videoTitle)
-        var date: AppCompatTextView = itemView.findViewById(R.id.videoDate)
-        var type: AppCompatTextView = itemView.findViewById(R.id.videoType)
 
         init { itemView.setOnClickListener(this) }
 

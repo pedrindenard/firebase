@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pdm.firebase.arquitecture.Event.Companion.mapTo
-import com.pdm.firebase.arquitecture.Event.Companion.toMutable
+import com.pdm.firebase.arquitecture.Event.Companion.mapToMutableList
 import com.pdm.firebase.databinding.FragmentSearchBinding
 import com.pdm.firebase.feature.domain.enums.SearchType
 import com.pdm.firebase.feature.domain.model.filter.FilterCreated
@@ -103,7 +103,7 @@ class SearchFragment : BaseFragment() {
 
         viewModel.getSearchCollections.observe(viewLifecycleOwner, {
             it?.let {
-                searchAdapter.updateAdapter(mutableList = it.results.toMutable())
+                searchAdapter.updateAdapter(mutableList = it.results.mapToMutableList())
                 setScrollListener(it = it.mapTo(), param = 2)
                 handlerProgressBar(isVisible = false)
             }
@@ -111,7 +111,7 @@ class SearchFragment : BaseFragment() {
 
         viewModel.getSearchActors.observe(viewLifecycleOwner, {
             it?.let {
-                searchAdapter.updateAdapter(mutableList = it.results.toMutable())
+                searchAdapter.updateAdapter(mutableList = it.results.mapToMutableList())
                 setScrollListener(it = it.mapTo(), param = 3)
                 handlerProgressBar(isVisible = false)
             }
@@ -119,7 +119,7 @@ class SearchFragment : BaseFragment() {
 
         viewModel.getSearchMovies.observe(viewLifecycleOwner, {
             it?.let {
-                searchAdapter.updateAdapter(mutableList = it.results.toMutable())
+                searchAdapter.updateAdapter(mutableList = it.results.mapToMutableList())
                 setScrollListener(it = it.mapTo(), param = 4)
                 handlerProgressBar(isVisible = false)
             }
@@ -127,7 +127,7 @@ class SearchFragment : BaseFragment() {
 
         viewModel.getSearchTvShows.observe(viewLifecycleOwner, {
             it?.let {
-                searchAdapter.updateAdapter(mutableList = it.results.toMutable())
+                searchAdapter.updateAdapter(mutableList = it.results.mapToMutableList())
                 setScrollListener(it = it.mapTo(), param = 5)
                 handlerProgressBar(isVisible = false)
             }

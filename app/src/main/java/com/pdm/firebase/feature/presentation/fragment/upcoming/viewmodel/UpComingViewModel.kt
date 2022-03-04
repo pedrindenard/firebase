@@ -19,8 +19,8 @@ class UpComingViewModel(
     private val _getUpcomingMovie: MutableLiveData<MovieResponse> = MutableLiveData()
     val getUpcomingMovie = _getUpcomingMovie as LiveData<MovieResponse>
 
-    private val _getMovieVideo: MutableLiveData<VideoResponse> = MutableLiveData()
-    val getMovieVideo = _getMovieVideo as LiveData<VideoResponse>
+    private val _getVideo: MutableLiveData<VideoResponse> = MutableLiveData()
+    val getVideo = _getVideo as LiveData<VideoResponse>
 
     private var upComingMovieOld: MovieResponse? = null
     private var pagging: Int = 1
@@ -59,7 +59,26 @@ class UpComingViewModel(
         viewModelScope.launch {
             when (val response = detailsUseCase.getMovieVideos.invoke(id = id)) {
                 is Resource.Success -> {
-                    _getMovieVideo.postValue(response.data!!)
+                    _getVideo.postValue(response.data!!)
+                }
+                is Resource.Error -> {
+                    errorResponse.postValue(response.message)
+                }
+                is Resource.Failure -> {
+                    failureResponse.postValue(response.throwable)
+                }
+                is Resource.InvalidAuth -> {
+                    invalidAuth.postValue(response.message)
+                }
+            }
+        }
+    }
+
+    fun getVideoTv(id: Int) {
+        viewModelScope.launch {
+            when (val response = detailsUseCase.getMovieVideos.invoke(id = id)) {
+                is Resource.Success -> {
+                    _getVideo.postValue(response.data!!)
                 }
                 is Resource.Error -> {
                     errorResponse.postValue(response.message)
