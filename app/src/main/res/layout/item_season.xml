@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/seasonPicture"
+        android:layout_width="140dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/imageViewSmallRounded"
+        tools:src="@color/gray_light" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/seasonName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:maxLines="2"
+        android:textColor="@color/yellow_dark"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/seasonPicture"
+        app:layout_constraintTop_toTopOf="@+id/seasonPicture"
+        tools:text="Winter is coming" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/seasonNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/seasonPicture"
+        app:layout_constraintTop_toBottomOf="@+id/seasonName"
+        tools:text="Season 1, episode 11" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/seasonDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/seasonPicture"
+        app:layout_constraintTop_toBottomOf="@+id/seasonNumber"
+        tools:text="Release on 01/02/2014" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/seasonOverView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:maxLines="4"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/seasonPicture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/seasonPicture"
+        app:layout_constraintTop_toBottomOf="@+id/seasonDate"
+        tools:text="Content of season, like description or overview" />
+
+    <View
+        android:id="@+id/viewLineUpComing"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/black_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/seasonPicture" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

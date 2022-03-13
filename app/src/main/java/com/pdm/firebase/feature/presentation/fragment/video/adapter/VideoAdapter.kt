@@ -84,9 +84,16 @@ class VideoAdapter : RecyclerView.Adapter<ViewHolder>() {
         }
 
         fun handlerFirst() {
-            if (absoluteAdapterPosition == 0) {
-                rate.margin(top = 32F)
-            }
+            rate.margin(
+                top = when (absoluteAdapterPosition) {
+                    0 -> {
+                        32F
+                    }
+                    else -> {
+                        8F
+                    }
+                }
+            )
         }
 
         fun handleLanguage(it: Search) {

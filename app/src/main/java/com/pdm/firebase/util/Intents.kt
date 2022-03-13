@@ -9,6 +9,7 @@ import android.net.Uri
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
+import com.pdm.firebase.feature.domain.model.video.VideoResponse
 import com.pdm.firebase.feature.presentation.activity.ErrorActivity
 import com.pdm.firebase.feature.presentation.activity.VideoActivity
 
@@ -84,4 +85,28 @@ fun Activity.startVideoActivity(key: String) {
 fun Activity.startErrorActivity() {
     val intent = Intent(this, ErrorActivity::class.java)
     startActivity(intent)
+}
+
+fun Activity.initVideo(it: VideoResponse, action: () -> Unit) {
+    it.results.takeIf { it.isNotEmpty() }?.run {
+        forEach {
+            if (it.type == "Trailer" && it.official) {
+                startVideoActivity(
+                    key = it.key
+                )
+                return@run
+            }
+        }
+        forEach {
+            if (it.type == "Trailer") {
+                startVideoActivity(
+                    key = it.key
+                )
+                return@run
+            }
+        }
+        startVideoActivity(
+            key = first().key
+        )
+    } ?: run { action() }
 }

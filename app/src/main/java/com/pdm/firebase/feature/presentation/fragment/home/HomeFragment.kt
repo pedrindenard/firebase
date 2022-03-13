@@ -235,7 +235,7 @@ class HomeFragment : BaseFragment() {
             adapter = TvAdapter(mutableList = this@initPopularTvAdapter).apply {
                 setOnItemClickListener(object : TvAdapter.ClickListener {
                     override fun onItemClickListener(tvShow: TvShow) {
-                        //tv
+                        initTvDetails(id = tvShow.id)
                     }
                 })
             }
@@ -279,7 +279,7 @@ class HomeFragment : BaseFragment() {
         val tvAdapter = TvAdapter(mutableList = this@initTvAdapter).apply {
             setOnItemClickListener(object : TvAdapter.ClickListener {
                 override fun onItemClickListener(tvShow: TvShow) {
-                    //tv
+                    initTvDetails(id = tvShow.id)
                 }
             })
         }
@@ -296,7 +296,7 @@ class HomeFragment : BaseFragment() {
             adapter = TvAdapter(mutableList = this@initTopRatedTvAdapter).apply {
                 setOnItemClickListener(object : TvAdapter.ClickListener {
                     override fun onItemClickListener(tvShow: TvShow) {
-                        //tv
+                        initTvDetails(id = tvShow.id)
                     }
                 })
             }
@@ -443,6 +443,19 @@ class HomeFragment : BaseFragment() {
     private fun initMovieDetails(id: Int) {
         findNavController().navigate(
             R.id.movieFragment, Bundle().apply {
+                putSerializable(ARGS, id)
+            }, NavOptions.Builder().apply {
+                setEnterAnim(R.anim.fade_in)
+                setExitAnim(R.anim.fade_out)
+                setPopEnterAnim(R.anim.fade_in)
+                setPopExitAnim(R.anim.fade_out)
+            }.build()
+        )
+    }
+
+    private fun initTvDetails(id: Int) {
+        findNavController().navigate(
+            R.id.tvShowFragment, Bundle().apply {
                 putSerializable(ARGS, id)
             }, NavOptions.Builder().apply {
                 setEnterAnim(R.anim.fade_in)

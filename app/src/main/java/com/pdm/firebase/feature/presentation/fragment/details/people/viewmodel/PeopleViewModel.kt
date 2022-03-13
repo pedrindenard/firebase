@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.pdm.firebase.arquitecture.Resource
 import com.pdm.firebase.feature.domain.model.credit.people.PeopleCreditsResponse
+import com.pdm.firebase.feature.domain.model.details.Requests
 import com.pdm.firebase.feature.domain.model.image.ImageResponse
 import com.pdm.firebase.feature.domain.model.people.PeopleResponse
 import com.pdm.firebase.feature.domain.model.people.details.PeopleDetailsResponse
@@ -29,6 +30,11 @@ class PeopleViewModel(private val useCase: PeopleUseCase) : BaseViewModel() {
 
     private val _getBestPeople: MutableLiveData<PeopleResponse> = MutableLiveData()
     val getBestActors = _getBestPeople as LiveData<PeopleResponse>
+
+    private val _onSuccess = MutableLiveData<Unit>()
+    val onSuccess = _onSuccess as LiveData<Unit>
+
+    private var listRequest = Requests.get(quantity = 4)
 
     fun initViewModel(id: Int) {
         getPeopleDetails(id = id)
@@ -130,5 +136,17 @@ class PeopleViewModel(private val useCase: PeopleUseCase) : BaseViewModel() {
                 }
             }
         }
+    }
+
+    private fun onSuccess(position: Int) {
+        listRequest.run {
+            this[position] = true
+            forEach {
+                if (!it) {
+                    return
+                }
+            }
+        }
+        _onSuccess.postValue(Unit)
     }
 }

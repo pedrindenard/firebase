@@ -85,12 +85,14 @@ inline fun <reified T : ViewGroup.LayoutParams> View.layoutParams(block: T.() ->
     if (layoutParams is T) block(layoutParams as T)
 }
 
-fun View.handler(isEnabled: Boolean) {
-    this.background.alpha = when (isEnabled) {
-        true -> 255
-        false -> 185
+fun View?.handler(isEnabled: Boolean) {
+    this.takeIf { it != null }?.run {
+        this.isEnabled = isEnabled
+        this.background.alpha = when (isEnabled) {
+            true -> 255
+            false -> 185
+        }
     }
-    this.isEnabled = isEnabled
 }
 
 fun SwipeRefreshLayout.setSwipeRefresh(onSwipe: () -> Unit) {

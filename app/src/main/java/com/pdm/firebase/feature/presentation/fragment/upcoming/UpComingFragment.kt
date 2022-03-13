@@ -55,7 +55,7 @@ class UpComingFragment: BaseFragment() {
             handlerProgressBar(isVisible = false)
         })
 
-        viewModel.getVideo.observe(viewLifecycleOwner, { it ->
+        viewModel.getVideo.observe(viewLifecycleOwner, {
             if (onVideoStartup) {
                 activity?.initVideo(it) {
                     showSnackBar(

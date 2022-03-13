@@ -200,7 +200,7 @@
     <string name="movie_reviews">Avaliações (%s)</string>
     <string name="see_all_reviews"><u>Ver tudo</u></string>
     <string name="provider_movie">Fornecedores</string>
-    <string name="crew_movie"><b><u>Criadores:</u></b></string>
+    <string name="crew_movie"><b><u>Equipe técnica:</u></b></string>
     <string name="company_production">Empresas de produção</string>
     <string name="know_for">Filmes / Programas / Séries</string>
     <string name="know_for_media">Elenco: %s</string>
@@ -216,4 +216,20 @@
     <string name="details">Detalhes</string>
     <string name="coming">Chegando</string>
     <string name="trailer_not_found">Este filme não tem trailer</string>
+    <string name="about_tv">Sobre</string>
+    <string name="next_ep">Próximo episódio</string>
+    <string name="last_ep">Último episódio</string>
+    <string name="seasons">Temporadas (%s)</string>
+    <string name="episodes">Episódios:</string>
+    <string name="episodes_number">%d episódios</string>
+    <string name="last_date_air">Última data do ar:</string>
+    <string name="release_on">Lançado em %s</string>
+    <string name="homepage">Pagina principal:</string>
+    <string name="runtime_episodes">Durações dos episódios:</string>
+    <string name="seasons_and_episodes">Episódios</string>
+    <string name="created_by">Criado por:</string>
+    <string name="last_season_ep">Temporada %d, episódio %d</string>
+    <string name="previous_season">Anterior</string>
+    <string name="next_season">Próximo</string>
+    <string name="especial">Especiais</string>
 </resources>

@@ -2,6 +2,7 @@ package com.pdm.firebase.di
 
 import com.pdm.firebase.feature.presentation.fragment.details.movie.viewmodel.MovieViewModel
 import com.pdm.firebase.feature.presentation.fragment.details.people.viewmodel.PeopleViewModel
+import com.pdm.firebase.feature.presentation.fragment.details.tv.viewmodel.TvShowViewModel
 import com.pdm.firebase.feature.presentation.fragment.discover.viewmodel.DiscoveryViewModel
 import com.pdm.firebase.feature.presentation.fragment.gender.viewmodel.GenderViewModel
 import com.pdm.firebase.feature.presentation.fragment.home.viewmodel.HomeViewModel
@@ -63,6 +64,7 @@ object ViewModelModule {
                 tvUserCase = get()
             )
         }
+        viewModel { TvShowViewModel(useCase = get()) }
         viewModel { SearchViewModel(useCase = get()) }
         viewModel { SignInViewModel(useCase = get()) }
         viewModel { SignUpViewModel(useCase = get()) }

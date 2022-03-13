@@ -34,8 +34,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initNavigation() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.mainNavHost) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.mainNavHost) as NavHostFragment
         val navController = navHostFragment.navController
         navDrawerLayout = binding.drawerLayout
         navController.initNavigationDrawer()
@@ -168,7 +167,8 @@ class MainActivity : BaseActivity() {
         this.addOnDestinationChangedListener { _, destination, _ ->
             binding.bottomNavigation.startAnimation(
                 anim = if (
-                    destination.id == R.id.movieFragment
+                    destination.id == R.id.movieFragment ||
+                    destination.id == R.id.tvShowFragment
                 ) {
                     "out"
                 } else {

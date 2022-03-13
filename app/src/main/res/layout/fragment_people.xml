@@ -236,7 +236,7 @@
                     tools:text="We approach our demand-driven" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/typeLabel"
+                    android:id="@+id/createdByLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -255,7 +255,7 @@
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/aboutMovie"
-                    app:layout_constraintTop_toTopOf="@+id/typeLabel"
+                    app:layout_constraintTop_toTopOf="@+id/createdByLabel"
                     tools:text="We approach our demand-driven" />
 
                 <androidx.appcompat.widget.AppCompatTextView

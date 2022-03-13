@@ -56,6 +56,10 @@ const val POLITY_PRIVACY = "Política de Privacidade"
 
 const val DRAWER = 0
 
+const val MOVIE_ENDPOINT = "movie/"
+
+const val TV_ENDPOINT = "tv/"
+
 val FACEBOOK_PERMISSIONS = arrayListOf("email", "public_profile")
 
 val GITHUB_SCOPES = arrayListOf("user:email")

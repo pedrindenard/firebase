@@ -20,6 +20,7 @@ import com.pdm.firebase.feature.domain.usecase.register.EmailVerificationUseCase
 import com.pdm.firebase.feature.domain.usecase.register.RegisterUserUseCase
 import com.pdm.firebase.feature.domain.usecase.search.*
 import com.pdm.firebase.feature.domain.usecase.tv.*
+import com.pdm.firebase.feature.domain.usecase.tv.details.*
 import org.koin.dsl.module
 
 object UseCaseModule {
@@ -97,6 +98,26 @@ object UseCaseModule {
                 getBestActors = get()
             )
         }
+        single {
+            TvDetailsUseCase(
+                getTvCredits = get(),
+                getTvDetails = get(),
+                getTvImages = get(),
+                getTvProviders = get(),
+                getTvRecommendations = get(),
+                getTvReviews = get(),
+                getTvSimilar = get(),
+                getTvVideos = get(),
+            )
+        }
+        single { GetTvCreditsUseCase(repository = get()) }
+        single { GetTvDetailsUseCase(repository = get()) }
+        single { GetTvImagesUseCase(repository = get()) }
+        single { GetTvProvidersUseCase(repository = get()) }
+        single { GetTvRecommendationsUseCase(repository = get()) }
+        single { GetTvReviewsUseCase(repository = get()) }
+        single { GetTvSimilarUseCase(repository = get()) }
+        single { GetTvVideosUseCase(repository = get()) }
         single { GetPeopleCreditsUseCase(repository = get()) }
         single { GetPeopleDetailsUseCase(repository = get()) }
         single { GetPeopleImagesUseCase(repository = get()) }

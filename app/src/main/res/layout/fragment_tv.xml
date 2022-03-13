@@ -24,7 +24,7 @@
                 app:layout_collapseMode="parallax">
 
                 <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/logoMovie"
+                    android:id="@+id/logoTv"
                     android:layout_width="0dp"
                     android:layout_height="465dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -37,11 +37,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:background="@drawable/background_gradient_dark"
-                    app:layout_constraintBottom_toBottomOf="@+id/logoMovie"
-                    app:layout_constraintTop_toBottomOf="@+id/averageMovie" />
+                    app:layout_constraintBottom_toBottomOf="@+id/logoTv"
+                    app:layout_constraintTop_toBottomOf="@+id/averageTv" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/yearMovie"
+                    android:id="@+id/yearTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -52,12 +52,12 @@
                     android:paddingVertical="4dp"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/averageMovie"
+                    app:layout_constraintBottom_toBottomOf="@+id/averageTv"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:text="2022" />
 
                 <RatingBar
-                    android:id="@+id/movieRateStar"
+                    android:id="@+id/tvRateStar"
                     style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -66,24 +66,24 @@
                     android:isIndicator="true"
                     android:numStars="5"
                     android:theme="@style/ratingBar"
-                    app:layout_constraintBottom_toTopOf="@+id/votesMovie"
-                    app:layout_constraintEnd_toStartOf="@+id/averageMovie"
+                    app:layout_constraintBottom_toTopOf="@+id/votesTv"
+                    app:layout_constraintEnd_toStartOf="@+id/averageTv"
                     tools:rating="4.5" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/votesMovie"
+                    android:id="@+id/votesTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="4dp"
                     android:fontFamily="@font/stellar_bold"
                     android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="@+id/averageMovie"
-                    app:layout_constraintEnd_toStartOf="@+id/averageMovie"
+                    app:layout_constraintBottom_toBottomOf="@+id/averageTv"
+                    app:layout_constraintEnd_toStartOf="@+id/averageTv"
                     tools:text="786587 VOTES" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/averageMovie"
+                    android:id="@+id/averageTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="280dp"
@@ -91,11 +91,11 @@
                     android:textColor="@color/white"
                     android:textSize="42sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/logoMovie"
+                    app:layout_constraintTop_toTopOf="@+id/logoTv"
                     tools:text="9,75" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/titleMovie"
+                    android:id="@+id/titleTv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -107,11 +107,11 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/averageMovie"
+                    app:layout_constraintTop_toBottomOf="@+id/averageTv"
                     tools:text="Fantastic Beasts and Where to Find Them" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/durationMovie"
+                    android:id="@+id/runtimeTv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -122,11 +122,11 @@
                     android:textColor="@color/white"
                     app:drawableStartCompat="@drawable/ic_time"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/titleMovie"
+                    app:layout_constraintTop_toBottomOf="@+id/titleTv"
                     tools:text="2h 13min" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/genderMovieRecyclerView"
+                    android:id="@+id/genderTvRecyclerView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -137,8 +137,8 @@
                     android:paddingEnd="16dp"
                     app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/durationMovie"
-                    app:layout_constraintTop_toBottomOf="@+id/titleMovie"
+                    app:layout_constraintStart_toEndOf="@+id/runtimeTv"
+                    app:layout_constraintTop_toBottomOf="@+id/titleTv"
                     tools:ignore="RtlSymmetry"
                     tools:itemCount="4"
                     tools:listitem="@layout/item_gender" />
@@ -195,7 +195,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/companyRecyclerView" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/storylineMovie"
+                    android:id="@+id/storylineTv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -210,7 +210,7 @@
                     tools:text="We approach our demand-driven logistics technologies with passion. From advanced warehouse management and load-planning software" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/rateMovie"
+                    android:id="@+id/rateTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -219,14 +219,14 @@
                     android:text="@string/rate_movie"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="@+id/shareMovie"
-                    app:layout_constraintEnd_toStartOf="@+id/shareMovie"
+                    app:layout_constraintBottom_toBottomOf="@+id/shareTv"
+                    app:layout_constraintEnd_toStartOf="@+id/shareTv"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/shareMovie" />
+                    app:layout_constraintTop_toTopOf="@+id/shareTv" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/shareMovie"
+                    android:id="@+id/shareTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -239,13 +239,13 @@
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/favMovie"
+                    app:layout_constraintEnd_toStartOf="@+id/favTv"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/rateMovie"
-                    app:layout_constraintTop_toBottomOf="@+id/storylineMovie" />
+                    app:layout_constraintStart_toEndOf="@+id/rateTv"
+                    app:layout_constraintTop_toBottomOf="@+id/storylineTv" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/favMovie"
+                    android:id="@+id/favTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -255,11 +255,11 @@
                     android:text="@string/movie_favorite"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="@+id/shareMovie"
+                    app:layout_constraintBottom_toBottomOf="@+id/shareTv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/shareMovie"
-                    app:layout_constraintTop_toTopOf="@+id/shareMovie" />
+                    app:layout_constraintStart_toEndOf="@+id/shareTv"
+                    app:layout_constraintTop_toTopOf="@+id/shareTv" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -269,7 +269,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/actorsMovie"
+                    android:id="@+id/actorsTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -294,7 +294,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/actorsMovie"
+                    app:layout_constraintTop_toBottomOf="@+id/actorsTv"
                     tools:ignore="RtlSymmetry"
                     tools:itemCount="6"
                     tools:listitem="@layout/item_actors" />
@@ -307,13 +307,13 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/aboutMovie"
+                    android:id="@+id/aboutTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/stellar_bold"
-                    android:text="@string/about_movie"
+                    android:text="@string/about_tv"
                     android:textAllCaps="true"
                     android:textColor="@color/yellow_dark"
                     app:layout_constraintStart_toStartOf="parent"
@@ -328,10 +328,10 @@
                     android:text="@string/original_title"
                     android:textColor="@color/gray_light"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/aboutMovie" />
+                    app:layout_constraintTop_toBottomOf="@+id/aboutTv" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/originalTitleMovie"
+                    android:id="@+id/originalTitleTv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -348,21 +348,44 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="@string/type_movie"
+                    android:text="@string/created_by"
                     android:textColor="@color/gray_light"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/originalTitleMovie" />
+                    app:layout_constraintTop_toBottomOf="@+id/originalTitleTv" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/typeMovie"
+                    android:id="@+id/createdBy"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:lineSpacingExtra="4dp"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/originalTitleMovie"
+                    app:layout_constraintStart_toStartOf="@+id/originalTitleTv"
                     app:layout_constraintTop_toTopOf="@+id/createdByLabel"
+                    tools:text="We approach our demand-driven" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/genderTvLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/type_movie"
+                    android:textColor="@color/gray_light"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/createdByLabel" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/genderTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/originalTitleTv"
+                    app:layout_constraintTop_toTopOf="@+id/genderTvLabel"
                     tools:text="We approach our demand-driven" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -374,16 +397,16 @@
                     android:text="@string/production_movie"
                     android:textColor="@color/gray_light"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/typeMovie" />
+                    app:layout_constraintTop_toBottomOf="@+id/genderTvLabel" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/sloganMovie"
+                    android:id="@+id/sloganTv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/originalTitleMovie"
+                    app:layout_constraintStart_toStartOf="@+id/originalTitleTv"
                     app:layout_constraintTop_toTopOf="@+id/sloganLabel"
                     tools:text="We approach our demand-driven" />
 
@@ -396,16 +419,16 @@
                     android:text="@string/premiere"
                     android:textColor="@color/gray_light"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/sloganMovie" />
+                    app:layout_constraintTop_toBottomOf="@+id/sloganTv" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/premiereMovie"
+                    android:id="@+id/premiereTv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/originalTitleMovie"
+                    app:layout_constraintStart_toStartOf="@+id/originalTitleTv"
                     app:layout_constraintTop_toTopOf="@+id/premiereLabel"
                     tools:text="We approach our demand-driven" />
 
@@ -418,10 +441,10 @@
                     android:text="@string/description_movie"
                     android:textColor="@color/gray_light"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/premiereMovie" />
+                    app:layout_constraintTop_toBottomOf="@+id/premiereTv" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/productionCountryMovie"
+                    android:id="@+id/productionCountryTv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -442,10 +465,10 @@
                     android:text="@string/company_production"
                     android:textColor="@color/gray_light"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/productionCountryMovie" />
+                    app:layout_constraintTop_toBottomOf="@+id/productionCountryTv" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/productionCompanyMovie"
+                    android:id="@+id/productionCompanyTv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -468,10 +491,10 @@
                     android:text="@string/crew_movie"
                     android:textColor="@color/gray_light"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/productionCompanyMovie" />
+                    app:layout_constraintTop_toBottomOf="@+id/productionCompanyTv" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/crewMovie"
+                    android:id="@+id/crewTv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -526,12 +549,291 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/infoTvConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/seasonNumberLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/stellar_bold"
+                    android:text="@string/seasons"
+                    android:textAllCaps="true"
+                    android:textColor="@color/yellow_dark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="@+id/seasonNumberLabel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/seasonNumberLabel">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/previousSeason"
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:background="@null"
+                        android:fontFamily="@font/stellar_bold"
+                        android:text="@string/previous_season"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/nextSeason"
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:background="@null"
+                        android:fontFamily="@font/stellar_bold"
+                        android:text="@string/next_season"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/seasonsAdapter"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/seasonNumberLabel" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/lastEpToAirConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lastEpOnAir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/stellar_bold"
+                    android:text="@string/last_ep"
+                    android:textAllCaps="true"
+                    android:textColor="@color/yellow_dark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/lastEpImage"
+                    android:layout_width="140dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lastEpOnAir"
+                    app:shapeAppearanceOverlay="@style/imageViewMediumRounded" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lastEpName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/stellar_bold"
+                    android:lineSpacingExtra="4dp"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toStartOf="@+id/lastEpRating"
+                    app:layout_constraintStart_toEndOf="@+id/lastEpImage"
+                    app:layout_constraintTop_toTopOf="@+id/lastEpImage"
+                    tools:text="New Haunts" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lastEpSeasonAndEpNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toTopOf="@+id/lastEpDate"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/lastEpImage"
+                    app:layout_constraintTop_toBottomOf="@+id/lastEpName"
+                    tools:text="Season 1, ep. 1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lastEpDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/lastEpImage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/lastEpImage"
+                    tools:text="Release on 20/02/2022" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lastEpRating"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/yellow"
+                    app:drawableStartCompat="@drawable/ic_star"
+                    app:drawableTint="@color/yellow"
+                    app:layout_constraintBottom_toBottomOf="@+id/lastEpName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/lastEpName"
+                    tools:text="5.7" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lastEpOverView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="4dp"
+                    android:maxLines="5"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lastEpImage"
+                    tools:text="We approach our demand-driven " />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/nextEpToAirConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/nextEpOnAir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/stellar_bold"
+                    android:text="@string/next_ep"
+                    android:textAllCaps="true"
+                    android:textColor="@color/yellow_dark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/nextEpImage"
+                    android:layout_width="140dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/nextEpOnAir"
+                    app:shapeAppearanceOverlay="@style/imageViewMediumRounded" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/nextEpName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/stellar_bold"
+                    android:lineSpacingExtra="4dp"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toStartOf="@+id/nextEpRating"
+                    app:layout_constraintStart_toEndOf="@+id/nextEpImage"
+                    app:layout_constraintTop_toTopOf="@+id/nextEpImage"
+                    tools:text="New Haunts" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/nextEpSeasonAndEpNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toTopOf="@+id/nextEpDate"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/nextEpImage"
+                    app:layout_constraintTop_toBottomOf="@+id/nextEpName"
+                    tools:text="Season 1, ep. 1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/nextEpDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/nextEpImage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/nextEpImage"
+                    tools:text="Release on 20/02/2022" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/nextEpRating"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/yellow"
+                    app:drawableStartCompat="@drawable/ic_star"
+                    app:drawableTint="@color/yellow"
+                    app:layout_constraintBottom_toBottomOf="@+id/nextEpName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/nextEpName"
+                    tools:text="5.7" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/nextEpOverView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="4dp"
+                    android:maxLines="5"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/nextEpImage"
+                    tools:text="We approach our demand-driven " />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/moreLikeThisConstraint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/moreLikeThisMovie"
+                    android:id="@+id/moreLikeThisTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -556,7 +858,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/moreLikeThisMovie"
+                    app:layout_constraintTop_toBottomOf="@+id/moreLikeThisTv"
                     tools:ignore="RtlSymmetry"
                     tools:itemCount="3"
                     tools:listitem="@layout/item_default" />
@@ -569,7 +871,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/trailersMovie"
+                    android:id="@+id/trailersTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -579,7 +881,8 @@
                     android:textAllCaps="true"
                     android:textColor="@color/yellow_dark"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TooManyViews" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/videosRecyclerView"
@@ -594,8 +897,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/trailersMovie"
-                    tools:ignore="RtlSymmetry"
+                    app:layout_constraintTop_toBottomOf="@+id/trailersTv"
+                    tools:ignore="RtlSymmetry,TooManyViews"
                     tools:itemCount="3"
                     tools:listitem="@layout/item_showcase" />
 
@@ -607,7 +910,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/seeTooMovie"
+                    android:id="@+id/seeTooTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -617,10 +920,11 @@
                     android:textAllCaps="true"
                     android:textColor="@color/yellow_dark"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TooManyViews" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/seeMoreMovie"
+                    android:id="@+id/seeMoreTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
@@ -629,7 +933,8 @@
                     android:text="@string/see_more"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TooManyViews" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/seeTooRecyclerView"
@@ -644,8 +949,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/seeTooMovie"
-                    tools:ignore="RtlSymmetry"
+                    app:layout_constraintTop_toBottomOf="@+id/seeTooTv"
+                    tools:ignore="RtlSymmetry, TooManyViews"
                     tools:itemCount="4"
                     tools:listitem="@layout/item_movie" />
 
@@ -657,7 +962,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/reviewsMovie"
+                    android:id="@+id/reviewsTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -667,10 +972,11 @@
                     android:textAllCaps="true"
                     android:textColor="@color/yellow_dark"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TooManyViews" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/reviewsMoreMovie"
+                    android:id="@+id/reviewsMoreTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
@@ -679,7 +985,8 @@
                     android:text="@string/see_all_reviews"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TooManyViews" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/reviewsRecyclerView"
@@ -691,8 +998,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/reviewsMovie"
-                    tools:ignore="RtlSymmetry"
+                    app:layout_constraintTop_toBottomOf="@+id/reviewsTv"
+                    tools:ignore="RtlSymmetry, TooManyViews"
                     tools:itemCount="2"
                     tools:listitem="@layout/item_review" />
 

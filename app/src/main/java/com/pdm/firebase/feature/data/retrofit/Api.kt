@@ -2,7 +2,7 @@ package com.pdm.firebase.feature.data.retrofit
 
 import com.pdm.firebase.feature.domain.model.collection.CollectionResponse
 import com.pdm.firebase.feature.domain.model.company.CompanyResponse
-import com.pdm.firebase.feature.domain.model.credit.movie.MovieCreditsResponse
+import com.pdm.firebase.feature.domain.model.credit.movie.CreditsResponse
 import com.pdm.firebase.feature.domain.model.credit.people.PeopleCreditsResponse
 import com.pdm.firebase.feature.domain.model.gender.GenderResponse
 import com.pdm.firebase.feature.domain.model.image.ImageResponse
@@ -16,6 +16,7 @@ import com.pdm.firebase.feature.domain.model.review.ReviewResponse
 import com.pdm.firebase.feature.domain.model.search.SearchResponse
 import com.pdm.firebase.feature.domain.model.tagged.TaggedResponse
 import com.pdm.firebase.feature.domain.model.tv.TvShowResponse
+import com.pdm.firebase.feature.domain.model.tv.details.TvDetailsResponse
 import com.pdm.firebase.feature.domain.model.video.VideoResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -88,7 +89,7 @@ interface Api {
     @GET(value = "movie/{movie_id}/credits")
     suspend fun getMovieCredits(
         @Path(value = "movie_id") id: Int
-    ): Response<MovieCreditsResponse>
+    ): Response<CreditsResponse>
 
     @Headers(value = ["Content-Type: application/json"])
     @GET(value = "movie/{movie_id}/recommendations")
@@ -256,49 +257,52 @@ interface Api {
     @GET(value = "tv/{tv_id}")
     suspend fun getTvDetails(
         @Path(value = "tv_id") id: Int
-    ): Response<*>
+    ): Response<TvDetailsResponse>
 
     @Headers(value = ["Content-Type: application/json"])
     @GET(value = "tv/{tv_id}/credits")
     suspend fun getTvCredits(
         @Path(value = "tv_id") id: Int
-    ): Response<*>
+    ): Response<CreditsResponse>
 
     @Headers(value = ["Content-Type: application/json"])
     @GET(value = "tv/{tv_id}/similar")
     suspend fun getTvSimilar(
-        @Path(value = "tv_id") id: Int
-    ): Response<*>
+        @Path(value = "tv_id") id: Int,
+        @Query(value = "page") page: Int? = 1
+    ): Response<TvShowResponse>
 
     @Headers(value = ["Content-Type: application/json"])
     @GET(value = "tv/{tv_id}/images")
     suspend fun getTvImages(
         @Path(value = "tv_id") id: Int
-    ): Response<*>
+    ): Response<ImageResponse>
 
     @Headers(value = ["Content-Type: application/json"])
     @GET(value = "tv/{tv_id}/reviews")
     suspend fun getTvReviews(
-        @Path(value = "tv_id") id: Int
-    ): Response<*>
+        @Path(value = "tv_id") id: Int,
+        @Query(value = "page") page: Int? = 1
+    ): Response<ReviewResponse>
 
     @Headers(value = ["Content-Type: application/json"])
     @GET(value = "tv/{tv_id}/watch/providers")
     suspend fun getTvProviders(
         @Path(value = "tv_id") id: Int
-    ): Response<*>
+    ): Response<ProviderResponse>
 
     @Headers(value = ["Content-Type: application/json"])
     @GET(value = "tv/{tv_id}/videos")
     suspend fun getTvVideos(
         @Path(value = "tv_id") id: Int
-    ): Response<*>
+    ): Response<VideoResponse>
 
     @Headers(value = ["Content-Type: application/json"])
     @GET(value = "tv/{tv_id}/recommendations")
     suspend fun getTvRecommendations(
-        @Path(value = "tv_id") id: Int
-    ): Response<*>
+        @Path(value = "tv_id") id: Int,
+        @Query(value = "page") page: Int? = 1
+    ): Response<TvShowResponse>
 
     /** Tv Seasons **/
     @Headers(value = ["Content-Type: application/json"])

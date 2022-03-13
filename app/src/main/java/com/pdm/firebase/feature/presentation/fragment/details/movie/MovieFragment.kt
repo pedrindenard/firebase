@@ -1,17 +1,14 @@
 package com.pdm.firebase.feature.presentation.fragment.details.movie
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.NavOptions
-import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.pdm.firebase.R
 import com.pdm.firebase.databinding.FragmentMovieBinding
-import com.pdm.firebase.feature.domain.model.credit.movie.MovieCredits
+import com.pdm.firebase.feature.domain.model.credit.movie.Credit
 import com.pdm.firebase.feature.domain.model.gender.Gender
 import com.pdm.firebase.feature.domain.model.image.Image
 import com.pdm.firebase.feature.domain.model.movie.Movie
@@ -21,7 +18,6 @@ import com.pdm.firebase.feature.domain.model.movie.provider.ProviderFlatRate
 import com.pdm.firebase.feature.domain.model.review.Review
 import com.pdm.firebase.feature.domain.model.review.ReviewResponse
 import com.pdm.firebase.feature.domain.model.video.Video
-import com.pdm.firebase.feature.presentation.activity.VideoActivity
 import com.pdm.firebase.feature.presentation.base.BaseFragment
 import com.pdm.firebase.feature.presentation.fragment.details.movie.adapter.*
 import com.pdm.firebase.feature.presentation.fragment.details.movie.viewmodel.MovieViewModel
@@ -106,13 +102,14 @@ class MovieFragment : BaseFragment() {
         viewModel.getMovieCredits.observe(viewLifecycleOwner, {
             binding.crewMovie.apply {
                 it.crew.takeIf { it.isNotEmpty() }?.let { text = it.formatCrew() } ?: run {
+                    binding.crewLabel.visibility = View.GONE
                     visibility = View.GONE
                 }
             }
             binding.actorsRecyclerView.apply {
                 adapter = CastAdapter(it.cast).apply {
                     setOnItemClickListener(object : CastAdapter.ClickListener {
-                        override fun onItemClickListener(people: MovieCredits) {
+                        override fun onItemClickListener(people: Credit) {
 
                         }
                     })
@@ -220,6 +217,10 @@ class MovieFragment : BaseFragment() {
             } ?: run {
                 /** Do nothing here **/
             }
+        })
+
+        viewModel.onSuccess.observe(viewLifecycleOwner, {
+
         })
 
         viewModel.errorResponse.observe(viewLifecycleOwner, {

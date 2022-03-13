@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 import java.math.BigDecimal
 
-data class MovieCredits (
+data class Credit (
     @SerializedName(value = "id") val id: Int,
     @SerializedName(value = "name") val name: String,
     @SerializedName(value = "gender") val gender: Int?,

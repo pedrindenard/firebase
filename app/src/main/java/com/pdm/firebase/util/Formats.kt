@@ -5,7 +5,7 @@ import android.text.format.DateUtils
 import com.github.rtoshiro.util.format.SimpleMaskFormatter
 import com.github.rtoshiro.util.format.text.MaskTextWatcher
 import com.google.android.material.textfield.TextInputEditText
-import com.pdm.firebase.feature.domain.model.credit.movie.MovieCredits
+import com.pdm.firebase.feature.domain.model.credit.movie.Credit
 import com.pdm.firebase.feature.domain.model.gender.Gender
 import com.pdm.firebase.feature.domain.model.movie.details.ProductionCompany
 import com.pdm.firebase.feature.domain.model.movie.details.ProductionCountry
@@ -13,6 +13,8 @@ import com.pdm.firebase.feature.domain.model.movie.provider.Provider
 import com.pdm.firebase.feature.domain.model.movie.provider.ProviderCountry
 import com.pdm.firebase.feature.domain.model.movie.provider.ProviderFlatRate
 import com.pdm.firebase.feature.domain.model.search.Search
+import com.pdm.firebase.feature.domain.model.tv.details.CreatedBy
+import okhttp3.HttpUrl
 import okhttp3.Request
 
 fun TextInputEditText?.formatToDate() {
@@ -86,7 +88,7 @@ fun List<Gender>.formatGenres(): String {
     return movieGenres
 }
 
-fun List<MovieCredits>.formatCrew(): String {
+fun List<Credit>.formatCrew(): String {
     var movieCrews = String()
     forEachIndexed { index, crew ->
         movieCrews += if (index != lastIndex) {
@@ -96,6 +98,18 @@ fun List<MovieCredits>.formatCrew(): String {
         }
     }
     return movieCrews
+}
+
+fun List<CreatedBy>.formatCreators(): String {
+    var createdBy = String()
+    forEachIndexed { index, people ->
+        createdBy += if (index != lastIndex) {
+            "${people.name},\u0020"
+        } else {
+            people.name
+        }
+    }
+    return createdBy
 }
 
 fun List<String>.formatKnowAs(): String {
@@ -146,21 +160,36 @@ fun Provider.formatToList(): MutableList<ProviderFlatRate> {
 
 fun String.formatDate() = substringBefore(delimiter = "-")
 
+fun List<Int>?.formatRuntime(): String {
+    this.takeIf { !it.isNullOrEmpty() }?.let { it ->
+        var max = Int.MIN_VALUE
+        var min = Int.MAX_VALUE
+
+        it.forEach {
+            if (it > max) max = it
+            if (it < min) min = it
+        }
+        return "${max - (max - min)} min"
+    }
+    return "0 min"
+}
+
 fun Request.setLanguage() = run {
-    if ("reviews".contains(
-            this.url.toString()
-                .substringAfter(delimiter = "movie/")
-                .substringAfter(delimiter = "/")
-                .substringBefore(delimiter = "?")
-        ) || "images".contains(
-            this.url.toString()
-                .substringAfter(delimiter = "movie/")
-                .substringAfter(delimiter = "/")
-                .substringBefore(delimiter = "?")
-        )
+    if ("reviews".delimiterBaseUrl(this.url, MOVIE_ENDPOINT) ||
+        "images".delimiterBaseUrl(this.url, MOVIE_ENDPOINT) ||
+        "reviews".delimiterBaseUrl(this.url, TV_ENDPOINT) ||
+        "images".delimiterBaseUrl(this.url, TV_ENDPOINT)
     ) {
         null
     } else {
         "pt-BR"
     }
+}
+
+fun String.delimiterBaseUrl(url: HttpUrl, endpoint: String) = run {
+    contains(url.toString()
+        .substringAfter(delimiter = endpoint)
+        .substringAfter(delimiter = "/")
+        .substringBefore(delimiter = "?")
+    )
 }

@@ -140,6 +140,10 @@ class PeopleFragment : BaseFragment() {
             }
         })
 
+        viewModel.onSuccess.observe(viewLifecycleOwner, {
+
+        })
+
         viewModel.errorResponse.observe(viewLifecycleOwner, {
 
         })
@@ -167,7 +171,7 @@ class PeopleFragment : BaseFragment() {
         }
         binding.typeMovie.apply {
             it.birthDatePlace.takeIf { !it.isNullOrEmpty() }?.let { text = it } ?: run {
-                binding.typeLabel.visibility = View.GONE
+                binding.createdByLabel.visibility = View.GONE
                 visibility = View.GONE
             }
         }

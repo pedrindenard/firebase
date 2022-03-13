@@ -65,4 +65,10 @@
         android:label="VideoFragment"
         tools:layout="@layout/fragment_video" />
 
+    <fragment
+        android:id="@+id/tvShowFragment"
+        android:name="com.pdm.firebase.feature.presentation.fragment.details.tv.TvShowFragment"
+        android:label="TvShowFragment"
+        tools:layout="@layout/fragment_tv"/>
+
 </navigation>
